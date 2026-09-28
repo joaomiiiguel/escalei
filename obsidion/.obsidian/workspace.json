@@ -1,0 +1,203 @@
+{
+  "main": {
+    "id": "cbd6dc0dbd4de329",
+    "type": "split",
+    "children": [
+      {
+        "id": "fd80f866a8769685",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "18124322e9a10e89",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Visualização em gráfico"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "c806b0433d4e4ec7",
+    "type": "split",
+    "children": [
+      {
+        "id": "51dd8680284d30db",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b1f8feb17b03f639",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de arquivos"
+            }
+          },
+          {
+            "id": "ebb0dcc257dc9b5b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Procurar"
+            }
+          },
+          {
+            "id": "02e2bb75b3c5169f",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Marcadores"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "right": {
+    "id": "32c278e33faa3c40",
+    "type": "split",
+    "children": [
+      {
+        "id": "7ba746c862c5e849",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ac36bb2f008898fd",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "01-Produto/Prompt de Design.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Links inversos"
+            }
+          },
+          {
+            "id": "df8a7ba44cd4b88f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "01-Produto/Prompt de Design.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Links de saída"
+            }
+          },
+          {
+            "id": "08a17caa5afc4018",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiquetas"
+            }
+          },
+          {
+            "id": "19f4f080c5cac576",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Todas as propriedades"
+            }
+          },
+          {
+            "id": "0122b9380d720f2e",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "01-Produto/Prompt de Design.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Sumário"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir a troca rápida": false,
+      "graph:Abrir visualização em gráfico": false,
+      "canvas:Criar novo canvas": false,
+      "daily-notes:Abrir a nota de hoje": false,
+      "templates:Inserir modelo": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Criar nova base": false
+    }
+  },
+  "active": "18124322e9a10e89",
+  "lastOpenFiles": [
+    "01-Produto/Prompt de Design.md",
+    "Anexos/Benchmark/draftkings-01-capa.png",
+    "07-Decisoes/Origem do projeto e decisões iniciais.md",
+    "02-Tecnico/API-Football.md",
+    "02-Tecnico/Banco de Dados — Modelo e Campos.md",
+    "02-Tecnico/Arquitetura.md",
+    "Index.md",
+    "06-Planejamento/Plano de 1 Mês — Lançamento do Teste.md",
+    "06-Planejamento/Roadmap e Backlog.md",
+    "03-Validacao/Plano de Validação.md",
+    "05-Juridico-e-Riscos/Jurídico e Riscos.md",
+    "01-Produto/Fluxo de Telas.md"
+  ]
+}
