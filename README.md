@@ -12,3 +12,12 @@ O script valida a Série A (league id `71`) na temporada `2026`, a cobertura de 
 - `Review Pro plan for one month (US$ 19) before implementation`: contratar o Pro por um mês antes de iniciar a integração.
 
 Não registre a chave em arquivos versionados ou no Linear.
+
+## Aplicação
+
+```bash
+npm install
+npm run dev
+```
+
+Copie `.env.example` para `.env` e preencha as variáveis do Supabase. A migration inicial está em `supabase/migrations/202609290001_foundation.sql` e deve ser aplicada ao projeto Supabase antes de testar login, onboarding e perfil.

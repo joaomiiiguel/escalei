@@ -1,0 +1,2 @@
+:root { color-scheme: dark; font-family: Arial, sans-serif; background: #121712; color: #f4f7f1; }
+* { box-sizing: border-box; } body { margin: 0; } main { max-width: 640px; margin: auto; padding: 48px 20px; } form { display: grid; gap: 12px; margin-top: 24px; } input, button { min-height: 44px; border-radius: 10px; border: 1px solid #536053; padding: 10px 12px; font: inherit; } button { background: #82e671; color: #092305; border: 0; cursor: pointer; font-weight: 700; } a { color: #a5ee98; }
