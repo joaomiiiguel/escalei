@@ -40,7 +40,7 @@ Um fantasy de futebol **rápido de jogar e feito para disputar com os amigos**. 
 - **Mensagem de marketing:** "Win cash even if you don't finish first". Aqui vira "ganhe da sua liga mesmo sem ser o 1º do Brasil".
 - **Formato alternativo:** "Tiers" da DraftKings (1 jogador por faixa, sem orçamento). Candidato para a fase 2.
 
-## Posicionamento: nicho, não "Cartola com prêmio"
+## Posicionamento do MVP: nicho, não "Cartola com prêmio"
 
 Opções de nicho a testar depois da validação:
 - **Ligas entre amigos e empresas** com convite pelo WhatsApp (é o foco do MVP)

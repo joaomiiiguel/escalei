@@ -1,0 +1,1 @@
+export function PlayerShirt({ number, tone = "green", size = "md" }: { number?: number; tone?: "green" | "red" | "white" | "dark"; size?: "sm" | "md" | "lg" }) { return <span className={`ui-shirt ui-shirt--${tone} ui-shirt--${size}`} aria-label={number ? `Camisa número ${number}` : "Camisa de jogador"}>{number}</span>; }

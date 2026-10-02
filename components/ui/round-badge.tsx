@@ -1,0 +1,1 @@
+export function RoundBadge({ status }: { status: "ABERTA" | "EM ANDAMENTO" | "FECHADA" }) { const tone = status === "ABERTA" ? "success" : status === "EM ANDAMENTO" ? "highlight" : "neutral"; return <span className={`ui-round-badge ui-round-badge--${tone}`}><i aria-hidden="true" />{status}</span>; }

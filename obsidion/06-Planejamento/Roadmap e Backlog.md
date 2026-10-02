@@ -54,7 +54,8 @@ tags:
 - [ ] Jobs `conferir-rodada`, `abrir-rodada` e `fn_atualizar_precos`
 
 **App**
-- [ ] Cadastro (Google + link mágico), apelido, clube do coração, aceite dos termos
+- [ ] Cadastro (telefone + OTP por SMS), apelido, clube do coração, aceite dos termos
+- [ ] ONB-01: onboarding exclusivo por convite de liga (ver [[Onboarding por Convite]])
 - [ ] Início
 - [ ] Montar Time + Mercado + Detalhe do Jogador + escalação automática
 - [ ] Trigger de trava e de validação de formação/orçamento

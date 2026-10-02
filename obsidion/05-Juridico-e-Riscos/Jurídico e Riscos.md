@@ -34,13 +34,19 @@ O autor trabalha numa empresa de apostas esportivas, e fantasy de futebol é mer
 - **Na validação (sem prêmio)** o risco regulatório é praticamente nulo. Ainda assim: termos de uso, política de privacidade e regulamento publicados.
 - **PL 2.796/2021 (Marco dos Games):** o trecho de fantasy caiu no Senado. O art. 49 é a norma vigente.
 
-## 3. Quando entrar prêmio
+## 3. Hipótese interna de contribuição por rodada (não pública e não aprovada)
+
+O planejamento considera, somente após a validação, uma contribuição de R$ 5 por participante da liga via PIX em cada rodada, com repasse do total ao maior pontuador. **Não comunicar nem implementar esta hipótese.**
+
+Pelo art. 49, parágrafo único, III, da Lei 14.790/2023, a exceção de fantasy sport requer que o valor garantido da premiação seja independente da quantidade de participantes e do volume arrecadado com taxas de inscrição. Portanto, o modelo de repasse do valor arrecadado pelo grupo **não atende a esse requisito na sua formulação atual**. A conclusão jurídica definitiva depende de parecer especializado; até lá, o produto deve permanecer no modelo gratuito do MVP.
+
+Caso exista uma fase futura com premiação juridicamente viável, os itens mínimos de análise são:
 
 - [ ] **CNPJ** (para pagar PIX em escala, reter IR, contratar serviços e ser controlador na LGPD).
 - [ ] **IR sobre prêmio:** regra de retenção e informe com o contador.
 - [ ] **18+** para receber prêmio.
-- [ ] **Antifraude:** jogo grátis com dinheiro atrai multicontas. Mínimo: CPF único validado, telefone verificado, PIX só para o mesmo CPF, bloqueio de vários cadastros no mesmo aparelho.
-- [ ] **Lanterna:** confirmar se cabe no art. 49 e aplicar as regras contra time-fantasma.
+- [ ] **Antifraude:** fluxos com dinheiro atraem multicontas. Mínimo: CPF único validado, telefone verificado, PIX só para o mesmo CPF, bloqueio de vários cadastros no mesmo aparelho.
+- [ ] Confirmar formato de premiação, regulamento e enquadramento antes de qualquer lançamento.
 
 ## 4. Imagem, marca e nome
 
@@ -58,4 +64,4 @@ O autor trabalha numa empresa de apostas esportivas, e fantasy de futebol é mer
 
 ---
 
-*Criado em 28/09/2026.*
+*Criado em 28/09/2026. Atualizado em 30/09/2026.*

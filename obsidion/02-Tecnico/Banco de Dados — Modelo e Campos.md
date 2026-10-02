@@ -81,11 +81,12 @@ Escrita **só pelos jobs** (service role). Leitura pública.
 | `sigla` | `char(3)` unique not null | maiúsculas | `team.code` (**pode vir nulo**: preencher à mão) |
 | `cor_primaria` | `char(7)` | hex `#RRGGBB` | **manual** (a API não fornece) |
 | `cor_secundaria` | `char(7)` | hex | **manual** |
+| `logo_url` | `text` | URL HTTPS opcional | `team.logo` |
 | `ativo` | `bool` default `true` | clube na Série A da temporada | |
 | `api_atualizado_em` | `timestamptz` | | job |
 
-> [!warning] Sem escudo
-> A API entrega `team.logo`, mas **não se usa**: escudo é marca registrada (ver [[Jurídico e Riscos]]). O app desenha a camisa genérica com `cor_primaria`/`cor_secundaria`.
+> [!warning] Uso do escudo
+> A URL oficial de `team.logo` é guardada no catálogo para referência da integração. A interface continua usando a camisa genérica com `cor_primaria`/`cor_secundaria` até haver definição jurídica para exibição de escudos.
 
 ### `jogadores`
 
@@ -212,11 +213,12 @@ A tabela da tela "Como Funciona" é lida daqui. Cada rodada aponta para a versã
 
 ### `perfis`
 
-O e-mail e o login ficam em `auth.users` (Supabase Auth) e **não são duplicados** aqui.
+O identificador de login e a validação do OTP ficam em `auth.users` (Supabase Auth). O telefone abaixo é um espelho do número verificado, necessário para consulta do perfil sem conceder acesso à tabela de autenticação.
 
 | Campo | Tipo | Regra |
 |---|---|---|
 | `id` | `uuid` PK = `auth.users.id` | |
+| `telefone` | `text` unique, nullable | E.164 brasileiro, espelhado somente após OTP SMS validado |
 | `apelido` | `citext` unique not null | 3–20 caracteres, `^[A-Za-z0-9_.]+$`, filtro de palavrão |
 | `clube_coracao_id` | `int` FK → `clubes` | alimenta o ranking "Por clube do coração" |
 | `convidado_por` | `uuid` FK → `perfis` | primeiro convite que trouxe o usuário (métrica de viralidade) |
@@ -389,11 +391,11 @@ A **chave da API-Football nunca vai para o front**: só os jobs no servidor a us
 
 ## LGPD: dados pessoais guardados
 
-Só **e-mail** (em `auth.users`), **apelido**, **clube do coração**, **origem** e as respostas de pesquisa. **Sem CPF, telefone ou endereço na validação.** A exclusão de conta:
+Só **telefone verificado** (em `auth.users` e espelhado em `perfis`), **apelido**, **clube do coração**, **origem** e as respostas de pesquisa. **Sem CPF ou endereço na validação.** A exclusão de conta:
 - apaga `auth.users`, `perfis`, `interesse_pro` e `pesquisas_respostas`;
 - mantém as linhas de ranking das rodadas passadas **anonimizadas** ("Jogador removido"), para a classificação dos outros não mudar.
 
-Quando entrar prêmio, a tabela `perfis` ganha CPF (criptografado), telefone verificado e chave PIX validada contra o CPF. Ver [[Jurídico e Riscos]].
+Quando entrar prêmio, a tabela `perfis` ganha CPF (criptografado) e chave PIX validada contra o CPF. Ver [[Jurídico e Riscos]].
 
 ---
 
