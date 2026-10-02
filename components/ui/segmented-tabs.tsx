@@ -1,0 +1,1 @@
+export function SegmentedTabs({ tabs, active }: { tabs: string[]; active: string }) { return <div className="ui-segmented-tabs" role="tablist">{tabs.map((tab) => <button key={tab} type="button" role="tab" aria-selected={tab === active} className={tab === active ? "is-active" : ""}>{tab}</button>)}</div>; }

@@ -35,7 +35,7 @@ tags:
 
 | Resultado | Decisão |
 |---|---|
-| Retenção **e** viralidade passaram | **Seguir:** abrir CNPJ, buscar patrocínio, colocar prêmio (ver [[Custos e Monetização]]) |
+| Retenção **e** viralidade passaram | **Seguir:** abrir CNPJ e avaliar modelos de monetização e premiação com parecer jurídico antes de qualquer lançamento (ver [[Custos e Monetização]]) |
 | Só a retenção passou | O jogo é bom, falta canal: testar ligas de empresas e grupos antes de investir |
 | Retenção no limite | Testar **1 mês de parcial ao vivo** (API Pro, US$ 19) antes de decidir |
 | Retenção não passou | Parar ou mudar o formato (rodada rápida, Tiers) |

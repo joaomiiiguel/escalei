@@ -63,7 +63,7 @@ tags:
 | Job `sync-lesoes` | 1 | Status preenchido |
 | Job `sync-rodada` (jogos, status, `trava_em`) | 2 | Rodada atual com os 10 jogos |
 | Preço inicial pelo histórico da temporada (`preco.ts`) | 2 | Preços entre C$ 2 e 20, com time de craques estourando C$ 100 |
-| Cadastro: Google + link mágico, apelido, clube do coração, aceite dos termos | 3 | Conta criada de ponta a ponta |
+| Cadastro: telefone + OTP por SMS, apelido, clube do coração, aceite dos termos | 3 | Conta criada de ponta a ponta |
 | Tela Início (rodada, contagem, jogos, card "Meu time") | 3 | Dados reais na tela |
 | **Montar Time + Mercado** (filtros, busca, orçamento, formação) | 7 | Time salvo no banco |
 | Triggers de validação (formação, orçamento) e de trava | 2 | Salvar depois da trava falha |

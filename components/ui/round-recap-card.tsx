@@ -1,0 +1,3 @@
+import { PlayerShirt } from "./player-shirt";
+import { RoundBadge } from "./round-badge";
+export function RoundRecapCard({ round, points, overallPosition, leaguePosition, highlight }: { round: string; points: string; overallPosition: string; leaguePosition: string; highlight: { name: string; points: string } }) { return <article className="ui-round-recap"><RoundBadge status="FECHADA" /><h2>{round} fechada</h2><strong>{points} <small>pts</small></strong><p>{overallPosition} no geral · {leaguePosition} na liga</p><div><PlayerShirt size="sm" /><span><small>Craque do seu time</small><b>{highlight.name} · {highlight.points} pts</b></span></div></article>; }

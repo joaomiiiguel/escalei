@@ -1,0 +1,2 @@
+import type { ReactNode } from "react";
+export function BottomSheet({ title, children, action }: { title: string; children: ReactNode; action?: ReactNode }) { return <section className="ui-bottom-sheet" role="dialog" aria-modal="true" aria-label={title}><i className="ui-bottom-sheet__handle" aria-hidden="true" /><header><h2>{title}</h2></header><div className="ui-bottom-sheet__content">{children}</div>{action && <footer>{action}</footer>}</section>; }

@@ -1,0 +1,2 @@
+import type { ReactNode } from "react";
+export function AppNav({ active, items }: { active: string; items: Array<{ label: string; icon: ReactNode; href: string }> }) { return <nav className="ui-app-nav" aria-label="Navegação principal">{items.map((item) => <a className={item.label === active ? "is-active" : ""} href={item.href} key={item.label}><i aria-hidden="true">{item.icon}</i><span>{item.label}</span></a>)}</nav>; }

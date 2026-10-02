@@ -1,0 +1,4 @@
+import { Button } from "./button";
+import { PlayerShirt } from "./player-shirt";
+import { PlayerStatus } from "./player-status";
+export function MarketPlayerCard({ name, club, position, price, average, status = "PROVÁVEL", selected = false }: { name: string; club: string; position: string; price: string; average: string; status?: "PROVÁVEL" | "DÚVIDA" | "LESIONADO" | "SUSPENSO" | "SEM STATUS"; selected?: boolean }) { return <article className={`ui-market-player ${selected ? "is-selected" : ""}`}><PlayerShirt size="md" /><div className="ui-market-player__identity"><b>{name}</b><small>{club} · {position}</small><PlayerStatus status={status} /></div><div className="ui-market-player__stats"><strong>{price}</strong><small>Média {average}</small></div><Button tone={selected ? "secondary" : "primary"} aria-label={`${selected ? "Remover" : "Escalar"} ${name}`}>{selected ? "−" : "+"}</Button></article>; }

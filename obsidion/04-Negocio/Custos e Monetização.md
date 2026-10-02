@@ -25,45 +25,32 @@ tags:
 
 O desenvolvimento é o seu tempo: solo, em noites e fins de semana, ~2 semanas até o beta.
 
-## 1º ano depois da validação (com prêmio)
+## Fase 2 pós-validação — hipótese interna e não pública
 
-| Item | Valor/ano |
-|---|--:|
-| **Prêmios**: R$ 1.000 × 38 rodadas | **R$ 38.000** |
-| Abertura de empresa + contador | ~R$ 6.000 |
-| Advogado: termos, regulamento, privacidade | R$ 5.000–10.000 |
-| API-Football Pro | ~R$ 1.300 |
-| Infra paga (Vercel Pro + Supabase Pro) | ~R$ 3.000 |
-| Validação de CPF / antifraude | ~R$ 3.000 |
-| **Total sem marketing** | **~R$ 56–61 mil** |
+> [!danger] Não aprovada para implementação ou comunicação
+> A hipótese abaixo é exclusivamente de planejamento. Não deve aparecer em telas, materiais de aquisição, termos, regulamento ou qualquer comunicação ao público. O MVP permanece gratuito, sem prêmio em dinheiro e sem pagamento.
 
-Com **R$ 500 por rodada**: ~R$ 37–42 mil. **Marketing** fica fora da conta e é a maior incógnita.
+**Hipótese a avaliar após a validação:** cada participante de uma liga contribuiria com **R$ 5 por PIX a cada rodada**, e a pessoa com a maior pontuação na rodada receberia o valor formado pelas contribuições do grupo.
 
-## Tabela de prêmios de referência (R$ 1.000 por rodada)
+Essa mecânica **não está liberada**: ela vincula o prêmio ao número de participantes e ao valor arrecadado. Isso é incompatível com a condição de fantasy sport prevista no art. 49 da Lei 14.790/2023, que exige premiação garantida independente desses fatores. Ver [[Jurídico e Riscos]].
 
-| 1º | 2º | 3º | 4º | 5º | 6º | 7º | 8º | 9º | 10º | Lanterna |
-|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|
-| 330 | 180 | 120 | 80 | 60 | 50 | 45 | 40 | 35 | 30 | 30 |
-
-- O prêmio da **lanterna** exige regras contra o time-fantasma: time completo, todos os escalados em campo, lanterna ≤ prêmio do 10º, 1 por usuário. Ver [[Jurídico e Riscos]].
-- Alternativa com mais ganhadores (35): 1º 200 · 2º 120 · 3º 80 · 4º–5º 50 · 6º–10º 30 · 11º–20º 20 · 21º–35º 10.
-- **O menor prêmio precisa ser ≥ o valor mínimo de PIX/saque definido.**
+Antes de qualquer decisão de produto, contratar parecer jurídico especializado e revisar modelo operacional, tributação, KYC/idade, prevenção a fraude e os requisitos do provedor de pagamentos. Não criar fluxo de cobrança, saldo, carteira, PIX ou distribuição de prêmio com base nesta hipótese.
 
 ## Fontes de receita (sem apostas)
 
 | Fonte | Quanto rende | Público necessário |
 |---|---|---|
-| **Patrocínio da rodada** ("Rodada 29 oferecida por…") | R$ 1–3 mil por rodada | Pouco. Marcas locais pagam o prêmio. **Caminho mais direto.** |
+| **Patrocínio da rodada** ("Rodada 29 oferecida por…") | R$ 1–3 mil por rodada | Pouco. Pode financiar uma premiação fixa, se juridicamente viável. |
 | **Assinatura PRO** | ~R$ 9,90/mês | ~500 assinantes cobrem o ano |
 | **Anúncios** | R$ 5–20 por mil visualizações de página | 300–500 mil visualizações/mês |
 | **Ligas pagas** (empresas) | Taxa por liga | Nicho fiel |
 | ~~Afiliado de bets~~ | Alto | **Evitar**: regras de publicidade de apostas e conflito com o emprego |
 
-**Ponto de equilíbrio do 1º ano (~R$ 5 mil/mês):**
+**Ponto de equilíbrio:** depende do modelo pós-validação que obtiver aprovação jurídica e operacional.
 - **Patrocínio:** 2 patrocinadores de R$ 2,5 mil/mês, **ou**
 - **PRO:** ~500 assinantes, **ou**
 - **Combinado:** 1 patrocinador + ~250 assinantes.
 
 ---
 
-*Criado em 28/09/2026.*
+*Criado em 28/09/2026. Atualizado em 30/09/2026.*

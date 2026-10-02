@@ -22,7 +22,7 @@ tags:
 | Camada      | Escolha                                           |                   Custo | Por quê                                   |
 | ----------- | ------------------------------------------------- | ----------------------: | ----------------------------------------- |
 | Front + API | Next.js (App Router), PWA instalável              |     R$ 0 (Vercel Hobby) | Um projeto só, deploy por push            |
-| Login       | Supabase Auth: Google + link mágico por e-mail    |                    R$ 0 | Sem senha para gerenciar                  |
+| Login       | Supabase Auth: telefone + OTP por SMS             |                    R$ 0 | Sem senha para gerenciar                  |
 | Banco       | Supabase Postgres + RLS                           |           R$ 0 (500 MB) | Regras de segurança no banco              |
 | Jobs        | Supabase Cron (`pg_cron`) chamando Edge Functions |                    R$ 0 | Não depende do limite de cron da Vercel   |
 | Métricas    | PostHog                                           | R$ 0 (1 mi eventos/mês) | Funil, retenção por coorte, questionários |

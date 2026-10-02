@@ -4,7 +4,7 @@ tipo: indice
 projeto: Fantasy Futebol
 status: pre-validacao
 criado-em: 2026-09-28
-atualizado-em: 2026-09-29
+atualizado-em: 2026-09-30
 tags:
   - projeto/fantasy-futebol
   - indice
@@ -13,7 +13,7 @@ tags:
 # Fantasy Futebol — Índice
 
 > [!abstract] Em uma frase
-> **App mobile (PWA) de fantasy futebol gratuito** para o Brasileirão Série A, estilo Cartola, criado como **projeto pessoal**. Não tem apostas nem prêmio na fase atual. O primeiro objetivo é **validar se as pessoas voltam toda rodada** e convidam amigos, gastando uns R$ 40 antes de pôr dinheiro em prêmio.
+> **App mobile (PWA) de fantasy futebol gratuito no MVP** para o Brasileirão Série A, estilo Cartola, criado como **projeto pessoal**. O MVP não tem apostas, prêmio em dinheiro nem pagamento. O primeiro objetivo é **validar se as pessoas voltam toda rodada** e convidam amigos, com custo estimado de ~R$ 40.
 
 > [!important] Status em 28/09/2026
 > **Pré-validação.** Nada foi construído. Plano: beta em 17–19/10 e **lançamento do teste em 24–26/10** ([[Plano de 1 Mês — Lançamento do Teste]]). Próximo passo: criar a chave grátis da API-Football e rodar as 3 chamadas de verificação da cobertura da Série A 2026 (ver [[API-Football]]).
@@ -37,7 +37,7 @@ tags:
 - [[Plano de Validação]]: hipóteses, métricas com meta, decisão, recrutamento e eventos
 
 **Negócio**
-- [[Custos e Monetização]]: custo da validação, custo do 1º ano com prêmio, fontes de receita e ponto de equilíbrio
+- [[Custos e Monetização]]: custo da validação, hipótese interna pós-validação, fontes de receita e ponto de equilíbrio
 
 **Jurídico e riscos**
 - [[Jurídico e Riscos]]: art. 49 da Lei 14.790, CNPJ, LGPD, antifraude, imagem e marca, **conflito com o emprego**
@@ -45,6 +45,7 @@ tags:
 **Planejamento**
 - **[[Plano de 1 Mês — Lançamento do Teste]]**: semana a semana até o lançamento em 24–26/10, com horas, checkpoints e checklist
 - [[Roadmap e Backlog]]: fases, backlog com checklists e cronograma
+- [[Onboarding por Convite]]: fluxo de acesso exclusivo por convite e task ONB-01
 
 **Decisões**
 - [[Origem do projeto e decisões iniciais]]

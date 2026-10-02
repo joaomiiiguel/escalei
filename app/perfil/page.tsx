@@ -9,7 +9,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
 
   const { data: profile } = await supabase
     .from("perfis")
-    .select("apelido, tema, notificacoes_email, termos_aceitos_em")
+    .select("apelido, telefone, tema, notificacoes_email, termos_aceitos_em")
     .eq("id", user.id)
     .maybeSingle();
   const params = await searchParams;
@@ -17,6 +17,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
   return <main>
     <h1>Perfil</h1>
     <p>{profile?.apelido ?? "Perfil pendente"}</p>
+    {profile?.telefone && <p>Celular verificado: final {profile.telefone.slice(-4)}</p>}
     <p>Termos aceitos: {profile?.termos_aceitos_em ? "sim" : "pendente"}</p>
     {params.atualizado && <p>Preferências salvas.</p>}
     {params.erro && <p>Não foi possível concluir a operação. Revise os dados e tente novamente.</p>}

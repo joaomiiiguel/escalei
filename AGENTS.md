@@ -14,8 +14,9 @@ Escalei é um PWA mobile-first de fantasy futebol gratuito para o Brasileirão S
 - Next.js 15, App Router e React 19.
 - TypeScript com aliases `@/*` definidos em `tsconfig.json`.
 - Tailwind CSS v4, carregado por `@import "tailwindcss"` em `app/globals.css` e pelo plugin `@tailwindcss/postcss`.
+- shadcn/ui é o design system padrão, configurado em `components.json`, com Base UI e Lucide.
 - Supabase para autenticação e Postgres, usando `@supabase/ssr`.
-- CSS global e componentes de UI reutilizáveis já existem; adote Tailwind para estilos novos e evolua o CSS existente de modo incremental, sem regressões visuais.
+- CSS global e componentes de UI reutilizáveis já existem; adote Tailwind e shadcn/ui para estilos e componentes novos, sem regressões visuais.
 
 ## Estrutura do repositório
 
@@ -45,10 +46,12 @@ obsidion/                 Especificação, decisões, regras e planejamento
 
 ## Design e Tailwind
 
-- Antes de criar um novo componente, verifique `components/ui/index.tsx` e reutilize `Button`, `Card`, `Badge`, `Chip`, `TextField`, `Toast` e demais primitivos disponíveis.
-- Não remova `app/globals.css`: ela contém tokens e estilos ativos. Migrações para utilitários Tailwind devem ser graduais.
-- Evite `style={{ ... }}` para estilos novos. Prefira utilitários Tailwind; quando a regra for repetida ou estrutural, use uma classe CSS bem nomeada.
-- Não instale bibliotecas de componentes ou ícones sem necessidade explícita.
+- Use shadcn/ui como design system padrão. Antes de criar um componente, verifique os primitivos já gerados em `components/shadcn/` e `components/ui/`.
+- Gere novos primitivos pelo CLI (`npx shadcn@latest add <componente>`) e mantenha-os separados por arquivo.
+- Para estilos novos, use utilitários Tailwind diretamente no componente. Não adicione estilos de tela ou de componente em `app/globals.css`.
+- Não remova `app/globals.css`: ela mantém a importação do Tailwind, os tokens do shadcn/ui e estilos legados ativos. Migrações devem ser graduais.
+- Evite `style={{ ... }}` para estilos novos. Prefira utilitários Tailwind e as variantes dos componentes shadcn/ui.
+- Use `lucide-react` para ícones novos; não instale outra biblioteca de ícones sem necessidade explícita.
 
 ## Supabase e dados
 
