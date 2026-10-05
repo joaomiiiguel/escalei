@@ -5,7 +5,8 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
-    "sync:clubs": "node --env-file=.env scripts/sync-clubes.mjs"
+    "sync:clubs": "node --env-file=.env scripts/sync-clubes.mjs",
+    "seed:mock-round": "node --env-file=.env scripts/seed-mock-round.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
