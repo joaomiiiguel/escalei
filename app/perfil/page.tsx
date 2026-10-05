@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import { deleteAccount, updatePreferences } from "./actions";
+import { deleteAccount, signOut, updatePreferences } from "./actions";
 
 export default async function Profile({ searchParams }: { searchParams: Promise<{ atualizado?: string; erro?: string }> }) {
   const supabase = await createClient();
@@ -12,6 +12,8 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
     .select("apelido, telefone, tema, notificacoes_email, termos_aceitos_em")
     .eq("id", user.id)
     .maybeSingle();
+  if (!profile) redirect("/onboarding");
+
   const params = await searchParams;
 
   return <main>
@@ -19,6 +21,7 @@ export default async function Profile({ searchParams }: { searchParams: Promise<
     <p>{profile?.apelido ?? "Perfil pendente"}</p>
     {profile?.telefone && <p>Celular verificado: final {profile.telefone.slice(-4)}</p>}
     <p>Termos aceitos: {profile?.termos_aceitos_em ? "sim" : "pendente"}</p>
+    <form action={signOut}><button type="submit">Sair da conta</button></form>
     {params.atualizado && <p>Preferências salvas.</p>}
     {params.erro && <p>Não foi possível concluir a operação. Revise os dados e tente novamente.</p>}
 

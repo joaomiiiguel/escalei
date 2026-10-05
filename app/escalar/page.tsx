@@ -1,10 +1,19 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
 import { Badge, BudgetBar, Button, Chip } from "@/components/ui";
 
 const players = ["Goleiro", "Lateral esquerdo", "Zagueiro", "Zagueiro", "Lateral direito", "Meia", "Meia", "Meia", "Atacante", "Atacante", "Atacante"];
 const market = [["Cássio", "CRU", "GOL", "C$ 8,40"], ["Arrascaeta", "FLA", "MEI", "C$ 15,20"], ["Vitor Roque", "PAL", "ATA", "C$ 12,80"]];
 
-export default function Lineup() {
+export default async function Lineup() {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/entrar");
+
+  const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
+  if (!profile) redirect("/onboarding");
+
   return (
     <main className="lineup-page">
       <header className="lineup-header">

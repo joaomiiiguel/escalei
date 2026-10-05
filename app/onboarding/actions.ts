@@ -1,29 +1,25 @@
 "use server";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-
-function isMockPhoneAuth() {
-    return process.env.NODE_ENV === "development" && process.env.AUTH_PHONE_OTP_MODE === "mock";
-}
+import { cookies } from "next/headers";
+import { addUserToInvitedLeague, isInviteToken } from "@/lib/invites";
 
 export async function finishOnboarding(formData: FormData) {
     const apelido = String(formData.get("apelido") ?? "").trim();
     const clubeValor = String(formData.get("clube_coracao_id") ?? "");
     const clube = clubeValor ? Number(clubeValor) : null;
-    const returnUrl = isMockPhoneAuth() ? "/onboarding?mock=1&" : "/onboarding?";
     if (!/^[A-Za-z0-9_.]{3,20}$/.test(apelido))
-        redirect(`${returnUrl}erro=apelido`);
+        redirect("/onboarding?erro=apelido");
     if (formData.get("aceite_termos") !== "on")
-        redirect(`${returnUrl}erro=termos`);
+        redirect("/onboarding?erro=termos");
     if (clubeValor && (!Number.isInteger(Number(clubeValor)) || Number(clubeValor) <= 0))
-        redirect(`${returnUrl}erro=clube`);
+        redirect("/onboarding?erro=clube");
 
-    if (isMockPhoneAuth()) redirect("/como-funciona?mock=1");
-
+    const cookieStore = await cookies();
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) redirect("/entrar");
-    if (!user.phone) redirect("/entrar?erro=telefone");
+    const { data: { user: signedInUser } } = await supabase.auth.getUser();
+    if (!signedInUser) redirect("/entrar?erro=autenticacao");
+    const user = signedInUser;
 
     if (clube) {
         const { data: clubeAtivo } = await supabase
@@ -35,14 +31,31 @@ export async function finishOnboarding(formData: FormData) {
         if (!clubeAtivo) redirect("/onboarding?erro=clube");
     }
 
-    const { error } = await supabase.from("perfis").upsert({
-      id: user.id,
-      apelido,
-      telefone: user.phone,
-      clube_coracao_id: clube,
-      termos_versao: "v1",
-      termos_aceitos_em: new Date().toISOString(),
-    });
+    const { data: profile, error } = await supabase
+      .from("perfis")
+      .upsert({
+        id: user.id,
+        apelido,
+        clube_coracao_id: clube,
+        telefone: cookieStore.get("escalei_verified_phone")?.value ?? null,
+        termos_versao: "v1",
+        termos_aceitos_em: new Date().toISOString(),
+      }, { onConflict: "id" })
+      .select("id")
+      .single();
+
     if (error?.code === "23505") redirect("/onboarding?erro=apelido_indisponivel");
-    redirect(error ? "/onboarding?erro=perfil" : "/como-funciona");
+    if (error || profile?.id !== user.id) redirect("/onboarding?erro=perfil");
+
+    cookieStore.delete("escalei_verified_phone");
+    const inviteFromForm = String(formData.get("convite") ?? "");
+    const inviteToken = isInviteToken(inviteFromForm)
+      ? inviteFromForm
+      : cookieStore.get("escalei_invite")?.value;
+    if (inviteToken && isInviteToken(inviteToken)) {
+      await addUserToInvitedLeague(inviteToken, user.id);
+      cookieStore.delete("escalei_invite");
+    }
+
+    redirect("/");
 }

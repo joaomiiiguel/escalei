@@ -1,70 +1,37 @@
 "use server";
-import { cookies } from "next/headers";
+
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-const phoneOtpCookie = "escalei_phone_otp";
-
-function phoneOtpMode() {
-  const mode = process.env.AUTH_PHONE_OTP_MODE ?? "supabase";
-  return process.env.NODE_ENV === "development" && mode === "mock" ? "mock" : "supabase";
+function credentials(formData: FormData) {
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  const password = String(formData.get("senha") ?? "");
+  return { email, password, isEmail: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) };
 }
 
-function mockOtpCode() {
-  return process.env.AUTH_PHONE_OTP_MOCK_CODE ?? "000000";
-}
-
-function normalizeBrazilianMobile(value: FormDataEntryValue | null) {
-  const digits = String(value ?? "").replace(/\D/g, "");
-  const nationalNumber = digits.length === 13 && digits.startsWith("55") ? digits.slice(2) : digits;
-
-  if (!/^[1-9]\d9\d{8}$/.test(nationalNumber)) return null;
-  return `+55${nationalNumber}`;
-}
-
-export async function requestPhoneOtp(formData: FormData) {
-  const phone = normalizeBrazilianMobile(formData.get("telefone"));
-  if (!phone) redirect("/entrar?erro=telefone");
-
-  const mode = phoneOtpMode();
-  if (mode === "supabase") {
-    const supabase = await createClient();
-    const { error } = await supabase.auth.signInWithOtp({
-      phone,
-      options: { shouldCreateUser: true },
-    });
-    if (error) redirect("/entrar?erro=sms");
-  }
-
-  const cookieStore = await cookies();
-  cookieStore.set(phoneOtpCookie, phone, {
-    httpOnly: true,
-    maxAge: 10 * 60,
-    path: "/",
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-  });
-
-  redirect(mode === "mock" ? "/entrar?verificar=1&modo=mock" : "/entrar?verificar=1");
-}
-
-export async function verifyPhoneOtp(formData: FormData) {
-  const code = String(formData.get("codigo") ?? "").replace(/\D/g, "");
-  const cookieStore = await cookies();
-  const phone = cookieStore.get(phoneOtpCookie)?.value;
-
-  if (!phone || !/^\d{6}$/.test(code)) redirect("/entrar?erro=codigo");
-
-  if (phoneOtpMode() === "mock") {
-    if (code !== mockOtpCode()) redirect("/entrar?verificar=1&modo=mock&erro=codigo");
-    cookieStore.delete(phoneOtpCookie);
-    redirect("/onboarding?mock=1");
-  }
-
+export async function signInWithEmail(formData: FormData) {
+  const { email, password, isEmail } = credentials(formData);
+  if (!isEmail || password.length < 8) redirect("/entrar?erro=campos");
   const supabase = await createClient();
-  const { error } = await supabase.auth.verifyOtp({ phone, token: code, type: "sms" });
-  if (error) redirect("/entrar?verificar=1&erro=codigo");
+  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  if (error) redirect("/entrar?erro=credenciais");
+  redirect("/");
+}
 
-  cookieStore.delete(phoneOtpCookie);
-  redirect("/onboarding");
+export async function signUpWithEmail(formData: FormData) {
+  const { email, password, isEmail } = credentials(formData);
+  if (!isEmail || password.length < 8 || password !== String(formData.get("confirmar_senha") ?? "")) redirect("/entrar?criar=1&erro=campos");
+  const supabase = await createClient();
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const { data, error } = await supabase.auth.signUp({ email, password, options: { emailRedirectTo: `${siteUrl}/api/auth/callback` } });
+  if (error) redirect("/entrar?criar=1&erro=cadastro");
+  redirect(data.session ? "/onboarding" : "/entrar?sucesso=confirmacao");
+}
+
+export async function signInWithGoogle() {
+  const supabase = await createClient();
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const { data, error } = await supabase.auth.signInWithOAuth({ provider: "google", options: { redirectTo: `${siteUrl}/api/auth/callback` } });
+  if (error || !data.url) redirect("/entrar?erro=google");
+  redirect(data.url);
 }

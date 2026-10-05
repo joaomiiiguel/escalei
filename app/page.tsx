@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { Badge, Button, Card, Chip } from "@/components/ui";
 
@@ -11,9 +12,13 @@ const matches = [
 export default async function Home() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
-  const { data: profile } = user
-    ? await supabase.from("perfis").select("apelido").eq("id", user.id).maybeSingle()
-    : { data: null };
+  if (!user) redirect("/entrar");
+
+  const { data: profile } = await supabase.from("perfis").select("apelido").eq("id", user.id).maybeSingle();
+  if (!profile) redirect("/onboarding");
+
+  const { data: admin } = await supabase.from("administradores").select("usuario_id").eq("usuario_id", user.id).maybeSingle();
+  if (admin) redirect("/admin/grupos");
   const firstName = profile?.apelido ?? "escalador";
 
   return (

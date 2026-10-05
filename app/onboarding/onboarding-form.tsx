@@ -10,26 +10,25 @@ import { TeamLogo } from "./team-logo";
 type Club = { id: number; nome: string; sigla: string; logo_url?: string | null };
 type FinishAction = (formData: FormData) => void | Promise<void>;
 
-export function OnboardingForm({ clubs, erro, finishOnboarding }: { clubs: Club[]; erro?: string; finishOnboarding: FinishAction }) {
+export function OnboardingForm({ clubs, erro, inviteToken, finishOnboarding }: { clubs: Club[]; erro?: string; inviteToken?: string; finishOnboarding: FinishAction }) {
   const [clubId, setClubId] = useState("");
   const [apelido, setApelido] = useState("");
   const [termos, setTermos] = useState(false);
 
   return (
-    <main className="mx-auto grid h-dvh min-h-dvh w-full !max-w-[390px] grid-rows-[54px_48px_minmax(0,1fr)_auto] overflow-hidden bg-[#0f1710] !p-0 text-[#f3f5f4]">
-
-      <div aria-hidden="true" className="flex items-center justify-between px-7 pl-[34px] text-base font-bold"><span>9:41</span><span>⌁ ◔ ▰</span></div>
+    <main className="mx-auto grid h-dvh min-h-dvh w-full !max-w-[490px]  overflow-hidden bg-[#0f1710] !p-0 text-[#f3f5f4]">
       <div className="flex items-center px-5">
         <a href="/entrar" aria-label="Voltar para entrar" className="grid size-11 place-items-center rounded-full bg-[#29332c] text-[22px] text-[#f3f5f4] no-underline">←</a>
       </div>
       <form id="onboarding-profile-form" action={finishOnboarding} className="grid min-h-0 content-start gap-5 overflow-y-auto px-5 pb-6 pt-1 !m-0">
+        {inviteToken && <input type="hidden" name="convite" value={inviteToken} />}
 
         <header className="grid gap-2">
           <h1 className="m-0 text-[28px] font-extrabold leading-tight tracking-[-0.9px]">Como vamos te chamar?</h1>
           <p className="m-0 text-sm leading-[21px] text-[#a0a8af]">Seu apelido aparece no ranking geral e nas ligas.</p>
         </header>
 
-        {erro && <p role="alert" className="m-0 text-sm text-[#ffc3c3]">{erro === "apelido_indisponivel" ? "Esse apelido já está em uso." : "Revise os dados e tente novamente."}</p>}
+        {erro && <p role="alert" className="m-0 text-sm text-[#ffc3c3]">{erro === "apelido_indisponivel" ? "Esse apelido já está em uso." : erro === "registro" ? "Não foi possível criar seu acesso agora. Tente novamente." : "Revise os dados e tente novamente."}</p>}
 
         <label className="grid gap-1.5 text-[13px] font-semibold text-[#a0a8af]">
           <span>Apelido</span>
@@ -64,7 +63,7 @@ export function OnboardingForm({ clubs, erro, finishOnboarding }: { clubs: Club[
       </form>
 
       <div className="border-t border-[#1e2921] bg-[#0f1710] px-5 py-5">
-        <Button type="submit" form="onboarding-profile-form" disabled={apelido.length < 3 || !termos || !clubId} className="flex items-center justify-center gap-2 h-[52px] w-full rounded-[14px] !border-0 bg-[#2fe06b] text-base font-bold text-[#06200f] hover:bg-[#49ef7c] transition disabled:opacity-50 disabled:pointer-events-none">
+        <Button type="submit" form="onboarding-profile-form" disabled={apelido.length < 3 || !termos} className="flex items-center justify-center gap-2 h-[52px] w-full rounded-[14px] !border-0 bg-[#2fe06b] text-base font-bold text-[#06200f] hover:bg-[#49ef7c] transition disabled:opacity-50 disabled:pointer-events-none">
           <ArrowRight aria-hidden="true" />Continuar</Button></div>
     </main>
   );

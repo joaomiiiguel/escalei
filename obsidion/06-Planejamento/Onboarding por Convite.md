@@ -40,7 +40,7 @@ Link /convite/[codigo]
 - Persistir o código de convite com segurança durante o envio e a validação do OTP por SMS. O código não é uma prova de identidade.
 - Não revelar lista de membros ou detalhes privados antes da autenticação. Na prévia, mostrar só nome e ícone da liga, apelido do convidador e a temporada.
 - Após entrar, registrar `convite_aceito`; o evento `cadastro` inclui a origem de convite. O compartilhamento posterior registra `convite_enviado { canal }`.
-- Convites devem usar URL não adivinhável além do código curto atual, ou ter expiração/revogação antes da abertura para público amplo. Esta é uma pendência técnica de segurança a decidir antes da implementação de produção.
+- Convites usam `token_convite` UUID no link público, sem expor o código curto. O token pode ser revogado ao arquivar a liga ou receber prazo em `convite_expira_em`.
 
 ## Telas do protótipo
 
