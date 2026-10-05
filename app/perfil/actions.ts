@@ -5,6 +5,12 @@ import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 
+export async function signOut() {
+  const supabase = await createClient();
+  await supabase.auth.signOut({ scope: "local" });
+  redirect("/entrar?saida=1");
+}
+
 export async function updatePreferences(formData: FormData) {
   const tema = formData.get("tema") === "claro" ? "claro" : "escuro";
   const notificacoesEmail = formData.get("notificacoes_email") === "on";

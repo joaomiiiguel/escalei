@@ -272,6 +272,17 @@ O identificador de login e a validação do OTP ficam em `auth.users` (Supabase 
 
 ## Grupo 3 · Social e validação
 
+### `administradores`
+
+Controle de acesso para o backoffice. Uma conta só ganha esse acesso por inclusão manual e confiável nesta tabela; o cliente nunca escolhe ou altera esse papel.
+
+| Campo | Tipo | Regra |
+|---|---|---|
+| `usuario_id` | `uuid` PK FK → `perfis` | uma conta administrativa por perfil |
+| `nome` | `text` not null | apelido do perfil no momento da inclusão |
+| `telefone` | `text` not null unique | celular brasileiro verificado no perfil |
+| `criado_em` | `timestamptz` | auditoria mínima |
+
 ### `ligas`
 
 | Campo | Tipo | Regra |
@@ -282,6 +293,8 @@ O identificador de login e a validação do OTP ficam em `auth.users` (Supabase 
 | `dono_id` | `uuid` FK → `perfis` not null | |
 | `tipo` | `tipo_liga` default `CONVITE` | |
 | `codigo_convite` | `varchar(8)` unique not null | alfanumérico sem caracteres ambíguos (sem 0/O, 1/I) |
+| `token_convite` | `uuid` unique not null | usado no link público, não adivinhável |
+| `convite_expira_em` | `timestamptz` | opcional; bloqueia o link depois do prazo |
 | `temporada` | `smallint` not null | |
 | `criada_em` · `arquivada_em` | `timestamptz` | |
 

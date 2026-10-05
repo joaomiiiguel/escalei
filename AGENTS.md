@@ -117,3 +117,7 @@ Para cada issue do Linear:
 - Informe de forma objetiva: arquivos alterados, validações executadas, limitações e próximos passos.
 - Diferencie claramente implementado, protótipo visual e integração real com dados externos.
 - Nunca afirme que uma integração de API, autenticação ou migration está validada sem ter executado uma verificação correspondente.
+
+## Consulta obrigatória
+
+- Antes de iniciar qualquer alteração no projeto, consulte este `AGENTS.md` e siga as instruções vigentes.

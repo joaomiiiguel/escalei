@@ -32,8 +32,16 @@ export function ComoFuncionaFlow() {
 
   useEffect(() => {
     setSecondsLeft(READING_TIME_SECONDS);
-    const timeout = window.setTimeout(() => setSecondsLeft(0), READING_TIME_SECONDS * 1000);
-    return () => window.clearTimeout(timeout);
+    const interval = window.setInterval(() => {
+      setSecondsLeft((prev) => {
+        if (prev <= 1) {
+          window.clearInterval(interval);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+    return () => window.clearInterval(interval);
   }, [currentSlide]);
 
   function continueFlow() {
@@ -46,8 +54,8 @@ export function ComoFuncionaFlow() {
   }
 
   return (
-    <main className="mx-auto grid h-dvh min-h-dvh w-full max-w-[390px] grid-rows-[54px_56px_minmax(0,1fr)_auto] overflow-hidden bg-[#0f1710] text-[#f3f5f4]">
-      <div aria-hidden="true" className="flex items-center justify-between px-7 pl-[34px] text-base font-semibold"><span>9:41</span><span>⌁ ◔ ▰</span></div>
+    <main className="mx-auto grid h-dvh min-h-dvh w-full max-w-[490px]  overflow-hidden bg-[#0f1710] text-[#f3f5f4]">
+
       <header className="flex items-center px-5"><span className="inline-flex items-center gap-2 text-[29px] font-extrabold tracking-[-0.8px]"><span aria-hidden="true" className="grid size-9 place-items-center rounded-full border-[3px] border-current text-sm">◉</span>escalei</span></header>
 
       <section className="min-h-0 overflow-y-auto">
