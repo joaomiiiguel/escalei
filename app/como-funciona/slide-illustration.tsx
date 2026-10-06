@@ -14,7 +14,7 @@ export function SlideIllustration({ slide }: { slide: number }) {
         <Image src={slideImages[slide]} alt={slideTitles[slide]} fill className="object-cover" priority />
       </div>
       <div className="relative grid size-28 place-items-center rounded-full border border-[#b6ffca66] bg-[#102c18] shadow-[0_0_70px_18px_#2fe06b26]">
-        <Icon aria-hidden="true" className="size-14 text-[#2fe06b]" strokeWidth={1.5} />
+        <Icon aria-hidden="true" className="size-14 text-primary" strokeWidth={1.5} />
       </div>
     </div>
   );

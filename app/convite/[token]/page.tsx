@@ -10,7 +10,7 @@ export default async function InvitePage({ params, searchParams }: { params: Pro
   const { token } = await params;
   const query = await searchParams;
   const invite = isInviteToken(token) ? await getActiveInvite(token) : false;
-  if (!invite) return <main className="mx-auto grid min-h-dvh max-w-[490px] place-items-center bg-[#0f1710] p-6 text-center text-[#f3f5f4]"><section><p className="text-sm font-extrabold tracking-widest text-[#ffcc66]">CONVITE INDISPONÍVEL</p><h1 className="text-3xl font-extrabold">Este link não é válido.</h1><p className="text-[#a0a8af]">Peça um novo convite a quem administra o grupo.</p></section></main>;
+  if (!invite) return <main className="mx-auto grid min-h-dvh max-w-[490px] place-items-center bg-background p-6 text-center text-foreground"><section><p className="text-sm font-extrabold tracking-widest text-[#ffcc66]">CONVITE INDISPONÍVEL</p><h1 className="text-3xl font-extrabold">Este link não é válido.</h1><p className="text-muted-foreground">Peça um novo convite a quem administra o grupo.</p></section></main>;
 
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -18,25 +18,25 @@ export default async function InvitePage({ params, searchParams }: { params: Pro
 
   if (user && !profile) redirect(`/onboarding?convite=${token}`);
 
-  return <main className="mx-auto grid min-h-dvh content-center gap-6 bg-[#0f1710] px-5 text-center text-[#f3f5f4]">
+  return <main className="mx-auto grid min-h-dvh content-center gap-6 bg-background px-5 text-center text-foreground">
     <span className="mx-auto grid size-20 place-items-center rounded-full bg-[#2fe06b1f] text-4xl">⚽</span>
-    <p className="m-0 text-xs font-extrabold tracking-[1.2px] text-[#2fe06b]">CONVITE DE GRUPO</p>
+    <p className="m-0 text-xs font-extrabold tracking-[1.2px] text-primary">CONVITE DE GRUPO</p>
     <h1 className="m-0 text-3xl font-extrabold">{invite.nome}</h1>
-    <p className="m-0 text-[#a0a8af]">Você foi convidado para acompanhar a temporada {invite.temporada} com este grupo.</p>
-    <div className="flex items-center justify-center gap-2 text-sm text-[#a0a8af]">
+    <p className="m-0 text-muted-foreground">Você foi convidado para acompanhar a temporada {invite.temporada} com este grupo.</p>
+    <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
       <UsersRound aria-hidden="true" className="size-4" />Entre com sua conta para participar.
     </div>
-    {query.erro && <p role="alert" className="m-0 text-sm text-[#ffc3c3]">Não foi possível entrar neste grupo. Peça um novo convite.</p>}
+    {query.erro && <p role="alert" className="m-0 text-sm text-destructive-foreground">Não foi possível entrar neste grupo. Peça um novo convite.</p>}
     {user ? (
       <form action={acceptInvite}>
         <input type="hidden" name="token" value={token} />
-        <Button type="submit" className="h-[52px] w-full rounded-[14px] bg-[#2fe06b] text-[#06200f] hover:bg-[#49ef7c]">
+        <Button type="submit" className="h-[52px] w-full rounded-[14px] bg-primary text-primary-foreground hover:bg-primary">
           Entrar no grupo
         </Button>
       </form>
     ) : (
       <Link href={`/entrar?convite=${token}`}>
-        <Button className="h-[52px] w-full rounded-[14px] bg-[#2fe06b] text-[#06200f] hover:bg-[#49ef7c]">
+        <Button className="h-[52px] w-full rounded-[14px] bg-primary text-primary-foreground hover:bg-primary">
           Entrar para participar
         </Button>
       </Link>

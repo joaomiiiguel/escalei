@@ -54,24 +54,24 @@ export function ComoFuncionaFlow() {
   }
 
   return (
-    <main className="mx-auto grid h-dvh min-h-dvh w-full max-w-[490px]  overflow-hidden bg-[#0f1710] text-[#f3f5f4]">
+    <main className="mx-auto grid h-dvh min-h-dvh w-full max-w-[490px]  overflow-hidden bg-background text-foreground">
 
       <header className="flex items-center px-5"><span className="inline-flex items-center gap-2 text-[29px] font-extrabold tracking-[-0.8px]"><span aria-hidden="true" className="grid size-9 place-items-center rounded-full border-[3px] border-current text-sm">◉</span>escalei</span></header>
 
       <section className="min-h-0 overflow-y-auto">
         <SlideIllustration slide={currentSlide} />
         <div className="grid gap-2.5 px-6 pb-5 pt-4">
-          <p className="m-0 text-[11px] font-extrabold tracking-[1.2px] text-[#2fe06b]">COMO FUNCIONA</p>
+          <p className="m-0 text-[11px] font-extrabold tracking-[1.2px] text-primary">COMO FUNCIONA</p>
           <h1 className="m-0 text-[30px] font-extrabold leading-[35px] tracking-[-1px]">{slide.title}</h1>
-          <p className="m-0 text-[15px] leading-[23px] text-[#a0a8af]">{slide.description}</p>
+          <p className="m-0 text-[15px] leading-[23px] text-muted-foreground">{slide.description}</p>
         </div>
       </section>
 
       <footer className="grid gap-4 px-6 pb-7 pt-3">
         <div className="flex justify-center gap-1.5" aria-label={`Etapa ${currentSlide + 1} de ${slides.length}`}>
-          {slides.map((_, index) => <span key={index} className={`h-1.5 rounded-full ${index === currentSlide ? "w-[22px] bg-[#2fe06b]" : "w-1.5 bg-[#29332c]"}`} />)}
+          {slides.map((_, index) => <span key={index} className={`h-1.5 rounded-full ${index === currentSlide ? "w-[22px] bg-primary" : "w-1.5 bg-border"}`} />)}
         </div>
-        <Button type="button" disabled={!canContinue} onClick={continueFlow} className="h-[52px] w-full rounded-[14px] !border-0 bg-[#2fe06b] text-base font-bold text-[#06200f] enabled:hover:bg-[#49ef7c] disabled:bg-[#29332c] disabled:text-[#7f8b83]">
+        <Button type="button" disabled={!canContinue} onClick={continueFlow} className="h-[52px] w-full rounded-[14px] !border-0 bg-primary text-base font-bold text-primary-foreground enabled:hover:bg-primary disabled:bg-border disabled:text-[#7f8b83]">
           <ArrowRight aria-hidden="true" />
           {canContinue ? (currentSlide === slides.length - 1 ? "Ir para o início" : "Continuar") : `Continue em ${secondsLeft}s`}
         </Button>
