@@ -2,63 +2,39 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+@theme {
+    --color-background: #0b120e;
+    --color-foreground: #eff7ef;
+    --color-card: #111b14;
+    --color-card-foreground: #eff7ef;
+    --color-popover: #171a1d;
+    --color-popover-foreground: #f3f5f4;
+    --color-primary: #82e671;
+    --color-primary-foreground: #092305;
+    --color-secondary: #1a2a1d;
+    --color-secondary-foreground: #dff5de;
+    --color-muted: #27322a;
+    --color-muted-foreground: #a0a8af;
+    --color-accent: #17371b;
+    --color-accent-foreground: #aaf29d;
+    --color-border: #2f4234;
+    --color-input: #3e5143;
+    --color-ring: #9aec87;
+    --color-success: #61d653;
+    --color-success-foreground: #082006;
+    --color-warning: #ffc933;
+    --color-warning-foreground: #231a00;
+    --color-destructive: #561d20;
+    --color-destructive-foreground: #ffdddd;
+    --color-whatsapp: #25d366;
+    --radius-card: 0.75rem;
+}
+
 :root {
     color-scheme: dark;
     font-family: Arial, sans-serif;
-    --background: #0b120e;
-    --foreground: #eff7ef;
-    --card: #111b14;
-    --card-foreground: #eff7ef;
-    --popover: #171a1d;
-    --popover-foreground: #f3f5f4;
-    --primary: #82e671;
-    --primary-foreground: #092305;
-    --secondary: #1a2a1d;
-    --secondary-foreground: #dff5de;
-    --muted: #27322a;
-    --muted-foreground: #a0a8af;
-    --accent: #17371b;
-    --accent-foreground: #aaf29d;
-    --border: #2f4234;
-    --input: #3e5143;
-    --ring: #9aec87;
-    --success: #61d653;
-    --success-foreground: #082006;
-    --warning: #ffc933;
-    --warning-foreground: #231a00;
-    --destructive: #561d20;
-    --destructive-foreground: #ffdddd;
-    --whatsapp: #25d366;
-    --radius: 0.75rem;
-    background: var(--background);
-    color: var(--foreground);
-}
-
-@theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --color-card: var(--card);
-    --color-card-foreground: var(--card-foreground);
-    --color-popover: var(--popover);
-    --color-popover-foreground: var(--popover-foreground);
-    --color-primary: var(--primary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-secondary: var(--secondary);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-muted: var(--muted);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-accent: var(--accent);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-border: var(--border);
-    --color-input: var(--input);
-    --color-ring: var(--ring);
-    --color-success: var(--success);
-    --color-success-foreground: var(--success-foreground);
-    --color-warning: var(--warning);
-    --color-warning-foreground: var(--warning-foreground);
-    --color-destructive: var(--destructive);
-    --color-destructive-foreground: var(--destructive-foreground);
-    --color-whatsapp: var(--whatsapp);
+    background: var(--color-background);
+    color: var(--color-foreground);
 }
 
 * {
@@ -68,7 +44,7 @@
 body {
     min-height: 100dvh;
     margin: 0;
-    background: var(--background);
+    background: var(--color-background);
 }
 
 main {
@@ -86,13 +62,13 @@ button,
 select {
     min-height: 44px;
     border-radius: 10px;
-    border: 1px solid var(--input);
+    border: 1px solid var(--color-input);
     padding: 10px 12px;
     font: inherit;
 }
 
 a {
-    color: var(--primary);
+    color: var(--color-primary);
 }
 
 .ui-button {
@@ -113,45 +89,45 @@ a {
 }
 
 .ui-button--primary {
-    color: var(--primary-foreground);
-    background: var(--primary);
+    color: var(--color-primary-foreground);
+    background: var(--color-primary);
 }
 
 .ui-button--secondary {
-    color: var(--secondary-foreground);
-    background: var(--secondary);
-    border: 1px solid var(--border);
+    color: var(--color-secondary-foreground);
+    background: var(--color-secondary);
+    border: 1px solid var(--color-border);
 }
 
 .ui-button--danger {
-    color: var(--destructive-foreground);
-    background: var(--destructive);
+    color: var(--color-destructive-foreground);
+    background: var(--color-destructive);
 }
 
 .ui-button--success {
-    color: var(--success-foreground);
-    background: var(--success);
+    color: var(--color-success-foreground);
+    background: var(--color-success);
 }
 
 .ui-button--neutral {
-    color: var(--foreground);
-    background: var(--muted);
+    color: var(--color-foreground);
+    background: var(--color-muted);
 }
 
 .ui-button--ghost {
-    color: var(--foreground);
-    border: 1.5px solid var(--border);
+    color: var(--color-foreground);
+    border: 1.5px solid var(--color-border);
     background: transparent;
 }
 
 .ui-button--highlight {
-    color: var(--warning-foreground);
-    background: var(--warning);
+    color: var(--color-warning-foreground);
+    background: var(--color-warning);
 }
 
 .ui-button--whatsapp {
-    color: var(--success-foreground);
-    background: var(--whatsapp);
+    color: var(--color-success-foreground);
+    background: var(--color-whatsapp);
 }
 
 .ui-icon-button {
