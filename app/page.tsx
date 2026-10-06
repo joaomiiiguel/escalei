@@ -1,35 +1,20 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { CalendarClock, ChevronRight, CircleUserRound, ShieldCheck, Trophy } from "lucide-react";
+import { CalendarClock, ChevronRight, ShieldCheck } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
+import { LockCountdown } from "./lock-countdown";
+import { Badge, ScoreCard } from "@/components/ui";
 
 type StatusRodada = "AGENDADA" | "ABERTA" | "EM_ANDAMENTO" | "FECHADA";
 type StatusJogo = "A_JOGAR" | "EM_ANDAMENTO" | "ENCERRADO" | "ADIADO" | "CANCELADO";
 type Rodada = { id: number; numero: number; status: StatusRodada; abre_em: string | null; trava_em: string; fechada_em: string | null; rotulo_api: string };
 type Jogo = { id: number; clube_casa_id: number; clube_fora_id: number; inicio_em: string; status: StatusJogo; gols_casa: number | null; gols_fora: number | null; pontuado_em: string | null };
-type Clube = { id: number; nome: string; sigla: string };
+type Clube = { id: number; nome: string; sigla: string; logo_url: string | null };
 
 const saoPaulo = "America/Sao_Paulo";
 
 function formatDateTime(value: string) {
   return new Intl.DateTimeFormat("pt-BR", { timeZone: saoPaulo, weekday: "short", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(value));
-}
-
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat("pt-BR", { timeZone: saoPaulo, day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(value));
-}
-
-function timeUntil(value: string, now: Date) {
-  const minutes = Math.max(0, Math.ceil((new Date(value).getTime() - now.getTime()) / 60000));
-  return `${Math.floor(minutes / 1440)}d ${Math.floor((minutes % 1440) / 60)}h ${minutes % 60}min`;
-}
-
-function roundPresentation(round: Rodada, now: Date) {
-  const isLocked = now >= new Date(round.trava_em);
-  if (round.status === "AGENDADA") return { label: "RODADA AINDA NÃO ABERTA", title: "Mercado ainda fechado", description: round.abre_em ? `A abertura está prevista para ${formatDateTime(round.abre_em)}.` : "A abertura do mercado ainda não foi definida." };
-  if (round.status === "ABERTA" && !isLocked) return { label: "MERCADO ABERTO", title: `Trava em ${formatDateTime(round.trava_em)}`, description: "Escalações válidas até o início do primeiro jogo." };
-  if (round.status === "FECHADA") return { label: "RODADA FECHADA", title: "Mercado fechado", description: round.fechada_em ? `Rodada encerrada em ${formatDateTime(round.fechada_em)}.` : "A rodada foi encerrada." };
-  return { label: "RODADA EM ANDAMENTO", title: `Mercado fechado desde ${formatDateTime(round.trava_em)}`, description: "Os pontos aparecem após o encerramento de cada jogo." };
 }
 
 function teamPresentation(hasTeam: boolean, round: Rodada, now: Date) {
@@ -39,18 +24,6 @@ function teamPresentation(hasTeam: boolean, round: Rodada, now: Date) {
   if (hasTeam && round.status === "EM_ANDAMENTO") return { title: "Seu time está acompanhando a rodada", description: "Os pontos são lançados quando cada jogo termina.", cta: "Ver meu time" };
   if (hasTeam) return { title: "Seu time está travado", description: "A escalação não pode mais ser alterada nesta rodada.", cta: "Ver meu time" };
   return { title: "Nenhum time escalado nesta rodada", description: "Acompanhe a próxima rodada para montar sua equipe.", cta: null };
-}
-
-function gameStatus(game: Jogo) {
-  if (game.status === "EM_ANDAMENTO") return "Em andamento · sem parcial";
-  if (game.status === "ADIADO") return "Adiado";
-  if (game.status === "CANCELADO") return "Cancelado";
-  if (game.status === "ENCERRADO") {
-    if (!game.pontuado_em) return "Encerrado · pontuação em breve";
-    if (game.gols_casa !== null && game.gols_fora !== null) return `${game.gols_casa} × ${game.gols_fora} · pontuado`;
-    return "Encerrado · pontuado";
-  }
-  return formatDate(game.inicio_em);
 }
 
 export default async function Home() {
@@ -85,26 +58,48 @@ export default async function Home() {
     roundDataUnavailable = Boolean(teamError || gamesError);
     const clubIds = [...new Set(games.flatMap((game) => [game.clube_casa_id, game.clube_fora_id]))];
     if (clubIds.length) {
-      const { data: clubs, error: clubsError } = await supabase.from("clubes").select("id, nome, sigla").in("id", clubIds);
+      const { data: clubs, error: clubsError } = await supabase.from("clubes").select("id, nome, sigla, logo_url").in("id", clubIds);
       roundDataUnavailable ||= Boolean(clubsError);
       clubsById = new Map(((clubs as Clube[] | null) ?? []).map((club) => [club.id, club]));
     }
   }
-  const initial = profile.apelido.slice(0, 1).toUpperCase();
-  const finishedGames = games.filter((game) => game.status === "ENCERRADO").length;
-  return <main className="mx-auto grid min-h-screen max-w-md gap-6 px-5 pb-28 pt-8 text-white">
-    <header className="flex items-center justify-between"><div><p className="text-sm text-muted-foreground">Olá, {profile.apelido} 👋</p><h1 className="mt-1 text-3xl font-black tracking-tight">{round ? `Rodada ${String(round.numero).padStart(2, "0")}` : "Início"}</h1></div><Link className="grid size-11 place-items-center rounded-full border border-[#5dca62] bg-primary font-black text-primary-foreground outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#09100b]" href="/perfil" aria-label="Abrir perfil">{initial}</Link></header>
+
+  return <main className="mx-auto flex min-h-screen max-w-lg flex-col gap-6 px-5 pt-8 pb-44 text-white">
+    <header className="flex items-center justify-between">
+      <div>
+        <p className="text-sm text-muted-foreground">Olá, {profile.apelido} 👋</p>
+        <h1 className="mt-1 text-3xl font-black tracking-tight">{round ? `Rodada ${String(round.numero).padStart(2, "0")}` : "Início"} · Brasileirão 2026</h1>
+      </div>
+    </header>
     {unavailable ? <section className="rounded-2xl border border-amber-400/40 bg-amber-950/20 p-4" role="alert"><h2 className="font-bold">Não foi possível carregar a rodada</h2><p className="mt-1 text-sm text-[#c7b98f]">Confira sua conexão e tente novamente.</p><Link className="mt-3 inline-flex text-sm font-bold text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4" href="/">Tentar novamente</Link></section> : !round ? <section className="rounded-2xl border border-border bg-card p-5 text-center"><CalendarClock className="mx-auto size-8 text-[#9aec87]" aria-hidden="true" /><h2 className="mt-3 text-lg font-bold">Nenhuma rodada disponível</h2><p className="mt-1 text-sm leading-6 text-muted-foreground">Quando a próxima rodada for publicada, os jogos e a janela do mercado aparecerão aqui.</p></section> : <>
-      {round.rotulo_api.startsWith("MOCK") && <p className="rounded-xl border border-dashed border-amber-300/60 bg-amber-950/30 px-3 py-2 text-center text-xs font-bold text-amber-100">Dados de demonstração — não representam jogos reais.</p>}
-      {(() => { const presentation = roundPresentation(round, now); return <section className="rounded-2xl border border-[#306e37] bg-linear-to-br from-[#142c18] to-[#102015] p-4" aria-label="Status da rodada"><span className="inline-flex rounded-full bg-[#246b36] px-2.5 py-1 text-xs font-black tracking-wide text-[#d7ffd1]">{presentation.label}</span><h2 className="mt-3 font-bold text-[#e2ffdc]">{presentation.title}</h2><p className="mt-1 text-sm leading-6 text-muted-foreground">{presentation.description} Horário de São Paulo.</p></section>; })()}
-      <section className="grid grid-cols-3 overflow-hidden rounded-2xl border border-border bg-card" aria-label="Resumo da rodada">
-        <div className="border-r border-border p-3"><p className="text-xl font-black text-foreground">{games.length}</p><p className="mt-1 text-[11px] text-muted-foreground">jogos</p></div>
-        <div className="border-r border-border p-3"><p className="text-xl font-black text-foreground">{finishedGames}</p><p className="mt-1 text-[11px] text-muted-foreground">pontuados</p></div>
-        <div className="p-3"><p className="text-sm font-black text-foreground">{round.status === "ABERTA" ? timeUntil(round.trava_em, now) : `${finishedGames}/${games.length}`}</p><p className="mt-1 text-[11px] text-muted-foreground">{round.status === "ABERTA" ? "para a trava" : "encerrados"}</p></div>
+      <div className="flex items-center gap-2">
+        <Badge className="h-6 !px-4" tone={round.status === "ABERTA" ? "primary" : round.status === "AGENDADA" ? "secondary" : "neutral"}>{round.status.toLocaleLowerCase()}</Badge>
+        <p className="text-[12px]/[normal] box-border text-[#6d7d76] opacity-80 font-bold text-left [white-space:nowrap]">{round.status === "ABERTA" ? `mercado aberto` : round.status === "AGENDADA" ? `sem parcial ao vivo` : "pontuaçao oficial"}</p>
+      </div>
+
+      {round.status === "ABERTA" && now < new Date(round.trava_em) && <LockCountdown travaEm={round.trava_em} formattedDate={formatDateTime(round.trava_em)} />}
+
+      {roundDataUnavailable ? <section className="rounded-2xl border border-amber-400/40 bg-amber-950/20 p-4" role="alert"><h2 className="font-bold">Alguns dados da rodada estão indisponíveis</h2><p className="mt-1 text-sm text-[#c7b98f]">Tente atualizar a página em instantes.</p></section> : (() => {
+        const presentation = teamPresentation(Boolean(team), round, now);
+        const isUnselected = !team && round.status === "ABERTA" && now < new Date(round.trava_em);
+        return <section className={isUnselected ? "rounded-2xl bg-primary/12 p-4 outline outline-1.5 -outline-offset-1 outline-primary" : "rounded-2xl border border-border bg-card p-4"}>
+          <div className="flex items-center gap-3">
+            <div className={isUnselected ? "grid size-11 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground" : "grid size-11 shrink-0 place-items-center rounded-xl bg-secondary text-primary"}><ShieldCheck className="size-[22px]" aria-hidden="true" /></div>
+            <div className="min-w-0">
+              <h2 className="text-[17px] font-extrabold text-foreground">{presentation.title}</h2>
+              <p className="mt-0.5 text-[13px] leading-[18px] text-muted-foreground">{isUnselected ? "Monte 11 jogadores com C$ 100. Leva uns 3 minutos — ou use a escalação automática." : presentation.description}</p>
+            </div>
+          </div>
+        </section>
+      })()}
+      <section aria-labelledby="jogos-da-rodada">
+        <div className="mb-3 flex items-center justify-between"><h2 id="jogos-da-rodada" className="text-lg font-bold">Jogos da rodada</h2><span className="text-xs font-semibold text-muted-foreground">{games.length} {games.length === 1 ? "jogo" : "jogos"}</span></div>
+        {roundDataUnavailable ? null : games.length === 0 ? <div className="rounded-2xl border border-border bg-card p-4 text-sm leading-6 text-muted-foreground">Os jogos desta rodada ainda não foram publicados.</div> : <div className="grid gap-2">{games.map((game) => {
+          const home = clubsById.get(game.clube_casa_id);
+          const away = clubsById.get(game.clube_fora_id);
+          return <ScoreCard key={game.id} home={{ nome: home?.nome ?? "Clube não disponível", sigla: home?.sigla ?? "—", logoUrl: home?.logo_url }} away={{ nome: away?.nome ?? "Clube não disponível", sigla: away?.sigla ?? "—", logoUrl: away?.logo_url }} homeGoals={game.gols_casa} awayGoals={game.gols_fora} kickoff={game.inicio_em} status={game.status} />;
+        })}</div>}
       </section>
-      {roundDataUnavailable ? <section className="rounded-2xl border border-amber-400/40 bg-amber-950/20 p-4" role="alert"><h2 className="font-bold">Alguns dados da rodada estão indisponíveis</h2><p className="mt-1 text-sm text-[#c7b98f]">Tente atualizar a página em instantes.</p></section> : <section className="rounded-2xl border border-border bg-card p-4">{(() => { const presentation = teamPresentation(Boolean(team), round, now); return <><div className="flex gap-3"><div className="grid size-11 shrink-0 place-items-center rounded-xl bg-[#203124] text-primary"><ShieldCheck className="size-5" aria-hidden="true" /></div><div><h2 className="font-bold">Meu time</h2><p className="mt-1 text-sm font-semibold text-[#edf5ed]">{presentation.title}</p><p className="mt-1 text-sm leading-5 text-muted-foreground">{presentation.description}</p></div></div>{presentation.cta && <Link className="mt-5 flex min-h-11 items-center justify-center gap-1 rounded-xl bg-primary px-4 py-2 text-sm font-black text-primary-foreground outline-none transition hover:bg-[#b9f2a9] focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#111b14]" href="/escalar">{presentation.cta}<ChevronRight className="size-4" aria-hidden="true" /></Link>}</>; })()}</section>}
-      <section aria-labelledby="jogos-da-rodada"><div className="mb-3 flex items-center justify-between"><h2 id="jogos-da-rodada" className="text-lg font-bold">Jogos da rodada</h2><span className="text-xs font-semibold text-muted-foreground">{games.length} {games.length === 1 ? "jogo" : "jogos"}</span></div>{roundDataUnavailable ? null : games.length === 0 ? <div className="rounded-2xl border border-border bg-card p-4 text-sm leading-6 text-muted-foreground">Os jogos desta rodada ainda não foram publicados.</div> : <div className="overflow-hidden rounded-2xl border border-border bg-card">{games.map((game) => { const home = clubsById.get(game.clube_casa_id); const away = clubsById.get(game.clube_fora_id); return <article className="flex items-center justify-between gap-3 border-b border-border p-4 last:border-0" key={game.id}><div className="min-w-0"><p className="truncate text-sm font-bold">{home?.nome ?? "Clube não disponível"} <span className="px-1 text-[#829184]">×</span> {away?.nome ?? "Clube não disponível"}</p><p className="mt-1 text-xs text-muted-foreground">{home?.sigla ?? "—"} · {away?.sigla ?? "—"}</p></div><time className="shrink-0 text-right text-xs font-semibold text-primary" dateTime={game.inicio_em}>{gameStatus(game)}</time></article>; })}</div>}</section>
     </>}
-    <nav className="fixed inset-x-0 bottom-0 flex justify-center gap-12 border-t border-[#26382a] bg-background/95 px-5 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))] backdrop-blur" aria-label="Navegação principal"><Link className="flex flex-col items-center gap-1 text-xs font-bold text-[#9aec87] outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-white" href="/"><Trophy className="size-5" aria-hidden="true" />Início</Link><Link className="flex flex-col items-center gap-1 text-xs font-semibold text-muted-foreground outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-white" href="/escalar"><ShieldCheck className="size-5" aria-hidden="true" />Escalar</Link><Link className="flex flex-col items-center gap-1 text-xs font-semibold text-muted-foreground outline-none focus-visible:rounded focus-visible:ring-2 focus-visible:ring-white" href="/perfil"><CircleUserRound className="size-5" aria-hidden="true" />Perfil</Link></nav>
-  </main>;
+  </main>
 }

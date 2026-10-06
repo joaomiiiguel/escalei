@@ -23,6 +23,8 @@ export * from "./round-badge";
 export * from "./round-recap-card";
 export * from "./segmented-tabs";
 export * from "./settings-row";
+export * from "./score-card";
+export * from "./team-logo";
 export * from "./text-field";
 export * from "./toast";
 export * from "./toggle";
