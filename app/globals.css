@@ -5,8 +5,60 @@
 :root {
     color-scheme: dark;
     font-family: Arial, sans-serif;
-    background: #0b120e;
-    color: #eff7ef;
+    --background: #0b120e;
+    --foreground: #eff7ef;
+    --card: #111b14;
+    --card-foreground: #eff7ef;
+    --popover: #171a1d;
+    --popover-foreground: #f3f5f4;
+    --primary: #82e671;
+    --primary-foreground: #092305;
+    --secondary: #1a2a1d;
+    --secondary-foreground: #dff5de;
+    --muted: #27322a;
+    --muted-foreground: #a0a8af;
+    --accent: #17371b;
+    --accent-foreground: #aaf29d;
+    --border: #2f4234;
+    --input: #3e5143;
+    --ring: #9aec87;
+    --success: #61d653;
+    --success-foreground: #082006;
+    --warning: #ffc933;
+    --warning-foreground: #231a00;
+    --destructive: #561d20;
+    --destructive-foreground: #ffdddd;
+    --whatsapp: #25d366;
+    --radius: 0.75rem;
+    background: var(--background);
+    color: var(--foreground);
+}
+
+@theme inline {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-card: var(--card);
+    --color-card-foreground: var(--card-foreground);
+    --color-popover: var(--popover);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-primary: var(--primary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-secondary: var(--secondary);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-muted: var(--muted);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-accent: var(--accent);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
+    --color-success: var(--success);
+    --color-success-foreground: var(--success-foreground);
+    --color-warning: var(--warning);
+    --color-warning-foreground: var(--warning-foreground);
+    --color-destructive: var(--destructive);
+    --color-destructive-foreground: var(--destructive-foreground);
+    --color-whatsapp: var(--whatsapp);
 }
 
 * {
@@ -16,7 +68,7 @@
 body {
     min-height: 100dvh;
     margin: 0;
-    background: #0b120e;
+    background: var(--background);
 }
 
 main {
@@ -34,13 +86,13 @@ button,
 select {
     min-height: 44px;
     border-radius: 10px;
-    border: 1px solid #3e5143;
+    border: 1px solid var(--input);
     padding: 10px 12px;
     font: inherit;
 }
 
 a {
-    color: #a5ee98;
+    color: var(--primary);
 }
 
 .ui-button {
@@ -61,45 +113,45 @@ a {
 }
 
 .ui-button--primary {
-    color: #092305;
-    background: #82e671;
+    color: var(--primary-foreground);
+    background: var(--primary);
 }
 
 .ui-button--secondary {
-    color: #dff5de;
-    background: #1a2a1d;
-    border: 1px solid #426048;
+    color: var(--secondary-foreground);
+    background: var(--secondary);
+    border: 1px solid var(--border);
 }
 
 .ui-button--danger {
-    color: #ffdddd;
-    background: #561d20;
+    color: var(--destructive-foreground);
+    background: var(--destructive);
 }
 
 .ui-button--success {
-    color: #082006;
-    background: #61d653;
+    color: var(--success-foreground);
+    background: var(--success);
 }
 
 .ui-button--neutral {
-    color: #d8e7d8;
-    background: #27322a;
+    color: var(--foreground);
+    background: var(--muted);
 }
 
 .ui-button--ghost {
-    color: #f3f5f4;
-    border: 1.5px solid #2b362d;
+    color: var(--foreground);
+    border: 1.5px solid var(--border);
     background: transparent;
 }
 
 .ui-button--highlight {
-    color: #231a00;
-    background: #ffc933;
+    color: var(--warning-foreground);
+    background: var(--warning);
 }
 
 .ui-button--whatsapp {
-    color: #062b14;
-    background: #25d366;
+    color: var(--success-foreground);
+    background: var(--whatsapp);
 }
 
 .ui-icon-button {
