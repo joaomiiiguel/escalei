@@ -32,7 +32,7 @@ export default async function AdminGroups({ searchParams }: { searchParams: Prom
   const activeGroups = (groups ?? []) as Group[];
   const participantCount = activeGroups.reduce((total, group) => total + (group.ligas_membros[0]?.count ?? 0), 0);
 
-  return <main className="bg-[#f8faf7] p-6 font-sans text-[#102117] lg:grid lg:grid-cols-[276px_minmax(0,1fr)] lg:gap-0 lg:p-0">
+  return <main className="!w-full bg-[#f8faf7] p-6 font-sans text-[#102117] lg:grid lg:grid-cols-[276px_minmax(0,1fr)] lg:gap-0 lg:p-0">
     <aside className="hidden min-h-dvh border-r border-foreground bg-white p-6 lg:flex lg:flex-col">
       <div className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-[10px] bg-success font-black text-white">E</span><div><p className="m-0 text-lg font-extrabold">escalei</p><p className="m-0 text-xs font-semibold text-[#637469]">Administração</p></div></div>
       <nav className="mt-8 grid gap-1 text-sm font-bold"><span className="rounded-lg bg-[#ddf7e8] px-3 py-2.5 text-[#102117]">Grupos</span><span className="px-3 py-2.5 text-[#637469]">Participantes</span><span className="px-3 py-2.5 text-[#637469]">Convites</span><span className="px-3 py-2.5 text-[#637469]">Configurações</span></nav>

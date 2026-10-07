@@ -26,7 +26,7 @@ export default async function Lineup({ searchParams }: { searchParams: Promise<{
   });
 
   return (
-    <main className="mx-auto flex h-screen w-full max-w-lg flex-col gap-4 text-foreground">
+    <main className="mx-auto flex h-screen w-full max-w-lg flex-col gap-4 pt-5 text-foreground">
       {!savedTeam || editar === "1" ? <TitleSection title="Montar time" /> : null}
       {round ? savedTeam && editar !== "1" ? <SavedLineup formation={savedTeam.formacao} players={initialPlayers} travaEm={round.trava_em} /> : <LineupBuilder initialFormation={savedTeam?.formacao} initialPlayers={initialPlayers} roundId={round.id} /> : <p className="rounded-xl bg-card p-4 text-sm text-muted-foreground">Não há rodada aberta para escalar no momento.</p>}
     </main>

@@ -65,7 +65,7 @@ export default async function Home() {
     }
   }
 
-  return <main className="flex max-w-lg flex-col justify-start gap-6 pb-44 text-white">
+  return <main className="flex max-w-lg flex-col justify-start gap-6 pt-5 pb-44 text-white">
     <header className="flex flex-col items-start justify-between">
       <p className="text-sm text-muted-foreground">Olá, {profile.apelido} 👋</p>
       <TitleSection title={round ? `Rodada ${String(round.numero).padStart(2, "0")} - Brasileirão 2026` : "Início - Brasileirão 2026"} />

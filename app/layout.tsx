@@ -19,7 +19,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
     return (
         <html lang="pt-BR">
-            <body className="min-h-screen max-w-lg !mx-auto px-5 pt-2">
+            <body className="min-h-screen">
                 {children}
                 <Navbar hasCurrentTeam={hasCurrentTeam} />
             </body>
