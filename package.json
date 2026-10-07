@@ -6,6 +6,7 @@
     "build": "next build",
     "lint": "next lint",
     "sync:clubs": "node --env-file=.env scripts/sync-clubes.mjs",
+    "sync:players": "node --env-file=.env scripts/sync-players.mjs",
     "seed:mock-round": "node --env-file=.env scripts/seed-mock-round.mjs",
     "seed:mock-next-round": "node --env-file=.env scripts/seed-mock-next-round.mjs"
   },
@@ -27,6 +28,7 @@
     "@tailwindcss/postcss": "^4.3.3",
     "@types/node": "^22",
     "@types/react": "^19",
+    "@types/react-dom": "^19.3.0",
     "postcss": "^8.5.28",
     "supabase": "^2.118.0",
     "tailwindcss": "^4.3.3",
