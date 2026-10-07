@@ -3,13 +3,13 @@
 @import "shadcn/tailwind.css";
 
 @theme {
-    --color-background: #0b120e;
+    --color-background: #050505;
     --color-foreground: #eff7ef;
-    --color-card: #111b14;
-    --color-card-foreground: #eff7ef;
+    --color-card: #101010;
+    --color-card-foreground: #1E1E1E;
     --color-popover: #171a1d;
     --color-popover-foreground: #f3f5f4;
-    --color-primary: #82e671;
+    --color-primary: #00E58A;
     --color-primary-foreground: #092305;
     --color-secondary: #1a2a1d;
     --color-secondary-foreground: #dff5de;
@@ -44,7 +44,6 @@
 body {
     min-height: 100dvh;
     margin: 0;
-    background: var(--color-background);
 }
 
 main {
@@ -58,12 +57,8 @@ form {
 }
 
 input,
-button,
 select {
-    min-height: 44px;
     border-radius: 10px;
-    border: 1px solid var(--color-input);
-    padding: 10px 12px;
     font: inherit;
 }
 
@@ -156,13 +151,13 @@ a {
 }
 
 .ui-badge--primary {
-    background: #244a24;
-    color: #a9f29d;
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
 }
 
 .ui-badge--success {
-    background: #1f5026;
-    color: #93f28d;
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
 }
 
 .ui-badge--danger {
@@ -190,9 +185,8 @@ a {
     display: grid;
     gap: 16px;
     padding: 20px;
-    border: 1px solid #2f4234;
     border-radius: 16px;
-    background: #111b14;
+    background: #101010;
 }
 
 .ui-card__title {
