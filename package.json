@@ -8,7 +8,10 @@
     "sync:clubs": "node --env-file=.env scripts/sync-clubes.mjs",
     "sync:players": "node --env-file=.env scripts/sync-players.mjs",
     "seed:mock-round": "node --env-file=.env scripts/seed-mock-round.mjs",
-    "seed:mock-next-round": "node --env-file=.env scripts/seed-mock-next-round.mjs"
+    "seed:mock-next-round": "node --env-file=.env scripts/seed-mock-next-round.mjs",
+    "seed:mock-live-round": "node --env-file=.env scripts/seed-mock-live-round.mjs",
+    "seed:mock-live-lineups": "node --env-file=.env scripts/seed-mock-live-lineups.mjs",
+    "seed:mock-league": "node --env-file=.env scripts/seed-mock-league.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",

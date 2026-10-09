@@ -17,7 +17,7 @@ const dateFormatter = new Intl.DateTimeFormat("pt-BR", { timeZone: "America/Sao_
 
 function centerContent({ awayGoals, homeGoals, kickoff, status }: Pick<ScoreCardProps, "awayGoals" | "homeGoals" | "kickoff" | "status">) {
   if (status === "EM_ANDAMENTO") return { main: `${homeGoals ?? 0} × ${awayGoals ?? 0}`, secondary: "Ao vivo" };
-  if (status === "ENCERRADO") return { main: homeGoals !== null && awayGoals !== null ? `${homeGoals} × ${awayGoals}` : "— × —", secondary: "Encerrado" };
+  if (status === "ENCERRADO") return { main: homeGoals !== null && awayGoals !== null ? `${homeGoals} × ${awayGoals}` : "— × —", secondary: "pontuado ✓" };
   if (status === "ADIADO") return { main: "—", secondary: "Adiado" };
   if (status === "CANCELADO") return { main: "—", secondary: "Cancelado" };
   return { main: timeFormatter.format(new Date(kickoff)), secondary: dateFormatter.format(new Date(kickoff)) };
@@ -33,7 +33,7 @@ export function ScoreCard({ away, awayGoals, home, homeGoals, kickoff, status }:
     </div>
     <div className="grid justify-items-center gap-0.5 text-center">
       <strong className="font-mono text-[17px] leading-none text-foreground">{center.main}</strong>
-      <span className={`text-[11px] font-semibold ${status === "EM_ANDAMENTO" ? "text-primary" : "text-muted-foreground"}`}>{center.secondary}</span>
+      <span className={`text-[11px] font-semibold ${status === "EM_ANDAMENTO" || status === "ENCERRADO" ? "text-primary" : "text-muted-foreground"}`}>{center.secondary}</span>
     </div>
     <div className="flex min-w-0 items-center gap-2">
       <TeamLogo className="size-7 shrink-0" logoUrl={away.logoUrl} nome={away.nome} sigla={away.sigla} />

@@ -7,7 +7,6 @@ import {
   LogOut,
   Mail,
   Moon,
-  Pencil,
   Shield,
   Shirt,
   Trash2,
@@ -17,10 +16,11 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { TeamLogo } from "@/components/ui/team-logo";
 import { createClient } from "@/lib/supabase/server";
-import { deleteAccount, signOut, updatePreferences } from "./actions";
+import { deleteAccount, signOut, updatePreferences, updateProfile } from "./actions";
+import { ProfileEditModal } from "./profile-edit-modal";
 
 type ProfilePageProps = {
-  searchParams: Promise<{ atualizado?: string; erro?: string }>;
+  searchParams: Promise<{ atualizado?: string; email_pendente?: string; erro?: string }>;
 };
 
 function initials(name: string) {
@@ -82,10 +82,20 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
 
   if (!profile) redirect("/onboarding");
 
-  const { data: favoriteClub } = profile.clube_coracao_id
-    ? await supabase.from("clubes").select("nome, sigla, logo_url").eq("id", profile.clube_coracao_id).maybeSingle()
-    : { data: null };
+  const { data: clubs } = await supabase.from("clubes").select("id, nome, sigla, logo_url").eq("ativo", true).order("nome");
+  const favoriteClub = clubs?.find((club) => club.id === profile.clube_coracao_id) ?? null;
   const params = await searchParams;
+  const errorMessage = params.erro === "apelido"
+    ? "Use de 3 a 20 caracteres no apelido: letras, números, ponto ou _."
+    : params.erro === "telefone"
+      ? "Informe um WhatsApp brasileiro válido com DDD ou deixe o campo em branco."
+      : params.erro === "email"
+        ? "Não foi possível atualizar o e-mail. Confira o endereço e tente novamente."
+        : params.erro === "indisponivel"
+          ? "Este apelido ou WhatsApp já está em uso."
+          : params.erro
+            ? "Não foi possível concluir a operação. Revise os dados e tente novamente."
+            : null;
   const roundsPlayed = teams?.length ?? 0;
   const averagePoints = roundsPlayed
     ? (teams ?? []).reduce((total, team) => total + Number(team.pontos ?? 0), 0) / roundsPlayed
@@ -98,7 +108,8 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
       </header>
 
       {params.atualizado && <p role="status" className="mb-4 rounded-xl border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-semibold text-primary">Preferências salvas.</p>}
-      {params.erro && <p role="alert" className="mb-4 rounded-xl border border-destructive/40 bg-destructive/15 px-3 py-2 text-sm font-semibold text-destructive-foreground">Não foi possível concluir a operação. Revise os dados e tente novamente.</p>}
+      {errorMessage && <p role="alert" className="mb-4 rounded-xl border border-destructive/40 bg-destructive/15 px-3 py-2 text-sm font-semibold text-destructive-foreground">{errorMessage}</p>}
+      {params.email_pendente && <p role="status" className="mb-4 rounded-xl border border-warning/40 bg-warning/10 px-3 py-2 text-sm font-semibold text-foreground">Confira seu e-mail para confirmar o novo endereço.</p>}
 
       <section className="mb-[18px] flex items-center gap-3.5" aria-label="Identificação do perfil">
         <div className="grid size-16 shrink-0 place-items-center rounded-[22px] bg-primary text-2xl font-extrabold text-primary-foreground">{initials(profile.apelido)}</div>
@@ -109,7 +120,14 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
             {user.email && <span className="truncate">{user.email}</span>}
           </div>
         </div>
-        <span aria-label="Edição de perfil disponível em breve" title="Edição de perfil disponível em breve" className="grid size-9 place-items-center rounded-full bg-card text-muted-foreground"><Pencil className="size-[18px]" aria-hidden="true" /></span>
+        <ProfileEditModal
+          apelido={profile.apelido}
+          clubeCoracaoId={profile.clube_coracao_id}
+          clubs={clubs ?? []}
+          email={user.email ?? ""}
+          telefone={profile.telefone}
+          updateProfile={updateProfile}
+        />
       </section>
 
       <section className="mb-5 grid grid-cols-3 gap-2" aria-label="Resumo do perfil">

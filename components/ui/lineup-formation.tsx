@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDownUp, Search, TriangleAlert, X } from "lucide-react";
+import { ArrowDownUp, Clock3, Search, TriangleAlert, X } from "lucide-react";
 import { createPortal } from "react-dom";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ButtonGroup } from "./button-group";
@@ -13,7 +13,18 @@ type Formation = "4-3-3" | "4-4-2" | "3-5-2";
 type Position = "ATA" | "MEI" | "LAT" | "ZAG" | "GOL";
 type CatalogPosition = "ATA" | "MEI" | "DEF" | "GOL";
 
-export type LineupPlayer = { club: string; clubName: string; id: number; logoUrl: string | null; name: string; position: CatalogPosition; price: number };
+export type LineupPlayer = {
+  club: string;
+  clubName: string;
+  id: number;
+  logoUrl: string | null;
+  name: string;
+  position: CatalogPosition;
+  price: number;
+  roundLabel?: string;
+  roundPoints?: number;
+  roundStatus?: "A_JOGAR" | "ADIADO" | "EM_ANDAMENTO" | "ENCERRADO" | "SEM_JOGO";
+};
 
 type LineupFormationProps = {
   className?: string;
@@ -21,6 +32,7 @@ type LineupFormationProps = {
   initialPlayers?: LineupPlayer[];
   autoPlayers?: LineupPlayer[];
   readOnly?: boolean;
+  showRoundStatus?: boolean;
   onFormationChange?: (formation: Formation) => void;
   onSelectedPlayersChange?: (players: LineupPlayer[]) => void;
 };
@@ -58,11 +70,22 @@ function EmptySlot({ onClick, position }: { onClick: () => void; position: Posit
   </button>;
 }
 
-function FilledSlot({ onClick, player, position, readOnly = false }: { onClick: () => void; player: LineupPlayer; position: Position; readOnly?: boolean }) {
+function FilledSlot({ onClick, player, position, readOnly = false, showRoundStatus = false }: { onClick: () => void; player: LineupPlayer; position: Position; readOnly?: boolean; showRoundStatus?: boolean }) {
+  const hasScored = player.roundStatus === "ENCERRADO";
+  const pointsTone = (player.roundPoints ?? 0) < 0 ? "text-destructive-foreground bg-destructive" : "text-primary-foreground bg-primary";
+  const roundMeta = hasScored
+    ? <span className={`rounded-full px-1.5 py-0.5 text-[9px] font-extrabold ${pointsTone}`}>{(player.roundPoints ?? 0).toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</span>
+    : player.roundStatus === "ADIADO"
+      ? <span className="text-[9px] font-bold text-warning">adiado</span>
+      : player.roundStatus === "EM_ANDAMENTO"
+        ? <span className="inline-flex items-center gap-1 text-[9px] font-bold text-warning"><span className="size-1.5 rounded-full bg-warning" aria-hidden="true" />Em jogo</span>
+        : player.roundStatus === "A_JOGAR"
+          ? <span className="inline-flex items-center gap-1 text-[9px] font-bold text-muted-foreground"><Clock3 className="size-3" />{player.roundLabel ? `${player.roundLabel}` : "a jogar"}</span>
+          : <span className="text-[9px] font-bold text-muted-foreground">sem jogo</span>;
   return <button type="button" disabled={readOnly} onClick={onClick} className="relative z-10 grid justify-items-center gap-1 rounded-lg outline-none transition hover:scale-105 focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-default disabled:hover:scale-100" aria-label={readOnly ? `${player.name}, ${position}` : `Trocar ${player.name}, ${position}`}>
     <span className="grid size-10 place-items-center rounded-full border border-primary/70 bg-background/85 p-1 shadow-lg shadow-black/25"><TeamLogo className="size-8 rounded-full" logoUrl={player.logoUrl} nome={player.clubName} sigla={player.club} /></span>
     <span className="w-full truncate text-center text-[10px] font-extrabold text-foreground">{player.name}</span>
-    <span className="text-[9px] font-bold text-primary">C$ {player.price.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</span>
+    {showRoundStatus ? roundMeta : <span className="text-[9px] font-bold text-primary">C$ {player.price.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</span>}
   </button>;
 }
 
@@ -156,7 +179,7 @@ function PlayerPickerSheet({ maxAvailablePrice, onClose, onSelect, position, sel
   return isMounted ? createPortal(sheet, document.body) : null;
 }
 
-export function LineupFormation({ autoPlayers, className = "", formation = "4-3-3", initialPlayers = [], onFormationChange, onSelectedPlayersChange, readOnly = false }: LineupFormationProps) {
+export function LineupFormation({ autoPlayers, className = "", formation = "4-3-3", initialPlayers = [], onFormationChange, onSelectedPlayersChange, readOnly = false, showRoundStatus = false }: LineupFormationProps) {
   const [selectedFormation, setSelectedFormation] = useState<Formation>(formation);
   const [transitionPhase, setTransitionPhase] = useState<"idle" | "leaving" | "entering">("idle");
   const [selectedSlot, setSelectedSlot] = useState<{ key: string; position: Position } | null>(null);
@@ -220,7 +243,7 @@ export function LineupFormation({ autoPlayers, className = "", formation = "4-3-
           {line.map((position, slot) => {
             const slotKey = `${position}-${slot}`;
             const player = playersBySlot[slotKey];
-            return player ? <FilledSlot key={slotKey} onClick={() => setSelectedSlot({ key: slotKey, position })} player={player} position={position} readOnly={readOnly} /> : <EmptySlot key={slotKey} onClick={() => setSelectedSlot({ key: slotKey, position })} position={position} />;
+            return player ? <FilledSlot key={slotKey} onClick={() => setSelectedSlot({ key: slotKey, position })} player={player} position={position} readOnly={readOnly} showRoundStatus={showRoundStatus} /> : <EmptySlot key={slotKey} onClick={() => setSelectedSlot({ key: slotKey, position })} position={position} />;
           })}
         </div>)}
       </div>
