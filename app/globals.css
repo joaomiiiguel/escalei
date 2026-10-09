@@ -50,21 +50,12 @@ main {
     margin: auto;
 }
 
-form {
-    display: grid;
-    gap: 12px;
-    margin-top: 24px;
-}
-
 input,
 select {
     border-radius: 10px;
     font: inherit;
 }
 
-a {
-    color: var(--color-primary);
-}
 
 .ui-button {
     border: 0;
@@ -151,8 +142,8 @@ a {
 }
 
 .ui-badge--primary {
-    background: var(--color-primary);
-    color: var(--color-primary-foreground);
+    background: color-mix(in srgb, var(--color-primary) 20%, transparent);
+    color: var(--color-primary);
 }
 
 .ui-badge--success {
@@ -168,6 +159,11 @@ a {
 .ui-badge--secondary {
     background: #273d34;
     color: #a4d9c0;
+}
+
+.ui-badge--highlight {
+    background: color-mix(in srgb, var(--color-foreground) 10%, transparent);
+    color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
 }
 
 .ui-chip {

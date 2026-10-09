@@ -10,7 +10,7 @@ const publicPaths = ["/entrar", "/onboarding", "/convite", "/admin"];
 const items = [
   { href: "/", label: "Início", icon: House },
   { href: "/escalar", label: "Meu time", icon: Shirt },
-  { href: null, label: "Ligas", icon: Trophy },
+  { href: "/ligas", label: "Ligas", icon: Trophy },
   { href: "/perfil", label: "Perfil", icon: UserRound },
 ] as const;
 
@@ -47,14 +47,6 @@ export function Navbar({ hasCurrentTeam = false }: { hasCurrentTeam?: boolean })
                 <Icon className="size-[22px]" aria-hidden="true" />
               </span>
             </>;
-
-            if (!href) {
-              return <li className="flex" key={label}>
-                <span className="flex h-14 w-full cursor-not-allowed flex-col items-center justify-center gap-[3px] text-[11px] font-semibold text-muted-foreground/70" aria-disabled="true" title="Ligas em breve">
-                  {content}
-                </span>
-              </li>;
-            }
 
             return <li className="flex" key={label}>
               <Link

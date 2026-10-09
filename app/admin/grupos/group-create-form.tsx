@@ -1,13 +1,17 @@
-import { Button } from "@/components/shadcn/button";
+
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 type CreateAction = (formData: FormData) => void | Promise<void>;
 
 export function GroupCreateForm({ action }: { action: CreateAction }) {
-  return <form action={action} className="grid grid-cols-[1fr_72px_92px_auto] gap-3 rounded-lg border border-foreground bg-white p-4">
-    <Input name="nome" required minLength={3} maxLength={40} placeholder="Nome do grupo" className="h-10 border-foreground bg-white text-[#102117]" />
-    <Input name="icone" defaultValue="⚽" required maxLength={8} aria-label="Ícone do grupo" className="h-10 border-foreground bg-white text-center text-[#102117]" />
-    <Input name="temporada" type="number" min="2024" max="2100" defaultValue="2026" required aria-label="Temporada" className="h-10 border-foreground bg-white text-[#102117]" />
-    <Button type="submit" className="h-10 bg-success text-white hover:bg-[#047857]">Criar grupo</Button>
+  return <form action={action} className="flex flex-col gap-3 rounded-lg border border-foreground bg-white p-4 shadow">
+    <div className="flex justify-between items-center">
+      <h3 className="text-lg font-bold text-background">Criar novo grupo</h3>
+    </div>
+    <div className="flex gap-3">
+      <Input name="nome" required minLength={3} maxLength={40} placeholder="Nome do grupo" className="h-10 border-foreground text-[#102117] w-3/4" />
+      <Button type="submit" className="h-10 w-1/4 bg-secondary text-white">Novo Grupo</Button>
+    </div>
   </form>;
 }
