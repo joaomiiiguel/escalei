@@ -1,5 +1,5 @@
 ---
-titulo: football-data.org
+titulo: API-Football
 tipo: nota-de-integracao
 projeto: Fantasy Futebol
 criado-em: 2026-09-28
@@ -9,41 +9,42 @@ tags:
   - integracao/football-data
 ---
 
-# football-data.org
+# API-Football
 
 ← [[Index]] · Campos no banco: [[Banco de Dados — Modelo e Campos]]
 
 > [!abstract] Em uma frase
-> Fonte de clubes, elencos e jogos. A integração usa a API v4, com o código da competição brasileira `BSA` e autenticação pelo cabeçalho `X-Auth-Token`.
+> Fonte de clubes, elencos, jogos e scouts. A integração usa a API-Football v3, com a Série A no identificador `71` e autenticação pelo cabeçalho `x-apisports-key`.
 
 > [!warning] Cobertura e permissões
-> A documentação lista o Campeonato Brasileiro Série A como `BSA` e plano `TIER_ONE`. Confirme, com uma chave do projeto, que a assinatura contratada permite clubes, elencos e jogos da temporada antes de executar uma carga.
+> O plano gratuito oferece endpoints, mas restringe temporadas recentes. No teste, usar explicitamente a Série A de **2024**. Não apontar o ambiente gratuito para a temporada corrente sem uma verificação de acesso da chave contratada.
 
 ## Endpoints usados
 
 | Endpoint | Para quê | Frequência |
 |---|---|---|
-| `/v4/competitions/BSA/teams?season={ano}` | Carga de `clubes` | 1× por temporada |
-| `/v4/teams/{id}` | Carga de `jogadores` pelo campo `squad` | 1× por semana × 20 times |
-| `/v4/competitions/BSA/matches?matchday={rodada}` | Jogos e status da rodada | job futuro |
-| `/v4/matches/{id}` | Placar, eventos e escalações disponíveis | job futuro |
+| `/v3/football/teams?league=71&season={ano}` | Carga de `clubes` | 1× por temporada |
+| `/v3/football/players?team={id}&season={ano}` | Carga de `jogadores` e posição | 1× por semana × 20 times |
+| `/v3/football/fixtures?league=71&season={ano}&round={rodada}` | Jogos e status da rodada | job futuro |
+| `/v3/football/fixtures/players?fixture={id}` | Scouts individuais por jogo | fim e conferência do jogo |
+| `/v3/football/fixtures/events?fixture={id}` | Gol contra e eventos | fim e conferência do jogo |
 
 ## Verificação antes de programar
 
 ```bash
-curl -s "https://api.football-data.org/v4/competitions/BSA/teams?season=2026" -H "X-Auth-Token: $FOOTBALL_DATA_API_KEY"
-curl -s "https://api.football-data.org/v4/competitions/BSA/matches?matchday=1" -H "X-Auth-Token: $FOOTBALL_DATA_API_KEY"
-curl -s "https://api.football-data.org/v4/teams/ID_DO_TIME" -H "X-Auth-Token: $FOOTBALL_DATA_API_KEY"
+curl -s "https://v3.football.api-sports.io/leagues?id=71&season=2024" -H "x-apisports-key: $API_FOOTBALL_KEY"
+curl -s "https://v3.football.api-sports.io/fixtures?league=71&season=2024&round=Regular%20Season%20-%201" -H "x-apisports-key: $API_FOOTBALL_KEY"
+curl -s "https://v3.football.api-sports.io/fixtures/players?fixture=ID_DO_JOGO" -H "x-apisports-key: $API_FOOTBALL_KEY"
 ```
 
-- [ ] A assinatura do projeto permite consultar `BSA` na temporada escolhida.
-- [ ] `/competitions/BSA/teams` retorna os 20 clubes com `tla` e `crest` válidos.
-- [ ] `/teams/{id}` retorna o elenco no campo `squad`, com `position` e `shirtNumber`.
-- [ ] A cobertura dos endpoints de partidas atende a pontuação necessária antes de ativar o job de rodadas.
+- [ ] A chave gratuita permite consultar `league=71&season=2024`.
+- [ ] `/teams` retorna os 20 clubes com código e logo válidos.
+- [ ] `/players` retorna jogadores com posição em `statistics[].games.position`.
+- [ ] A resposta de `/fixtures/players` contém todos os scouts da tabela de pontuação em um jogo real.
 
 ## Riscos
 
-- **Cobertura de scouts:** a carga atual não grava estatísticas individuais de jogo; não ativar pontuação real até validar os dados disponíveis.
+- **Temporada corrente:** o plano gratuito não é fonte aprovada para a temporada atual; produção exige plano compatível ou nova decisão de produto.
 - **Queda da API:** a rodada fecha mais tarde. O app mostra "pontuação atrasada" em vez de pontos errados.
 - **Mudança de plano:** confirmar disponibilidade da Série A antes de sincronizar dados reais.
 

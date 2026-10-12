@@ -5,6 +5,7 @@ type CurrentRound = {
   status: StatusRodada;
   trava_em: string;
   numero: number;
+  simulada?: boolean;
 };
 
 const roundPriority: Record<StatusRodada, number> = {
@@ -23,14 +24,32 @@ function currentSeason() {
 
 /** Fonte única para a rodada atual exibida ao usuário. */
 export async function getCurrentRound<T extends CurrentRound>(supabase: SupabaseClient, select: string) {
-  const { data, error } = await supabase
+  const [simulationResult, currentSeasonResult] = await Promise.all([
+    supabase.from("rodadas").select(select).eq("simulada", true),
+    supabase
     .from("rodadas")
     .select(select)
-    .eq("temporada", currentSeason());
+    .eq("temporada", currentSeason()),
+  ]);
 
-  if (error || !data) return { data: null as T | null, error };
+  if (simulationResult.error) return { data: null as T | null, error: simulationResult.error };
+  if (simulationResult.data?.length) {
+    const round = (simulationResult.data as unknown as T[])
+      .sort((first, second) => roundPriority[first.status] - roundPriority[second.status] || second.numero - first.numero)[0];
+    return { data: round ?? null, error: null };
+  }
 
-  const round = (data as unknown as T[])
+  if (currentSeasonResult.error) return { data: null as T | null, error: currentSeasonResult.error };
+
+  // O ambiente de teste usa a última temporada liberada pela API gratuita.
+  // Em produção, a primeira consulta sempre encontra a temporada corrente.
+  const fallbackResult = currentSeasonResult.data?.length
+    ? currentSeasonResult
+    : await supabase.from("rodadas").select(select).order("temporada", { ascending: false });
+
+  if (fallbackResult.error || !fallbackResult.data) return { data: null as T | null, error: fallbackResult.error };
+
+  const round = (fallbackResult.data as unknown as T[])
     .sort((first, second) => {
       const priorityDifference = roundPriority[first.status] - roundPriority[second.status];
       if (priorityDifference !== 0) return priorityDifference;

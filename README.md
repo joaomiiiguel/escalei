@@ -1,12 +1,12 @@
-# Verificação da API-Football
+# API-Football — ambiente de teste
 
-Execute a verificação da JOA-40 com uma chave de API-Football válida:
+O produto usará a API-Football como fonte de elencos, jogos e scouts. Como o plano gratuito não dá acesso à temporada corrente, o ambiente de teste simula a Série A de **2024**, a temporada mais recente disponível para esta finalidade.
 
 ```bash
-API_FOOTBALL_KEY="sua-chave" node scripts/verify-api-football.mjs
+API_FOOTBALL_KEY="sua-chave" API_FOOTBALL_SEASON=2024 node scripts/verify-api-football.mjs
 ```
 
-O script valida a Série A (league id `71`) na temporada `2026`, a cobertura de estatísticas de jogadores e um payload real de `/fixtures/players`. Ele imprime um JSON com a decisão:
+O script valida a Série A (league id `71`) na temporada configurada, a cobertura de estatísticas de jogadores e um payload real de `/fixtures/players`.
 
 - `Free plan accepted for the MVP`: cobertura suficiente para continuar no plano gratuito.
 - `Review Pro plan for one month (US$ 19) before implementation`: contratar o Pro por um mês antes de iniciar a integração.
@@ -30,4 +30,4 @@ Para testar somente as telas sem disparar SMS, defina `AUTH_PHONE_OTP_MODE=mock`
 
 ## Sincronização de clubes
 
-O catálogo de times vem da API-Football e não possui dados de exemplo. Aplique primeiro a migration `202609300002_clubes_logo_url.sql`. Depois, execute `npm run sync:clubs`; o comando carrega automaticamente `API_FOOTBALL_KEY`, `NEXT_PUBLIC_SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` do arquivo `.env`. O script consulta `teams?league=71&season=2024`, valida IDs e siglas de três caracteres e faz upsert seguro por ID, incluindo `logo_url` fornecida pela API.
+O catálogo de times vem da API-Football e não possui dados de exemplo. Aplique primeiro a migration `202609300002_clubes_logo_url.sql` e a migration de IDs da API-Football. Depois, execute `npm run sync:clubs`; o comando deve usar `API_FOOTBALL_KEY`, `API_FOOTBALL_LEAGUE_ID=71` e `API_FOOTBALL_SEASON=2024`, além das credenciais de servidor do Supabase. A rodada simulada é lida do banco pela chave `rodada_simulada_atual`; o fechamento da rodada deve avançar essa chave para a próxima. A mudança para dados da temporada corrente exige um plano que a libere e alteração explícita da variável de temporada.

@@ -18,7 +18,7 @@ export default async function Home() {
 
   const { data: currentRound, error: currentRoundError } = await getCurrentRound<Rodada>(
     supabase,
-    "id, numero, status, abre_em, trava_em, fechada_em, rotulo_api",
+    "id, numero, status, abre_em, trava_em, fechada_em, rotulo_api, simulada",
   );
   const round = currentRound;
   const unavailable = Boolean(currentRoundError);
