@@ -3,23 +3,25 @@ import { createClient } from "@/lib/supabase/server";
 import type { Rodada, Jogo, Clube, TimeDaRodada, EstatisticaDaRodada } from "@/lib/types";
 import { ActiveRoundView } from "@/components/active-round-view";
 import { DefaultRoundView } from "@/components/default-round-view";
+import { hasActiveLeagueMembership } from "@/lib/league-access";
+import { getCurrentRound } from "@/lib/current-round";
 
 export default async function Home() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/entrar");
+  if (!await hasActiveLeagueMembership(user.id)) redirect("/entrar?erro=sem_liga");
   const { data: profile } = await supabase.from("perfis").select("apelido").eq("id", user.id).maybeSingle();
   if (!profile) redirect("/onboarding");
   const { data: admin } = await supabase.from("administradores").select("usuario_id").eq("usuario_id", user.id).maybeSingle();
   if (admin) redirect("/admin/grupos");
 
-  const [{ data: activeRounds, error: activeRoundsError }, { data: scheduledRounds, error: scheduledRoundsError }, { data: closedRounds, error: closedRoundsError }] = await Promise.all([
-    supabase.from("rodadas").select("id, numero, status, abre_em, trava_em, fechada_em, rotulo_api").in("status", ["ABERTA", "EM_ANDAMENTO"]).order("numero", { ascending: false }).limit(1),
-    supabase.from("rodadas").select("id, numero, status, abre_em, trava_em, fechada_em, rotulo_api").eq("status", "AGENDADA").order("numero", { ascending: true }).limit(1),
-    supabase.from("rodadas").select("id, numero, status, abre_em, trava_em, fechada_em, rotulo_api").eq("status", "FECHADA").order("numero", { ascending: false }).limit(1),
-  ]);
-  const round = ((activeRounds?.[0] ?? scheduledRounds?.[0] ?? closedRounds?.[0]) as Rodada | undefined) ?? null;
-  const unavailable = Boolean(activeRoundsError || scheduledRoundsError || closedRoundsError);
+  const { data: currentRound, error: currentRoundError } = await getCurrentRound<Rodada>(
+    supabase,
+    "id, numero, status, abre_em, trava_em, fechada_em, rotulo_api",
+  );
+  const round = currentRound;
+  const unavailable = Boolean(currentRoundError);
   const now = new Date();
   let team: TimeDaRodada | null = null;
   let games: Jogo[] = [];

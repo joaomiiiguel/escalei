@@ -79,7 +79,7 @@ export function ActiveRoundView({
     </section>
 
     <section id="jogos-da-rodada" aria-labelledby="proximos-jogos">
-      <div className="mb-3 flex items-center justify-between"><h2 id="proximos-jogos" className="text-lg font-extrabold">Próximos jogos</h2><Link href="#jogos-da-rodada" className="text-sm font-bold text-primary underline-offset-4 hover:underline">Ver todos ({games.length})</Link></div>
+      <div className="mb-3 flex items-center justify-between"><h2 id="proximos-jogos" className="text-lg font-extrabold">Jogos da rodada ({games.length})</h2></div>
       {games.length === 0 ? <div className="rounded-2xl bg-card p-4 text-sm leading-6 text-muted-foreground">Os jogos desta rodada ainda não foram publicados.</div> : <div className="grid gap-2">{games.map((game) => {
         const home = clubsById.get(game.clube_casa_id);
         const away = clubsById.get(game.clube_fora_id);

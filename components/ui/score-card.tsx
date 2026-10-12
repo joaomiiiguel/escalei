@@ -17,7 +17,7 @@ const dateFormatter = new Intl.DateTimeFormat("pt-BR", { timeZone: "America/Sao_
 
 function centerContent({ awayGoals, homeGoals, kickoff, status }: Pick<ScoreCardProps, "awayGoals" | "homeGoals" | "kickoff" | "status">) {
   if (status === "EM_ANDAMENTO") return { main: `${homeGoals ?? 0} × ${awayGoals ?? 0}`, secondary: "Ao vivo" };
-  if (status === "ENCERRADO") return { main: homeGoals !== null && awayGoals !== null ? `${homeGoals} × ${awayGoals}` : "— × —", secondary: "pontuado ✓" };
+  if (status === "ENCERRADO") return { main: homeGoals !== null && awayGoals !== null ? `${homeGoals} × ${awayGoals}` : "— × —", secondary: "Encerrado" };
   if (status === "ADIADO") return { main: "—", secondary: "Adiado" };
   if (status === "CANCELADO") return { main: "—", secondary: "Cancelado" };
   return { main: timeFormatter.format(new Date(kickoff)), secondary: dateFormatter.format(new Date(kickoff)) };

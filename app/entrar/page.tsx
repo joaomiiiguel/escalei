@@ -1,13 +1,16 @@
-import { EmailSignIn } from "./email-sign-in";
-import { signInWithEmail, signInWithGoogle, signUpWithEmail } from "./actions";
+import { GoogleSignIn } from "./email-sign-in";
+import { signInWithGoogle } from "./actions";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
+import { getActiveInvite, isInviteToken } from "@/lib/invites";
 
-export default async function SignIn({ searchParams }: { searchParams: Promise<{ criar?: string; erro?: string; sucesso?: string }> }) {
+export default async function SignIn({ searchParams }: { searchParams: Promise<{ erro?: string; convite?: string }> }) {
+    const params = await searchParams;
+    const candidateToken = params.convite;
+    const inviteToken = candidateToken && isInviteToken(candidateToken) && await getActiveInvite(candidateToken) ? candidateToken : null;
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (user) redirect("/");
 
-    const params = await searchParams;
-    return <EmailSignIn createAccount={Boolean(params.criar)} error={params.erro} success={params.sucesso} signIn={signInWithEmail} signUp={signUpWithEmail} signInWithGoogle={signInWithGoogle} />;
+    return <GoogleSignIn error={params.erro} inviteToken={inviteToken ?? ""} signInWithGoogle={signInWithGoogle} />;
 }

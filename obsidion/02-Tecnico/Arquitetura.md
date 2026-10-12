@@ -15,7 +15,7 @@ tags:
 ← [[Index]] · Dados: [[Banco de Dados — Modelo e Campos]] · Fonte: [[API-Football]]
 
 > [!abstract] Em uma frase
-> **Next.js (PWA) na Vercel + Supabase (Auth, Postgres, Cron) + PostHog**, tudo nos planos grátis. Os jobs leem a API-Football e gravam no banco; o app só lê o banco.
+> **Next.js (PWA) na Vercel + Supabase (Auth, Postgres, Cron) + PostHog**, tudo nos planos grátis. Os jobs leem a football-data.org e gravam no banco; o app só lê o banco.
 
 ## Stack
 
@@ -35,7 +35,7 @@ tags:
 ## Fluxo de dados
 
 ```
-API-Football ──(jobs, service role)──► Postgres (Supabase)
+football-data.org ──(jobs, service role)──► Postgres (Supabase)
                                          ▲        │
                                          │        ▼
                            Next.js (RLS, anon/auth) ──► navegador (PWA)
@@ -48,7 +48,7 @@ API-Football ──(jobs, service role)──► Postgres (Supabase)
 |---|---|---|
 | `sync-elencos` | Segunda de manhã | `/players/squads` × 20 → `jogadores` |
 | `sync-lesoes` | Diário, 10h | `/injuries` → `jogadores.status` |
-| `sync-rodada` | A cada 20 min, 16h–24h, em dia de jogo | `/fixtures?round=` → `jogos.status`, placar e `rodadas.trava_em` |
+| `sync-rodada` | A cada hora; só consulta a API quando há jogo local no dia | `/competitions/BSA/matches` → `jogos.status`, placar e `rodadas.trava_em` |
 | `pontuar-jogo` | Disparado quando um jogo muda para `ENCERRADO` | `/fixtures?id=` → `estatisticas_jogador` → `fn_pontuar_jogo` |
 | `conferir-rodada` | Dia seguinte ao último jogo, 12h | 2ª leitura de cada jogo → `fn_fechar_rodada` → `fn_atualizar_precos` |
 | `abrir-rodada` | Logo depois do fechamento | Rodada seguinte `ABERTA` + e-mail "a rodada abriu" |

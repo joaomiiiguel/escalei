@@ -2,6 +2,9 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { finishOnboarding } from "./actions";
 import { OnboardingForm } from "./onboarding-form";
+import { cookies } from "next/headers";
+import { hasActiveLeagueMembership } from "@/lib/league-access";
+import { getActiveInvite, isInviteToken } from "@/lib/invites";
 
 export const dynamic = "force-dynamic";
 
@@ -10,10 +13,16 @@ export default async function Onboarding({ searchParams }: { searchParams: Promi
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
 
-  if (user) {
-    const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
-    if (profile) redirect("/");
-  }
+  const cookieStore = await cookies();
+  const candidateToken = params.convite ?? cookieStore.get("escalei_invite")?.value;
+  const inviteToken = candidateToken && isInviteToken(candidateToken) && await getActiveInvite(candidateToken) ? candidateToken : null;
+
+  if (!user) redirect(inviteToken ? `/entrar?convite=${inviteToken}` : "/entrar");
+
+  const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
+  if (await hasActiveLeagueMembership(user.id)) redirect("/");
+  if (!inviteToken) redirect("/entrar?erro=sem_liga");
+  if (profile) redirect(`/convite/${inviteToken}`);
 
   const { data: clubs } = await supabase
     .from("clubes")
@@ -21,5 +30,5 @@ export default async function Onboarding({ searchParams }: { searchParams: Promi
     .eq("ativo", true)
     .order("nome");
 
-  return <OnboardingForm clubs={clubs ?? []} erro={params.erro} inviteToken={params.convite} finishOnboarding={finishOnboarding} />;
+  return <OnboardingForm clubs={clubs ?? []} erro={params.erro} inviteToken={inviteToken} finishOnboarding={finishOnboarding} />;
 }
