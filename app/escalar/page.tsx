@@ -2,6 +2,8 @@ import { redirect } from "next/navigation";
 import { LineupBuilder, RoundLineup, SavedLineup, type LineupPlayer } from "@/components/ui";
 import TitleSection from "@/components/ui/title-section";
 import { createClient } from "@/lib/supabase/server";
+import { hasActiveLeagueMembership } from "@/lib/league-access";
+import { getCurrentRound } from "@/lib/current-round";
 
 import type { SavedPlayer, SavedTeam, ActiveRound, RoundGame, PlayerStat } from "@/lib/types";
 
@@ -14,18 +16,15 @@ export default async function Lineup({ searchParams }: { searchParams: Promise<{
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/entrar");
+  if (!await hasActiveLeagueMembership(user.id)) redirect("/entrar?erro=sem_liga");
 
   const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
   if (!profile) redirect("/onboarding");
 
-  const { data: roundData } = await supabase
-    .from("rodadas")
-    .select("id, numero, status, trava_em, fechada_em")
-    .in("status", ["ABERTA", "EM_ANDAMENTO", "FECHADA"])
-    .order("numero", { ascending: false })
-    .limit(1)
-    .maybeSingle();
-  const round = roundData as ActiveRound | null;
+  const { data: round } = await getCurrentRound<ActiveRound>(
+    supabase,
+    "id, numero, status, trava_em, fechada_em",
+  );
   const { data: savedTeamData } = round
     ? await supabase.from("times").select("formacao, times_jogadores(jogadores(id, clube_id, nome, nome_exibicao, posicao, preco, clubes(nome, sigla, logo_url)))").eq("usuario_id", user.id).eq("rodada_id", round.id).maybeSingle()
     : { data: null };

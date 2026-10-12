@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/ui/navbar";
 import { createClient } from "@/lib/supabase/server";
+import { getCurrentRound } from "@/lib/current-round";
 import "./globals.css";
 import type { Metadata } from "next";
 
@@ -8,11 +9,24 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
     let hasCurrentTeam = false;
+    let isRoundInProgress = false;
 
     if (user) {
-        const { data: round } = await supabase.from("rodadas").select("id").eq("status", "ABERTA").gt("trava_em", new Date().toISOString()).order("numero", { ascending: false }).limit(1).maybeSingle();
+        const { data: round } = await getCurrentRound<{
+            id: number;
+            numero: number;
+            status: "AGENDADA" | "ABERTA" | "EM_ANDAMENTO" | "FECHADA";
+            trava_em: string;
+        }>(supabase, "id, numero, status, trava_em");
+
         if (round) {
-            const { data: team } = await supabase.from("times").select("id").eq("usuario_id", user.id).eq("rodada_id", round.id).maybeSingle();
+            isRoundInProgress = round.status === "EM_ANDAMENTO";
+            const { data: team } = await supabase
+                .from("times")
+                .select("id")
+                .eq("usuario_id", user.id)
+                .eq("rodada_id", round.id)
+                .maybeSingle();
             hasCurrentTeam = Boolean(team);
         }
     }
@@ -21,7 +35,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <html lang="pt-BR">
             <body className="min-h-screen">
                 {children}
-                <Navbar hasCurrentTeam={hasCurrentTeam} />
+                <Navbar hasCurrentTeam={hasCurrentTeam} isRoundInProgress={isRoundInProgress} />
             </body>
         </html>
     );

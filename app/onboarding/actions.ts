@@ -2,7 +2,8 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
-import { addUserToInvitedLeague, isInviteToken } from "@/lib/invites";
+import { addUserToInvitedLeague, getActiveInvite, isInviteToken } from "@/lib/invites";
+import { hasActiveLeagueMembership } from "@/lib/league-access";
 
 export async function finishOnboarding(formData: FormData) {
     const apelido = String(formData.get("apelido") ?? "").trim();
@@ -20,6 +21,14 @@ export async function finishOnboarding(formData: FormData) {
     const { data: { user: signedInUser } } = await supabase.auth.getUser();
     if (!signedInUser) redirect("/entrar?erro=autenticacao");
     const user = signedInUser;
+
+    const inviteFromForm = String(formData.get("convite") ?? "");
+    const inviteToken = isInviteToken(inviteFromForm)
+      ? inviteFromForm
+      : cookieStore.get("escalei_invite")?.value;
+    const hasMembership = await hasActiveLeagueMembership(user.id);
+    const activeInvite = inviteToken && isInviteToken(inviteToken) ? await getActiveInvite(inviteToken) : false;
+    if (!hasMembership && !activeInvite) redirect("/entrar?erro=sem_liga");
 
     if (clube) {
         const { data: clubeAtivo } = await supabase
@@ -48,12 +57,9 @@ export async function finishOnboarding(formData: FormData) {
     if (error || profile?.id !== user.id) redirect("/onboarding?erro=perfil");
 
     cookieStore.delete("escalei_verified_phone");
-    const inviteFromForm = String(formData.get("convite") ?? "");
-    const inviteToken = isInviteToken(inviteFromForm)
-      ? inviteFromForm
-      : cookieStore.get("escalei_invite")?.value;
     if (inviteToken && isInviteToken(inviteToken)) {
-      await addUserToInvitedLeague(inviteToken, user.id);
+      const joined = await addUserToInvitedLeague(inviteToken, user.id);
+      if (!joined) redirect("/entrar?erro=sem_liga");
       cookieStore.delete("escalei_invite");
     }
 

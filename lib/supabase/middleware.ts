@@ -1,6 +1,14 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
+const protectedRoutes = ["/", "/admin", "/como-funciona", "/escalar", "/ligas", "/perfil"];
+
+function isProtectedRoute(pathname: string) {
+  return protectedRoutes.some((route) => route === "/"
+    ? pathname === route
+    : pathname === route || pathname.startsWith(`${route}/`));
+}
+
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({ request });
   const supabase = createServerClient(
@@ -21,9 +29,8 @@ export async function updateSession(request: NextRequest) {
   );
 
   const { data: { user } } = await supabase.auth.getUser();
-  const isProtectedRoute = ["/", "/escalar", "/perfil", "/como-funciona"].some((route) => request.nextUrl.pathname === route || request.nextUrl.pathname.startsWith(`${route}/`));
 
-  if (!user && isProtectedRoute) {
+  if (!user && isProtectedRoute(request.nextUrl.pathname)) {
     const url = request.nextUrl.clone();
     url.pathname = "/entrar";
     url.searchParams.set("redirecionar", `${request.nextUrl.pathname}${request.nextUrl.search}`);

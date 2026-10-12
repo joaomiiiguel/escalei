@@ -1,14 +1,19 @@
 import { createClient } from "@supabase/supabase-js";
 
-const apiKey = process.env.API_FOOTBALL_KEY;
+const apiKey = process.env.FOOTBALL_DATA_API_KEY;
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-const leagueId = Number(process.env.API_FOOTBALL_LEAGUE_ID ?? "71");
-const season = Number(process.env.API_FOOTBALL_SEASON ?? "2024");
+const competitionCode = process.env.FOOTBALL_DATA_COMPETITION_CODE ?? "BSA";
+const season = Number(process.env.FOOTBALL_DATA_SEASON ?? "2026");
 
 const brazilianAbbreviations = {
   "Atletico Goianiense": "ACG",
   "Atletico-MG": "CAM",
+  "Grêmio FBPA": "GRE",
+  "São Paulo FC": "SAO",
+  "Coritiba FBC": "CTB",
+  "Clube do Remo": "REM",
+  "SC Internacional": "INT",
 };
 
 function isHttpsUrl(value) {
@@ -20,55 +25,76 @@ function isHttpsUrl(value) {
 }
 
 if (!apiKey || !supabaseUrl || !serviceRoleKey) {
-  throw new Error("API_FOOTBALL_KEY, NEXT_PUBLIC_SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY são obrigatórias.");
+  throw new Error("FOOTBALL_DATA_API_KEY, NEXT_PUBLIC_SUPABASE_URL e SUPABASE_SERVICE_ROLE_KEY são obrigatórias.");
 }
 
-if (!Number.isInteger(leagueId) || !Number.isInteger(season)) {
-  throw new Error("API_FOOTBALL_LEAGUE_ID e API_FOOTBALL_SEASON devem ser números inteiros.");
+if (!/^[A-Z0-9_-]{2,12}$/.test(competitionCode) || !Number.isInteger(season)) {
+  throw new Error("FOOTBALL_DATA_COMPETITION_CODE deve ser um código válido e FOOTBALL_DATA_SEASON deve ser um número inteiro.");
 }
 
-const response = await fetch(`https://v3.football.api-sports.io/teams?league=${leagueId}&season=${season}`, {
-  headers: { "x-apisports-key": apiKey },
+const supabase = createClient(supabaseUrl, serviceRoleKey, {
+  auth: { autoRefreshToken: false, persistSession: false },
+});
+const { data: existingClubsForMapping, error: existingClubsForMappingError } = await supabase
+  .from("clubes")
+  .select("id, sigla, football_data_id");
+
+if (existingClubsForMappingError) {
+  throw new Error(`Não foi possível consultar o catálogo atual de clubes: ${existingClubsForMappingError.message}`);
+}
+
+const response = await fetch(`https://api.football-data.org/v4/competitions/${encodeURIComponent(competitionCode)}/teams?season=${season}`, {
+  headers: { "X-Auth-Token": apiKey, Accept: "application/json" },
 });
 
-if (!response.ok) throw new Error(`API-Football respondeu HTTP ${response.status}.`);
+if (!response.ok) throw new Error(`football-data.org respondeu HTTP ${response.status}.`);
 
 const payload = await response.json();
-if (payload.errors && Object.keys(payload.errors).length > 0) {
-  const errorFields = Object.keys(payload.errors).join(", ");
-  throw new Error(`A API-Football retornou erros ao consultar os clubes (campos: ${errorFields}).`);
+if (!Array.isArray(payload.teams)) {
+  throw new Error(`football-data.org não retornou a lista de clubes esperada (${payload.message ?? "resposta inválida"}).`);
 }
 
-const clubs = payload.response?.map(({ team }) => ({
-  id: team.id,
-  nome: team.name?.trim(),
-  sigla: brazilianAbbreviations[team.name] ?? team.code?.trim().toUpperCase(),
-  logo_url: team.logo?.trim() || null,
-  ativo: true,
-  api_atualizado_em: new Date().toISOString(),
-})) ?? [];
+const existingByFootballDataId = new Map((existingClubsForMapping ?? []).flatMap((club) => club.football_data_id ? [[club.football_data_id, club]] : []));
+const existingByAbbreviation = new Map((existingClubsForMapping ?? []).map((club) => [club.sigla, club]));
+const existingById = new Map((existingClubsForMapping ?? []).map((club) => [club.id, club]));
+const clubs = payload.teams.map((team) => {
+  const sigla = brazilianAbbreviations[team.name] ?? team.tla?.trim().toUpperCase();
+  const existingClub = existingByFootballDataId.get(team.id) ?? existingByAbbreviation.get(sigla);
+  const collidingClub = existingById.get(team.id);
 
-if (clubs.length === 0) throw new Error("A API-Football não retornou clubes para esta competição e temporada.");
+  if (!existingClub && collidingClub) {
+    throw new Error(`O ID externo ${team.id} colide com o clube interno ${collidingClub.nome}. Faça o mapeamento manual antes de sincronizar.`);
+  }
+
+  return {
+    id: existingClub?.id ?? team.id,
+    football_data_id: team.id,
+    nome: team.name?.trim(),
+    sigla,
+    logo_url: team.crest?.trim() || null,
+    ativo: true,
+    api_atualizado_em: new Date().toISOString(),
+  };
+});
+
+if (clubs.length === 0) throw new Error("football-data.org não retornou clubes para esta competição e temporada.");
 
 const invalidClub = clubs.find((club) => !Number.isInteger(club.id) || !club.nome || !/^[A-Z0-9]{3}$/.test(club.sigla ?? ""));
-if (invalidClub) throw new Error("A API-Football retornou clube sem sigla de três caracteres válida; sincronização cancelada.");
+if (invalidClub) throw new Error("football-data.org retornou clube sem sigla de três caracteres válida; sincronização cancelada.");
 
 const clubWithInvalidLogo = clubs.find((club) => club.logo_url && !isHttpsUrl(club.logo_url));
-if (clubWithInvalidLogo) throw new Error("A API-Football retornou uma URL de logo inválida; sincronização cancelada.");
+if (clubWithInvalidLogo) throw new Error("football-data.org retornou uma URL de escudo inválida; sincronização cancelada.");
 
 const duplicatedAbbreviations = clubs
   .filter((club, index) => clubs.findIndex(({ sigla }) => sigla === club.sigla) !== index)
   .map(({ nome, sigla }) => `${sigla} (${nome})`);
 
 if (duplicatedAbbreviations.length > 0) {
-  throw new Error(`A API-Football retornou siglas duplicadas: ${duplicatedAbbreviations.join(", ")}.`);
+  throw new Error(`football-data.org retornou siglas duplicadas: ${duplicatedAbbreviations.join(", ")}.`);
 }
 
-const supabase = createClient(supabaseUrl, serviceRoleKey, {
-  auth: { autoRefreshToken: false, persistSession: false },
-});
 const { error } = await supabase.from("clubes").upsert(clubs, { onConflict: "id" });
-if (error) throw new Error("Não foi possível gravar o catálogo de clubes no Supabase.");
+if (error) throw new Error(`Não foi possível gravar o catálogo de clubes no Supabase: ${error.message}`);
 
 const { data: existingClubs, error: existingClubsError } = await supabase
   .from("clubes")

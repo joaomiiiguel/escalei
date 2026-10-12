@@ -3,6 +3,7 @@ import { ChevronRight, KeyRound, Trophy } from "lucide-react";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
+import { hasActiveLeagueMembership } from "@/lib/league-access";
 
 type League = { id: string; nome: string; icone: string | null; tipo: "ABERTA" | "CONVITE"; temporada: number };
 type LeagueMembership = { liga_id: string; ligas: League | League[] | null };
@@ -12,6 +13,7 @@ export default async function LeaguesPage({ searchParams }: { searchParams: Prom
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/entrar");
+  if (!await hasActiveLeagueMembership(user.id)) redirect("/entrar?erro=sem_liga");
 
   const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
   if (!profile) redirect("/onboarding");

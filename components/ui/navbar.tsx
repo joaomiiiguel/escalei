@@ -18,23 +18,31 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function Navbar({ hasCurrentTeam = false }: { hasCurrentTeam?: boolean }) {
+export function Navbar({
+  hasCurrentTeam = false,
+  isRoundInProgress = false,
+}: {
+  hasCurrentTeam?: boolean;
+  isRoundInProgress?: boolean;
+}) {
   const pathname = usePathname();
 
   if (publicPaths.some((path) => pathname === path || pathname.startsWith(`${path}/`))) return null;
 
   if (pathname === '/como-funciona') return null;
 
+  const showCta = pathname !== "/escalar" && pathname === "/" && (isRoundInProgress || !hasCurrentTeam);
+
   return (
     <><HowItWorksModal /><div className="fixed inset-x-0 bottom-0 z-50 mx-auto w-full max-w-lg mb-5 px-4" data-app-navbar>
-      {pathname !== "/escalar" && pathname === "/" && !hasCurrentTeam && (
+      {showCta && (
         <div className="bg-background pb-3">
           <Link
             className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-[14px] bg-primary px-5 text-base font-bold !text-primary-foreground outline-none transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             href="/escalar"
           >
             <Shirt className="size-[18px]" aria-hidden="true" />
-            Escalar meu time
+            {isRoundInProgress ? "Ver pontos do meu time" : "Escalar meu time"}
           </Link>
         </div>
       )}
