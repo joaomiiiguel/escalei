@@ -45,7 +45,7 @@ export async function createGroup(formData: FormData) {
     redirect("/admin/grupos?erro=grupo");
   }
 
-  const { data: group, error } = await supabase
+  const { data: group, error } = await admin
     .from("ligas")
     .insert({
       nome: name,
@@ -53,10 +53,16 @@ export async function createGroup(formData: FormData) {
       codigo_convite: createInviteCode(),
       temporada: season,
     })
-    .select("token_convite")
+    .select("id, token_convite")
     .single();
 
   if (error || !group) redirect("/admin/grupos?erro=grupo");
+  const { error: ownerMembershipError } = await admin.from("ligas_membros").upsert({
+    liga_id: group.id,
+    usuario_id: user.id,
+    convidado_por: user.id,
+  }, { onConflict: "liga_id,usuario_id", ignoreDuplicates: true });
+  if (ownerMembershipError) redirect("/admin/grupos?erro=grupo");
   redirect(`/admin/grupos?criado=1&convite=${group.token_convite}`);
 }
 
@@ -75,6 +81,24 @@ export async function addGroupMember(formData: FormData) {
     convidado_por: user.id,
   }, { onConflict: "liga_id,usuario_id", ignoreDuplicates: true });
   redirect(`/admin/grupos/${groupId}${error ? "?erro=adicionar" : "?adicionado=1"}`);
+}
+
+export async function addGroupInviteEmail(formData: FormData) {
+  const groupId = String(formData.get("grupo_id") ?? "");
+  const email = String(formData.get("email") ?? "").trim().toLowerCase();
+  if (!UUID_PATTERN.test(groupId) || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) redirect(`/admin/grupos/${groupId}?erro=convite_email`);
+
+  const { user } = await requireAdmin();
+  const admin = createAdminClient();
+  const { data: group } = await admin.from("ligas").select("id").eq("id", groupId).is("arquivada_em", null).maybeSingle();
+  if (!group) redirect("/admin/grupos?erro=grupo");
+
+  const { error } = await admin.from("ligas_convites_email").upsert({
+    liga_id: groupId,
+    email,
+    convidado_por: user.id,
+  }, { onConflict: "liga_id,email", ignoreDuplicates: true });
+  redirect(`/admin/grupos/${groupId}${error ? "?erro=convite_email" : "?convite_email=1"}`);
 }
 
 export async function removeGroupMember(formData: FormData) {

@@ -4,6 +4,7 @@ import { Badge, ScoreCard } from "@/components/ui";
 import TitleSection from "@/components/ui/title-section";
 import { LockCountdown } from "@/app/lock-countdown";
 import type { Rodada, Jogo, TimeDaRodada, Clube, StatusRodada } from "@/lib/types";
+import { displayedKickoff } from "@/lib/game-kickoff";
 
 const saoPaulo = "America/Sao_Paulo";
 
@@ -46,10 +47,10 @@ export function DefaultRoundView({
   games: Jogo[];
   clubsById: Map<number, Clube>;
 }) {
-  return <main className="flex max-w-lg flex-col justify-start gap-6 pt-5 pb-44 text-white">
+  return <main className="flex max-w-lg px-5 flex-col justify-start gap-6 pt-5 pb-44 text-white">
     <header className="flex flex-col items-start justify-between">
       <p className="text-sm text-muted-foreground">Olá, {profile.apelido} 👋</p>
-      <TitleSection title={round ? `Rodada ${String(round.numero).padStart(2, "0")} - Brasileirão 2026` : "Início - Brasileirão 2026"} />
+      <TitleSection title={round ? `Rodada ${String(round.numero).padStart(2, "0")} - Brasileirão ${round.temporada ?? 2026}` : "Início - Brasileirão"} />
     </header>
     {unavailable ?
       <section className="rounded-2xl border border-amber-400/40 bg-amber-950/20 p-4" role="alert">
@@ -97,7 +98,7 @@ export function DefaultRoundView({
             {roundDataUnavailable ? null : games.length === 0 ? <div className="rounded-2xl border border-border bg-card p-4 text-sm leading-6 text-muted-foreground">Os jogos desta rodada ainda não foram publicados.</div> : <div className="grid gap-2">{games.map((game) => {
               const home = clubsById.get(game.clube_casa_id);
               const away = clubsById.get(game.clube_fora_id);
-              return <ScoreCard key={game.id} home={{ nome: home?.nome ?? "Clube não disponível", sigla: home?.sigla ?? "—", logoUrl: home?.logo_url }} away={{ nome: away?.nome ?? "Clube não disponível", sigla: away?.sigla ?? "—", logoUrl: away?.logo_url }} homeGoals={game.gols_casa} awayGoals={game.gols_fora} kickoff={game.inicio_em} status={game.status} />;
+              return <ScoreCard key={game.id} home={{ nome: home?.nome ?? "Clube não disponível", sigla: home?.sigla ?? "—", logoUrl: home?.logo_url }} away={{ nome: away?.nome ?? "Clube não disponível", sigla: away?.sigla ?? "—", logoUrl: away?.logo_url }} homeGoals={game.gols_casa} awayGoals={game.gols_fora} kickoff={displayedKickoff(game)} status={game.status} />;
             })}</div>}
           </section>
         </>}

@@ -4,9 +4,9 @@ import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { Button } from "@/components/shadcn/button";
 
-export function InviteLink({ token }: { token: string }) {
+export function InviteLink({ token, code }: { token: string; code?: string }) {
   const [copied, setCopied] = useState(false);
-  const path = `/convite/${token}`;
+  const path = code ? `/convite?codigo=${code}` : `/convite/${token}`;
 
   async function copyLink() {
     await navigator.clipboard.writeText(`${window.location.origin}${path}`);

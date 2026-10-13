@@ -5,6 +5,7 @@ type Participant = {
     usuario_id: string;
     apelido: string;
     email: string;
+    telefone: string | null;
     grupo: string;
     gestor: string;
 };
@@ -15,7 +16,6 @@ export default async function AdminParticipants() {
     const [
         { data: groups },
         { data: membersData },
-        { data: { users } }
     ] = await Promise.all([
         admin.from("ligas").select("id").is("arquivada_em", null),
         admin
@@ -23,24 +23,22 @@ export default async function AdminParticipants() {
             .select(`
                 usuario_id,
                 entrou_em,
-                perfis!ligas_membros_usuario_id_fkey ( apelido ),
+                perfis!ligas_membros_usuario_id_fkey ( apelido, email, telefone ),
                 ligas (
                     nome,
                     perfis!ligas_dono_id_fkey ( apelido )
                 )
             `)
             .order("entrou_em", { ascending: false }),
-        admin.auth.admin.listUsers()
     ]);
 
     const activeGroupsCount = groups?.length ?? 0;
     
-    const emailMap = new Map(users.map(u => [u.id, u.email || "Sem e-mail"]));
-
     const participants: Participant[] = (membersData || []).map((m: any) => ({
         usuario_id: m.usuario_id,
         apelido: m.perfis?.apelido ?? "Desconhecido",
-        email: emailMap.get(m.usuario_id) ?? "Sem e-mail",
+        email: m.perfis?.email ?? "Sem e-mail",
+        telefone: m.perfis?.telefone ?? null,
         grupo: m.ligas?.nome ?? "Sem grupo",
         gestor: m.ligas?.perfis?.apelido ?? "Desconhecido",
     }));
@@ -69,6 +67,7 @@ export default async function AdminParticipants() {
                     <tr>
                         <th className="px-5 py-3 font-semibold">Nome</th>
                         <th className="px-5 py-3 font-semibold">E-mail</th>
+                        <th className="px-5 py-3 font-semibold">Telefone</th>
                         <th className="px-5 py-3 font-semibold">Grupo</th>
                         <th className="px-5 py-3 font-semibold">Gestor</th>
                     </tr>
@@ -78,12 +77,13 @@ export default async function AdminParticipants() {
                         <tr key={`${p.usuario_id}-${idx}`} className="border-b border-[#edf1ee] last:border-0">
                             <td className="px-5 py-4 font-bold">{p.apelido}</td>
                             <td className="px-5 py-4 text-[#637469]">{p.email}</td>
+                            <td className="px-5 py-4 text-[#637469]">{p.telefone ?? "Sem telefone"}</td>
                             <td className="px-5 py-4">{p.grupo}</td>
                             <td className="px-5 py-4">{p.gestor}</td>
                         </tr>
                     )) : (
                         <tr>
-                            <td colSpan={4} className="px-5 py-10 text-center text-[#637469]">Nenhum participante ativo ainda.</td>
+                            <td colSpan={5} className="px-5 py-10 text-center text-[#637469]">Nenhum participante ativo ainda.</td>
                         </tr>
                     )}
                 </tbody>

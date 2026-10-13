@@ -4,7 +4,7 @@ import { finishOnboarding } from "./actions";
 import { OnboardingForm } from "./onboarding-form";
 import { cookies } from "next/headers";
 import { hasActiveLeagueMembership } from "@/lib/league-access";
-import { getActiveInvite, isInviteToken } from "@/lib/invites";
+import { canUserJoinInvite, getActiveInvite, isInviteToken } from "@/lib/invites";
 
 export const dynamic = "force-dynamic";
 
@@ -18,6 +18,7 @@ export default async function Onboarding({ searchParams }: { searchParams: Promi
   const inviteToken = candidateToken && isInviteToken(candidateToken) && await getActiveInvite(candidateToken) ? candidateToken : null;
 
   if (!user) redirect(inviteToken ? `/entrar?convite=${inviteToken}` : "/entrar");
+  if (inviteToken && !await canUserJoinInvite(inviteToken, user.id)) redirect("/entrar?erro=convite_email");
 
   const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
   if (await hasActiveLeagueMembership(user.id)) redirect("/");

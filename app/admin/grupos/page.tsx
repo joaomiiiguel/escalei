@@ -12,6 +12,7 @@ type Group = {
   icone: string;
   temporada: number;
   token_convite: string;
+  codigo_convite: string;
   criada_em: string;
   ligas_membros: { count: number }[];
 };
@@ -20,7 +21,7 @@ export default async function AdminGroups({ searchParams }: { searchParams: Prom
   const supabase = await createClient();
 
   const [{ data: groups }, params] = await Promise.all([
-    supabase.from("ligas").select("id, nome, icone, temporada, token_convite, criada_em, ligas_membros(count)").is("arquivada_em", null).order("criada_em", { ascending: false }),
+    supabase.from("ligas").select("id, nome, icone, temporada, token_convite, codigo_convite, criada_em, ligas_membros(count)").is("arquivada_em", null).order("criada_em", { ascending: false }),
     searchParams,
   ]);
   const activeGroups = (groups ?? []) as Group[];
@@ -62,7 +63,7 @@ export default async function AdminGroups({ searchParams }: { searchParams: Prom
               <td className="px-5 py-4">{group.temporada}</td>
               <td className="px-5 py-4">{group.ligas_membros[0]?.count ?? 0}</td>
               <td className="max-w-[360px] px-5 py-3">
-                <InviteLink token={group.token_convite} />
+                <InviteLink token={group.token_convite} code={group.codigo_convite} />
               </td>
               <td className="px-5 py-3"><Link href={`/admin/grupos/${group.id}`} className="inline-flex h-9 items-center rounded-md bg-success px-3 text-xs font-bold text-white hover:bg-success/90">Gerenciar</Link></td>
             </tr>

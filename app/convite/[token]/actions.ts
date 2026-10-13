@@ -2,13 +2,14 @@
 
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { addUserToInvitedLeague } from "@/lib/invites";
+import { addUserToInvitedLeague, canUserJoinInvite } from "@/lib/invites";
 
 export async function acceptInvite(formData: FormData) {
   const token = String(formData.get("token") ?? "");
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect(`/entrar?convite=${token}`);
+  if (!await canUserJoinInvite(token, user.id)) redirect(`/convite/${token}?erro=email`);
 
   const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
   if (!profile) redirect(`/onboarding?convite=${token}`);

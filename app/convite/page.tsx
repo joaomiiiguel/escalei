@@ -1,21 +1,12 @@
-"use client";
+import { redirect } from "next/navigation";
+import { getInviteTokenByCode } from "@/lib/invites";
+import { useInviteCode } from "./actions";
 
-import Link from "next/link";
-import { Button } from "@/components/shadcn/button";
-
-export default function InviteRequired() {
-  return (
-    <main className="mx-auto grid min-h-dvh max-w-[490px] place-items-center bg-background p-6 text-center text-foreground">
-      <section className="grid max-w-[315px] gap-4">
-        <p className="text-sm font-extrabold tracking-[0.4em] text-primary">ACESSO POR CONVITE</p>
-        <h1 className="text-3xl font-extrabold leading-tight">Abra o link do seu grupo.</h1>
-        <p className="text-base leading-6 text-muted-foreground">Cada grupo possui um link exclusivo para novos participantes.</p>
-        <Link href="/entrar">
-          <Button className="mt-1 h-12 w-full rounded-xl bg-primary text-primary-foreground hover:bg-primary text-lg font-bold">
-            Já tenho uma conta
-          </Button>
-        </Link>
-      </section>
-    </main>
-  );
+export default async function InviteCodePage({ searchParams }: { searchParams: Promise<{ codigo?: string; erro?: string }> }) {
+  const params = await searchParams;
+  if (params.codigo) {
+    const token = await getInviteTokenByCode(params.codigo.toUpperCase());
+    if (token) redirect(`/convite/${token}`);
+  }
+  return <main className="mx-auto grid min-h-dvh max-w-[490px] content-center gap-6 bg-background px-5 text-center text-foreground"><div><p className="text-xs font-extrabold tracking-[1.2px] text-primary">CONVITE DE GRUPO</p><h1 className="mt-2 text-3xl font-extrabold">Use seu código</h1><p className="mt-2 text-sm text-muted-foreground">Digite o código de oito caracteres enviado pelo gestor.</p></div>{params.erro && <p role="alert" className="text-sm text-destructive-foreground">Código inválido ou convite indisponível.</p>}<form action={useInviteCode} className="grid gap-3"><input name="codigo" required minLength={8} maxLength={8} autoCapitalize="characters" className="h-14 rounded-xl border border-border bg-card px-4 text-center font-mono text-xl font-bold tracking-[0.2em] outline-none focus:ring-2 focus:ring-ring" placeholder="ABCD2345" /><button type="submit" className="h-12 rounded-xl bg-primary font-bold text-primary-foreground">Continuar</button></form></main>;
 }

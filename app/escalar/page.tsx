@@ -4,6 +4,7 @@ import TitleSection from "@/components/ui/title-section";
 import { createClient } from "@/lib/supabase/server";
 import { hasActiveLeagueMembership } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
+import { displayedKickoff } from "@/lib/game-kickoff";
 
 import type { SavedPlayer, SavedTeam, ActiveRound, RoundGame, PlayerStat } from "@/lib/types";
 
@@ -23,7 +24,7 @@ export default async function Lineup({ searchParams }: { searchParams: Promise<{
 
   const { data: round } = await getCurrentRound<ActiveRound>(
     supabase,
-    "id, numero, status, trava_em, fechada_em",
+    "id, numero, status, trava_em, fechada_em, simulada",
   );
   const { data: savedTeamData } = round
     ? await supabase.from("times").select("formacao, times_jogadores(jogadores(id, clube_id, nome, nome_exibicao, posicao, preco, clubes(nome, sigla, logo_url)))").eq("usuario_id", user.id).eq("rodada_id", round.id).maybeSingle()
@@ -38,8 +39,8 @@ export default async function Lineup({ searchParams }: { searchParams: Promise<{
   const playerIds = savedPlayers.map((player) => player.id);
   const [{ data: gamesData }, { data: statsData }] = round && playerIds.length && round.status !== "ABERTA"
     ? await Promise.all([
-      supabase.from("jogos").select("id, clube_casa_id, clube_fora_id, inicio_em, status").eq("rodada_id", round.id),
-      supabase.from("estatisticas_jogador").select("jogador_id, pontos, jogos(inicio_em, status)").eq("rodada_id", round.id).in("jogador_id", playerIds),
+      supabase.from("jogos").select("id, clube_casa_id, clube_fora_id, inicio_em, inicio_simulado_em, status").eq("rodada_id", round.id),
+      supabase.from("estatisticas_jogador").select("jogador_id, pontos, jogos(inicio_em, inicio_simulado_em, status)").eq("rodada_id", round.id).in("jogador_id", playerIds),
     ])
     : [{ data: [] }, { data: [] }];
   const games = (gamesData ?? []) as RoundGame[];
@@ -64,7 +65,7 @@ export default async function Lineup({ searchParams }: { searchParams: Promise<{
       ...player,
       roundPoints: Number(stat?.pontos ?? 0),
       roundStatus,
-      roundLabel: game ? matchTime(game.inicio_em) : "sem jogo",
+      roundLabel: game ? matchTime(displayedKickoff(game)) : "sem jogo",
     };
   });
   const canEdit = round?.status === "ABERTA" && new Date() < new Date(round.trava_em);

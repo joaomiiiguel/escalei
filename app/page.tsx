@@ -5,6 +5,7 @@ import { ActiveRoundView } from "@/components/active-round-view";
 import { DefaultRoundView } from "@/components/default-round-view";
 import { hasActiveLeagueMembership } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
+import { displayedKickoff } from "@/lib/game-kickoff";
 
 export default async function Home() {
   const supabase = await createClient();
@@ -18,7 +19,7 @@ export default async function Home() {
 
   const { data: currentRound, error: currentRoundError } = await getCurrentRound<Rodada>(
     supabase,
-    "id, numero, status, abre_em, trava_em, fechada_em, rotulo_api, simulada",
+    "id, temporada, numero, status, abre_em, trava_em, fechada_em, rotulo_api, simulada",
   );
   const round = currentRound;
   const unavailable = Boolean(currentRoundError);
@@ -32,10 +33,10 @@ export default async function Home() {
   if (round) {
     const [{ data: teamData, error: teamError }, { data: gamesData, error: gamesError }] = await Promise.all([
       supabase.from("times").select("id, formacao, times_jogadores(jogador_id)").eq("usuario_id", user.id).eq("rodada_id", round.id).maybeSingle(),
-      supabase.from("jogos").select("id, clube_casa_id, clube_fora_id, inicio_em, status, gols_casa, gols_fora, pontuado_em").eq("rodada_id", round.id).order("inicio_em"),
+      supabase.from("jogos").select("id, clube_casa_id, clube_fora_id, inicio_em, inicio_simulado_em, status, gols_casa, gols_fora, pontuado_em").eq("rodada_id", round.id),
     ]);
     team = teamData as TimeDaRodada | null;
-    games = (gamesData as Jogo[] | null) ?? [];
+    games = ((gamesData as Jogo[] | null) ?? []).sort((first, second) => new Date(displayedKickoff(first)).getTime() - new Date(displayedKickoff(second)).getTime());
     roundDataUnavailable = Boolean(teamError || gamesError);
     const clubIds = [...new Set(games.flatMap((game) => [game.clube_casa_id, game.clube_fora_id]))];
     if (clubIds.length) {

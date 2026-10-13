@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { hasActiveLeagueMembership } from "@/lib/league-access";
-import { getActiveInvite, isInviteToken } from "@/lib/invites";
+import { canUserJoinInvite, getActiveInvite, isInviteToken } from "@/lib/invites";
 export async function GET(request: Request) {
     const code = new URL(request.url).searchParams.get("code");
     if (!code) return NextResponse.redirect(new URL("/entrar?erro=callback", request.url));
@@ -23,12 +23,20 @@ export async function GET(request: Request) {
       await supabase.auth.signOut();
       return NextResponse.redirect(new URL("/entrar?erro=sem_liga", request.url));
     }
+    if (!inviteToken || !await canUserJoinInvite(inviteToken, user.id)) {
+      await supabase.auth.signOut();
+      return NextResponse.redirect(new URL("/entrar?erro=convite_email", request.url));
+    }
 
     const { data: profile } = await supabase
       .from("perfis")
       .select("id")
       .eq("id", user.id)
       .maybeSingle();
+
+    if (profile && user.email) {
+      await supabase.from("perfis").update({ email: user.email.trim().toLowerCase() }).eq("id", user.id);
+    }
 
     return NextResponse.redirect(new URL(profile ? `/convite/${inviteToken}` : `/onboarding?convite=${inviteToken}`, request.url));
 }

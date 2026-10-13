@@ -31,24 +31,15 @@ export function LineupBuilder({ initialFormation = "4-3-3", initialPlayers = [],
     });
   }, [formation, roundId, selectedPlayers]);
   const autoSelect = useCallback(async () => {
-    const required: Record<Formation, Record<LineupPlayer["position"], number>> = {
-      "4-3-3": { GOL: 1, DEF: 4, MEI: 3, ATA: 3 },
-      "4-4-2": { GOL: 1, DEF: 4, MEI: 4, ATA: 2 },
-      "3-5-2": { GOL: 1, DEF: 3, MEI: 5, ATA: 2 },
-    };
     setIsAutoSelecting(true);
     setMessage(null);
     try {
-      const positions = Object.keys(required[formation]) as LineupPlayer["position"][];
-      const responses = await Promise.all(positions.map(async (position) => {
-        const response = await fetch(`/api/jogadores?posicao=${position}`);
-        if (!response.ok) throw new Error("Não foi possível carregar o mercado.");
-        return (await response.json() as { players: LineupPlayer[] }).players;
-      }));
-      const lineup = positions.flatMap((position, index) => [...responses[index]].sort((first, second) => first.price - second.price).slice(0, required[formation][position]));
-      if (lineup.length !== 11 || lineup.reduce((total, player) => total + player.price, 0) > ROUND_BUDGET) throw new Error("Não há jogadores suficientes dentro do orçamento.");
-      setAutoPlayers(lineup);
-      setMessage("Escalação automática aplicada. Revise antes de salvar.");
+      const response = await fetch(`/api/escalacao-automatica?formacao=${formation}`);
+      const data = await response.json() as { players?: LineupPlayer[]; hasPerformanceData?: boolean; error?: string };
+      if (!response.ok || !data.players) throw new Error(data.error ?? "Não foi possível montar a escalação automática.");
+      if (data.players.length !== 11 || data.players.reduce((total, player) => total + player.price, 0) > ROUND_BUDGET) throw new Error("Não há jogadores suficientes dentro do orçamento.");
+      setAutoPlayers(data.players);
+      setMessage(data.hasPerformanceData ? "Escalação baseada em desempenho e contexto da rodada. Revise antes de salvar." : "Escalação montada com os sinais disponíveis da rodada. Revise antes de salvar.");
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Não foi possível montar a escalação automática.");
     } finally {

@@ -2,7 +2,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
-import { addUserToInvitedLeague, getActiveInvite, isInviteToken } from "@/lib/invites";
+import { addUserToInvitedLeague, canUserJoinInvite, getActiveInvite, isInviteToken } from "@/lib/invites";
 import { hasActiveLeagueMembership } from "@/lib/league-access";
 
 export async function finishOnboarding(formData: FormData) {
@@ -21,6 +21,8 @@ export async function finishOnboarding(formData: FormData) {
     const { data: { user: signedInUser } } = await supabase.auth.getUser();
     if (!signedInUser) redirect("/entrar?erro=autenticacao");
     const user = signedInUser;
+    const email = user.email?.trim().toLowerCase();
+    if (!email) redirect("/entrar?erro=autenticacao");
 
     const inviteFromForm = String(formData.get("convite") ?? "");
     const inviteToken = isInviteToken(inviteFromForm)
@@ -29,6 +31,7 @@ export async function finishOnboarding(formData: FormData) {
     const hasMembership = await hasActiveLeagueMembership(user.id);
     const activeInvite = inviteToken && isInviteToken(inviteToken) ? await getActiveInvite(inviteToken) : false;
     if (!hasMembership && !activeInvite) redirect("/entrar?erro=sem_liga");
+    if (activeInvite && (!inviteToken || !await canUserJoinInvite(inviteToken, user.id))) redirect("/entrar?erro=convite_email");
 
     if (clube) {
         const { data: clubeAtivo } = await supabase
@@ -44,6 +47,7 @@ export async function finishOnboarding(formData: FormData) {
       .from("perfis")
       .upsert({
         id: user.id,
+        email,
         apelido,
         clube_coracao_id: clube,
         telefone: cookieStore.get("escalei_verified_phone")?.value ?? null,

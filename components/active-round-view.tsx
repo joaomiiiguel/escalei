@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Clock3, RefreshCw } from "lucide-react";
 import { Badge, ScoreCard } from "@/components/ui";
 import type { Rodada, Jogo, TimeDaRodada, EstatisticaDaRodada, Clube } from "@/lib/types";
+import { displayedKickoff } from "@/lib/game-kickoff";
 
 const saoPaulo = "America/Sao_Paulo";
 
@@ -73,7 +74,7 @@ export function ActiveRoundView({
           <div className="rounded-xl bg-card-foreground px-2 py-3 text-center"><p className="text-lg font-extrabold leading-none">{completedPlayers}/{selectedPlayers || 11}</p><p className="mt-1 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">Pontuaram</p></div>
           <div className="rounded-xl bg-card-foreground px-2 py-3 text-center"><p className="text-lg font-extrabold leading-none">{livePlayers}</p><p className="mt-1 text-[10px] font-bold uppercase tracking-wide text-muted-foreground">Ao vivo</p></div>
         </div>
-        <p className="flex items-center gap-2 text-xs font-medium text-muted-foreground"><Clock3 className="size-4 shrink-0 text-warning" aria-hidden="true" />{nextGame ? `${completedPlayers} de ${selectedPlayers || 11} já pontuaram · ${nextGameStatus}: ${matchLabel(nextGame)}, ${formatKickoffTime(nextGame.inicio_em)}` : `${completedPlayers} de ${selectedPlayers || 11} jogadores já pontuaram`}</p>
+        <p className="flex items-center gap-2 text-xs font-medium text-muted-foreground"><Clock3 className="size-4 shrink-0 text-warning" aria-hidden="true" />{nextGame ? `${completedPlayers} de ${selectedPlayers || 11} já pontuaram · ${nextGameStatus}: ${matchLabel(nextGame)}, ${formatKickoffTime(displayedKickoff(nextGame))}` : `${completedPlayers} de ${selectedPlayers || 11} jogadores já pontuaram`}</p>
         <Link href="/escalar" className="inline-flex min-h-10 items-center justify-center rounded-xl bg-card-foreground px-4 text-sm font-bold text-primary transition hover:bg-card-foreground/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">Ver escalação</Link>
       </> : <div className="rounded-xl bg-card-foreground p-3 text-sm leading-6 text-muted-foreground">Você não escalou um time para acompanhar esta rodada.</div>}
     </section>
@@ -83,7 +84,7 @@ export function ActiveRoundView({
       {games.length === 0 ? <div className="rounded-2xl bg-card p-4 text-sm leading-6 text-muted-foreground">Os jogos desta rodada ainda não foram publicados.</div> : <div className="grid gap-2">{games.map((game) => {
         const home = clubsById.get(game.clube_casa_id);
         const away = clubsById.get(game.clube_fora_id);
-        return <ScoreCard key={game.id} home={{ nome: home?.nome ?? "Clube não disponível", sigla: home?.sigla ?? "—", logoUrl: home?.logo_url }} away={{ nome: away?.nome ?? "Clube não disponível", sigla: away?.sigla ?? "—", logoUrl: away?.logo_url }} homeGoals={game.gols_casa} awayGoals={game.gols_fora} kickoff={game.inicio_em} status={game.status} />;
+        return <ScoreCard key={game.id} home={{ nome: home?.nome ?? "Clube não disponível", sigla: home?.sigla ?? "—", logoUrl: home?.logo_url }} away={{ nome: away?.nome ?? "Clube não disponível", sigla: away?.sigla ?? "—", logoUrl: away?.logo_url }} homeGoals={game.gols_casa} awayGoals={game.gols_fora} kickoff={displayedKickoff(game)} status={game.status} />;
       })}</div>}
     </section>
   </main>;

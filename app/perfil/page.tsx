@@ -75,7 +75,7 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
   const [{ data: profile }, { data: teams }, { count: leaguesCount }] = await Promise.all([
     supabase
       .from("perfis")
-      .select("apelido, telefone, tema, notificacoes_email, termos_aceitos_em, termos_versao, clube_coracao_id")
+      .select("apelido, email, telefone, tema, notificacoes_email, termos_aceitos_em, termos_versao, clube_coracao_id")
       .eq("id", user.id)
       .maybeSingle(),
     supabase.from("times").select("pontos").eq("usuario_id", user.id),
@@ -119,14 +119,15 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
           <h2 className="truncate text-[22px] font-extrabold tracking-[-0.4px] text-foreground">{profile.apelido}</h2>
           <div className="mt-1 flex min-w-0 items-center gap-2 text-xs text-muted-foreground">
             {favoriteClub && <span className="flex shrink-0 items-center gap-1 rounded-md bg-muted px-2 py-1 text-[11px] font-extrabold text-foreground"><TeamLogo className="size-3.5" logoUrl={favoriteClub.logo_url} nome={favoriteClub.nome} sigla={favoriteClub.sigla} />{favoriteClub.sigla}</span>}
-            {user.email && <span className="truncate">{user.email}</span>}
+            {profile.email && <span className="truncate">{profile.email}</span>}
           </div>
+          {profile.telefone && <p className="mt-1 text-xs text-muted-foreground">{profile.telefone}</p>}
         </div>
         <ProfileEditModal
           apelido={profile.apelido}
           clubeCoracaoId={profile.clube_coracao_id}
           clubs={clubs ?? []}
-          email={user.email ?? ""}
+          email={profile.email}
           telefone={profile.telefone}
           updateProfile={updateProfile}
         />

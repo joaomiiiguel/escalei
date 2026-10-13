@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { UsersRound } from "lucide-react";
 import { Button } from "@/components/shadcn/button";
 import { createClient } from "@/lib/supabase/server";
-import { getActiveInvite, isInviteToken } from "@/lib/invites";
+import { canUserJoinInvite, getActiveInvite, isInviteToken } from "@/lib/invites";
 import { acceptInvite } from "./actions";
 
 export default async function InvitePage({ params, searchParams }: { params: Promise<{ token: string }>; searchParams: Promise<{ erro?: string }> }) {
@@ -15,7 +15,9 @@ export default async function InvitePage({ params, searchParams }: { params: Pro
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   const { data: profile } = user ? await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle() : { data: null };
+  const authorized = user ? await canUserJoinInvite(token, user.id) : false;
 
+  if (user && !authorized) redirect(`/entrar?erro=convite_email`);
   if (user && !profile) redirect(`/onboarding?convite=${token}`);
 
   return <main className="mx-auto grid min-h-dvh content-center gap-6 bg-background px-5 text-center text-foreground">
