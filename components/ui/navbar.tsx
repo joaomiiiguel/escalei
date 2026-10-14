@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HowItWorksModal } from "./how-it-works-modal";
 
-const publicPaths = ["/entrar", "/onboarding", "/convite", "/admin"];
+const publicPaths = ["/entrar", "/onboarding", "/convite", "/admin", "/beta", "/termos", "/privacidade"];
 
 const items = [
   { href: "/", label: "Início", icon: House },
