@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { hasActiveLeagueMembership } from "@/lib/league-access";
+import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { canUserJoinInvite, getActiveInvite, isInviteToken } from "@/lib/invites";
 export async function GET(request: Request) {
     const code = new URL(request.url).searchParams.get("code");
@@ -13,8 +13,13 @@ export async function GET(request: Request) {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return NextResponse.redirect(new URL("/entrar?erro=callback", request.url));
 
-    if (await hasActiveLeagueMembership(user.id)) {
+    const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
+    if (leagueMembershipStatus === "ATIVA") {
       return NextResponse.redirect(new URL("/", request.url));
+    }
+    if (leagueMembershipStatus === "INATIVA") {
+      await supabase.auth.signOut();
+      return NextResponse.redirect(new URL("/entrar?erro=grupo_inativado", request.url));
     }
 
     const inviteToken = request.headers.get("cookie")?.match(/(?:^|; )escalei_invite=([^;]+)/)?.[1];

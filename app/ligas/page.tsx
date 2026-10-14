@@ -3,17 +3,18 @@ import { ChevronRight, KeyRound, Trophy } from "lucide-react";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
-import { hasActiveLeagueMembership } from "@/lib/league-access";
+import { getLeagueMembershipStatus } from "@/lib/league-access";
 
-type League = { id: string; nome: string; icone: string | null; tipo: "ABERTA" | "CONVITE"; temporada: number };
+type League = { id: string; nome: string; icone: string | null; tipo: "ABERTA" | "CONVITE"; temporada: number; arquivada_em: string | null };
 type LeagueMembership = { liga_id: string; ligas: League | League[] | null };
 
-export default async function LeaguesPage({ searchParams }: { searchParams: Promise<{ lista?: string }> }) {
-  const { lista } = await searchParams;
+export default async function LeaguesPage({ searchParams }: { searchParams: Promise<{ lista?: string; erro?: string }> }) {
+  const { lista, erro } = await searchParams;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/entrar");
-  if (!await hasActiveLeagueMembership(user.id)) redirect("/entrar?erro=sem_liga");
+  const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
+  if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
 
   const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
   if (!profile) redirect("/onboarding");
@@ -21,11 +22,11 @@ export default async function LeaguesPage({ searchParams }: { searchParams: Prom
   const admin = createAdminClient();
   const { data: memberships, error } = await admin
     .from("ligas_membros")
-    .select("liga_id, ligas(id, nome, icone, tipo, temporada)")
+    .select("liga_id, ligas(id, nome, icone, tipo, temporada, arquivada_em)")
     .eq("usuario_id", user.id);
   const leagues = ((memberships ?? []) as unknown as LeagueMembership[]).flatMap((membership) => {
     const league = Array.isArray(membership.ligas) ? membership.ligas[0] : membership.ligas;
-    return league ? [league] : [];
+    return league && !league.arquivada_em ? [league] : [];
   });
 
   if (!error && leagues.length === 1 && lista !== "1") redirect(`/ligas/${leagues[0].id}`);
@@ -34,6 +35,7 @@ export default async function LeaguesPage({ searchParams }: { searchParams: Prom
     <header className="flex h-12 items-center">
       <h1 className="text-2xl font-extrabold tracking-tight">Ligas</h1>
     </header>
+    {erro === "grupo_inativado" && <section className="mt-4 rounded-2xl border border-warning/40 bg-warning/10 p-4 text-sm text-warning" role="alert">Este grupo foi inativado. Entre em contato com o suporte caso precise de ajuda.</section>}
     {error ? <section className="mt-4 rounded-2xl border border-warning/40 bg-warning/10 p-4 text-sm text-warning" role="alert">Não foi possível carregar suas ligas agora. Tente novamente em instantes.</section>
       : leagues.length === 0 ?
         <section className="mx-auto mt-8 flex w-full h-[70vh] max-w-[350px] flex-col items-center justify-center gap-3.5 px-4 py-6 text-center">

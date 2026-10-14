@@ -3,11 +3,11 @@ import { ArrowLeft, Users } from "lucide-react";
 import { notFound, redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
-import { hasActiveLeagueMembership } from "@/lib/league-access";
+import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
 import { InviteLeagueActions } from "../invite-league-actions";
 
-type League = { id: string; nome: string; icone: string | null; tipo: "ABERTA" | "CONVITE"; temporada: number; token_convite: string };
+type League = { id: string; nome: string; icone: string | null; tipo: "ABERTA" | "CONVITE"; temporada: number; token_convite: string; arquivada_em: string | null };
 type Membership = { entrou_em: string; ligas: League | League[] | null };
 type MemberProfile = { apelido: string; clubes: { sigla: string } | { sigla: string }[] | null };
 type LeagueMember = { usuario_id: string; perfis: MemberProfile | MemberProfile[] | null };
@@ -32,7 +32,8 @@ export default async function LeagueDetailPage({ params }: { params: Promise<{ i
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/entrar");
-  if (!await hasActiveLeagueMembership(user.id)) redirect("/entrar?erro=sem_liga");
+  const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
+  if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
 
   const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
   if (!profile) redirect("/onboarding");
@@ -40,13 +41,14 @@ export default async function LeagueDetailPage({ params }: { params: Promise<{ i
   const admin = createAdminClient();
   const { data: membershipData } = await admin
     .from("ligas_membros")
-    .select("entrou_em, ligas(id, nome, icone, tipo, temporada, token_convite)")
+    .select("entrou_em, ligas(id, nome, icone, tipo, temporada, token_convite, arquivada_em)")
     .eq("liga_id", id)
     .eq("usuario_id", user.id)
     .maybeSingle();
   const membership = membershipData as unknown as Membership | null;
   const league = membership ? first(membership.ligas) : null;
   if (!membership || !league) notFound();
+  if (league.arquivada_em) redirect("/ligas?erro=grupo_inativado");
 
   const [{ data: membersData }, { data: roundData }] = await Promise.all([
     admin.from("ligas_membros").select("usuario_id, perfis!ligas_membros_usuario_id_fkey(apelido, clubes(sigla))").eq("liga_id", league.id).order("entrou_em"),

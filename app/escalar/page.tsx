@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 import { LineupBuilder, RoundLineup, SavedLineup, type LineupPlayer } from "@/components/ui";
 import TitleSection from "@/components/ui/title-section";
 import { createClient } from "@/lib/supabase/server";
-import { hasActiveLeagueMembership } from "@/lib/league-access";
+import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
 import { displayedKickoff } from "@/lib/game-kickoff";
 
@@ -17,7 +17,8 @@ export default async function Lineup({ searchParams }: { searchParams: Promise<{
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/entrar");
-  if (!await hasActiveLeagueMembership(user.id)) redirect("/entrar?erro=sem_liga");
+  const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
+  if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
 
   const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
   if (!profile) redirect("/onboarding");

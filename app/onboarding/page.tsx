@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { finishOnboarding } from "./actions";
 import { OnboardingForm } from "./onboarding-form";
 import { cookies } from "next/headers";
-import { hasActiveLeagueMembership } from "@/lib/league-access";
+import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { canUserJoinInvite, getActiveInvite, isInviteToken } from "@/lib/invites";
 
 export const dynamic = "force-dynamic";
@@ -21,8 +21,9 @@ export default async function Onboarding({ searchParams }: { searchParams: Promi
   if (inviteToken && !await canUserJoinInvite(inviteToken, user.id)) redirect("/entrar?erro=convite_email");
 
   const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
-  if (await hasActiveLeagueMembership(user.id)) redirect("/");
-  if (!inviteToken) redirect("/entrar?erro=sem_liga");
+  const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
+  if (leagueMembershipStatus === "ATIVA") redirect("/");
+  if (!inviteToken) redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
   if (profile) redirect(`/convite/${inviteToken}`);
 
   const { data: clubs } = await supabase

@@ -16,7 +16,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { TeamLogo } from "@/components/ui/team-logo";
 import { createClient } from "@/lib/supabase/server";
-import { hasActiveLeagueMembership } from "@/lib/league-access";
+import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { deleteAccount, signOut, updatePreferences, updateProfile } from "./actions";
 import { ProfileEditModal } from "./profile-edit-modal";
 
@@ -70,7 +70,8 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/entrar");
-  if (!await hasActiveLeagueMembership(user.id)) redirect("/entrar?erro=sem_liga");
+  const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
+  if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
 
   const [{ data: profile }, { data: teams }, { count: leaguesCount }] = await Promise.all([
     supabase

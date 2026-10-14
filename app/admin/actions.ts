@@ -30,7 +30,7 @@ async function requireAdmin() {
 export async function createGroup(formData: FormData) {
   const name = String(formData.get("nome") ?? "").trim();
   if (name.length < 3 || name.length > 40) {
-    redirect("/admin/grupos?erro=grupo");
+    redirect("/admin/grupos/novo?erro=grupo");
   }
 
   const { supabase, user } = await requireAdmin();
@@ -42,7 +42,7 @@ export async function createGroup(formData: FormData) {
     .maybeSingle();
   const season = typeof seasonConfig?.valor === "number" ? seasonConfig.valor : Number(seasonConfig?.valor);
   if (seasonConfigError || !Number.isInteger(season) || season < 2024 || season > 2100) {
-    redirect("/admin/grupos?erro=grupo");
+    redirect("/admin/grupos/novo?erro=grupo");
   }
 
   const { data: group, error } = await admin
@@ -56,14 +56,14 @@ export async function createGroup(formData: FormData) {
     .select("id, token_convite")
     .single();
 
-  if (error || !group) redirect("/admin/grupos?erro=grupo");
+  if (error || !group) redirect("/admin/grupos/novo?erro=grupo");
   const { error: ownerMembershipError } = await admin.from("ligas_membros").upsert({
     liga_id: group.id,
     usuario_id: user.id,
     convidado_por: user.id,
   }, { onConflict: "liga_id,usuario_id", ignoreDuplicates: true });
-  if (ownerMembershipError) redirect("/admin/grupos?erro=grupo");
-  redirect(`/admin/grupos?criado=1&convite=${group.token_convite}`);
+  if (ownerMembershipError) redirect("/admin/grupos/novo?erro=grupo");
+  redirect("/admin/grupos");
 }
 
 export async function addGroupMember(formData: FormData) {
@@ -113,6 +113,21 @@ export async function removeGroupMember(formData: FormData) {
 
   const { error } = await supabase.from("ligas_membros").delete().eq("liga_id", groupId).eq("usuario_id", userId);
   redirect(`/admin/grupos/${groupId}${error ? "?erro=remover" : "?removido=1"}`);
+}
+
+export async function deactivateGroup(formData: FormData) {
+  const groupId = String(formData.get("grupo_id") ?? "");
+  if (!UUID_PATTERN.test(groupId)) redirect("/admin/grupos?erro=grupo");
+
+  await requireAdmin();
+  const admin = createAdminClient();
+  const { error } = await admin
+    .from("ligas")
+    .update({ arquivada_em: new Date().toISOString() })
+    .eq("id", groupId)
+    .is("arquivada_em", null);
+
+  redirect(`/admin/grupos${error ? "?erro=grupo" : "?inativado=1"}`);
 }
 
 export async function signOut() {

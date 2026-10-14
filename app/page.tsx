@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase/server";
 import type { Rodada, Jogo, Clube, TimeDaRodada, EstatisticaDaRodada } from "@/lib/types";
 import { ActiveRoundView } from "@/components/active-round-view";
 import { DefaultRoundView } from "@/components/default-round-view";
-import { hasActiveLeagueMembership } from "@/lib/league-access";
+import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
 import { displayedKickoff } from "@/lib/game-kickoff";
 
@@ -11,7 +11,8 @@ export default async function Home() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/entrar");
-  if (!await hasActiveLeagueMembership(user.id)) redirect("/entrar?erro=sem_liga");
+  const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
+  if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
   const { data: profile } = await supabase.from("perfis").select("apelido").eq("id", user.id).maybeSingle();
   if (!profile) redirect("/onboarding");
   const { data: admin } = await supabase.from("administradores").select("usuario_id").eq("usuario_id", user.id).maybeSingle();

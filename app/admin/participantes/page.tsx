@@ -6,9 +6,13 @@ type Participant = {
     apelido: string;
     email: string;
     telefone: string | null;
-    grupo: string;
-    gestor: string;
+    grupos: string[];
+    gestores: string[];
 };
+
+function first<T>(value: T | T[] | null) {
+    return Array.isArray(value) ? value[0] ?? null : value;
+}
 
 export default async function AdminParticipants() {
     const admin = createAdminClient();
@@ -24,66 +28,86 @@ export default async function AdminParticipants() {
                 usuario_id,
                 entrou_em,
                 perfis!ligas_membros_usuario_id_fkey ( apelido, email, telefone ),
-                ligas (
+                ligas!inner (
                     nome,
                     perfis!ligas_dono_id_fkey ( apelido )
                 )
             `)
+            .is("ligas.arquivada_em", null)
             .order("entrou_em", { ascending: false }),
     ]);
 
     const activeGroupsCount = groups?.length ?? 0;
     
-    const participants: Participant[] = (membersData || []).map((m: any) => ({
-        usuario_id: m.usuario_id,
-        apelido: m.perfis?.apelido ?? "Desconhecido",
-        email: m.perfis?.email ?? "Sem e-mail",
-        telefone: m.perfis?.telefone ?? null,
-        grupo: m.ligas?.nome ?? "Sem grupo",
-        gestor: m.ligas?.perfis?.apelido ?? "Desconhecido",
-    }));
+    const participantsByUser = new Map<string, Participant>();
+
+    for (const membership of membersData ?? []) {
+        const participant = participantsByUser.get(membership.usuario_id);
+        const group = first(membership.ligas);
+        const profile = first(membership.perfis);
+        const manager = first(group?.perfis);
+        const groupName = group?.nome ?? "Sem grupo";
+        const managerName = manager?.apelido ?? "Desconhecido";
+
+        if (participant) {
+            if (!participant.grupos.includes(groupName)) participant.grupos.push(groupName);
+            if (!participant.gestores.includes(managerName)) participant.gestores.push(managerName);
+            continue;
+        }
+
+        participantsByUser.set(membership.usuario_id, {
+            usuario_id: membership.usuario_id,
+            apelido: profile?.apelido ?? "Desconhecido",
+            email: profile?.email ?? "Sem e-mail",
+            telefone: profile?.telefone ?? null,
+            grupos: [groupName],
+            gestores: [managerName],
+        });
+    }
+
+    const participants = [...participantsByUser.values()];
 
     return <section className="w-full p-0">
         <header className="flex flex-col items-start gap-2">
             <p className="m-0 text-[26px] font-extrabold tracking-tight">Participantes</p>
-            <p className="m-1 text-sm font-medium text-background/40">Veja todos os participantes ativos dos grupos.</p>
+            <p className="m-1 text-sm font-medium text-muted-foreground">Veja todos os participantes ativos dos grupos.</p>
         </header>
 
         <section className="mt-6 grid gap-4 sm:grid-cols-2">
-            <article className="rounded-lg border border-foreground bg-white p-5 shadow-sm">
-                <Layers3 aria-hidden="true" className="mb-3 size-5 text-success" />
-                <p className="m-0 text-sm font-semibold text-[#637469]">Grupos ativos</p>
+            <article className="rounded-lg border border-neutral-800 bg-neutral-900 p-5 shadow-sm">
+                <Layers3 aria-hidden="true" className="mb-3 size-5 text-primary" />
+                <p className="m-0 text-sm font-semibold text-muted-foreground">Grupos ativos</p>
                 <strong className="text-3xl">{activeGroupsCount}</strong>
             </article>
-            <article className="rounded-lg border border-foreground bg-white p-5 shadow-sm">
-                <UsersRound aria-hidden="true" className="mb-3 size-5 text-success" />
-                <p className="m-0 text-sm font-semibold text-[#637469]">Participantes</p>
+            <article className="rounded-lg border border-neutral-800 bg-neutral-900 p-5 shadow-sm">
+                <UsersRound aria-hidden="true" className="mb-3 size-5 text-primary" />
+                <p className="m-0 text-sm font-semibold text-muted-foreground">Participantes únicos</p>
                 <strong className="text-3xl">{participants.length}</strong>
             </article>
         </section>
-        <section className="mt-6 overflow-x-auto rounded-lg border border-foreground bg-white shadow-sm">
+        <section className="mt-6 overflow-x-auto rounded-lg border border-neutral-800 bg-neutral-900 shadow-sm">
             <table className="w-full min-w-[700px] text-left text-sm">
-                <thead className="border-b border-foreground bg-secondary text-foreground">
+                <thead className="border-b border-neutral-800 bg-neutral-800 text-neutral-100">
                     <tr>
                         <th className="px-5 py-3 font-semibold">Nome</th>
                         <th className="px-5 py-3 font-semibold">E-mail</th>
                         <th className="px-5 py-3 font-semibold">Telefone</th>
-                        <th className="px-5 py-3 font-semibold">Grupo</th>
-                        <th className="px-5 py-3 font-semibold">Gestor</th>
+                        <th className="px-5 py-3 font-semibold">Grupos</th>
+                        <th className="px-5 py-3 font-semibold">Gestores</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {participants.length > 0 ? participants.map((p, idx) => (
-                        <tr key={`${p.usuario_id}-${idx}`} className="border-b border-[#edf1ee] last:border-0">
+                    {participants.length > 0 ? participants.map((p) => (
+                        <tr key={p.usuario_id} className="border-b border-neutral-800 last:border-0">
                             <td className="px-5 py-4 font-bold">{p.apelido}</td>
-                            <td className="px-5 py-4 text-[#637469]">{p.email}</td>
-                            <td className="px-5 py-4 text-[#637469]">{p.telefone ?? "Sem telefone"}</td>
-                            <td className="px-5 py-4">{p.grupo}</td>
-                            <td className="px-5 py-4">{p.gestor}</td>
+                            <td className="px-5 py-4 text-muted-foreground">{p.email}</td>
+                            <td className="px-5 py-4 text-muted-foreground">{p.telefone ?? "Sem telefone"}</td>
+                            <td className="px-5 py-4">{p.grupos.join(", ")}</td>
+                            <td className="px-5 py-4">{p.gestores.join(", ")}</td>
                         </tr>
                     )) : (
                         <tr>
-                            <td colSpan={5} className="px-5 py-10 text-center text-[#637469]">Nenhum participante ativo ainda.</td>
+                            <td colSpan={5} className="px-5 py-10 text-center text-muted-foreground">Nenhum participante ativo ainda.</td>
                         </tr>
                     )}
                 </tbody>
