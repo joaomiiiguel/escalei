@@ -10,6 +10,10 @@ function formatKickoffTime(value: string) {
   return new Intl.DateTimeFormat("pt-BR", { timeZone: saoPaulo, hour: "2-digit", minute: "2-digit" }).format(new Date(value));
 }
 
+function formatClosingTime(value: string) {
+  return new Intl.DateTimeFormat("pt-BR", { timeZone: saoPaulo, day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" }).format(new Date(value));
+}
+
 export function ActiveRoundView({
   round,
   games,
@@ -35,6 +39,7 @@ export function ActiveRoundView({
   const lastCompletedGame = completedGames.at(-1) ?? null;
   const matchLabel = (game: Jogo) => `${clubsById.get(game.clube_casa_id)?.sigla ?? "—"} × ${clubsById.get(game.clube_fora_id)?.sigla ?? "—"}`;
   const nextGameStatus = nextGame?.status === "EM_ANDAMENTO" ? "em andamento" : "próximo";
+  const allGamesScored = games.length > 0 && completedGames.length === games.length;
 
   return <main className="flex max-w-lg flex-col gap-5 pt-1 pb-44 px-5 text-foreground">
     <header className="flex h-12 items-center">
@@ -57,6 +62,10 @@ export function ActiveRoundView({
         </div>
         <p className="flex items-center gap-1.5 text-xs text-muted-foreground"><RefreshCw className="size-3" aria-hidden="true" />{lastCompletedGame ? `Pontuação atualizada após ${matchLabel(lastCompletedGame)}` : "Aguardando o encerramento dos jogos"}</p>
       </div>
+      {allGamesScored && <aside className="rounded-2xl border border-primary/35 bg-primary/10 p-3.5" role="status" aria-live="polite">
+        <p className="text-sm font-extrabold text-foreground">Resultados em conferência</p>
+        <p className="mt-1 text-xs leading-5 text-muted-foreground">Todos os jogos foram pontuados. Seus pontos já aparecem no ranking, mas a classificação continua provisória até a conferência final{round.fechamento_simulado_em ? `, prevista para ${formatClosingTime(round.fechamento_simulado_em)}` : ""}.</p>
+      </aside>}
     </section>
 
     <section className="grid gap-3.5 rounded-2xl bg-card p-4" aria-labelledby="meu-time">

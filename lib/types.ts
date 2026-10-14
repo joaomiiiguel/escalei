@@ -1,6 +1,6 @@
 export type StatusRodada = "AGENDADA" | "ABERTA" | "EM_ANDAMENTO" | "FECHADA";
 export type StatusJogo = "A_JOGAR" | "EM_ANDAMENTO" | "ENCERRADO" | "ADIADO" | "CANCELADO";
-export type Rodada = { id: number; temporada?: number; numero: number; status: StatusRodada; abre_em: string | null; trava_em: string; fechada_em: string | null; rotulo_api: string; simulada?: boolean };
+export type Rodada = { id: number; temporada?: number; numero: number; status: StatusRodada; abre_em: string | null; trava_em: string; fechamento_simulado_em?: string | null; fechada_em: string | null; rotulo_api: string; simulada?: boolean };
 export type Jogo = { id: number; clube_casa_id: number; clube_fora_id: number; inicio_em: string; inicio_simulado_em?: string | null; status: StatusJogo; gols_casa: number | null; gols_fora: number | null; pontuado_em: string | null };
 export type Clube = { id: number; nome: string; sigla: string; logo_url: string | null };
 export type TimeDaRodada = { id: string; formacao: string | null; times_jogadores: { jogador_id: number }[] | null };
