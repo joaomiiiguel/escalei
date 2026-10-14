@@ -47,11 +47,11 @@ export function Navbar({
         </div>
       )}
       <nav className="border-t border-border bg-card bg-opacity/80 backdrop-blur-sm rounded-full overflow-hidden h-14" aria-label="Navegação principal">
-        <ul className="grid grid-cols-4 h-full items-center">
+        <ul className="w-full flex flex-row justify-around h-full items-center">
           {items.map(({ href, icon: Icon, label }) => {
             const active = href ? isActive(pathname, href) : false;
             const content = <>
-              <span className={`flex flex-col w-full h-full items-center justify-center gap-1 ${active ? "bg-primary/12" : "bg-transparent"}`}>
+              <span className={`flex flex-col w-full h-full items-center justify-center gap-1 ${active ? "bg-primary/12 rounded-full" : "bg-transparent"}`}>
                 <Icon className="size-[22px]" aria-hidden="true" />
               </span>
             </>;

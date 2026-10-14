@@ -105,7 +105,7 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
     : 0;
 
   return (
-    <main className="mx-auto w-full max-w-lg pb-32 pt-5">
+    <main className="mx-auto w-full max-w-lg pb-32 pt-5 px-5">
       <header className="mb-[18px] flex h-12 items-center">
         <h1 className="flex-1 text-2xl font-extrabold tracking-[-0.5px] text-foreground">Perfil</h1>
       </header>
@@ -149,7 +149,7 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
             <ToggleRow icon={Bell} label="Avisar antes da trava" defaultChecked disabled />
             <ToggleRow icon={Users} label="Novidades das minhas ligas" disabled />
           </Section>
-          <button type="submit" className="h-10 rounded-xl border border-border bg-card px-4 text-sm font-bold text-foreground transition hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Salvar preferências</button>
+          <button type="submit" className="h-10 rounded-xl border border-border bg-primary/70 px-4 text-sm font-bold text-card transition hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:bg-primary">Salvar preferências</button>
         </form>
 
         <Section title="SOBRE">

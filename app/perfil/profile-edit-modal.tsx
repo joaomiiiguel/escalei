@@ -31,7 +31,7 @@ export function ProfileEditModal({ apelido, clubeCoracaoId, clubs, email, telefo
       <Pencil className="size-[18px]" aria-hidden="true" />
     </button>
     {mounted && isOpen && createPortal(
-      <div className="fixed inset-0 z-[80] flex items-end justify-center bg-black/75 sm:items-center" role="presentation">
+      <div className="fixed inset-0 z-[80] flex items-end justify-center bg-black/75 sm:items-center px-2" role="presentation">
         <button type="button" aria-label="Fechar edição de perfil" className="absolute inset-0 cursor-default" onClick={() => setIsOpen(false)} />
         <section className="relative max-h-[92dvh] w-full max-w-lg overflow-y-auto rounded-t-[24px] border border-border bg-background px-5 pb-8 pt-4 shadow-2xl sm:rounded-[24px]" role="dialog" aria-modal="true" aria-labelledby="edit-profile-title">
           <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-muted sm:hidden" />

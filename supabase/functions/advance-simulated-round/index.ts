@@ -82,7 +82,10 @@ Deno.serve(async (request) => {
   const allScored = games.length > 0 && games.every((game) => game.pontuado_em);
   let closeAt = round.fechamento_simulado_em;
   if (allScored && !closeAt) {
-    closeAt = new Date(now.getTime() + 24 * 60 * 60_000).toISOString();
+    const lastScoredAt = Math.max(
+      ...games.map((game) => new Date(game.pontuado_em as string).getTime()),
+    );
+    closeAt = new Date(lastScoredAt + 60 * 60_000).toISOString();
     const { error } = await db.from("rodadas").update({ fechamento_simulado_em: closeAt }).eq("id", round.id);
     if (error) return Response.json({ error: "Não foi possível agendar a conferência da rodada." }, { status: 500 });
   }

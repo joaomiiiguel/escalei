@@ -11,8 +11,8 @@ type CurrentRound = {
 const roundPriority: Record<StatusRodada, number> = {
   EM_ANDAMENTO: 0,
   ABERTA: 1,
-  AGENDADA: 2,
-  FECHADA: 3,
+  FECHADA: 2,
+  AGENDADA: 3,
 };
 
 function currentSeason() {

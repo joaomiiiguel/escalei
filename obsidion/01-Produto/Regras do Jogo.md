@@ -40,7 +40,8 @@ Sem técnico, sem capitão e sem banco de reservas no MVP.
 
 ## Trava e status
 
-- A escalação **trava no início do primeiro jogo da rodada**. Depois disso, ninguém edita até a próxima rodada abrir.
+- A escalação **trava uma hora antes do primeiro jogo da rodada**. Depois disso, ninguém edita até a próxima rodada abrir.
+- A próxima rodada abre à **00h do dia seguinte ao último jogo** da rodada anterior, no horário de Fortaleza.
 - **Rodada:** Aberta → Em andamento (x de 10 jogos encerrados) → Fechada.
 - **Jogo:** A jogar → Em andamento → Encerrado (pontuado).
 - **Pontos:** lançados quando o jogo termina. **Fechamento oficial no dia seguinte ao último jogo**, com uma segunda leitura da API para pegar as correções de scout.

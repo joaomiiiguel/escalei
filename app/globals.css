@@ -44,6 +44,17 @@
 body {
     min-height: 100dvh;
     margin: 0;
+    background-color: var(--color-background);
+    background-image: linear-gradient(rgb(5 5 5 / 80%), rgb(5 5 5 / 95%)), url("/bg-m.webp");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+@media (min-width: 768px) {
+    body {
+        background-image: linear-gradient(rgb(5 5 5 / 80%), rgb(5 5 5 / 95%)), url("/bg-w.webp");
+    }
 }
 
 main {

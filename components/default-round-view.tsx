@@ -15,6 +15,13 @@ const roundStatusLabel: Record<StatusRodada, string> = {
   FECHADA: "Fechada",
 };
 
+const roundStatusDescription: Record<StatusRodada, string> = {
+  AGENDADA: "Os jogos foram publicados. Aguarde a abertura do mercado para escalar.",
+  ABERTA: "Você pode montar ou alterar seu time até o início do primeiro jogo.",
+  EM_ANDAMENTO: "Os pontos aparecem quando cada jogo termina. O ranking ainda é provisório.",
+  FECHADA: "A conferência terminou. Pontos e ranking desta rodada são oficiais.",
+};
+
 function formatDateTime(value: string) {
   return new Intl.DateTimeFormat("pt-BR", { timeZone: saoPaulo, weekday: "short", day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).format(new Date(value));
 }
@@ -31,6 +38,7 @@ function teamPresentation(hasTeam: boolean, round: Rodada, now: Date) {
 export function DefaultRoundView({
   profile,
   round,
+  nextRound,
   unavailable,
   roundDataUnavailable,
   now,
@@ -40,6 +48,7 @@ export function DefaultRoundView({
 }: {
   profile: { apelido: string | null };
   round: Rodada | null;
+  nextRound: Pick<Rodada, "numero" | "temporada" | "abre_em"> | null;
   unavailable: boolean;
   roundDataUnavailable: boolean;
   now: Date;
@@ -70,6 +79,11 @@ export function DefaultRoundView({
             <Badge className="h-6 !px-4" tone={round.status === "ABERTA" ? "primary" : round.status === "EM_ANDAMENTO" ? "highlight" : round.status === "AGENDADA" ? "secondary" : "neutral"}>{roundStatusLabel[round.status]}</Badge>
             <p className="text-[12px]/[normal] box-border text-[#6d7d76] opacity-80 font-bold text-left [white-space:nowrap]">{round.status === "ABERTA" ? "mercado aberto" : round.status === "EM_ANDAMENTO" ? "jogos em andamento" : round.status === "AGENDADA" ? "sem parcial ao vivo" : "pontuação oficial"}</p>
           </div>
+          <p className="-mt-3 text-xs leading-5 text-muted-foreground" role="status">{round.status === "FECHADA"
+            ? nextRound?.abre_em
+              ? `${roundStatusDescription.FECHADA} A rodada ${String(nextRound.numero).padStart(2, "0")} começa em ${formatDateTime(nextRound.abre_em)}.`
+              : `${roundStatusDescription.FECHADA} A próxima rodada ainda não foi publicada.`
+            : roundStatusDescription[round.status]}</p>
 
           {round.status === "ABERTA" && now < new Date(round.trava_em) && <LockCountdown travaEm={round.trava_em} formattedDate={formatDateTime(round.trava_em)} />}
 

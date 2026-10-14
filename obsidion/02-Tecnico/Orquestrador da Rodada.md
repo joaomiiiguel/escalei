@@ -11,7 +11,7 @@ ABERTA
   └─ trava_em alcançada → EM_ANDAMENTO
        └─ inicio_simulado_em de cada jogo → ENCERRADO
             └─ score-match → scouts, pontos e ranking
-                 └─ todos pontuados + 24h → conferência
+                 └─ todos pontuados + 1h → conferência
                       └─ FECHADA
 ```
 
@@ -34,7 +34,7 @@ O orquestrador nunca inventa placares. Para cada jogo devido, consulta
 - Falha de pontuação: o jogo permanece `ENCERRADO` com `pontuado_em` vazio; a
   próxima execução chama `score-match` novamente.
 - Conferência: após todos os jogos pontuados, `fechamento_simulado_em` é gravado
-  para 24 horas depois. O mesmo fluxo relê os scouts com `conferencia: true` e
+  para uma hora após a pontuação do último jogo. O mesmo fluxo relê os scouts com `conferencia: true` e
   somente então fecha a rodada.
 
 ## Operação

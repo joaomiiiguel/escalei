@@ -5,13 +5,13 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
-import { InviteLeagueActions } from "../invite-league-actions";
+import { RoundSelector } from "./round-selector";
 
 type League = { id: string; nome: string; icone: string | null; tipo: "ABERTA" | "CONVITE"; temporada: number; token_convite: string; arquivada_em: string | null };
 type Membership = { entrou_em: string; ligas: League | League[] | null };
 type MemberProfile = { apelido: string; clubes: { sigla: string } | { sigla: string }[] | null };
 type LeagueMember = { usuario_id: string; perfis: MemberProfile | MemberProfile[] | null };
-type Round = { id: number; numero: number };
+type Round = { id: number; numero: number; temporada: number; simulada?: boolean; status: "AGENDADA" | "ABERTA" | "EM_ANDAMENTO" | "FECHADA"; trava_em: string };
 type Team = { usuario_id: string; times_jogadores: { jogador_id: number }[] | null };
 type Stat = { jogador_id: number; pontos: number };
 
@@ -27,8 +27,9 @@ function points(value: number) {
   return value.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 }
 
-export default async function LeagueDetailPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function LeagueDetailPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ rodada?: string }> }) {
   const { id } = await params;
+  const { rodada: requestedRoundId } = await searchParams;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/entrar");
@@ -50,15 +51,27 @@ export default async function LeagueDetailPage({ params }: { params: Promise<{ i
   if (!membership || !league) notFound();
   if (league.arquivada_em) redirect("/ligas?erro=grupo_inativado");
 
-  const [{ data: membersData }, { data: roundData }] = await Promise.all([
+  const [{ data: membersData }, { data: currentRoundData }] = await Promise.all([
     admin.from("ligas_membros").select("usuario_id, perfis!ligas_membros_usuario_id_fkey(apelido, clubes(sigla))").eq("liga_id", league.id).order("entrou_em"),
-    getCurrentRound<Round & { status: "AGENDADA" | "ABERTA" | "EM_ANDAMENTO" | "FECHADA"; trava_em: string }>(admin, "id, numero, status, trava_em"),
+    getCurrentRound<Round>(admin, "id, numero, temporada, simulada, status, trava_em"),
   ]);
   const members = ((membersData ?? []) as unknown as LeagueMember[]).flatMap((member) => {
     const memberProfile = first(member.perfis);
     return memberProfile ? [{ ...member, profile: memberProfile }] : [];
   });
-  const round = roundData as Round | null;
+  const currentRound = currentRoundData as Round | null;
+  const { data: availableRoundsData } = currentRound
+    ? await admin
+      .from("rodadas")
+      .select("id, numero, temporada, simulada, status, trava_em")
+      .eq("temporada", currentRound.temporada)
+      .eq("simulada", Boolean(currentRound.simulada))
+      .in("status", ["ABERTA", "EM_ANDAMENTO", "FECHADA"])
+      .order("numero", { ascending: false })
+    : { data: [] };
+  const availableRounds = (availableRoundsData ?? []) as Round[];
+  const requestedRound = Number(requestedRoundId);
+  const round = availableRounds.find((candidate) => candidate.id === requestedRound) ?? currentRound;
   const memberIds = members.map((member) => member.usuario_id);
   const { data: teamsData } = round && memberIds.length
     ? await admin.from("times").select("usuario_id, times_jogadores(jogador_id)").eq("rodada_id", round.id).in("usuario_id", memberIds)
@@ -99,7 +112,7 @@ export default async function LeagueDetailPage({ params }: { params: Promise<{ i
 
     {members.length === 1 && <section className="flex gap-2 rounded-xl bg-warning/12 p-3 text-xs leading-[1.4] text-warning"><Users className="size-4 shrink-0" aria-hidden="true" />Convide pelo menos 3 amigos. Sozinho você é sempre o primeiro — e isso não tem graça.</section>}
 
-    <section className="grid gap-1" aria-labelledby="ranking-title"><div className="mb-1 flex items-center justify-between"><h2 id="ranking-title" className="text-[17px] font-extrabold">{round ? `Ranking da Rodada ${String(round.numero).padStart(2, "0")}` : "Ranking da liga"}</h2><span className="text-[13px] font-bold text-primary">Ver geral</span></div>
+    <section className="grid gap-1" aria-labelledby="ranking-title"><div className="mb-1 flex items-center justify-between gap-3"><h2 id="ranking-title" className="text-[17px] font-extrabold">{round ? `Ranking da Rodada ${String(round.numero).padStart(2, "0")}` : "Ranking da liga"}</h2>{round && availableRounds.length > 0 && <RoundSelector leagueId={league.id} selectedRoundId={round.id} options={availableRounds.map((candidate) => ({ id: candidate.id, numero: candidate.numero, isCurrent: candidate.id === currentRound?.id }))} />}</div>
       {ranking.map((member) => {
         const club = first(member.profile.clubes);
         return <article key={member.usuario_id} className={`flex h-[60px] items-center gap-3 rounded-xl px-3 ${member.isCurrentUser ? "border border-primary bg-primary/12" : "bg-card"}`}>
@@ -110,6 +123,5 @@ export default async function LeagueDetailPage({ params }: { params: Promise<{ i
         </article>;
       })}
     </section>
-    <InviteLeagueActions invitePath={`/convite/${league.token_convite}`} leagueName={league.nome} />
   </main>;
 }

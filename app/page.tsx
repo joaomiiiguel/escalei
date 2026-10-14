@@ -7,6 +7,8 @@ import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
 import { displayedKickoff } from "@/lib/game-kickoff";
 
+type ProximaRodada = Pick<Rodada, "numero" | "temporada" | "abre_em">;
+
 export default async function Home() {
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -30,6 +32,7 @@ export default async function Home() {
   let clubsById = new Map<number, Clube>();
   let teamStats: EstatisticaDaRodada[] = [];
   let roundDataUnavailable = false;
+  let nextRound: ProximaRodada | null = null;
 
   if (round) {
     const [{ data: teamData, error: teamError }, { data: gamesData, error: gamesError }] = await Promise.all([
@@ -56,11 +59,28 @@ export default async function Home() {
       teamStats = (statsData as EstatisticaDaRodada[] | null) ?? [];
       roundDataUnavailable ||= Boolean(statsError);
     }
+
+    if (round.status === "FECHADA") {
+      const { data: roundsData, error: nextRoundError } = await supabase
+        .from("rodadas")
+        .select("numero, temporada, abre_em")
+        .eq("simulada", Boolean(round.simulada))
+        .not("abre_em", "is", null)
+        .order("temporada", { ascending: true })
+        .order("numero", { ascending: true });
+      const rounds = (roundsData as ProximaRodada[] | null) ?? [];
+      nextRound = rounds.find((candidate) =>
+        candidate.temporada !== undefined && round.temporada !== undefined
+          ? candidate.temporada > round.temporada || (candidate.temporada === round.temporada && candidate.numero > round.numero)
+          : candidate.numero > round.numero,
+      ) ?? null;
+      roundDataUnavailable ||= Boolean(nextRoundError);
+    }
   }
 
   if (round?.status === "EM_ANDAMENTO" && !unavailable && !roundDataUnavailable) {
     return <ActiveRoundView round={round} games={games} team={team} teamStats={teamStats} clubsById={clubsById} />;
   }
 
-  return <DefaultRoundView profile={profile} round={round} unavailable={unavailable} roundDataUnavailable={roundDataUnavailable} now={now} team={team} games={games} clubsById={clubsById} />;
+  return <DefaultRoundView profile={profile} round={round} nextRound={nextRound} unavailable={unavailable} roundDataUnavailable={roundDataUnavailable} now={now} team={team} games={games} clubsById={clubsById} />;
 }
