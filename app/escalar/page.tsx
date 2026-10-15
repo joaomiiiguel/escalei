@@ -23,6 +23,13 @@ export default async function Lineup({ searchParams }: { searchParams: Promise<{
   const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
   if (!profile) redirect("/onboarding");
 
+  const { data: wallet } = await supabase
+    .from("carteiras")
+    .select("saldo")
+    .eq("usuario_id", user.id)
+    .maybeSingle();
+  const balance = Number(wallet?.saldo ?? 50);
+
   const { data: round } = await getCurrentRound<ActiveRound>(
     supabase,
     "id, numero, status, trava_em, fechada_em, simulada",
@@ -73,16 +80,16 @@ export default async function Lineup({ searchParams }: { searchParams: Promise<{
 
   return (
     <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-4 pt-5 px-5 text-foreground">
-      {round ? savedTeam
-        ? round.status === "ABERTA" && editar === "1" && canEdit
-          ? <>
-            <TitleSection title="Montar time" />
-            <LineupBuilder initialFormation={savedTeam.formacao} initialPlayers={initialPlayers} roundId={round.id} />
-          </>
-          : round.status === "ABERTA"
-            ? <SavedLineup formation={savedTeam.formacao} players={initialPlayers} travaEm={round.trava_em} />
+      {round ? canEdit && (!savedTeam || editar === "1")
+        ? <>
+          <TitleSection title="Montar time" />
+          <LineupBuilder budget={balance} initialFormation={savedTeam?.formacao} initialPlayers={initialPlayers} roundId={round.id} />
+        </>
+        : savedTeam
+          ? round.status === "ABERTA"
+            ? <SavedLineup budget={balance} formation={savedTeam.formacao} players={initialPlayers} travaEm={round.trava_em} />
             : <RoundLineup formation={savedTeam.formacao} players={roundPlayers} roundNumber={round.numero} status={round.status} finishedAt={round.fechada_em} />
-        : <><TitleSection title="Meu time" /><p className="rounded-xl bg-card p-4 text-sm text-muted-foreground">Você não escalou jogadores para esta rodada.</p></>
+          : <><TitleSection title="Meu time" /><p className="rounded-xl bg-card p-4 text-sm text-muted-foreground">Você não escalou jogadores para esta rodada.</p></>
         : <><TitleSection title="Meu time" /><p className="rounded-xl bg-card p-4 text-sm text-muted-foreground">Não há rodada disponível no momento.</p></>}
     </main>
   );

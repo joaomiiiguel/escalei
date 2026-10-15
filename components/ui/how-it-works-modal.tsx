@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 
 const steps = [
-  ["1", "Monte seu time", "Escolha 11 jogadores e uma das formações permitidas, dentro de C$ 100."],
+  ["1", "Monte seu time", "Comece com C$ 50, escolha 11 jogadores e respeite o seu saldo."],
   ["2", "Salve antes da trava", "Você pode mudar sua escalação até o início do primeiro jogo da rodada."],
   ["3", "Acompanhe a rodada", "Os pontos dos seus jogadores são lançados quando cada jogo termina."],
   ["4", "Compare com os amigos", "Entre em ligas e acompanhe sua posição no ranking da rodada."],

@@ -31,6 +31,7 @@ type LineupFormationProps = {
   formation?: Formation;
   initialPlayers?: LineupPlayer[];
   autoPlayers?: LineupPlayer[];
+  budget?: number;
   readOnly?: boolean;
   showRoundStatus?: boolean;
   onFormationChange?: (formation: Formation) => void;
@@ -179,7 +180,7 @@ function PlayerPickerSheet({ maxAvailablePrice, onClose, onSelect, position, sel
   return isMounted ? createPortal(sheet, document.body) : null;
 }
 
-export function LineupFormation({ autoPlayers, className = "", formation = "4-3-3", initialPlayers = [], onFormationChange, onSelectedPlayersChange, readOnly = false, showRoundStatus = false }: LineupFormationProps) {
+export function LineupFormation({ autoPlayers, budget = 100, className = "", formation = "4-3-3", initialPlayers = [], onFormationChange, onSelectedPlayersChange, readOnly = false, showRoundStatus = false }: LineupFormationProps) {
   const [selectedFormation, setSelectedFormation] = useState<Formation>(formation);
   const [transitionPhase, setTransitionPhase] = useState<"idle" | "leaving" | "entering">("idle");
   const [selectedSlot, setSelectedSlot] = useState<{ key: string; position: Position } | null>(null);
@@ -190,7 +191,7 @@ export function LineupFormation({ autoPlayers, className = "", formation = "4-3-
   const selectedPlayers = Object.values(playersBySlot);
   const totalCost = selectedPlayers.reduce((total, player) => total + player.price, 0);
   const currentSlotPrice = selectedSlot ? playersBySlot[selectedSlot.key]?.price ?? 0 : 0;
-  const maxAvailablePrice = 100 - totalCost + currentSlotPrice;
+  const maxAvailablePrice = budget - totalCost + currentSlotPrice;
   const selectPlayer = useCallback((player: LineupPlayer) => {
     if (!selectedSlot || player.price > maxAvailablePrice) return;
     setPlayersBySlot((current) => ({ ...current, [selectedSlot.key]: player }));

@@ -70714,7 +70714,7 @@
       "clip": true,
       "width": 1440,
       "height": 1024,
-      "fill": "$bo-bg",
+      "fill": "$--background",
       "children": [
         {
           "type": "frame",
@@ -70722,8 +70722,8 @@
           "name": "Desktop Sidebar",
           "width": 276,
           "height": "fill_container",
-          "fill": "$bo-surface",
-          "stroke": "$bo-line",
+          "fill": "#0B1A12",
+          "stroke": "#2A2A2A",
           "strokeWidth": {
             "right": 1
           },
@@ -70745,7 +70745,7 @@
                   "name": "Brand Mark",
                   "width": 40,
                   "height": 40,
-                  "fill": "$bo-green",
+                  "fill": "#19C66A",
                   "cornerRadius": 10,
                   "justifyContent": "center",
                   "alignItems": "center",
@@ -70754,9 +70754,9 @@
                       "type": "text",
                       "id": "xawyN",
                       "name": "Brand Mark Text",
-                      "fill": "$--primary-foreground",
+                      "fill": "#03140D",
                       "content": "E",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 18,
                       "fontWeight": "900"
                     }
@@ -70773,9 +70773,9 @@
                       "type": "text",
                       "id": "Baiq0",
                       "name": "Brand Name",
-                      "fill": "$bo-text",
+                      "fill": "#F2FFF6",
                       "content": "Escalei",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 18,
                       "fontWeight": "800"
                     },
@@ -70783,9 +70783,9 @@
                       "type": "text",
                       "id": "Hv34C",
                       "name": "Brand Sub",
-                      "fill": "$bo-muted",
+                      "fill": "#94B8A0",
                       "content": "Backoffice",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 12,
                       "fontWeight": "600"
                     }
@@ -70805,9 +70805,11 @@
                   "type": "frame",
                   "id": "gNq2n",
                   "name": "Sidebar Item Dashboard",
+                  "width": "fill_container",
                   "height": 40,
-                  "fill": "$bo-green-soft",
-                  "cornerRadius": "$--radius-m",
+                  "fill": "#00E58A24",
+                  "cornerRadius": 8,
+                  "stroke": "#00000000",
                   "gap": 10,
                   "padding": [
                     0,
@@ -70823,15 +70825,15 @@
                       "height": 18,
                       "icon": "layout-dashboard",
                       "library": "lucide",
-                      "fill": "$bo-green"
+                      "fill": "#19C66A"
                     },
                     {
                       "type": "text",
                       "id": "r4mXqn",
                       "name": "Sidebar Label Dashboard",
-                      "fill": "$bo-text",
+                      "fill": "#F2FFF6",
                       "content": "Dashboard",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 14,
                       "fontWeight": "700"
                     }
@@ -70841,9 +70843,11 @@
                   "type": "frame",
                   "id": "lX3QX",
                   "name": "Sidebar Item Participantes",
+                  "width": "fill_container",
                   "height": 40,
                   "fill": "#00000000",
-                  "cornerRadius": "$--radius-m",
+                  "cornerRadius": 8,
+                  "stroke": "#00000000",
                   "gap": 10,
                   "padding": [
                     0,
@@ -70859,15 +70863,15 @@
                       "height": 18,
                       "icon": "users",
                       "library": "lucide",
-                      "fill": "$bo-muted"
+                      "fill": "#94B8A0"
                     },
                     {
                       "type": "text",
                       "id": "gdvXX",
                       "name": "Sidebar Label Participantes",
-                      "fill": "$bo-muted",
+                      "fill": "#94B8A0",
                       "content": "Participantes",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 14,
                       "fontWeight": "700"
                     }
@@ -70877,9 +70881,11 @@
                   "type": "frame",
                   "id": "N8xlN",
                   "name": "Sidebar Item Financeiro",
+                  "width": "fill_container",
                   "height": 40,
                   "fill": "#00000000",
-                  "cornerRadius": "$--radius-m",
+                  "cornerRadius": 8,
+                  "stroke": "#00000000",
                   "gap": 10,
                   "padding": [
                     0,
@@ -70895,15 +70901,15 @@
                       "height": 18,
                       "icon": "wallet",
                       "library": "lucide",
-                      "fill": "$bo-muted"
+                      "fill": "#94B8A0"
                     },
                     {
                       "type": "text",
                       "id": "CoU9r",
                       "name": "Sidebar Label Financeiro",
-                      "fill": "$bo-muted",
+                      "fill": "#94B8A0",
                       "content": "Financeiro",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 14,
                       "fontWeight": "700"
                     }
@@ -70913,9 +70919,11 @@
                   "type": "frame",
                   "id": "sNO2h",
                   "name": "Sidebar Item Grupos",
+                  "width": "fill_container",
                   "height": 40,
                   "fill": "#00000000",
-                  "cornerRadius": "$--radius-m",
+                  "cornerRadius": 8,
+                  "stroke": "#00000000",
                   "gap": 10,
                   "padding": [
                     0,
@@ -70931,15 +70939,15 @@
                       "height": 18,
                       "icon": "layers",
                       "library": "lucide",
-                      "fill": "$bo-muted"
+                      "fill": "#94B8A0"
                     },
                     {
                       "type": "text",
                       "id": "w2bnLx",
                       "name": "Sidebar Label Grupos",
-                      "fill": "$bo-muted",
+                      "fill": "#94B8A0",
                       "content": "Grupos",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 14,
                       "fontWeight": "700"
                     }
@@ -70949,9 +70957,11 @@
                   "type": "frame",
                   "id": "ZPMOH",
                   "name": "Sidebar Item Convites",
+                  "width": "fill_container",
                   "height": 40,
                   "fill": "#00000000",
-                  "cornerRadius": "$--radius-m",
+                  "cornerRadius": 8,
+                  "stroke": "#00000000",
                   "gap": 10,
                   "padding": [
                     0,
@@ -70967,15 +70977,15 @@
                       "height": 18,
                       "icon": "mail",
                       "library": "lucide",
-                      "fill": "$bo-muted"
+                      "fill": "#94B8A0"
                     },
                     {
                       "type": "text",
                       "id": "G2Vir5",
                       "name": "Sidebar Label Convites",
-                      "fill": "$bo-muted",
+                      "fill": "#94B8A0",
                       "content": "Convites",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 14,
                       "fontWeight": "700"
                     }
@@ -70985,9 +70995,11 @@
                   "type": "frame",
                   "id": "clRD3",
                   "name": "Sidebar Item Configuracoes",
+                  "width": "fill_container",
                   "height": 40,
                   "fill": "#00000000",
-                  "cornerRadius": "$--radius-m",
+                  "cornerRadius": 8,
+                  "stroke": "#00000000",
                   "gap": 10,
                   "padding": [
                     0,
@@ -71003,15 +71015,15 @@
                       "height": 18,
                       "icon": "settings",
                       "library": "lucide",
-                      "fill": "$bo-muted"
+                      "fill": "#94B8A0"
                     },
                     {
                       "type": "text",
                       "id": "K3lU8",
                       "name": "Sidebar Label Configuracoes",
-                      "fill": "$bo-muted",
+                      "fill": "#94B8A0",
                       "content": "Configuracoes",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 14,
                       "fontWeight": "700"
                     }
@@ -71024,9 +71036,9 @@
               "id": "sd0qa",
               "name": "Sidebar Account",
               "width": "fill_container",
-              "fill": "$bo-surface-2",
-              "cornerRadius": "$--radius-m",
-              "stroke": "$bo-line",
+              "fill": "#10271A",
+              "cornerRadius": 8,
+              "stroke": "#2A2A2A",
               "strokeWidth": 1,
               "gap": 12,
               "padding": 14,
@@ -71038,8 +71050,8 @@
                   "name": "Account Avatar",
                   "width": 36,
                   "height": 36,
-                  "fill": "$bo-green-soft",
-                  "cornerRadius": "$--radius-pill",
+                  "fill": "#00E58A24",
+                  "cornerRadius": 999,
                   "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
@@ -71047,9 +71059,9 @@
                       "type": "text",
                       "id": "jAO5p",
                       "name": "Account Initials",
-                      "fill": "$bo-green",
+                      "fill": "#19C66A",
                       "content": "JM",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 12,
                       "fontWeight": "800"
                     }
@@ -71067,11 +71079,11 @@
                       "type": "text",
                       "id": "X3Q1C",
                       "name": "Account Name",
-                      "fill": "$bo-text",
+                      "fill": "#F2FFF6",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "Joao Miguel",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 13,
                       "fontWeight": "700"
                     },
@@ -71079,11 +71091,11 @@
                       "type": "text",
                       "id": "tt3QR",
                       "name": "Account Role",
-                      "fill": "$bo-muted",
+                      "fill": "#94B8A0",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "Admin",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 12,
                       "fontWeight": "500"
                     }
@@ -71099,7 +71111,7 @@
           "name": "Desktop Main",
           "width": "fill_container",
           "height": "fill_container",
-          "fill": "$bo-bg",
+          "fill": "#06100B",
           "layout": "vertical",
           "children": [
             {
@@ -71108,8 +71120,8 @@
               "name": "Desktop Topbar",
               "width": "fill_container",
               "height": 76,
-              "fill": "$bo-bg",
-              "stroke": "$bo-line",
+              "fill": "#06100B",
+              "stroke": "#2A2A2A",
               "strokeWidth": {
                 "bottom": 1
               },
@@ -71132,11 +71144,11 @@
                       "type": "text",
                       "id": "AkoS2",
                       "name": "Page Title",
-                      "fill": "$bo-text",
+                      "fill": "#F2FFF6",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "Dashboard Admin",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 26,
                       "fontWeight": "800"
                     },
@@ -71144,11 +71156,11 @@
                       "type": "text",
                       "id": "oAqT6",
                       "name": "Page Subtitle",
-                      "fill": "$bo-muted",
+                      "fill": "#94B8A0",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "Operacao completa do bolao em desktop",
-                      "fontFamily": "$--font-primary",
+                      "fontFamily": "Inter",
                       "fontSize": 13,
                       "fontWeight": "500"
                     }
@@ -71158,6 +71170,7 @@
                   "type": "frame",
                   "id": "jpDRu",
                   "name": "Topbar Actions",
+                  "width": 260,
                   "gap": 12,
                   "alignItems": "center",
                   "children": [
@@ -71166,9 +71179,9 @@
                       "id": "xKUkA",
                       "name": "Secondary Action",
                       "height": 40,
-                      "fill": "$--card",
-                      "cornerRadius": "$--radius-m",
-                      "stroke": "$--border",
+                      "fill": "#101010",
+                      "cornerRadius": 8,
+                      "stroke": "#2A2A2A",
                       "strokeWidth": 1,
                       "gap": 8,
                       "padding": [
@@ -71186,15 +71199,15 @@
                           "height": 18,
                           "icon": "download",
                           "library": "lucide",
-                          "fill": "$--foreground"
+                          "fill": "#F5F7F6"
                         },
                         {
                           "type": "text",
                           "id": "kwBDp",
                           "name": "Secondary Action Label",
-                          "fill": "$--foreground",
+                          "fill": "#F5F7F6",
                           "content": "Exportar",
-                          "fontFamily": "$--font-primary",
+                          "fontFamily": "Inter",
                           "fontSize": 14,
                           "fontWeight": "700"
                         }
@@ -71205,8 +71218,8 @@
                       "id": "T2hFF",
                       "name": "Primary Action",
                       "height": 40,
-                      "fill": "$--primary",
-                      "cornerRadius": "$--radius-m",
+                      "fill": "#00E58A",
+                      "cornerRadius": 8,
                       "gap": 8,
                       "padding": [
                         0,
@@ -71223,15 +71236,15 @@
                           "height": 18,
                           "icon": "plus",
                           "library": "lucide",
-                          "fill": "$--primary-foreground"
+                          "fill": "#03140D"
                         },
                         {
                           "type": "text",
                           "id": "gxzhu",
                           "name": "Primary Action Label",
-                          "fill": "$--primary-foreground",
+                          "fill": "#03140D",
                           "content": "Novo grupo",
-                          "fontFamily": "$--font-primary",
+                          "fontFamily": "Inter",
                           "fontSize": 14,
                           "fontWeight": "700"
                         }
@@ -71247,6 +71260,7 @@
               "name": "Desktop Content",
               "width": "fill_container",
               "height": "fill_container",
+              "fill": "#06100B",
               "layout": "vertical",
               "gap": 24,
               "padding": 28,
@@ -71256,6 +71270,7 @@
                   "id": "i2V1y",
                   "name": "Dashboard Metrics",
                   "width": "fill_container",
+                  "height": 116,
                   "gap": 16,
                   "children": [
                     {
@@ -71264,12 +71279,12 @@
                       "name": "Metric Card Receita",
                       "width": "fill_container",
                       "height": 116,
-                      "fill": "$--card",
-                      "cornerRadius": "$--radius-m",
-                      "stroke": "$--border",
+                      "fill": "#101010",
+                      "cornerRadius": 8,
+                      "stroke": "#2A2A2A",
                       "strokeWidth": 1,
                       "layout": "vertical",
-                      "gap": 16,
+                      "gap": 12,
                       "padding": 20,
                       "children": [
                         {
@@ -71277,6 +71292,7 @@
                           "id": "Wxlc2",
                           "name": "Metric Head Receita",
                           "width": "fill_container",
+                          "height": 24,
                           "justifyContent": "space_between",
                           "alignItems": "center",
                           "children": [
@@ -71323,9 +71339,9 @@
                           "type": "text",
                           "id": "CcQxQ",
                           "name": "Metric Value Receita",
-                          "fill": "$--foreground",
+                          "fill": "#F2FFF6",
                           "content": "R$ 18.420",
-                          "fontFamily": "$--font-primary",
+                          "fontFamily": "Inter",
                           "fontSize": 30,
                           "fontWeight": "800"
                         }
@@ -71337,12 +71353,12 @@
                       "name": "Metric Card Participantes",
                       "width": "fill_container",
                       "height": 116,
-                      "fill": "$--card",
-                      "cornerRadius": "$--radius-m",
-                      "stroke": "$--border",
+                      "fill": "#101010",
+                      "cornerRadius": 8,
+                      "stroke": "#2A2A2A",
                       "strokeWidth": 1,
                       "layout": "vertical",
-                      "gap": 16,
+                      "gap": 12,
                       "padding": 20,
                       "children": [
                         {
@@ -71350,6 +71366,7 @@
                           "id": "kp0ll",
                           "name": "Metric Head Participantes",
                           "width": "fill_container",
+                          "height": 24,
                           "justifyContent": "space_between",
                           "alignItems": "center",
                           "children": [
@@ -71396,9 +71413,9 @@
                           "type": "text",
                           "id": "M2VMf",
                           "name": "Metric Value Participantes",
-                          "fill": "$--foreground",
+                          "fill": "#F2FFF6",
                           "content": "312",
-                          "fontFamily": "$--font-primary",
+                          "fontFamily": "Inter",
                           "fontSize": 30,
                           "fontWeight": "800"
                         }
@@ -71410,12 +71427,12 @@
                       "name": "Metric Card Pendencias",
                       "width": "fill_container",
                       "height": 116,
-                      "fill": "$--card",
-                      "cornerRadius": "$--radius-m",
-                      "stroke": "$--border",
+                      "fill": "#101010",
+                      "cornerRadius": 8,
+                      "stroke": "#2A2A2A",
                       "strokeWidth": 1,
                       "layout": "vertical",
-                      "gap": 16,
+                      "gap": 12,
                       "padding": 20,
                       "children": [
                         {
@@ -71423,6 +71440,7 @@
                           "id": "VMZC6",
                           "name": "Metric Head Pendencias",
                           "width": "fill_container",
+                          "height": 24,
                           "justifyContent": "space_between",
                           "alignItems": "center",
                           "children": [
@@ -71469,9 +71487,9 @@
                           "type": "text",
                           "id": "HUozD",
                           "name": "Metric Value Pendencias",
-                          "fill": "$--foreground",
+                          "fill": "#F2FFF6",
                           "content": "24",
-                          "fontFamily": "$--font-primary",
+                          "fontFamily": "Inter",
                           "fontSize": 30,
                           "fontWeight": "800"
                         }
@@ -71483,12 +71501,12 @@
                       "name": "Metric Card Grupos",
                       "width": "fill_container",
                       "height": 116,
-                      "fill": "$--card",
-                      "cornerRadius": "$--radius-m",
-                      "stroke": "$--border",
+                      "fill": "#101010",
+                      "cornerRadius": 8,
+                      "stroke": "#2A2A2A",
                       "strokeWidth": 1,
                       "layout": "vertical",
-                      "gap": 16,
+                      "gap": 12,
                       "padding": 20,
                       "children": [
                         {
@@ -71496,6 +71514,7 @@
                           "id": "F1Yjvt",
                           "name": "Metric Head Grupos",
                           "width": "fill_container",
+                          "height": 24,
                           "justifyContent": "space_between",
                           "alignItems": "center",
                           "children": [
@@ -71542,9 +71561,9 @@
                           "type": "text",
                           "id": "yY6nT",
                           "name": "Metric Value Grupos",
-                          "fill": "$--foreground",
+                          "fill": "#F2FFF6",
                           "content": "28",
-                          "fontFamily": "$--font-primary",
+                          "fontFamily": "Inter",
                           "fontSize": 30,
                           "fontWeight": "800"
                         }
@@ -71574,9 +71593,10 @@
                           "id": "XVWhX",
                           "name": "Table Acoes",
                           "width": "fill_container",
-                          "fill": "$--card",
-                          "cornerRadius": "$--radius-m",
-                          "stroke": "$--border",
+                          "height": 329,
+                          "fill": "#101010",
+                          "cornerRadius": 8,
+                          "stroke": "#2A2A2A",
                           "strokeWidth": 1,
                           "layout": "vertical",
                           "gap": 16,
@@ -71601,9 +71621,9 @@
                                       "type": "text",
                                       "id": "lIOP9",
                                       "name": "Table Acoes Title",
-                                      "fill": "$--foreground",
+                                      "fill": "#F2FFF6",
                                       "content": "Acoes",
-                                      "fontFamily": "$--font-primary",
+                                      "fontFamily": "Inter",
                                       "fontSize": 18,
                                       "fontWeight": "800"
                                     },
@@ -71611,11 +71631,11 @@
                                       "type": "text",
                                       "id": "L0IEv",
                                       "name": "Table Acoes Caption",
-                                      "fill": "$--muted-foreground",
+                                      "fill": "#94B8A0",
                                       "content": "Dados operacionais do backoffice",
-                                      "fontFamily": "$--font-primary",
-                                      "fontSize": 13,
-                                      "fontWeight": "normal"
+                                      "fontFamily": "Inter",
+                                      "fontSize": 12,
+                                      "fontWeight": "500"
                                     }
                                   ]
                                 },
@@ -72253,9 +72273,9 @@
                           "name": "Card Saude",
                           "width": 360,
                           "height": 220,
-                          "fill": "$--card",
-                          "cornerRadius": "$--radius-m",
-                          "stroke": "$--border",
+                          "fill": "#101010",
+                          "cornerRadius": 8,
+                          "stroke": "#2A2A2A",
                           "strokeWidth": 1,
                           "layout": "vertical",
                           "gap": 16,
@@ -72265,11 +72285,11 @@
                               "type": "text",
                               "id": "Dbczt",
                               "name": "Health Title",
-                              "fill": "$bo-text",
+                              "fill": "#F2FFF6",
                               "textGrowth": "fixed-width",
                               "width": "fill_container",
                               "content": "Saude da rodada",
-                              "fontFamily": "$--font-primary",
+                              "fontFamily": "Inter",
                               "fontSize": 18,
                               "fontWeight": "800"
                             },
@@ -72277,21 +72297,22 @@
                               "type": "text",
                               "id": "X1Bzs",
                               "name": "Health Value",
-                              "fill": "$bo-green",
+                              "fill": "#19C66A",
                               "content": "84%",
-                              "fontFamily": "$--font-primary",
-                              "fontSize": 46,
-                              "fontWeight": "900"
+                              "fontFamily": "Inter",
+                              "fontSize": 48,
+                              "fontWeight": "800"
                             },
                             {
                               "type": "text",
                               "id": "mQXah",
                               "name": "Health Copy",
-                              "fill": "$bo-muted",
+                              "fill": "#94B8A0",
                               "textGrowth": "fixed-width",
                               "width": "fill_container",
                               "content": "Participantes com time completo ou pagamento confirmado.",
-                              "fontFamily": "$--font-primary",
+                              "lineHeight": 1.2,
+                              "fontFamily": "Inter",
                               "fontSize": 13,
                               "fontWeight": "500"
                             }
@@ -72302,9 +72323,10 @@
                           "id": "QzN0f",
                           "name": "Card Atalhos",
                           "width": 360,
-                          "fill": "$--card",
-                          "cornerRadius": "$--radius-m",
-                          "stroke": "$--border",
+                          "height": 192,
+                          "fill": "#101010",
+                          "cornerRadius": 8,
+                          "stroke": "#2A2A2A",
                           "strokeWidth": 1,
                           "layout": "vertical",
                           "gap": 16,
@@ -72314,13 +72336,15 @@
                               "type": "frame",
                               "id": "M1GdaB",
                               "name": "Shortcut Invite",
+                              "width": "fill_container",
                               "height": 40,
-                              "fill": "$--primary",
-                              "cornerRadius": "$--radius-m",
+                              "fill": "#00E58A",
+                              "cornerRadius": 8,
+                              "stroke": "$bo-border-soft",
                               "gap": 8,
                               "padding": [
                                 0,
-                                14
+                                12
                               ],
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -72339,9 +72363,9 @@
                                   "type": "text",
                                   "id": "pG0mV",
                                   "name": "Shortcut Invite Label",
-                                  "fill": "$--primary-foreground",
+                                  "fill": "#03140D",
                                   "content": "Enviar convites",
-                                  "fontFamily": "$--font-primary",
+                                  "fontFamily": "Inter",
                                   "fontSize": 14,
                                   "fontWeight": "700"
                                 }
@@ -72351,15 +72375,15 @@
                               "type": "frame",
                               "id": "L6sdQ",
                               "name": "Shortcut Billing",
+                              "width": "fill_container",
                               "height": 40,
-                              "fill": "$--card",
-                              "cornerRadius": "$--radius-m",
-                              "stroke": "$--border",
-                              "strokeWidth": 1,
+                              "fill": "#00E58A",
+                              "cornerRadius": 8,
+                              "stroke": "$bo-border-soft",
                               "gap": 8,
                               "padding": [
                                 0,
-                                14
+                                12
                               ],
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -72378,9 +72402,9 @@
                                   "type": "text",
                                   "id": "hC5LE",
                                   "name": "Shortcut Billing Label",
-                                  "fill": "$--foreground",
+                                  "fill": "#03140D",
                                   "content": "Baixar pagamentos",
-                                  "fontFamily": "$--font-primary",
+                                  "fontFamily": "Inter",
                                   "fontSize": 14,
                                   "fontWeight": "700"
                                 }
@@ -72390,15 +72414,15 @@
                               "type": "frame",
                               "id": "sd3Bp",
                               "name": "Shortcut Groups",
+                              "width": "fill_container",
                               "height": 40,
-                              "fill": "$--card",
-                              "cornerRadius": "$--radius-m",
-                              "stroke": "$--border",
-                              "strokeWidth": 1,
+                              "fill": "#00E58A",
+                              "cornerRadius": 8,
+                              "stroke": "$bo-border-soft",
                               "gap": 8,
                               "padding": [
                                 0,
-                                14
+                                12
                               ],
                               "justifyContent": "center",
                               "alignItems": "center",
@@ -72417,9 +72441,9 @@
                                   "type": "text",
                                   "id": "r35EFr",
                                   "name": "Shortcut Groups Label",
-                                  "fill": "$--foreground",
+                                  "fill": "#03140D",
                                   "content": "Revisar grupos",
-                                  "fontFamily": "$--font-primary",
+                                  "fontFamily": "Inter",
                                   "fontSize": 14,
                                   "fontWeight": "700"
                                 }
@@ -77630,6 +77654,2664 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "FiNtI",
+      "x": -3436,
+      "y": 28087,
+      "name": "Landing Mobile · Escalei",
+      "clip": true,
+      "width": 390,
+      "height": 7600,
+      "fill": "$lp-bg",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "Qgauv",
+          "name": "Header Fixo",
+          "width": "fill_container",
+          "height": 72,
+          "fill": "#050806F2",
+          "stroke": "#172A20",
+          "strokeWidth": {
+            "bottom": 1
+          },
+          "padding": [
+            0,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "Ok8DQ",
+              "name": "Header Logo",
+              "fill": "$lp-text",
+              "content": "escalei",
+              "fontFamily": "$lp-font",
+              "fontSize": 22,
+              "fontWeight": "900"
+            },
+            {
+              "type": "frame",
+              "id": "n5OTf",
+              "name": "Header CTA",
+              "height": 44,
+              "fill": "$lp-green",
+              "cornerRadius": 14,
+              "padding": [
+                0,
+                16
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "iHTHC",
+                  "name": "Header CTA Label",
+                  "fill": "#04100A",
+                  "content": "Entrar no beta",
+                  "fontFamily": "$lp-font",
+                  "fontSize": 13,
+                  "fontWeight": "900"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "OsnuI",
+          "name": "Hero",
+          "width": "fill_container",
+          "fill": "$lp-bg",
+          "layout": "vertical",
+          "gap": 22,
+          "padding": [
+            34,
+            20,
+            28,
+            20
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "lxd7C",
+              "name": "Hero Badge",
+              "fill": "#00E58A18",
+              "cornerRadius": 999,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "padding": [
+                7,
+                10
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "mueM4",
+                  "name": "Hero Badge Text",
+                  "fill": "$lp-green",
+                  "content": "BETA FECHADO · BRASILEIRÃO",
+                  "fontFamily": "$lp-font",
+                  "fontSize": 11,
+                  "fontWeight": "900"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "S4kgH",
+              "name": "Hero Title",
+              "fill": "$lp-text",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Todo mundo entende de futebol. Até a rodada começar.",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 40,
+              "fontWeight": "900"
+            },
+            {
+              "type": "text",
+              "id": "eFqhG",
+              "name": "Hero Subtitle",
+              "fill": "$lp-muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Monte seu time, desafie a sua turma e descubra quem realmente manja de Brasileirão.",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 18,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "D3A90n",
+              "name": "Hero Support",
+              "fill": "$lp-muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Entre na lista de espera do Escalei e receba o convite para o grupo oficial do beta no WhatsApp.",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 15,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "rDkpd",
+              "name": "Hero Primary CTA",
+              "width": "fill_container",
+              "height": 52,
+              "fill": "$lp-green",
+              "cornerRadius": 14,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "z8m0U6",
+                  "name": "Hero Primary CTA Label",
+                  "fill": "#04100A",
+                  "content": "Entrar na lista de espera",
+                  "fontFamily": "$lp-font",
+                  "fontSize": 15,
+                  "fontWeight": "800"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "YyRMA",
+              "name": "Hero Microcopy",
+              "fill": "$lp-dim",
+              "content": "Gratuito. Sem apostas. Convites liberados aos poucos.",
+              "fontFamily": "$lp-font",
+              "fontSize": 12,
+              "fontWeight": "700"
+            },
+            {
+              "type": "frame",
+              "id": "YjdpD",
+              "name": "Hero Phone Wrap",
+              "width": "fill_container",
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "hllrp",
+                  "name": "Hero Phone",
+                  "width": 266,
+                  "height": 512,
+                  "fill": "#050806",
+                  "cornerRadius": 30,
+                  "stroke": "#31513F",
+                  "strokeWidth": 2,
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 24,
+                      "id": "KOO69",
+                      "x": 12,
+                      "y": 12,
+                      "name": "Hero Phone Screen Glow",
+                      "fill": "#08150EFF",
+                      "width": 242,
+                      "height": 488
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 16,
+                      "id": "DIyD1",
+                      "x": 27,
+                      "y": 77,
+                      "name": "Hero Phone Pitch",
+                      "fill": "#073A24",
+                      "width": 212,
+                      "height": 252,
+                      "stroke": "#1F6A42",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "id": "K9cNju",
+                      "x": 27,
+                      "y": 202,
+                      "name": "Hero Phone Pitch Midline",
+                      "fill": "#2AA96655",
+                      "width": 212,
+                      "height": 1
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "iXv8x",
+                      "x": 105,
+                      "y": 169,
+                      "name": "Hero Phone Pitch Circle",
+                      "innerRadius": 0.9,
+                      "fill": "#2AA96655",
+                      "width": 56,
+                      "height": 56
+                    },
+                    {
+                      "type": "text",
+                      "id": "YZVfL",
+                      "x": 27,
+                      "y": 33,
+                      "name": "Hero Phone App Logo",
+                      "fill": "$lp-text",
+                      "content": "escalei",
+                      "fontFamily": "$lp-font",
+                      "fontSize": 18,
+                      "fontWeight": "900"
+                    },
+                    {
+                      "type": "text",
+                      "id": "eVYkN",
+                      "x": 174,
+                      "y": 36,
+                      "name": "Hero Phone Round",
+                      "fill": "$lp-green",
+                      "content": "Rodada 29",
+                      "fontFamily": "$lp-font",
+                      "fontSize": 12,
+                      "fontWeight": "800"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Z9xZrQ",
+                      "x": 27,
+                      "y": 54,
+                      "name": "Hero Phone Budget Label",
+                      "fill": "$lp-dim",
+                      "content": "Orçamento",
+                      "fontFamily": "$lp-font",
+                      "fontSize": 10,
+                      "fontWeight": "700"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xoU14",
+                      "x": 91,
+                      "y": 52,
+                      "name": "Hero Phone Budget Value",
+                      "fill": "$lp-yellow",
+                      "content": "C$ 100",
+                      "fontFamily": "$lp-font",
+                      "fontSize": 14,
+                      "fontWeight": "900"
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "AtgVb",
+                      "x": 119,
+                      "y": 78,
+                      "name": "Hero Phone Player",
+                      "fill": "#00E58A",
+                      "width": 26,
+                      "height": 26,
+                      "stroke": "#F3FFF7",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 999,
+                      "id": "NCePJ",
+                      "x": 114,
+                      "y": 108,
+                      "name": "Hero Phone Player Shadow",
+                      "fill": "#00000044",
+                      "width": 36,
+                      "height": 5
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "ulfZV",
+                      "x": 65,
+                      "y": 125,
+                      "name": "Hero Phone Player",
+                      "fill": "#4ADE80",
+                      "width": 26,
+                      "height": 26,
+                      "stroke": "#F3FFF7",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 999,
+                      "id": "qwEJj",
+                      "x": 60,
+                      "y": 155,
+                      "name": "Hero Phone Player Shadow",
+                      "fill": "#00000044",
+                      "width": 36,
+                      "height": 5
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "EBpJB",
+                      "x": 173,
+                      "y": 125,
+                      "name": "Hero Phone Player",
+                      "fill": "#4ADE80",
+                      "width": 26,
+                      "height": 26,
+                      "stroke": "#F3FFF7",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 999,
+                      "id": "ehkCC",
+                      "x": 168,
+                      "y": 155,
+                      "name": "Hero Phone Player Shadow",
+                      "fill": "#00000044",
+                      "width": 36,
+                      "height": 5
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "lqlm4",
+                      "x": 43,
+                      "y": 196,
+                      "name": "Hero Phone Player",
+                      "fill": "#2DD4BF",
+                      "width": 26,
+                      "height": 26,
+                      "stroke": "#F3FFF7",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 999,
+                      "id": "BBMzy",
+                      "x": 38,
+                      "y": 226,
+                      "name": "Hero Phone Player Shadow",
+                      "fill": "#00000044",
+                      "width": 36,
+                      "height": 5
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "OJixQ",
+                      "x": 119,
+                      "y": 196,
+                      "name": "Hero Phone Player",
+                      "fill": "#2DD4BF",
+                      "width": 26,
+                      "height": 26,
+                      "stroke": "#F3FFF7",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 999,
+                      "id": "OjyaI",
+                      "x": 114,
+                      "y": 226,
+                      "name": "Hero Phone Player Shadow",
+                      "fill": "#00000044",
+                      "width": 36,
+                      "height": 5
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "n6njf",
+                      "x": 195,
+                      "y": 196,
+                      "name": "Hero Phone Player",
+                      "fill": "#2DD4BF",
+                      "width": 26,
+                      "height": 26,
+                      "stroke": "#F3FFF7",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 999,
+                      "id": "jAjDa",
+                      "x": 190,
+                      "y": 226,
+                      "name": "Hero Phone Player Shadow",
+                      "fill": "#00000044",
+                      "width": 36,
+                      "height": 5
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "DQiX7",
+                      "x": 64,
+                      "y": 268,
+                      "name": "Hero Phone Player",
+                      "fill": "#60A5FA",
+                      "width": 26,
+                      "height": 26,
+                      "stroke": "#F3FFF7",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 999,
+                      "id": "ThBgt",
+                      "x": 59,
+                      "y": 298,
+                      "name": "Hero Phone Player Shadow",
+                      "fill": "#00000044",
+                      "width": 36,
+                      "height": 5
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "y0vRU",
+                      "x": 119,
+                      "y": 268,
+                      "name": "Hero Phone Player",
+                      "fill": "#60A5FA",
+                      "width": 26,
+                      "height": 26,
+                      "stroke": "#F3FFF7",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 999,
+                      "id": "uiCec",
+                      "x": 114,
+                      "y": 298,
+                      "name": "Hero Phone Player Shadow",
+                      "fill": "#00000044",
+                      "width": 36,
+                      "height": 5
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "toX9N",
+                      "x": 174,
+                      "y": 268,
+                      "name": "Hero Phone Player",
+                      "fill": "#60A5FA",
+                      "width": 26,
+                      "height": 26,
+                      "stroke": "#F3FFF7",
+                      "strokeWidth": 1
+                    },
+                    {
+                      "type": "rectangle",
+                      "cornerRadius": 999,
+                      "id": "Otz4E",
+                      "x": 169,
+                      "y": 298,
+                      "name": "Hero Phone Player Shadow",
+                      "fill": "#00000044",
+                      "width": 36,
+                      "height": 5
+                    },
+                    {
+                      "type": "frame",
+                      "id": "I8AJ7",
+                      "x": 27,
+                      "y": 348,
+                      "name": "Hero Phone Ranking Card",
+                      "width": 212,
+                      "height": 126,
+                      "fill": "#101D16",
+                      "cornerRadius": 16,
+                      "stroke": "$lp-border",
+                      "strokeWidth": 1,
+                      "layout": "vertical",
+                      "gap": 9,
+                      "padding": 14,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "q0t9K",
+                          "name": "Hero Phone Ranking Title",
+                          "fill": "$lp-text",
+                          "content": "Liga da resenha",
+                          "fontFamily": "$lp-font",
+                          "fontSize": 13,
+                          "fontWeight": "800"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "Jzacp",
+                          "name": "Hero Phone Ranking Row 1",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "ellipse",
+                              "id": "EfLKD",
+                              "name": "Hero Phone Ranking Dot 1",
+                              "fill": "#FFD54A",
+                              "width": 20,
+                              "height": 20
+                            },
+                            {
+                              "type": "text",
+                              "id": "v4tseN",
+                              "name": "Hero Phone Ranking Name 1",
+                              "fill": "$lp-text",
+                              "content": "1. Você",
+                              "fontFamily": "$lp-font",
+                              "fontSize": 12,
+                              "fontWeight": "800"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Uj0zN",
+                              "name": "Hero Phone Ranking Points 1",
+                              "fill": "$lp-green",
+                              "content": "84.2",
+                              "fontFamily": "$lp-font",
+                              "fontSize": 12,
+                              "fontWeight": "800"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "RqwaG",
+                          "name": "Hero Phone Ranking Row 2",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "ellipse",
+                              "id": "hyBpQ",
+                              "name": "Hero Phone Ranking Dot 2",
+                              "fill": "#A5BDAE",
+                              "width": 20,
+                              "height": 20
+                            },
+                            {
+                              "type": "text",
+                              "id": "rFVHj",
+                              "name": "Hero Phone Ranking Name 2",
+                              "fill": "$lp-text",
+                              "content": "2. Rafa",
+                              "fontFamily": "$lp-font",
+                              "fontSize": 12,
+                              "fontWeight": "800"
+                            },
+                            {
+                              "type": "text",
+                              "id": "FbnGx",
+                              "name": "Hero Phone Ranking Points 2",
+                              "fill": "$lp-green",
+                              "content": "79.8",
+                              "fontFamily": "$lp-font",
+                              "fontSize": 12,
+                              "fontWeight": "800"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "sz5Dc",
+                          "name": "Hero Phone Ranking Row 3",
+                          "width": "fill_container",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "ellipse",
+                              "id": "hJ5dc",
+                              "name": "Hero Phone Ranking Dot 3",
+                              "fill": "#A5BDAE",
+                              "width": 20,
+                              "height": 20
+                            },
+                            {
+                              "type": "text",
+                              "id": "mKPRA",
+                              "name": "Hero Phone Ranking Name 3",
+                              "fill": "$lp-text",
+                              "content": "3. Beto",
+                              "fontFamily": "$lp-font",
+                              "fontSize": 12,
+                              "fontWeight": "800"
+                            },
+                            {
+                              "type": "text",
+                              "id": "Zli87",
+                              "name": "Hero Phone Ranking Points 3",
+                              "fill": "$lp-green",
+                              "content": "73.4",
+                              "fontFamily": "$lp-font",
+                              "fontSize": 12,
+                              "fontWeight": "800"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "p3ni7",
+          "name": "Formulario Lista de Espera",
+          "width": "fill_container",
+          "fill": "$lp-panel",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            28,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "S9I6h",
+              "name": "Form Title",
+              "fill": "$lp-text",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Entre para o beta",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 28,
+              "fontWeight": "900"
+            },
+            {
+              "type": "text",
+              "id": "R6aWtE",
+              "name": "Form Text",
+              "fill": "$lp-muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Deixe seus dados para receber novidades e o convite para o grupo de WhatsApp do Escalei.",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 15,
+              "fontWeight": "500"
+            },
+            {
+              "type": "frame",
+              "id": "wdQe3",
+              "name": "Nome ou apelido Field",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 7,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "E46UJp",
+                  "name": "Nome ou apelido Label",
+                  "fill": "$lp-muted",
+                  "content": "Nome ou apelido",
+                  "fontFamily": "$lp-font",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "ohrqv",
+                  "name": "Nome ou apelido Input",
+                  "width": "fill_container",
+                  "height": 48,
+                  "fill": "#08100C",
+                  "cornerRadius": 12,
+                  "stroke": "$lp-border",
+                  "strokeWidth": 1,
+                  "gap": 10,
+                  "padding": [
+                    0,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "BxeSA",
+                      "name": "Nome ou apelido Input Icon",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "user",
+                      "library": "lucide",
+                      "fill": "$lp-dim"
+                    },
+                    {
+                      "type": "text",
+                      "id": "PaOE0",
+                      "name": "Nome ou apelido Placeholder",
+                      "fill": "#6E8175",
+                      "content": "Como a turma te chama",
+                      "fontFamily": "$lp-font",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "y7vOuy",
+              "name": "WhatsApp com DDD Field",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 7,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "UPCdV",
+                  "name": "WhatsApp com DDD Label",
+                  "fill": "$lp-muted",
+                  "content": "WhatsApp com DDD",
+                  "fontFamily": "$lp-font",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "V4idY0",
+                  "name": "WhatsApp com DDD Input",
+                  "width": "fill_container",
+                  "height": 48,
+                  "fill": "#08100C",
+                  "cornerRadius": 12,
+                  "stroke": "$lp-border",
+                  "strokeWidth": 1,
+                  "gap": 10,
+                  "padding": [
+                    0,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "VXgox",
+                      "name": "WhatsApp com DDD Input Icon",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "phone",
+                      "library": "lucide",
+                      "fill": "$lp-dim"
+                    },
+                    {
+                      "type": "text",
+                      "id": "r6WtW5",
+                      "name": "WhatsApp com DDD Placeholder",
+                      "fill": "#6E8175",
+                      "content": "(11) 99999-9999",
+                      "fontFamily": "$lp-font",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "GLcbS",
+              "name": "E-mail Field",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 7,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "i59Rz",
+                  "name": "E-mail Label",
+                  "fill": "$lp-muted",
+                  "content": "E-mail",
+                  "fontFamily": "$lp-font",
+                  "fontSize": 12,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "frame",
+                  "id": "PpeKw",
+                  "name": "E-mail Input",
+                  "width": "fill_container",
+                  "height": 48,
+                  "fill": "#08100C",
+                  "cornerRadius": 12,
+                  "stroke": "$lp-border",
+                  "strokeWidth": 1,
+                  "gap": 10,
+                  "padding": [
+                    0,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "lUtTE",
+                      "name": "E-mail Input Icon",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "mail",
+                      "library": "lucide",
+                      "fill": "$lp-dim"
+                    },
+                    {
+                      "type": "text",
+                      "id": "m7qoz",
+                      "name": "E-mail Placeholder",
+                      "fill": "#6E8175",
+                      "content": "voce@email.com",
+                      "fontFamily": "$lp-font",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "C3JPfr",
+              "name": "Consentimento Checkbox",
+              "width": "fill_container",
+              "gap": 10,
+              "children": [
+                {
+                  "type": "rectangle",
+                  "cornerRadius": 6,
+                  "id": "uthsQ",
+                  "name": "Consentimento Caixa",
+                  "fill": "#08100C",
+                  "width": 22,
+                  "height": 22,
+                  "stroke": "$lp-green",
+                  "strokeWidth": 2
+                },
+                {
+                  "type": "text",
+                  "id": "L5fDN",
+                  "name": "Consentimento Texto",
+                  "fill": "$lp-muted",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Aceito receber informações sobre o beta do Escalei por WhatsApp e e-mail.",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "hDhW2",
+              "name": "Form Submit",
+              "width": "fill_container",
+              "height": 52,
+              "fill": "$lp-green",
+              "cornerRadius": 14,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ORwKD",
+                  "name": "Form Submit Label",
+                  "fill": "#04100A",
+                  "content": "Entrar na lista de espera",
+                  "fontFamily": "$lp-font",
+                  "fontSize": 15,
+                  "fontWeight": "800"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Y8hKf",
+              "name": "Estado Sucesso",
+              "width": "fill_container",
+              "fill": "#073A24",
+              "cornerRadius": 16,
+              "stroke": "#1D7A4A",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 8,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "swc9h",
+                  "name": "Success Title",
+                  "fill": "$lp-text",
+                  "content": "Você está na lista!",
+                  "fontFamily": "$lp-font",
+                  "fontSize": 17,
+                  "fontWeight": "900"
+                },
+                {
+                  "type": "text",
+                  "id": "vtVCZ",
+                  "name": "Success Text",
+                  "fill": "$lp-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Quando novas vagas forem liberadas, vamos enviar seu convite para o grupo oficial de WhatsApp do beta.",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "text",
+                  "id": "IOmJp",
+                  "name": "Success Back",
+                  "fill": "$lp-green",
+                  "content": "Voltar ao início",
+                  "fontFamily": "$lp-font",
+                  "fontSize": 13,
+                  "fontWeight": "800"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "o9bgQe",
+          "name": "Identificacao",
+          "width": "fill_container",
+          "fill": "$lp-bg",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            42,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "U3Z8U",
+              "name": "Identificacao Title",
+              "fill": "$lp-text",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "O grupo já fala de futebol. Agora falta decidir quem entende mais.",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 30,
+              "fontWeight": "900"
+            },
+            {
+              "type": "text",
+              "id": "k9tLD",
+              "name": "Identificacao Subtitle",
+              "fill": "$lp-muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Transforme a resenha da rodada em uma disputa que dura até o último jogo.",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 16,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "xVP77",
+              "name": "Card Escale",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 16,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "bhCLc",
+                  "name": "Card Escale Icon Box",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "#00E58A18",
+                  "cornerRadius": 12,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "UpOg7",
+                      "name": "Card Escale Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "clipboard-list",
+                      "library": "lucide",
+                      "fill": "$lp-green"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "JaZnQ",
+                  "name": "Card Escale Title",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Escale em poucos minutos",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 17,
+                  "fontWeight": "800"
+                },
+                {
+                  "type": "text",
+                  "id": "u4CrO",
+                  "name": "Card Escale Body",
+                  "fill": "$lp-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Escolha 11 jogadores antes da rodada travar.",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "eXa8x",
+              "name": "Card Jogo",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 16,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "u2RGON",
+                  "name": "Card Jogo Icon Box",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "#00E58A18",
+                  "cornerRadius": 12,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "c78av",
+                      "name": "Card Jogo Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "chart-column",
+                      "library": "lucide",
+                      "fill": "$lp-green"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "M0aPb",
+                  "name": "Card Jogo Title",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Acompanhe jogo a jogo",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 17,
+                  "fontWeight": "800"
+                },
+                {
+                  "type": "text",
+                  "id": "L9k2d",
+                  "name": "Card Jogo Body",
+                  "fill": "$lp-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Os pontos aparecem quando cada partida termina.",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qTUac",
+              "name": "Card Ranking",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 16,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 10,
+              "padding": 18,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "U1LO8C",
+                  "name": "Card Ranking Icon Box",
+                  "width": 40,
+                  "height": 40,
+                  "fill": "#00E58A18",
+                  "cornerRadius": 12,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon",
+                      "id": "TG7Vn",
+                      "name": "Card Ranking Icon",
+                      "width": 20,
+                      "height": 20,
+                      "icon": "trophy",
+                      "library": "lucide",
+                      "fill": "$lp-green"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "sSqYn",
+                  "name": "Card Ranking Title",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Suba no ranking da turma",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 17,
+                  "fontWeight": "800"
+                },
+                {
+                  "type": "text",
+                  "id": "t7lIsk",
+                  "name": "Card Ranking Body",
+                  "fill": "$lp-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Veja quem acertou e quem vai ouvir provocação no grupo.",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "K4Dpq",
+          "name": "Como Funciona",
+          "width": "fill_container",
+          "fill": "$lp-panel",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            42,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "R9G87S",
+              "name": "Steps Title",
+              "fill": "$lp-text",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Da escalação à resenha em 3 passos",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 30,
+              "fontWeight": "900"
+            },
+            {
+              "type": "frame",
+              "id": "T6glg",
+              "name": "Passo 1",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 16,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "gap": 14,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "CkGET",
+                  "name": "Passo 1 Numero",
+                  "width": 38,
+                  "height": 38,
+                  "fill": "$lp-green",
+                  "cornerRadius": 12,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "yGTnO",
+                      "name": "Passo 1 Numero Texto",
+                      "fill": "#04100A",
+                      "content": "1",
+                      "fontFamily": "$lp-font",
+                      "fontSize": 16,
+                      "fontWeight": "900"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZTF8w",
+                  "name": "Passo 1 Copy",
+                  "width": 268,
+                  "layout": "vertical",
+                  "gap": 5,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "VLQmU",
+                      "name": "Passo 1 Title",
+                      "fill": "$lp-text",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Entre para o beta",
+                      "lineHeight": 1.16,
+                      "fontFamily": "$lp-font",
+                      "fontSize": 17,
+                      "fontWeight": "900"
+                    },
+                    {
+                      "type": "text",
+                      "id": "PDG9g",
+                      "name": "Passo 1 Body",
+                      "fill": "$lp-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Cadastre-se na lista de espera e receba o convite do grupo oficial.",
+                      "lineHeight": 1.16,
+                      "fontFamily": "$lp-font",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "LLALn",
+              "name": "Passo 2",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 16,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "gap": 14,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "oEznD",
+                  "name": "Passo 2 Numero",
+                  "width": 38,
+                  "height": 38,
+                  "fill": "$lp-green",
+                  "cornerRadius": 12,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "OkqBX",
+                      "name": "Passo 2 Numero Texto",
+                      "fill": "#04100A",
+                      "content": "2",
+                      "fontFamily": "$lp-font",
+                      "fontSize": 16,
+                      "fontWeight": "900"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "OFCpl",
+                  "name": "Passo 2 Copy",
+                  "width": 268,
+                  "layout": "vertical",
+                  "gap": 5,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "A9n0q1",
+                      "name": "Passo 2 Title",
+                      "fill": "$lp-text",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Monte seu time",
+                      "lineHeight": 1.16,
+                      "fontFamily": "$lp-font",
+                      "fontSize": 17,
+                      "fontWeight": "900"
+                    },
+                    {
+                      "type": "text",
+                      "id": "V1csnl",
+                      "name": "Passo 2 Body",
+                      "fill": "$lp-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Escolha 11 jogadores dentro de C$ 100.",
+                      "lineHeight": 1.16,
+                      "fontFamily": "$lp-font",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "IL7i0",
+              "name": "Passo 3",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 16,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "gap": 14,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "EQhgd",
+                  "name": "Passo 3 Numero",
+                  "width": 38,
+                  "height": 38,
+                  "fill": "$lp-green",
+                  "cornerRadius": 12,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "cQMmW",
+                      "name": "Passo 3 Numero Texto",
+                      "fill": "#04100A",
+                      "content": "3",
+                      "fontFamily": "$lp-font",
+                      "fontSize": 16,
+                      "fontWeight": "900"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "IVYzg",
+                  "name": "Passo 3 Copy",
+                  "width": 268,
+                  "layout": "vertical",
+                  "gap": 5,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "TcvaT",
+                      "name": "Passo 3 Title",
+                      "fill": "$lp-text",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Dispute com a turma",
+                      "lineHeight": 1.16,
+                      "fontFamily": "$lp-font",
+                      "fontSize": 17,
+                      "fontWeight": "900"
+                    },
+                    {
+                      "type": "text",
+                      "id": "vObPZ",
+                      "name": "Passo 3 Body",
+                      "fill": "$lp-muted",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "Acompanhe seus pontos e suba no ranking da liga.",
+                      "lineHeight": 1.16,
+                      "fontFamily": "$lp-font",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ZXvqD",
+              "name": "Observacao Trava",
+              "width": "fill_container",
+              "fill": "#FFD54A18",
+              "cornerRadius": 14,
+              "stroke": "#FFD54A55",
+              "strokeWidth": 1,
+              "gap": 10,
+              "padding": 14,
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "YMeFT",
+                  "name": "Observacao Icon",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "timer",
+                  "library": "lucide",
+                  "fill": "$lp-yellow"
+                },
+                {
+                  "type": "text",
+                  "id": "OgQmQ",
+                  "name": "Observacao Texto",
+                  "fill": "$lp-yellow",
+                  "textGrowth": "fixed-width",
+                  "width": 290,
+                  "content": "A escalação trava no início do primeiro jogo da rodada.",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 13,
+                  "fontWeight": "800"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "WJbxo",
+          "name": "Diferencial",
+          "width": "fill_container",
+          "fill": "$lp-green-dark",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            42,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "TXtbP",
+              "name": "Diferencial Title",
+              "fill": "$lp-text",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Não é sobre ganhar dinheiro. É sobre ganhar da sua liga.",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 30,
+              "fontWeight": "900"
+            },
+            {
+              "type": "text",
+              "id": "G2vDru",
+              "name": "Diferencial Text",
+              "fill": "#CDEDDD",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Sem odds, sem depósito e sem enrolação. Só futebol, estratégia e aquela mensagem no grupo quando você passa seu amigo no ranking.",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 16,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "jYylL",
+              "name": "Diferencial CTA",
+              "width": "fill_container",
+              "height": 52,
+              "fill": "$lp-green",
+              "cornerRadius": 14,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "F3by5",
+                  "name": "Diferencial CTA Label",
+                  "fill": "#04100A",
+                  "content": "Quero entrar no beta",
+                  "fontFamily": "$lp-font",
+                  "fontSize": 15,
+                  "fontWeight": "800"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "qNXuT",
+              "name": "Diferencial Microcopy",
+              "fill": "#9DDDBD",
+              "content": "Vagas liberadas por convite.",
+              "fontFamily": "$lp-font",
+              "fontSize": 12,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "jlNip",
+          "name": "Regras Rapidas",
+          "width": "fill_container",
+          "fill": "$lp-bg",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            42,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "n3woyf",
+              "name": "Rules Title",
+              "fill": "$lp-text",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "O básico para começar",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 30,
+              "fontWeight": "900"
+            },
+            {
+              "type": "frame",
+              "id": "n2RcK",
+              "name": "Regra 11 jogadores por rodada",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 14,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "J8Ddz",
+                  "name": "Regra Icon 11 jogadores por rodada",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "circle-check",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "Ofyrl",
+                  "name": "Regra Texto 11 jogadores por rodada",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "11 jogadores por rodada",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "a6HX5M",
+              "name": "Regra Formações 4-3-3, 4-4-2 ou 3-5-2",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 14,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "G01va",
+                  "name": "Regra Icon Formações 4-3-3, 4-4-2 ou 3-5-2",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "circle-check",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "MZosK",
+                  "name": "Regra Texto Formações 4-3-3, 4-4-2 ou 3-5-2",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Formações 4-3-3, 4-4-2 ou 3-5-2",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vSuAN",
+              "name": "Regra Orçamento de C$ 100",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 14,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "t59ICu",
+                  "name": "Regra Icon Orçamento de C$ 100",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "circle-check",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "CmByJ",
+                  "name": "Regra Texto Orçamento de C$ 100",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Orçamento de C$ 100",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Zuuvb",
+              "name": "Regra Pontos liberados após cada jogo terminar",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 14,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "fNer5",
+                  "name": "Regra Icon Pontos liberados após cada jogo terminar",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "circle-check",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "Z4r0as",
+                  "name": "Regra Texto Pontos liberados após cada jogo terminar",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Pontos liberados após cada jogo terminar",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "jEMLH",
+              "name": "Regra Ranking atualizado a cada jogo encerrado",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 14,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "gtO9t",
+                  "name": "Regra Icon Ranking atualizado a cada jogo encerrado",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "circle-check",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "eecYg",
+                  "name": "Regra Texto Ranking atualizado a cada jogo encerrado",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Ranking atualizado a cada jogo encerrado",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "v0vF1",
+              "name": "Regra Ligas privadas para disputar com amigos",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 14,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "FDSBJ",
+                  "name": "Regra Icon Ligas privadas para disputar com amigos",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "circle-check",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "p80zTU",
+                  "name": "Regra Texto Ligas privadas para disputar com amigos",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Ligas privadas para disputar com amigos",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "aTCkk",
+              "name": "Regra Gratuito e sem prêmio em dinheiro",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 14,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "m8U7wm",
+                  "name": "Regra Icon Gratuito e sem prêmio em dinheiro",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "circle-check",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "H7vWt",
+                  "name": "Regra Texto Gratuito e sem prêmio em dinheiro",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Gratuito e sem prêmio em dinheiro",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "LIeEs",
+          "name": "Para Quem",
+          "width": "fill_container",
+          "fill": "$lp-panel",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": [
+            42,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "qCbqh",
+              "name": "Audience Title",
+              "fill": "$lp-text",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Feito para quem vive o Brasileirão com amigos",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 30,
+              "fontWeight": "900"
+            },
+            {
+              "type": "frame",
+              "id": "I7Ionc",
+              "name": "Publico Resenha do trabalho",
+              "width": "fill_container",
+              "fill": "$lp-card-2",
+              "cornerRadius": 14,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "Ldb72",
+                  "name": "Publico Icon Resenha do trabalho",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "message-circle",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "D9gd7",
+                  "name": "Publico Texto Resenha do trabalho",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Resenha do trabalho",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "800"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cvfZ9",
+              "name": "Publico Grupo da faculdade",
+              "width": "fill_container",
+              "fill": "$lp-card-2",
+              "cornerRadius": 14,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "z3Rog",
+                  "name": "Publico Icon Grupo da faculdade",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "message-circle",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "R2DHKm",
+                  "name": "Publico Texto Grupo da faculdade",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Grupo da faculdade",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "800"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "S83WKg",
+              "name": "Publico Pelada de domingo",
+              "width": "fill_container",
+              "fill": "$lp-card-2",
+              "cornerRadius": 14,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "adL2z",
+                  "name": "Publico Icon Pelada de domingo",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "message-circle",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "PuSlE",
+                  "name": "Publico Texto Pelada de domingo",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Pelada de domingo",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "800"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "w4fu9",
+              "name": "Publico Família",
+              "width": "fill_container",
+              "fill": "$lp-card-2",
+              "cornerRadius": 14,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "afHhh",
+                  "name": "Publico Icon Família",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "message-circle",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "i5TyT",
+                  "name": "Publico Texto Família",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Família",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "800"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "qBfZc",
+              "name": "Publico Amigos que não param de falar de futebol",
+              "width": "fill_container",
+              "fill": "$lp-card-2",
+              "cornerRadius": 14,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "ScvlB",
+                  "name": "Publico Icon Amigos que não param de falar de futebol",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "message-circle",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "DLAFu",
+                  "name": "Publico Texto Amigos que não param de falar de futebol",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Amigos que não param de falar de futebol",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "800"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "o2rTu",
+              "name": "Publico Grupo de WhatsApp que já discute toda rodada",
+              "width": "fill_container",
+              "fill": "$lp-card-2",
+              "cornerRadius": 14,
+              "gap": 10,
+              "padding": 14,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "OagAB",
+                  "name": "Publico Icon Grupo de WhatsApp que já discute toda rodada",
+                  "width": 18,
+                  "height": 18,
+                  "icon": "message-circle",
+                  "library": "lucide",
+                  "fill": "$lp-green"
+                },
+                {
+                  "type": "text",
+                  "id": "Wy0mV",
+                  "name": "Publico Texto Grupo de WhatsApp que já discute toda rodada",
+                  "fill": "$lp-text",
+                  "textGrowth": "fixed-width",
+                  "width": 300,
+                  "content": "Grupo de WhatsApp que já discute toda rodada",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "800"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "zMja6",
+              "name": "Audience Final",
+              "fill": "$lp-green",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Você entra no beta. A turma faz o resto.",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 20,
+              "fontWeight": "900"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "EwFM1",
+          "name": "FAQ",
+          "width": "fill_container",
+          "fill": "$lp-bg",
+          "layout": "vertical",
+          "gap": 14,
+          "padding": [
+            42,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "Gf32V",
+              "name": "FAQ Title",
+              "fill": "$lp-text",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Perguntas rápidas",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 30,
+              "fontWeight": "900"
+            },
+            {
+              "type": "frame",
+              "id": "iMAb5",
+              "name": "FAQ Item É gratuito?",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 16,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 9,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "wsoVp",
+                  "name": "FAQ Header É gratuito?",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "q8tUS",
+                      "name": "FAQ Question É gratuito?",
+                      "fill": "$lp-text",
+                      "textGrowth": "fixed-width",
+                      "width": 284,
+                      "content": "É gratuito?",
+                      "lineHeight": 1.16,
+                      "fontFamily": "$lp-font",
+                      "fontSize": 15,
+                      "fontWeight": "900"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "N86XeG",
+                      "name": "FAQ Chevron É gratuito?",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$lp-green"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "q5LfPz",
+                  "name": "FAQ Answer É gratuito?",
+                  "fill": "$lp-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Sim. O beta do Escalei é gratuito.",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "l6zWq3",
+              "name": "FAQ Item Tem aposta ou prêmio em dinheiro?",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 16,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 9,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "a3VcZ",
+                  "name": "FAQ Header Tem aposta ou prêmio em dinheiro?",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "upGek",
+                      "name": "FAQ Question Tem aposta ou prêmio em dinheiro?",
+                      "fill": "$lp-text",
+                      "textGrowth": "fixed-width",
+                      "width": 284,
+                      "content": "Tem aposta ou prêmio em dinheiro?",
+                      "lineHeight": 1.16,
+                      "fontFamily": "$lp-font",
+                      "fontSize": 15,
+                      "fontWeight": "900"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "r3ZqL",
+                      "name": "FAQ Chevron Tem aposta ou prêmio em dinheiro?",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$lp-green"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "krWsx",
+                  "name": "FAQ Answer Tem aposta ou prêmio em dinheiro?",
+                  "fill": "$lp-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Não. O Escalei é um fantasy gratuito para competir com amigos, sem apostas e sem premiação em dinheiro.",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "FOp6t",
+              "name": "FAQ Item Como entro no beta?",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 16,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 9,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "zVNYP",
+                  "name": "FAQ Header Como entro no beta?",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "e9NW2",
+                      "name": "FAQ Question Como entro no beta?",
+                      "fill": "$lp-text",
+                      "textGrowth": "fixed-width",
+                      "width": 284,
+                      "content": "Como entro no beta?",
+                      "lineHeight": 1.16,
+                      "fontFamily": "$lp-font",
+                      "fontSize": 15,
+                      "fontWeight": "900"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "z7x3s",
+                      "name": "FAQ Chevron Como entro no beta?",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$lp-green"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "Qe6Lo",
+                  "name": "FAQ Answer Como entro no beta?",
+                  "fill": "$lp-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Cadastre-se na lista de espera. Quando novas vagas forem abertas, você poderá receber um convite para o grupo oficial de WhatsApp do beta.",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Psoy6",
+              "name": "FAQ Item Preciso entender muito de futebol?",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 16,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 9,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "U93u2",
+                  "name": "FAQ Header Preciso entender muito de futebol?",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "c0WW0",
+                      "name": "FAQ Question Preciso entender muito de futebol?",
+                      "fill": "$lp-text",
+                      "textGrowth": "fixed-width",
+                      "width": 284,
+                      "content": "Preciso entender muito de futebol?",
+                      "lineHeight": 1.16,
+                      "fontFamily": "$lp-font",
+                      "fontSize": 15,
+                      "fontWeight": "900"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "jQwFL",
+                      "name": "FAQ Chevron Preciso entender muito de futebol?",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$lp-green"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "syv8B",
+                  "name": "FAQ Answer Preciso entender muito de futebol?",
+                  "fill": "$lp-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Não. Quem acompanha o Brasileirão já consegue começar. A graça é testar suas escolhas contra a turma.",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "gsxf5",
+              "name": "FAQ Item Posso jogar com meus amigos?",
+              "width": "fill_container",
+              "fill": "$lp-card",
+              "cornerRadius": 16,
+              "stroke": "$lp-border",
+              "strokeWidth": 1,
+              "layout": "vertical",
+              "gap": 9,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "gteXj",
+                  "name": "FAQ Header Posso jogar com meus amigos?",
+                  "width": "fill_container",
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "cR8av",
+                      "name": "FAQ Question Posso jogar com meus amigos?",
+                      "fill": "$lp-text",
+                      "textGrowth": "fixed-width",
+                      "width": 284,
+                      "content": "Posso jogar com meus amigos?",
+                      "lineHeight": 1.16,
+                      "fontFamily": "$lp-font",
+                      "fontSize": 15,
+                      "fontWeight": "900"
+                    },
+                    {
+                      "type": "icon",
+                      "id": "X4RYE",
+                      "name": "FAQ Chevron Posso jogar com meus amigos?",
+                      "width": 18,
+                      "height": 18,
+                      "icon": "chevron-down",
+                      "library": "lucide",
+                      "fill": "$lp-green"
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "JJRdE",
+                  "name": "FAQ Answer Posso jogar com meus amigos?",
+                  "fill": "$lp-muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Sim. O Escalei foi pensado para ligas privadas, grupos de amigos e resenhas de futebol.",
+                  "lineHeight": 1.16,
+                  "fontFamily": "$lp-font",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "yXVN4",
+          "name": "CTA Final",
+          "width": "fill_container",
+          "fill": "$lp-green-dark",
+          "layout": "vertical",
+          "gap": 18,
+          "padding": [
+            46,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "ObH7n",
+              "name": "Final Title",
+              "fill": "$lp-text",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Quem vai mandar na sua resenha nesta rodada?",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 34,
+              "fontWeight": "900"
+            },
+            {
+              "type": "text",
+              "id": "rg2oJ",
+              "name": "Final Text",
+              "fill": "#CDEDDD",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Entre na lista de espera e seja um dos primeiros a disputar o Brasileirão com a sua turma no Escalei.",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 16,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "k1PG36",
+              "name": "Final CTA",
+              "width": "fill_container",
+              "height": 52,
+              "fill": "$lp-green",
+              "cornerRadius": 14,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "YWieT",
+                  "name": "Final CTA Label",
+                  "fill": "#04100A",
+                  "content": "Quero entrar na lista de espera",
+                  "fontFamily": "$lp-font",
+                  "fontSize": 15,
+                  "fontWeight": "800"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "Kz6RH",
+              "name": "Final Microcopy",
+              "fill": "#9DDDBD",
+              "content": "Beta fechado · gratuito · sem apostas",
+              "fontFamily": "$lp-font",
+              "fontSize": 12,
+              "fontWeight": "800"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "sxFq0",
+          "name": "Footer",
+          "width": "fill_container",
+          "fill": "#030604",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": [
+            32,
+            20
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "q75tB",
+              "name": "Footer Logo",
+              "fill": "$lp-text",
+              "content": "escalei",
+              "fontFamily": "$lp-font",
+              "fontSize": 22,
+              "fontWeight": "900"
+            },
+            {
+              "type": "text",
+              "id": "SM0S4",
+              "name": "Footer Phrase",
+              "fill": "$lp-muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Fantasy de futebol gratuito para disputar com amigos.",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 14,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "j1DcVx",
+              "name": "Footer Links",
+              "fill": "$lp-green",
+              "content": "Como funciona   |   Termos   |   Privacidade",
+              "fontFamily": "$lp-font",
+              "fontSize": 13,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "AeW8q",
+              "name": "Footer Legal",
+              "fill": "$lp-dim",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Produto independente. Sem vínculo com clubes, ligas ou entidades esportivas.",
+              "lineHeight": 1.16,
+              "fontFamily": "$lp-font",
+              "fontSize": 12,
+              "fontWeight": "500"
+            },
+            {
+              "type": "text",
+              "id": "ROrVp",
+              "name": "Footer Safe",
+              "fill": "$lp-dim",
+              "content": "Sem apostas e sem prêmios em dinheiro.",
+              "fontFamily": "$lp-font",
+              "fontSize": 12,
+              "fontWeight": "800"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "rectangle",
+      "id": "WAxGR",
+      "x": 22313.030593097523,
+      "y": 3747.5559951191435,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "66d5f256-c004-4fa4-968a-ac692926dd67.png",
+        "mode": "cover",
+        "transform": [
+          2.915441,
+          0,
+          0,
+          1.019527,
+          -0.014706,
+          -0.011305
+        ]
+      },
+      "width": 544.0000000000033,
+      "height": 973.000000000001
+    },
+    {
+      "type": "rectangle",
+      "id": "EI8Yc",
+      "x": 22313.030593097523,
+      "y": 3747.5559951191435,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "66d5f256-c004-4fa4-968a-ac692926dd67.png",
+        "mode": "cover",
+        "transform": [
+          2.915441,
+          0,
+          0,
+          1.019527,
+          -0.014706,
+          -0.011305
+        ]
+      },
+      "width": 544.0000000000033,
+      "height": 973.000000000001
+    },
+    {
+      "type": "rectangle",
+      "id": "o0LXSM",
+      "x": 23587,
+      "y": 3746,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "66d5f256-c004-4fa4-968a-ac692926dd67.png",
+        "mode": "cover",
+        "transform": [
+          1.568744,
+          0,
+          0,
+          1.019527,
+          -0.559842,
+          -0.010277
+        ]
+      },
+      "width": 1011.0000000000027,
+      "height": 973.000000000001
     }
   ],
   "themes": {
@@ -78068,19 +80750,19 @@
     },
     "bo-bg": {
       "type": "color",
-      "value": "#050505"
+      "value": "#06100B"
     },
     "bo-surface": {
       "type": "color",
-      "value": "#101010"
+      "value": "#0B1A12"
     },
     "bo-surface-2": {
       "type": "color",
-      "value": "#151515"
+      "value": "#10271A"
     },
     "bo-surface-3": {
       "type": "color",
-      "value": "#1E1E1E"
+      "value": "#12331F"
     },
     "bo-line": {
       "type": "color",
@@ -78088,15 +80770,15 @@
     },
     "bo-text": {
       "type": "color",
-      "value": "#F5F7F6"
+      "value": "#F2FFF6"
     },
     "bo-muted": {
       "type": "color",
-      "value": "#A7AAA8"
+      "value": "#94B8A0"
     },
     "bo-green": {
       "type": "color",
-      "value": "#00E58A"
+      "value": "#19C66A"
     },
     "bo-green-soft": {
       "type": "color",
@@ -78104,11 +80786,11 @@
     },
     "bo-red": {
       "type": "color",
-      "value": "#00E58A"
+      "value": "#F87171"
     },
     "bo-yellow": {
       "type": "color",
-      "value": "#00E58A"
+      "value": "#F3C74F"
     },
     "bo-blue": {
       "type": "color",
@@ -78340,6 +81022,94 @@
     "--radius-pill": {
       "type": "number",
       "value": 999
+    },
+    "bo-border": {
+      "type": "color",
+      "value": "#21452F"
+    },
+    "bo-border-soft": {
+      "type": "color",
+      "value": "#193623"
+    },
+    "bo-dim": {
+      "type": "color",
+      "value": "#5F806A"
+    },
+    "bo-green-2": {
+      "type": "color",
+      "value": "#80F2A9"
+    },
+    "bo-font-heading": {
+      "type": "string",
+      "value": "Space Grotesk"
+    },
+    "bo-font-body": {
+      "type": "string",
+      "value": "Manrope"
+    },
+    "bo-font-caption": {
+      "type": "string",
+      "value": "Instrument Sans"
+    },
+    "bo-radius-sm": {
+      "type": "number",
+      "value": 4
+    },
+    "bo-radius-lg": {
+      "type": "number",
+      "value": 8
+    },
+    "lp-bg": {
+      "type": "color",
+      "value": "#050806"
+    },
+    "lp-panel": {
+      "type": "color",
+      "value": "#0B1410"
+    },
+    "lp-card": {
+      "type": "color",
+      "value": "#101D16"
+    },
+    "lp-card-2": {
+      "type": "color",
+      "value": "#13281B"
+    },
+    "lp-border": {
+      "type": "color",
+      "value": "#254232"
+    },
+    "lp-text": {
+      "type": "color",
+      "value": "#F3FFF7"
+    },
+    "lp-muted": {
+      "type": "color",
+      "value": "#A5BDAE"
+    },
+    "lp-dim": {
+      "type": "color",
+      "value": "#789383"
+    },
+    "lp-green": {
+      "type": "color",
+      "value": "#00E58A"
+    },
+    "lp-green-dark": {
+      "type": "color",
+      "value": "#073A24"
+    },
+    "lp-yellow": {
+      "type": "color",
+      "value": "#FFD54A"
+    },
+    "lp-red": {
+      "type": "color",
+      "value": "#F15B5B"
+    },
+    "lp-font": {
+      "type": "string",
+      "value": "Inter"
     }
   },
   "fileToken": "cbd20792-ac72-4fdf-9154-f06e58cad7de"

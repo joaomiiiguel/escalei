@@ -29,9 +29,12 @@ tags:
 
 Sem técnico, sem capitão e sem banco de reservas no MVP.
 
-## Orçamento e preço (proposta)
+## Saldo, orçamento e preço
 
-- Orçamento: **C$ 100** por rodada (média ~C$ 9 por vaga).
+- Saldo inicial: **C$ 50,00** por usuário.
+- Uma escalação só pode ser salva se o custo dos 11 jogadores couber no saldo atual.
+- Ao fechar a rodada, cada jogador rende `max(pontos da rodada − preço pago, 0)` para o saldo do usuário. Não há perda quando o desempenho ficar abaixo do preço.
+- Exemplo: jogador comprado por C$ 5,00 que marca 6,20 pontos rende C$ 1,20; se marcar 3,00 pontos, rende C$ 0,00.
 - **Preço inicial** = `clamp(3 + média de pontos na temporada, 2, 20)`. Jogador sem histórico começa em C$ 5.
 - **Variação depois de cada rodada** = `clamp(0,25 × (pontos na rodada − média dos últimos 5 jogos), −2, +2)`, com preço mínimo de C$ 2.
 - A variação aparece no mercado como ▲/▼.

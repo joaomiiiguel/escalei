@@ -5,12 +5,10 @@ import { saveLineup } from "@/app/escalar/actions";
 import { LineupFormation, type LineupPlayer } from "./lineup-formation";
 import { LineupSummary } from "./lineup-summary";
 
-const ROUND_BUDGET = 100;
-
 type Formation = "4-3-3" | "4-4-2" | "3-5-2";
-type LineupBuilderProps = { initialFormation?: Formation; initialPlayers?: LineupPlayer[]; roundId: number };
+type LineupBuilderProps = { budget: number; initialFormation?: Formation; initialPlayers?: LineupPlayer[]; roundId: number };
 
-export function LineupBuilder({ initialFormation = "4-3-3", initialPlayers = [], roundId }: LineupBuilderProps) {
+export function LineupBuilder({ budget, initialFormation = "4-3-3", initialPlayers = [], roundId }: LineupBuilderProps) {
   const [selectedPlayers, setSelectedPlayers] = useState<LineupPlayer[]>(initialPlayers);
   const [formation, setFormation] = useState<Formation>(initialFormation);
   const [autoPlayers, setAutoPlayers] = useState<LineupPlayer[] | undefined>();
@@ -37,7 +35,7 @@ export function LineupBuilder({ initialFormation = "4-3-3", initialPlayers = [],
       const response = await fetch(`/api/escalacao-automatica?formacao=${formation}`);
       const data = await response.json() as { players?: LineupPlayer[]; hasPerformanceData?: boolean; error?: string };
       if (!response.ok || !data.players) throw new Error(data.error ?? "Não foi possível montar a escalação automática.");
-      if (data.players.length !== 11 || data.players.reduce((total, player) => total + player.price, 0) > ROUND_BUDGET) throw new Error("Não há jogadores suficientes dentro do orçamento.");
+      if (data.players.length !== 11 || data.players.reduce((total, player) => total + player.price, 0) > budget) throw new Error("Não há jogadores suficientes dentro do seu saldo.");
       setAutoPlayers(data.players);
       setMessage(data.hasPerformanceData ? "Escalação baseada em desempenho e contexto da rodada. Revise antes de salvar." : "Escalação montada com os sinais disponíveis da rodada. Revise antes de salvar.");
     } catch (error) {
@@ -45,10 +43,10 @@ export function LineupBuilder({ initialFormation = "4-3-3", initialPlayers = [],
     } finally {
       setIsAutoSelecting(false);
     }
-  }, [formation]);
+  }, [budget, formation]);
 
   return <>
-    <LineupFormation autoPlayers={autoPlayers} className="h-[65vh]" formation={formation} initialPlayers={initialPlayers} onFormationChange={handleFormationChange} onSelectedPlayersChange={handleSelectedPlayersChange} />
-    <LineupSummary budget={ROUND_BUDGET - totalCost} isAutoSelecting={isAutoSelecting} isSaving={isSaving} onAutoSelect={autoSelect} onSave={save} saveMessage={message} selectedPlayers={selectedPlayers.length} />
+    <LineupFormation autoPlayers={autoPlayers} budget={budget} className="h-[65vh]" formation={formation} initialPlayers={initialPlayers} onFormationChange={handleFormationChange} onSelectedPlayersChange={handleSelectedPlayersChange} />
+    <LineupSummary budget={budget - totalCost} isAutoSelecting={isAutoSelecting} isSaving={isSaving} onAutoSelect={autoSelect} onSave={save} saveMessage={message} selectedPlayers={selectedPlayers.length} />
   </>;
 }

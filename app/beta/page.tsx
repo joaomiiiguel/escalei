@@ -48,7 +48,7 @@ const steps = [
   },
   {
     title: "Monte seu time",
-    text: "Escolha 11 jogadores dentro de C$ 100.",
+    text: "Comece com C$ 50 e escolha 11 jogadores dentro do seu saldo.",
   },
   {
     title: "Dispute com a turma",
@@ -59,7 +59,7 @@ const steps = [
 const rules = [
   "11 jogadores por rodada",
   "Formações 4-3-3, 4-4-2 ou 3-5-2",
-  "Orçamento de C$ 100",
+  "Saldo inicial de C$ 50",
   "Pontos liberados após cada jogo terminar",
   "Ranking atualizado a cada jogo encerrado",
   "Ligas privadas para disputar com amigos",

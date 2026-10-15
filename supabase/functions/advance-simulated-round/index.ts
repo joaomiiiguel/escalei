@@ -21,15 +21,47 @@ Deno.serve(async (request) => {
   const db = createClient(url, serviceRoleKey, { auth: { autoRefreshToken: false, persistSession: false } });
   const { data: config, error: configError } = await db.from("configuracoes")
     .select("valor").eq("chave", "rodada_simulada_atual").maybeSingle();
-  const number = typeof config?.valor === "number" ? config.valor : Number(config?.valor);
+  let number = typeof config?.valor === "number" ? config.valor : Number(config?.valor);
   if (configError || !Number.isInteger(number)) return Response.json({ error: "Rodada simulada não configurada." }, { status: 500 });
 
-  const { data: round, error: roundError } = await db.from("rodadas")
-    .select("id, status, trava_em, fechamento_simulado_em")
+  const { data: configuredRound, error: roundError } = await db.from("rodadas")
+    .select("id, numero, status, trava_em, fechamento_simulado_em")
     .eq("temporada", season).eq("numero", number).eq("simulada", true).maybeSingle();
-  if (roundError || !round) return Response.json({ error: "Rodada simulada não encontrada." }, { status: 404 });
+  if (roundError || !configuredRound) return Response.json({ error: "Rodada simulada não encontrada." }, { status: 404 });
 
   const now = new Date();
+  let round = configuredRound;
+  let openedRound: number | null = null;
+  if (round.status === "FECHADA") {
+    const { data: nextRound, error: nextRoundError } = await db.from("rodadas")
+      .select("id, numero, status, trava_em, fechamento_simulado_em")
+      .eq("temporada", season)
+      .eq("simulada", true)
+      .eq("status", "AGENDADA")
+      .gt("numero", number)
+      .lte("abre_em", now.toISOString())
+      .order("numero")
+      .limit(1)
+      .maybeSingle();
+    if (nextRoundError) return Response.json({ error: "Não foi possível localizar a próxima rodada." }, { status: 500 });
+
+    if (nextRound) {
+      const { error: openError } = await db.from("rodadas")
+        .update({ status: "ABERTA" })
+        .eq("id", nextRound.id)
+        .eq("status", "AGENDADA");
+      if (openError) return Response.json({ error: "Não foi possível abrir a próxima rodada." }, { status: 500 });
+
+      const { error: configUpdateError } = await db.from("configuracoes")
+        .update({ valor: nextRound.numero })
+        .eq("chave", "rodada_simulada_atual");
+      if (configUpdateError) return Response.json({ error: "Não foi possível atualizar a rodada ativa." }, { status: 500 });
+
+      round = { ...nextRound, status: "ABERTA" };
+      number = nextRound.numero;
+      openedRound = nextRound.numero;
+    }
+  }
   if (round.status === "ABERTA" && now >= new Date(round.trava_em)) {
     const { error } = await db.from("rodadas").update({ status: "EM_ANDAMENTO" }).eq("id", round.id);
     if (error) return Response.json({ error: "Não foi possível travar a rodada." }, { status: 500 });
@@ -99,8 +131,20 @@ Deno.serve(async (request) => {
       if (!response.ok) pending.push(game.id);
     }
     const { data: unchecked } = await db.from("jogos").select("id").eq("rodada_id", round.id).is("conferido_em", null);
-    if (!unchecked?.length) await db.from("rodadas").update({ status: "FECHADA", fechada_em: now.toISOString() }).eq("id", round.id);
+    if (!unchecked?.length) {
+      const { error: priceError } = await db.rpc("fn_atualizar_precos", { p_rodada_id: round.id });
+      if (priceError) return Response.json({ error: "A conferência foi concluída, mas não foi possível atualizar os preços." }, { status: 500 });
+
+      const { error: balanceError } = await db.rpc("fn_creditar_saldos_rodada", { p_rodada_id: round.id });
+      if (balanceError) return Response.json({ error: "A conferência foi concluída, mas não foi possível creditar os saldos." }, { status: 500 });
+
+      const { error: closeError } = await db
+        .from("rodadas")
+        .update({ status: "FECHADA", fechada_em: now.toISOString() })
+        .eq("id", round.id);
+      if (closeError) return Response.json({ error: "Não foi possível fechar a rodada." }, { status: 500 });
+    }
   }
 
-  return Response.json({ rodada: number, encerrados: completed, pendentes: [...new Set(pending)], conferenciaEm: closeAt ?? null });
+  return Response.json({ rodada: number, rodadaAberta: openedRound, encerrados: completed, pendentes: [...new Set(pending)], conferenciaEm: closeAt ?? null });
 });

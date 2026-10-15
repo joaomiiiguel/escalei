@@ -31,6 +31,7 @@ tags:
 **Técnico**
 - [[API-Football]]: plano grátis, endpoints, campos, orçamento de requisições e verificação
 - [[Arquitetura]]: stack, jobs, estrutura do projeto e decisões técnicas
+- [[Ativação de Produção — Calendário e Orquestração]]: calendário oficial, jobs, estados e checklist para sair da simulação
 - [[Banco de Dados — Modelo e Campos]]: **17 tabelas com todos os campos**, tipos, origem na API, regras, RLS, volume e LGPD
 
 **Validação**

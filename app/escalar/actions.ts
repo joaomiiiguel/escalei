@@ -37,6 +37,13 @@ export async function saveLineup(input: { formation: string; playerIds: number[]
     .maybeSingle();
   if (!round) return { error: "A janela de edição desta rodada já foi encerrada." };
 
+  const { data: wallet, error: walletError } = await supabase
+    .from("carteiras")
+    .select("saldo")
+    .eq("usuario_id", user.id)
+    .maybeSingle();
+  if (walletError || !wallet) return { error: "Não foi possível consultar seu saldo. Tente novamente." };
+
   const { data: players, error: playersError } = await supabase
     .from("jogadores")
     .select("id, posicao, preco")
@@ -52,7 +59,7 @@ export async function saveLineup(input: { formation: string; playerIds: number[]
   const isValidFormation = (Object.keys(FORMATIONS[formation]) as Position[]).every((position) => positions[position] === FORMATIONS[formation][position]);
   const cost = players.reduce((total, player) => total + Number(player.preco), 0);
   if (!isValidFormation) return { error: "Os jogadores não correspondem à formação escolhida." };
-  if (cost > 100) return { error: "A escalação ultrapassa o orçamento de C$ 100,00." };
+  if (cost > Number(wallet.saldo)) return { error: "A escalação ultrapassa o seu saldo disponível." };
 
   const { data: team, error: teamError } = await supabase
     .from("times")

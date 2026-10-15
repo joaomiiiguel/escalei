@@ -101,7 +101,7 @@ export function DefaultRoundView({
                   <div className={isUnselected ? "grid size-11 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground" : "grid size-11 shrink-0 place-items-center rounded-xl bg-secondary text-primary"}><ShieldCheck className="size-[22px]" aria-hidden="true" /></div>
                   <div className="min-w-0">
                     <h2 className="text-[17px] font-extrabold text-foreground">{presentation.title}</h2>
-                    <p className="mt-0.5 text-[13px] leading-[18px] text-muted-foreground">{isUnselected ? "Monte 11 jogadores com C$ 100. Leva uns 3 minutos — ou use a escalação automática." : presentation.description}</p>
+                    <p className="mt-0.5 text-[13px] leading-[18px] text-muted-foreground">{isUnselected ? "Monte 11 jogadores dentro do seu saldo. Leva uns 3 minutos — ou use a escalação automática." : presentation.description}</p>
                   </div>
                 </div>
                 {team && presentation.cta && <Link href="/escalar" className="mt-4 inline-flex min-h-9 w-full items-center justify-center rounded-xl bg-secondary px-4 text-sm font-bold text-primary outline-none transition hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-ring">{presentation.cta}</Link>}

@@ -8,7 +8,7 @@ function currency(value: number) {
   return `C$ ${value.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-export function SavedLineup({ formation, players, travaEm }: { formation: Formation; players: LineupPlayer[]; travaEm: string }) {
+export function SavedLineup({ budget, formation, players, travaEm }: { budget: number; formation: Formation; players: LineupPlayer[]; travaEm: string }) {
   const spent = players.reduce((total, player) => total + player.price, 0);
   const lockDate = new Intl.DateTimeFormat("pt-BR", { weekday: "short", hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" }).format(new Date(travaEm));
 
@@ -24,7 +24,7 @@ export function SavedLineup({ formation, players, travaEm }: { formation: Format
     <div className="grid grid-cols-3 gap-2">
       <div className="rounded-xl bg-card p-3"><b className="block text-base">{formation}</b><span className="text-[10px] text-muted-foreground">formação</span></div>
       <div className="rounded-xl bg-card p-3"><b className="block text-base">{currency(spent)}</b><span className="text-[10px] text-muted-foreground">gastos</span></div>
-      <div className="rounded-xl bg-card p-3"><b className="block text-base">{currency(100 - spent)}</b><span className="text-[10px] text-muted-foreground">sobrando</span></div>
+      <div className="rounded-xl bg-card p-3"><b className="block text-base">{currency(budget - spent)}</b><span className="text-[10px] text-muted-foreground">sobrando</span></div>
     </div>
     <LineupFormation className="min-h-[47vh]" formation={formation} initialPlayers={players} readOnly />
     <div className="grid grid-cols-2 gap-2">

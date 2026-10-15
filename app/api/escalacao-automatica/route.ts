@@ -30,6 +30,17 @@ export async function GET(request: Request) {
   if (!formation || !(formation in formations)) return NextResponse.json({ error: "Formação inválida." }, { status: 400 });
 
   const db = await createClient();
+  const { data: { user } } = await db.auth.getUser();
+  if (!user) return NextResponse.json({ error: "Entre novamente para usar a escalação automática." }, { status: 401 });
+
+  const { data: wallet, error: walletError } = await db
+    .from("carteiras")
+    .select("saldo")
+    .eq("usuario_id", user.id)
+    .maybeSingle();
+  if (walletError || !wallet) return NextResponse.json({ error: "Não foi possível consultar seu saldo." }, { status: 500 });
+  const budget = asNumber(wallet.saldo);
+
   const { data: round, error: roundError } = await getCurrentRound<{
     id: number; numero: number; status: "AGENDADA" | "ABERTA" | "EM_ANDAMENTO" | "FECHADA"; trava_em: string;
   }>(db, "id, numero, status, trava_em");
@@ -104,7 +115,7 @@ export async function GET(request: Request) {
 
   const selected = (Object.keys(required) as Position[]).flatMap((position) => byPosition[position].slice(0, required[position]));
   let cost = selected.reduce((total, player) => total + player.price, 0);
-  if (cost > 100) return NextResponse.json({ error: "Não há escalação válida dentro do orçamento." }, { status: 422 });
+  if (cost > budget) return NextResponse.json({ error: "Não há escalação válida dentro do seu saldo." }, { status: 422 });
 
   for (;;) {
     let bestUpgrade: { position: Position; current: Candidate; next: Candidate; gain: number; cost: number } | null = null;
@@ -113,9 +124,9 @@ export async function GET(request: Request) {
       for (const current of currentPlayers) for (const next of byPosition[position]) {
         const extraCost = next.price - current.price;
         const gain = next.score - current.score;
-        if (gain <= 0 || cost + extraCost > 100 || selected.some((player) => player.id === next.id)) continue;
-        const value = extraCost <= 0 ? gain + 100 : gain / extraCost;
-        const bestValue = bestUpgrade ? (bestUpgrade.cost <= 0 ? bestUpgrade.gain + 100 : bestUpgrade.gain / bestUpgrade.cost) : -Infinity;
+        if (gain <= 0 || cost + extraCost > budget || selected.some((player) => player.id === next.id)) continue;
+        const value = extraCost <= 0 ? gain + budget : gain / extraCost;
+        const bestValue = bestUpgrade ? (bestUpgrade.cost <= 0 ? bestUpgrade.gain + budget : bestUpgrade.gain / bestUpgrade.cost) : -Infinity;
         if (value > bestValue) bestUpgrade = { position, current, next, gain, cost: extraCost };
       }
     }
