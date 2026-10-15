@@ -34,40 +34,42 @@ export function Navbar({
   const showCta = pathname !== "/escalar" && pathname === "/" && (isRoundInProgress || !hasCurrentTeam);
 
   return (
-    <><HowItWorksModal /><div className="fixed inset-x-0 bottom-0 z-50 mx-auto w-full max-w-lg mb-5 px-4" data-app-navbar>
-      {showCta && (
-        <div className="bg-background pb-3">
-          <Link
-            className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-[14px] bg-primary px-5 text-base font-bold !text-primary-foreground outline-none transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            href="/escalar"
-          >
-            <Shirt className="size-[18px]" aria-hidden="true" />
-            {isRoundInProgress ? "Ver pontos do meu time" : "Escalar meu time"}
-          </Link>
-        </div>
-      )}
-      <nav className="border-t border-border bg-card bg-opacity/80 backdrop-blur-sm rounded-full overflow-hidden h-14" aria-label="Navegação principal">
-        <ul className="w-full flex flex-row justify-around h-full items-center">
-          {items.map(({ href, icon: Icon, label }) => {
-            const active = href ? isActive(pathname, href) : false;
-            const content = <>
-              <span className={`flex flex-col w-full h-full items-center justify-center gap-1 ${active ? "bg-primary/12 rounded-full" : "bg-transparent"}`}>
-                <Icon className="size-[22px]" aria-hidden="true" />
-              </span>
-            </>;
+    <>
+      <HowItWorksModal />
+      <div className="fixed inset-x-0 bottom-0 z-50 mx-auto w-full max-w-lg mb-5 px-4" data-app-navbar>
+        {showCta && (
+          <div className="bg-background pb-3">
+            <Link
+              className="flex min-h-[52px] w-full items-center justify-center gap-2 rounded-[14px] bg-primary px-5 text-base font-bold !text-primary-foreground outline-none transition hover:opacity-90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+              href="/escalar"
+            >
+              <Shirt className="size-[18px]" aria-hidden="true" />
+              {isRoundInProgress ? "Ver pontos do meu time" : "Escalar meu time"}
+            </Link>
+          </div>
+        )}
+        <nav className="border-t border-b border-border bg-background/70 backdrop-blur-sm rounded-full overflow-hidden h-18 px-1" aria-label="Navegação principal">
+          <ul className="flex flex-row justify-between h-full items-center">
+            {items.map(({ href, icon: Icon, label }) => {
+              const active = href ? isActive(pathname, href) : false;
+              const content = <>
+                <span className={`flex flex-col h-full items-center justify-center gap-1 ${active ? "bg-primary/20 rounded-full" : "bg-transparent"}`}>
+                  <Icon className="size-[22px]" aria-hidden="true" />
+                </span>
+              </>;
 
-            return <li className="flex" key={label}>
-              <Link
-                className={`flex w-full h-14 flex-col items-center justify-center gap-[3px] text-[10px] outline-none transition focus-visible:rounded-lg focus-visible:ring-2 focus-visible:ring-ring ${active ? "font-bold text-primary" : "font-semibold text-muted-foreground hover:text-foreground"}`}
-                href={href}
-                aria-current={active ? "page" : undefined}
-              >
-                {content}
-              </Link>
-            </li>;
-          })}
-        </ul>
-      </nav>
-    </div></>
+              return <li className="flex" key={label}>
+                <Link
+                  className={`w-16 h-16 ${active ? "font-bold text-primary" : "font-semibold text-muted-foreground hover:text-foreground"}`}
+                  href={href}
+                  aria-current={active ? "page" : undefined}
+                >
+                  {content}
+                </Link>
+              </li>;
+            })}
+          </ul>
+        </nav>
+      </div></>
   );
 }
