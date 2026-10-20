@@ -33,11 +33,12 @@ export function LineupBuilder({ budget, initialFormation = "4-3-3", initialPlaye
     setMessage(null);
     try {
       const response = await fetch(`/api/escalacao-automatica?formacao=${formation}`);
-      const data = await response.json() as { players?: LineupPlayer[]; hasPerformanceData?: boolean; error?: string };
+      const data = await response.json() as { players?: LineupPlayer[]; hasPerformanceData?: boolean; error?: string; algorithmVersion?: string };
       if (!response.ok || !data.players) throw new Error(data.error ?? "Não foi possível montar a escalação automática.");
       if (data.players.length !== 11 || data.players.reduce((total, player) => total + player.price, 0) > budget) throw new Error("Não há jogadores suficientes dentro do seu saldo.");
       setAutoPlayers(data.players);
-      setMessage(data.hasPerformanceData ? "Escalação baseada em desempenho e contexto da rodada. Revise antes de salvar." : "Escalação montada com os sinais disponíveis da rodada. Revise antes de salvar.");
+      const versionInfo = data.algorithmVersion ? ` (v${data.algorithmVersion})` : "";
+      setMessage(data.hasPerformanceData ? `Escalação baseada em desempenho e contexto da rodada${versionInfo}. Revise antes de salvar.` : `Escalação montada com os sinais disponíveis da rodada${versionInfo}. Revise antes de salvar.`);
     } catch (error) {
       setMessage(error instanceof Error ? error.message : "Não foi possível montar a escalação automática.");
     } finally {

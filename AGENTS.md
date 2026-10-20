@@ -90,9 +90,11 @@ Execute, no mínimo, antes de concluir uma mudança de código:
 ```bash
 npm run build
 git diff --check
+npm test
 ```
 
 - Corrija falhas de tipos, build e espaços em branco antes de prosseguir.
+- **Toda nova implementação deve incluir testes** (unitários em `tests/` ou de integração). Rode `npm test` e garanta que passem antes de commitar.
 - Teste manualmente os fluxos afetados quando houver servidor disponível: login, onboarding, rota protegida, salvar time e estados de rodada.
 - Ao alterar uma migration, valide também a aplicação da migration e as políticas RLS em uma base de desenvolvimento antes de declarar a tarefa pronta.
 - Não use `npm audit fix --force` sem solicitação explícita; pode alterar dependências de forma incompatível.

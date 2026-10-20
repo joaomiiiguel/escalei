@@ -18,4 +18,4 @@ export type SavedPlayer = {
 export type SavedTeam = { formacao: "4-3-3" | "4-4-2" | "3-5-2"; times_jogadores: { jogadores: SavedPlayer | null }[] };
 export type ActiveRound = { id: number; numero: number; status: StatusRodada; trava_em: string; fechada_em: string | null; simulada?: boolean };
 export type RoundGame = { clube_casa_id: number; clube_fora_id: number; id: number; inicio_em: string; inicio_simulado_em?: string | null; status: StatusJogo };
-export type PlayerStat = { jogador_id: number; pontos: number; jogos: { inicio_em: string; inicio_simulado_em?: string | null; status: StatusJogo } | { inicio_em: string; inicio_simulado_em?: string | null; status: StatusJogo }[] | null };
+export type PlayerStat = { jogador_id: number; pontos: number; jogos: { inicio_em: string; inicio_simulado_em?: string | null; status: StatusJogo } | { inicio_em: string; inicio_simulado_em?: string | null; status: StatusJogo }[] | null; lido_em: string | null };

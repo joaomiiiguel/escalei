@@ -5,6 +5,9 @@
     "dev": "next dev",
     "build": "next build",
     "lint": "next lint",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "sync:clubs": "node --env-file=.env scripts/sync-clubes.mjs",
     "sync:players": "node --env-file=.env scripts/sync-players.mjs",
     "sync:round": "node --env-file=.env scripts/sync-current-round.mjs",
@@ -15,7 +18,8 @@
     "seed:mock-next-round": "node --env-file=.env scripts/seed-mock-next-round.mjs",
     "seed:mock-live-round": "node --env-file=.env scripts/seed-mock-live-round.mjs",
     "seed:mock-live-lineups": "node --env-file=.env scripts/seed-mock-live-lineups.mjs",
-    "seed:mock-league": "node --env-file=.env scripts/seed-mock-league.mjs"
+    "seed:mock-league": "node --env-file=.env scripts/seed-mock-league.mjs",
+    "seed:round-31": "node --env-file=.env scripts/seed-round-31.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
@@ -33,12 +37,23 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
+    "@testing-library/dom": "^10.4.2",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.3",
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "@vitest/coverage-v8": "^5.0.5",
+    "@vitest/ui": "^5.0.5",
+    "happy-dom": "^21.0.3",
+    "husky": "^9.1.7",
+    "jsdom": "^30.1.3",
     "postcss": "^8.5.28",
     "supabase": "^2.118.0",
     "tailwindcss": "^4.3.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5"
   }
 }

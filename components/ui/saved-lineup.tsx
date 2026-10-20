@@ -46,7 +46,7 @@ function points(value: number) {
   return value.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 }
 
-export function RoundLineup({ formation, players, roundNumber, status, finishedAt }: RoundLineupProps) {
+export function RoundLineup({ formation, players, roundNumber, status, finishedAt, lastUpdated }: { formation: Formation; players: LineupPlayer[]; roundNumber: number; status: "EM_ANDAMENTO" | "FECHADA" | "AGENDADA"; finishedAt?: string | null; lastUpdated?: string | null }) {
   const isClosed = status === "FECHADA";
   const totalPoints = players.reduce((total, player) => total + (player.roundPoints ?? 0), 0);
   const finishedPlayers = players.filter((player) => player.roundStatus === "ENCERRADO");
@@ -78,6 +78,7 @@ export function RoundLineup({ formation, players, roundNumber, status, finishedA
         <div className="rounded-xl bg-card-foreground px-3 py-2.5"><b className="block text-[18px] font-extrabold leading-tight text-foreground">{livePlayers.length}</b><span className="text-[11px] text-muted-foreground">em campo</span></div>
         <div className="rounded-xl bg-card-foreground px-3 py-2.5"><b className="block truncate text-[18px] font-extrabold leading-tight text-foreground">{isClosed && topPlayer ? points(topPlayer.roundPoints ?? 0) : scheduledPlayers.length}</b><span className="block truncate text-[11px] text-muted-foreground">{isClosed && topPlayer ? `craque: ${topPlayer.name}` : "a jogar"}</span></div>
       </div>
+      {lastUpdated && <p className="mt-2 text-[10px] text-muted-foreground flex items-center gap-1"><Clock3 className="size-3" />Atualizado: {new Intl.DateTimeFormat("pt-BR", { day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" }).format(new Date(lastUpdated))}</p>}
       {isClosed ? <div className="mt-3 flex items-center gap-2 rounded-xl bg-card-foreground px-3 py-2.5 text-xs font-semibold leading-4 text-muted-foreground"><Trophy className="size-[15px] shrink-0" aria-hidden="true" />Pontuação oficial{finishedDate ? ` fechada em ${finishedDate}.` : " confirmada."}</div> : nextText ? <div className="mt-3 flex items-center gap-2 rounded-xl bg-card-foreground px-3 py-2.5 text-xs font-semibold leading-4 text-muted-foreground"><Clock3 className="size-[15px] shrink-0" aria-hidden="true" />{nextText}</div> : null}
     </section>
     <LineupFormation className="h-[50vh] flex-none" formation={formation} initialPlayers={players} readOnly showRoundStatus />

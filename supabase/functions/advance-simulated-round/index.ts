@@ -57,6 +57,10 @@ Deno.serve(async (request) => {
         .eq("chave", "rodada_simulada_atual");
       if (configUpdateError) return Response.json({ error: "Não foi possível atualizar a rodada ativa." }, { status: 500 });
 
+      // Inicializar ranking_rodada para todos os membros de ligas ativas nesta rodada
+      const { error: rankingInitError } = await db.rpc("fn_inicializar_ranking_rodada", { p_rodada_id: nextRound.id });
+      if (rankingInitError) return Response.json({ error: "Não foi possível inicializar o ranking da rodada." }, { status: 500 });
+
       round = { ...nextRound, status: "ABERTA" };
       number = nextRound.numero;
       openedRound = nextRound.numero;

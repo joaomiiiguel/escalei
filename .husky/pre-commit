@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+
+echo "🔍 Running pre-commit checks..."
+
+# Type check
+echo "📝 Type checking..."
+npx tsc --noEmit
+if [ $? -ne 0 ]; then
+  echo "❌ Type check failed"
+  exit 1
+fi
+
+# Lint (if eslint config exists)
+if [ -f "eslint.config.mjs" ] && [ -s "eslint.config.mjs" ]; then
+  echo "🔍 Linting..."
+  npx eslint . --ext .ts,.tsx
+  if [ $? -ne 0 ]; then
+    echo "❌ Lint failed"
+    exit 1
+  fi
+fi
+
+# Tests
+echo "🧪 Running tests..."
+npm test
+if [ $? -ne 0 ]; then
+  echo "❌ Tests failed"
+  exit 1
+fi
+
+echo "✅ All pre-commit checks passed"

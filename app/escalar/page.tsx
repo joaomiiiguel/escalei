@@ -5,14 +5,28 @@ import { createClient } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
 import { displayedKickoff } from "@/lib/game-kickoff";
+import { Clock3 } from "lucide-react";
+import { Suspense } from "react";
 
 import type { SavedPlayer, SavedTeam, ActiveRound, RoundGame, PlayerStat } from "@/lib/types";
+
+function LineupSkeleton() {
+  return (
+    <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-4 pt-5 px-5 text-foreground">
+      <div className="animate-pulse space-y-4">
+        <div className="h-8 w-48 bg-muted rounded" />
+        <div className="h-[65vh] bg-muted rounded-[14px]" />
+        <div className="h-12 bg-muted rounded-xl" />
+      </div>
+    </main>
+  );
+}
 
 function matchTime(value: string) {
   return new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" }).format(new Date(value));
 }
 
-export default async function Lineup({ searchParams }: { searchParams: Promise<{ editar?: string }> }) {
+async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?: string }> }) {
   const { editar } = await searchParams;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
@@ -48,12 +62,21 @@ export default async function Lineup({ searchParams }: { searchParams: Promise<{
   const [{ data: gamesData }, { data: statsData }] = round && playerIds.length && round.status !== "ABERTA"
     ? await Promise.all([
       supabase.from("jogos").select("id, clube_casa_id, clube_fora_id, inicio_em, inicio_simulado_em, status").eq("rodada_id", round.id),
-      supabase.from("estatisticas_jogador").select("jogador_id, pontos, jogos(inicio_em, inicio_simulado_em, status)").eq("rodada_id", round.id).in("jogador_id", playerIds),
+      supabase.from("estatisticas_jogador").select("jogador_id, pontos, jogos(inicio_em, inicio_simulado_em, status), lido_em").eq("rodada_id", round.id).in("jogador_id", playerIds),
     ])
     : [{ data: [] }, { data: [] }];
   const games = (gamesData ?? []) as RoundGame[];
   const gamesByClub = new Map(games.flatMap((game) => [[game.clube_casa_id, game], [game.clube_fora_id, game]]));
   const statsByPlayer = new Map(((statsData ?? []) as PlayerStat[]).map((stat) => [stat.jogador_id, stat]));
+  
+  // Calcular última atualização dos pontos (maior lido_em entre os jogadores do time)
+  const lastUpdated = statsData && statsData.length > 0
+    ? statsData.reduce((max, stat) => {
+        const lido = stat.lido_em ? new Date(stat.lido_em).getTime() : 0;
+        return lido > max ? lido : max;
+      }, 0)
+    : 0;
+  const lastUpdatedIso = lastUpdated > 0 ? new Date(lastUpdated).toISOString() : null;
   const roundPlayers = initialPlayers.map((player, index) => {
     const savedPlayer = savedPlayers[index];
     const game = gamesByClub.get(savedPlayer?.clube_id);
@@ -88,9 +111,17 @@ export default async function Lineup({ searchParams }: { searchParams: Promise<{
         : savedTeam
           ? round.status === "ABERTA"
             ? <SavedLineup budget={balance} formation={savedTeam.formacao} players={initialPlayers} travaEm={round.trava_em} />
-            : <RoundLineup formation={savedTeam.formacao} players={roundPlayers} roundNumber={round.numero} status={round.status} finishedAt={round.fechada_em} />
+            : <RoundLineup formation={savedTeam.formacao} players={roundPlayers} roundNumber={round.numero} status={round.status} finishedAt={round.fechada_em} lastUpdated={lastUpdatedIso} />
           : <><TitleSection title="Meu time" /><p className="rounded-xl bg-card p-4 text-sm text-muted-foreground">Você não escalou jogadores para esta rodada.</p></>
         : <><TitleSection title="Meu time" /><p className="rounded-xl bg-card p-4 text-sm text-muted-foreground">Não há rodada disponível no momento.</p></>}
     </main>
+  );
+}
+
+export default async function Lineup({ searchParams }: { searchParams: Promise<{ editar?: string }> }) {
+  return (
+    <Suspense fallback={<LineupSkeleton />}>
+      <LineupContent searchParams={searchParams} />
+    </Suspense>
   );
 }

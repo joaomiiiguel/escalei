@@ -1,3 +1,4 @@
+import { unstable_noStore as noStore } from "next/cache";
 import type { SupabaseClient } from "@supabase/supabase-js";
 import type { StatusRodada } from "@/lib/types";
 
@@ -24,6 +25,7 @@ function currentSeason() {
 
 /** Fonte única para a rodada atual exibida ao usuário. */
 export async function getCurrentRound<T extends CurrentRound>(supabase: SupabaseClient, select: string) {
+  noStore();
   const [simulationResult, currentSeasonResult] = await Promise.all([
     supabase.from("rodadas").select(select).eq("simulada", true),
     supabase

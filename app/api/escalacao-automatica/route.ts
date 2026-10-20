@@ -141,5 +141,6 @@ export async function GET(request: Request) {
     cost,
     hasPerformanceData,
     criteria: ["média dos últimos 5 jogos", "média da temporada", "jogos disputados", "mando de campo", "forma recente do adversário", "orçamento"],
+    algorithmVersion: "1.0.0",
   });
 }
