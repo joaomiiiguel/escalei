@@ -19,7 +19,7 @@ export function LineupSummary({ budget = 100, selectedPlayers = 0, isSaving = fa
   const averagePerSlot = remainingSlots ? budget / remainingSlots : 0;
   const canSave = selectedPlayers === 11 && budget >= 0;
 
-  return <section className="grid gap-3 border-t border-border pt-3 " aria-label="Resumo da escalação">
+  return <section className="grid gap-3 border-t border-border pt-3 mb-32" aria-label="Resumo da escalação">
     <div className="flex items-end justify-between gap-4">
       <div>
         <p className="text-[11px] font-medium text-muted-foreground">Restam</p>
@@ -27,7 +27,6 @@ export function LineupSummary({ budget = 100, selectedPlayers = 0, isSaving = fa
       </div>
       <div className="text-right">
         <p className="text-[11px] font-bold text-foreground">{selectedPlayers}/11 escalados</p>
-        <p className="mt-0.5 text-[10px] text-muted-foreground">Média {formatCurrency(averagePerSlot)} por vaga</p>
       </div>
     </div>
 

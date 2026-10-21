@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { LineupBuilder, RoundLineup, SavedLineup, type LineupPlayer } from "@/components/ui";
+import { LineupBuilder, Logo, RoundLineup, SavedLineup, type LineupPlayer } from "@/components/ui";
 import TitleSection from "@/components/ui/title-section";
 import { createClient } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
@@ -9,6 +9,7 @@ import { Clock3 } from "lucide-react";
 import { Suspense } from "react";
 
 import type { SavedPlayer, SavedTeam, ActiveRound, RoundGame, PlayerStat } from "@/lib/types";
+import Image from "next/image";
 
 function LineupSkeleton() {
   return (
@@ -24,6 +25,66 @@ function LineupSkeleton() {
 
 function matchTime(value: string) {
   return new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" }).format(new Date(value));
+}
+
+function Message({ children }: { children: React.ReactNode }) {
+  return <p className="rounded-xl bg-card p-4 text-sm text-muted-foreground">{children}</p>;
+}
+
+type LineupBodyProps = {
+  round: ActiveRound | null;
+  savedTeam: SavedTeam | null;
+  canEdit: boolean;
+  editMode: boolean;
+  balance: number;
+  initialPlayers: LineupPlayer[];
+  roundPlayers: LineupPlayer[];
+  lastUpdated: string | null;
+};
+
+function LineupBody({ round, savedTeam, canEdit, editMode, balance, initialPlayers, roundPlayers, lastUpdated }: LineupBodyProps) {
+  if (!round) {
+    return <Message>Não há rodada disponível no momento.</Message>;
+  }
+
+  const isEditing = canEdit && (!savedTeam || editMode);
+
+  if (isEditing) {
+    return (
+      <LineupBuilder
+        budget={balance}
+        initialFormation={savedTeam?.formacao}
+        initialPlayers={initialPlayers}
+        roundId={round.id}
+      />
+    );
+  }
+
+  if (!savedTeam) {
+    return <Message>Você não escalou jogadores para esta rodada.</Message>;
+  }
+
+  if (round.status === "ABERTA") {
+    return (
+      <SavedLineup
+        budget={balance}
+        formation={savedTeam.formacao}
+        players={initialPlayers}
+        travaEm={round.trava_em}
+      />
+    );
+  }
+
+  return (
+    <RoundLineup
+      formation={savedTeam.formacao}
+      players={roundPlayers}
+      roundNumber={round.numero}
+      status={round.status}
+      finishedAt={round.fechada_em}
+      lastUpdated={lastUpdated}
+    />
+  );
 }
 
 async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?: string }> }) {
@@ -68,13 +129,13 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
   const games = (gamesData ?? []) as RoundGame[];
   const gamesByClub = new Map(games.flatMap((game) => [[game.clube_casa_id, game], [game.clube_fora_id, game]]));
   const statsByPlayer = new Map(((statsData ?? []) as PlayerStat[]).map((stat) => [stat.jogador_id, stat]));
-  
+
   // Calcular última atualização dos pontos (maior lido_em entre os jogadores do time)
   const lastUpdated = statsData && statsData.length > 0
     ? statsData.reduce((max, stat) => {
-        const lido = stat.lido_em ? new Date(stat.lido_em).getTime() : 0;
-        return lido > max ? lido : max;
-      }, 0)
+      const lido = stat.lido_em ? new Date(stat.lido_em).getTime() : 0;
+      return lido > max ? lido : max;
+    }, 0)
     : 0;
   const lastUpdatedIso = lastUpdated > 0 ? new Date(lastUpdated).toISOString() : null;
   const roundPlayers = initialPlayers.map((player, index) => {
@@ -99,23 +160,56 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
       roundLabel: game ? matchTime(displayedKickoff(game)) : "sem jogo",
     };
   });
+
+  if (!round) {
+    return (
+      <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-4 pt-5 px-5 text-foreground">
+        <div className="w-full flex items-center justify-center">
+          <Logo size="md" />
+        </div>
+        <TitleSection title="Meu time" />
+        <div className="flex flex-col items-center justify-center border border-primary/50 rounded-xl py-8 gap-2 mt-20">
+          <Image src="/icon-erro.png" alt="Time indisponível" width={100} height={100} />
+          <p className="text-sm text-primary">Não há rodada disponível no momento.</p>
+        </div>
+      </main>
+    );
+  }
+
   const canEdit = round?.status === "ABERTA" && new Date() < new Date(round.trava_em);
 
+  if (!canEdit && !savedTeam) {
+    return (
+      <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-4 pt-5 px-5 text-foreground">
+        <div className="w-full flex items-center justify-center">
+          <Logo size="md" />
+        </div>
+        <TitleSection title="Meu time" />
+        <div className="flex flex-col items-center justify-center border border-primary/50 rounded-xl py-8 gap-2 mt-20">
+          <Image src="/icon-erro.png" alt="Time indisponível" width={100} height={100} />
+          <p className="text-sm text-primary">Não é possível editar o time nesta rodada.</p>
+        </div>
+      </main>
+    );
+  }
+
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-4 pt-5 px-5 text-foreground">
-      {round ? canEdit && (!savedTeam || editar === "1")
-        ? <>
-          <TitleSection title="Montar time" />
-          <LineupBuilder budget={balance} initialFormation={savedTeam?.formacao} initialPlayers={initialPlayers} roundId={round.id} />
-        </>
-        : savedTeam
-          ? round.status === "ABERTA"
-            ? <SavedLineup budget={balance} formation={savedTeam.formacao} players={initialPlayers} travaEm={round.trava_em} />
-            : <RoundLineup formation={savedTeam.formacao} players={roundPlayers} roundNumber={round.numero} status={round.status} finishedAt={round.fechada_em} lastUpdated={lastUpdatedIso} />
-          : <><TitleSection title="Meu time" /><p className="rounded-xl bg-card p-4 text-sm text-muted-foreground">Você não escalou jogadores para esta rodada.</p></>
-        : <><TitleSection title="Meu time" /><p className="rounded-xl bg-card p-4 text-sm text-muted-foreground">Não há rodada disponível no momento.</p></>}
-    </main>
-  );
+    <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-2 pt-5 px-5 text-foreground">
+      <div className="w-full flex items-center justify-center">
+        <Logo size="md" />
+      </div>
+      <TitleSection title={round && canEdit ? "Montar time" : "Meu time"} />
+      <LineupBody
+        round={round}
+        savedTeam={savedTeam}
+        canEdit={canEdit}
+        editMode={editar === "1"}
+        balance={balance}
+        initialPlayers={initialPlayers}
+        roundPlayers={roundPlayers}
+        lastUpdated={lastUpdatedIso}
+      />
+    </main>)
 }
 
 export default async function Lineup({ searchParams }: { searchParams: Promise<{ editar?: string }> }) {

@@ -1,8 +1,8 @@
-# Escalei — instruções para agentes
+# Escalou — instruções para agentes
 
 ## Produto e escopo
 
-Escalei é um PWA mobile-first de fantasy futebol gratuito para o Brasileirão Série A.
+Escalou é um PWA mobile-first de fantasy futebol gratuito para o Brasileirão Série A.
 
 - O produto não possui apostas, prêmio em dinheiro ou linguagem que sugira jogo de azar.
 - A meta do MVP é validar retenção por rodada e competição entre amigos.

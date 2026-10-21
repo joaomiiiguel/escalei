@@ -14,7 +14,7 @@ export default async function Onboarding({ searchParams }: { searchParams: Promi
   const { data: { user } } = await supabase.auth.getUser();
 
   const cookieStore = await cookies();
-  const candidateToken = params.convite ?? cookieStore.get("escalei_invite")?.value;
+  const candidateToken = params.convite ?? cookieStore.get("escalou_invite")?.value ?? cookieStore.get("escalei_invite")?.value;
   const inviteToken = candidateToken && isInviteToken(candidateToken) && await getActiveInvite(candidateToken) ? candidateToken : null;
 
   if (!user) redirect(inviteToken ? `/entrar?convite=${inviteToken}` : "/entrar");

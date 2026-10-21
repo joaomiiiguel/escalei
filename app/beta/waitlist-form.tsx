@@ -80,7 +80,7 @@ export function WaitlistForm() {
         Entre para o beta
       </h2>
       <p className="mt-2 text-sm leading-6 text-[#a5bdae]">
-        Deixe seus dados para receber novidades e o convite para o grupo de WhatsApp do Escalei.
+        Deixe seus dados para receber novidades e o convite para o grupo de WhatsApp do Escalou.
       </p>
 
       <div className="mt-6 grid gap-4">
@@ -124,7 +124,7 @@ export function WaitlistForm() {
               aria-describedby={errors.consent ? `${id}-consent-error` : undefined}
               className="mt-0.5 size-5 rounded border-[#345b43] bg-[#050806] text-primary accent-[#00e58a] focus-visible:ring-2 focus-visible:ring-ring"
             />
-            <span>Aceito receber informações sobre o beta do Escalei por WhatsApp e e-mail.</span>
+            <span>Aceito receber informações sobre o beta do Escalou por WhatsApp e e-mail.</span>
           </label>
           {errors.consent ? (
             <p id={`${id}-consent-error`} className="mt-2 text-xs font-bold text-[#ff8f8f]">

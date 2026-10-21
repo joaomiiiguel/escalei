@@ -27,7 +27,7 @@ export async function finishOnboarding(formData: FormData) {
     const inviteFromForm = String(formData.get("convite") ?? "");
     const inviteToken = isInviteToken(inviteFromForm)
       ? inviteFromForm
-      : cookieStore.get("escalei_invite")?.value;
+      : cookieStore.get("escalou_invite")?.value ?? cookieStore.get("escalei_invite")?.value;
     const hasMembership = await hasActiveLeagueMembership(user.id);
     const activeInvite = inviteToken && isInviteToken(inviteToken) ? await getActiveInvite(inviteToken) : false;
     if (!hasMembership && !activeInvite) redirect("/entrar?erro=sem_liga");
@@ -50,7 +50,7 @@ export async function finishOnboarding(formData: FormData) {
         email,
         apelido,
         clube_coracao_id: clube,
-        telefone: cookieStore.get("escalei_verified_phone")?.value ?? null,
+        telefone: cookieStore.get("escalou_verified_phone")?.value ?? cookieStore.get("escalei_verified_phone")?.value ?? null,
         termos_versao: "v1",
         termos_aceitos_em: new Date().toISOString(),
       }, { onConflict: "id" })
@@ -60,10 +60,12 @@ export async function finishOnboarding(formData: FormData) {
     if (error?.code === "23505") redirect("/onboarding?erro=apelido_indisponivel");
     if (error || profile?.id !== user.id) redirect("/onboarding?erro=perfil");
 
+    cookieStore.delete("escalou_verified_phone");
     cookieStore.delete("escalei_verified_phone");
     if (inviteToken && isInviteToken(inviteToken)) {
       const joined = await addUserToInvitedLeague(inviteToken, user.id);
       if (!joined) redirect("/entrar?erro=sem_liga");
+      cookieStore.delete("escalou_invite");
       cookieStore.delete("escalei_invite");
     }
 

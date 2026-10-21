@@ -15,9 +15,12 @@ vi.mock("next/navigation", () => ({
   useSearchParams: () => new URLSearchParams(),
 }));
 
+import React from "react";
+
 // Mock next/link
 vi.mock("next/link", () => ({
-  default: (props: any) => props.children,
+  default: ({ children, href, ...rest }: any) =>
+    React.createElement("a", { href, ...rest }, children),
 }));
 
 // Mock lucide-react icons

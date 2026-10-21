@@ -157,7 +157,7 @@ function PlayerPickerSheet({ maxAvailablePrice, onClose, onSelect, position, sel
   const sheet = (
     <div className="fixed inset-0 z-[70] flex items-end mx-auto max-w-lg">
       <button type="button" className={`absolute inset-0 bg-black/65 transition-opacity duration-200 ${isOpen ? "opacity-100" : "opacity-0"}`} onClick={close} aria-label="Fechar lista de jogadores" />
-      <section className={`relative z-10 grid h-[82dvh] w-full grid-rows-[auto_auto_auto_minmax(0,1fr)] overflow-hidden rounded-t-3xl border-t border-border bg-card shadow-2xl transition-transform duration-200 ease-out motion-reduce:transition-none ${isOpen ? "translate-y-0" : "translate-y-full"}`} role="dialog" aria-modal="true" aria-labelledby="player-picker-title">
+      <section className={`relative z-10 grid h-[82dvh] w-full grid-rows-[auto_auto_auto_minmax(0,1fr)] overflow-hidden rounded-t-3xl border-t border-border bg-card/40 backdrop-blur-md shadow-2xl transition-transform duration-200 ease-out motion-reduce:transition-none ${isOpen ? "translate-y-0" : "translate-y-full"}`} role="dialog" aria-modal="true" aria-labelledby="player-picker-title">
         <div className="mx-auto mt-3 h-1 w-9 rounded-full bg-muted-foreground/60" aria-hidden="true" />
         <header className="flex items-center justify-between px-5 pb-3 pt-4"><div><h2 id="player-picker-title" className="text-lg font-extrabold text-foreground">Mercado</h2><p className="text-xs font-medium text-muted-foreground">{isLoading ? "Carregando jogadores" : `${players.length} jogadores`}</p></div><button type="button" onClick={close} className="grid size-9 place-items-center rounded-full bg-muted text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label="Fechar"><X className="size-4" /></button></header>
         <div className="border-t border-border px-5 pt-3">
@@ -224,14 +224,14 @@ export function LineupFormation({ autoPlayers, budget = 100, className = "", for
   }
 
   return <section className={`flex flex-col gap-3 ${className}`} aria-labelledby="lineup-formation-title">
-    {!readOnly && <div className="flex items-center justify-between gap-3">
-      <p id="lineup-formation-title" className="shrink-0 text-[12px] font-semibold text-muted-foreground">Formação</p>
-      <ButtonGroup className="h-8 w-[218px] max-w-[calc(100%-5rem)] gap-0 rounded-[10px] bg-card-foreground p-0.5 [&>[data-slot=button]]:!h-7 [&>[data-slot=button]]:!min-h-0 [&>[data-slot=button]]:flex-1 [&>[data-slot=button]]:!rounded-lg" aria-label="Selecionar formação">
-        {formations.map((item) => <Button className="px-0 !text-[11px] !font-bold shadow-none !border-0" onClick={() => changeFormation(item)} disabled={transitionPhase !== "idle"} key={item} variant={item === selectedFormation ? "default" : "ghost"} size="sm" aria-pressed={item === selectedFormation}>{item}</Button>)}
+    {!readOnly && <div className="flex items-center justify-end gap-3">
+      <p id="lineup-formation-title" className="shrink-0 text-[12px] font-semibold text-muted-foreground font-mono">Formação</p>
+      <ButtonGroup className="h-9 w-[218px] max-w-[calc(100%-5rem)] items-center gap-0 rounded-xl bg-primary/20 border border-primary p-0.5 [&>[data-slot=button]]:!h-7 [&>[data-slot=button]]:!min-h-0 [&>[data-slot=button]]:flex-1 [&>[data-slot=button]]:!rounded-lg" aria-label="Selecionar formação">
+        {formations.map((item) => <Button className="px-0 !text-[12px] font-mono !font-bold shadow-none !border-0" onClick={() => changeFormation(item)} disabled={transitionPhase !== "idle"} key={item} variant={item === selectedFormation ? "default" : "ghost"} size="sm" aria-pressed={item === selectedFormation}>{item}</Button>)}
       </ButtonGroup>
     </div>}
 
-    <div className="relative flex-1 overflow-hidden rounded-[14px] border border-primary/50 bg-linear-to-b from-emerald-950 via-emerald-900/70 to-emerald-950 p-3 shadow-inner shadow-black/30">
+    <div className="relative flex-1 overflow-hidden rounded-[14px] border border-primary/50 bg-linear-to-b from-emerald-950 via-emerald-900/70 to-emerald-950 p-4 shadow-inner shadow-black/30">
       <div className="pointer-events-none absolute inset-1.5 rounded-[10px] border border-primary/35" aria-hidden="true" />
       <div className="pointer-events-none absolute inset-x-1.5 top-1/2 border-t border-primary/35" aria-hidden="true" />
       <div className="pointer-events-none absolute left-1/2 top-1/2 size-16 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/35" aria-hidden="true" />
@@ -239,7 +239,7 @@ export function LineupFormation({ autoPlayers, budget = 100, className = "", for
       <div className="pointer-events-none absolute bottom-1.5 left-1/2 h-10 w-[42%] -translate-x-1/2 border-x border-t border-primary/35" aria-hidden="true" />
       <div className="pointer-events-none absolute bottom-1.5 left-1/2 h-5 w-[22%] -translate-x-1/2 border-x border-t border-primary/35" aria-hidden="true" />
 
-      <div className={`absolute inset-0 z-10 grid grid-rows-4 px-3 py-2 transition-[opacity,transform] duration-300 motion-reduce:transition-none ${transitionPhase === "leaving" ? "-translate-y-1 scale-[0.97] opacity-0 ease-in" : transitionPhase === "entering" ? "translate-y-1 scale-[0.97] opacity-0 ease-out" : "translate-y-0 scale-100 opacity-100 ease-out"}`}>
+      <div className={`absolute inset-0 z-10 grid grid-rows-4 gap-2 px-3 py-2 transition-[opacity,transform] duration-300 motion-reduce:transition-none ${transitionPhase === "leaving" ? "-translate-y-1 scale-[0.97] opacity-0 ease-in" : transitionPhase === "entering" ? "translate-y-1 scale-[0.97] opacity-0 ease-out" : "translate-y-0 scale-100 opacity-100 ease-out"}`}>
         {lines.map((line, index) => <div className={`grid items-center ${line.length === 5 ? "grid-cols-5" : line.length === 4 ? "grid-cols-4" : line.length === 3 ? "grid-cols-3" : line.length === 2 ? "grid-cols-2" : "grid-cols-1"}`} key={index}>
           {line.map((position, slot) => {
             const slotKey = `${position}-${slot}`;
@@ -250,7 +250,7 @@ export function LineupFormation({ autoPlayers, budget = 100, className = "", for
       </div>
     </div>
 
-    {!readOnly && <p className="flex items-start gap-2 rounded-xl bg-primary/10 px-3 py-2 text-[11px] leading-4 text-primary/50">
+    {!readOnly && <p className="flex justify-center items-center gap-2 rounded-xl bg-primary/30 px-3 py-2 text-[11px] leading-4 text-white/50">
       <TriangleAlert className="mt-0.5 size-3.5 shrink-0" aria-hidden="true" />
       Toque em um “+” para escolher o jogador daquela posição.
     </p>}

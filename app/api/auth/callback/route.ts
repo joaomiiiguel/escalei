@@ -22,7 +22,7 @@ export async function GET(request: Request) {
       return NextResponse.redirect(new URL("/entrar?erro=grupo_inativado", request.url));
     }
 
-    const inviteToken = request.headers.get("cookie")?.match(/(?:^|; )escalei_invite=([^;]+)/)?.[1];
+    const inviteToken = request.headers.get("cookie")?.match(/(?:^|; )(?:escalou_invite|escalei_invite)=([^;]+)/)?.[1];
     const invite = inviteToken && isInviteToken(inviteToken) ? await getActiveInvite(inviteToken) : false;
     if (!invite) {
       await supabase.auth.signOut();

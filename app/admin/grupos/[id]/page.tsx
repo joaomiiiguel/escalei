@@ -81,8 +81,34 @@ export default async function AdminGroupDetail({ params, searchParams }: { param
       <div className="grid gap-4">
         {ownerMember && <article className="rounded-lg border border-neutral-800 bg-neutral-900 p-5 shadow-sm"><header className="mb-4 flex items-center gap-2"><Crown className="size-4 text-primary" aria-hidden="true" /><h2 className="text-sm font-extrabold">Dono do grupo</h2></header><div className="flex items-center gap-3"><span className="grid size-10 place-items-center rounded-full bg-primary/15 text-xs font-extrabold text-primary">{ownerMember.profile.apelido.slice(0, 2).toUpperCase()}</span><div className="min-w-0"><p className="truncate text-sm font-bold">{ownerMember.profile.apelido}</p><p className="truncate text-xs text-muted-foreground">{ownerMember.profile.email}</p><p className="truncate text-xs text-muted-foreground">{ownerMember.profile.telefone ?? "Sem telefone"}</p></div></div></article>}
         <article className="overflow-hidden rounded-lg border border-neutral-800 bg-neutral-900 shadow-sm">
-          <header className="flex items-center justify-between border-b border-neutral-800 px-5 py-4"><div><h2 className="text-lg font-extrabold">Participantes</h2><p className="text-sm text-muted-foreground">{participantMembers.length} {participantMembers.length === 1 ? "participante" : "participantes"} · ordenados pela última pontuação</p></div><UsersRound className="size-5 text-primary" /></header>
-          <ul className="divide-y divide-neutral-800">{rankedMembers.map((member) => <li key={member.usuario_id} className={`flex items-center gap-3 px-5 py-4 ${member.posicao === 1 ? "border-l-2 border-primary bg-primary/5" : ""}`}><strong className={`w-6 text-center text-sm ${member.posicao === 1 ? "text-primary" : "text-muted-foreground"}`}>{member.posicao}º</strong><span className="grid size-10 place-items-center rounded-full bg-primary/15 text-xs font-extrabold text-primary">{member.profile.apelido.slice(0, 2).toUpperCase()}</span><div className="min-w-0 flex-1"><p className="truncate text-sm font-bold">{member.profile.apelido}</p><p className="truncate text-xs text-muted-foreground">{member.profile.email}</p><p className="truncate text-xs text-muted-foreground">{member.profile.telefone ?? "Sem telefone"}</p></div><p className="shrink-0 text-right text-xs text-muted-foreground"><strong className="block text-base text-foreground">{member.pontos.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</strong>última pontuação</p><form action={removeGroupMember}><input type="hidden" name="grupo_id" value={group.id} /><input type="hidden" name="usuario_id" value={member.usuario_id} /><Button type="submit" variant="destructive" className="h-8 px-2.5 text-xs"><UserMinus className="size-3.5" /><span className="sr-only">Remover participante</span></Button></form></li>)}</ul>
+          <header className="flex items-center justify-between border-b border-neutral-800 px-5 py-4">
+            <div>
+              <h2 className="text-lg font-extrabold">Participantes</h2>
+              <p className="text-sm text-muted-foreground">{participantMembers.length} {participantMembers.length === 1 ? "participante" : "participantes"} · ordenados pela última pontuação</p>
+            </div><UsersRound className="size-5 text-primary" />
+          </header>
+          <ul className="divide-y divide-neutral-800">{rankedMembers.map((member) => (
+            <li key={member.usuario_id} className={`flex items-center gap-3 px-5 py-4 ${member.posicao === 1 ? "border-l-2 border-primary border-b-2 border-b-primary/10 bg-primary/5" : ""}`}>
+              <strong className={`w-6 text-center text-sm ${member.posicao === 1 ? "text-primary" : "text-muted-foreground"}`}>{member.posicao}º</strong>
+              <span className="grid size-10 place-items-center rounded-full bg-primary/15 text-xs font-extrabold text-primary">{member.profile.apelido.slice(0, 2).toUpperCase()}</span>
+              <div className="min-w-0 flex-1">
+                <p className="truncate text-sm font-bold">{member.profile.apelido}</p>
+                <p className="truncate text-xs text-muted-foreground">{member.profile.email}</p>
+                <p className="truncate text-xs text-muted-foreground">{member.profile.telefone ?? "Sem telefone"}</p>
+              </div>
+              <p className="shrink-0 text-right text-xs text-muted-foreground">
+                <strong className="block text-base text-foreground">{member.pontos.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}</strong>
+                última pontuação
+              </p>
+              <form action={removeGroupMember}>
+                <input type="hidden" name="grupo_id" value={group.id} />
+                <input type="hidden" name="usuario_id" value={member.usuario_id} />
+                <Button type="submit" variant="outline" className="h-8 px-2.5 text-xs">
+                  <UserMinus className="size-3.5" />
+                  <span className="sr-only">Remover participante</span></Button>
+              </form>
+            </li>))}
+          </ul>
         </article>
       </div>
 

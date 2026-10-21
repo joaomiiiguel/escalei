@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
 import { RoundSelector } from "./round-selector";
+import { Logo } from "@/components/ui";
 
 type League = { id: string; nome: string; icone: string | null; tipo: "ABERTA" | "CONVITE"; temporada: number; token_convite: string; arquivada_em: string | null };
 type Membership = { entrou_em: string; ligas: League | League[] | null };
@@ -100,26 +101,41 @@ export default async function LeagueDetailPage({ params, searchParams }: { param
   const joinedDate = new Intl.DateTimeFormat("pt-BR", { month: "short", year: "numeric", timeZone: "America/Sao_Paulo" }).format(new Date(membership.entrou_em));
 
   return <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-3.5 px-5 pt-1 pb-40 text-foreground">
-    <header className="flex h-12 items-center gap-2.5"><Link href="/ligas?lista=1" className="grid size-9 place-items-center rounded-full bg-card text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label="Voltar para ligas"><ArrowLeft className="size-[18px]" /></Link><h1 className="min-w-0 flex-1 truncate text-2xl font-extrabold tracking-tight">Ligas</h1></header>
+    {/* <header className="flex h-12 items-center gap-2.5"><Link href="/ligas?lista=1" className="grid size-9 place-items-center rounded-full bg-card text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label="Voltar para ligas"><ArrowLeft className="size-[18px]" /></Link><h1 className="min-w-0 flex-1 truncate text-2xl font-extrabold tracking-tight">Ligas</h1></header> */}
+    <div className="w-full flex items-center justify-center">
+      <Logo size="md" />
+    </div>
+    <section className="flex items-center gap-3.5" aria-labelledby="league-name">
+      <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-primary/30 text-[28px]">{league.icone || "⚽"}</span>
+      <div className="min-w-0">
+        <h2 id="league-name" className="truncate text-[22px] font-extrabold tracking-tight">{league.nome}</h2>
+        <p className="mt-1 text-xs text-muted-foreground">{members.length} {members.length === 1 ? "membro" : "membros"} · {league.tipo === "CONVITE" ? "por convite" : "aberta"} · entrou em {joinedDate}</p>
+      </div>
+    </section>
 
-    <section className="flex items-center gap-3.5" aria-labelledby="league-name"><span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-card-foreground text-[28px]">{league.icone || "⚽"}</span><div className="min-w-0"><h2 id="league-name" className="truncate text-[22px] font-extrabold tracking-tight">{league.nome}</h2><p className="mt-1 text-xs text-muted-foreground">{members.length} {members.length === 1 ? "membro" : "membros"} · {league.tipo === "CONVITE" ? "por convite" : "aberta"} · entrou em {joinedDate}</p></div></section>
-
-    <section className="grid grid-cols-3 gap-2" aria-label="Seu desempenho na liga">
-      <div className="rounded-xl bg-card px-3 py-2.5"><strong className="block text-lg font-extrabold leading-tight">{currentMember ? `${currentMember.position}º` : "—"}</strong><span className="text-[11px] text-muted-foreground">sua posição</span></div>
-      <div className="rounded-xl bg-card px-3 py-2.5"><strong className="block text-lg font-extrabold leading-tight">{currentMember ? points(currentMember.points) : "—"}</strong><span className="text-[11px] text-muted-foreground">seus pontos</span></div>
-      <div className="rounded-xl bg-card px-3 py-2.5"><strong className="block text-lg font-extrabold leading-tight">{differenceToLeader === null ? "—" : differenceToLeader === 0 ? "—" : `−${points(differenceToLeader)}`}</strong><span className="text-[11px] text-muted-foreground">para o 1º</span></div>
+    <section className="grid grid-cols-3 gap-4" aria-label="Seu desempenho na liga">
+      <div className="rounded-xl bg-secondary px-3 py-2.5 text-center"><strong className="block text-3xl font-mono text-primary font-extrabold leading-tight">{currentMember ? `${currentMember.position}º` : "—"}</strong><span className="text-[11px] font-mono text-white">sua posição</span></div>
+      <div className="rounded-xl bg-secondary px-3 py-2.5 text-center"><strong className="block text-3xl font-mono text-primary font-extrabold leading-tight">{currentMember ? points(currentMember.points) : "—"}</strong><span className="text-[11px] font-mono text-white">seus pontos</span></div>
+      <div className="rounded-xl bg-secondary px-3 py-2.5 text-center"><strong className="block text-3xl font-mono text-primary font-extrabold leading-tight">{differenceToLeader === null ? "—" : differenceToLeader === 0 ? "—" : `−${points(differenceToLeader)}`}</strong><span className="text-[11px] font-mono text-white">para o 1º</span></div>
     </section>
 
     {members.length === 1 && <section className="flex gap-2 rounded-xl bg-warning/12 p-3 text-xs leading-[1.4] text-warning"><Users className="size-4 shrink-0" aria-hidden="true" />Convide pelo menos 3 amigos. Sozinho você é sempre o primeiro — e isso não tem graça.</section>}
 
-    <section className="grid gap-1" aria-labelledby="ranking-title"><div className="mb-1 flex items-center justify-between gap-3"><h2 id="ranking-title" className="text-[17px] font-extrabold">{round ? `Ranking da Rodada ${String(round.numero).padStart(2, "0")}` : "Ranking da liga"}</h2>{round && availableRounds.length > 0 && <RoundSelector leagueId={league.id} selectedRoundId={round.id} options={availableRounds.map((candidate) => ({ id: candidate.id, numero: candidate.numero, isCurrent: candidate.id === currentRound?.id }))} />}</div>
+    <section className="grid gap-1" aria-labelledby="ranking-title">
+      <div className="mb-1 flex items-center justify-between gap-3">
+        <h2 id="ranking-title" className="text-[17px] font-extrabold">{round ? `Ranking da Rodada ${String(round.numero).padStart(2, "0")}` : "Ranking da liga"}</h2>
+        {round && availableRounds.length > 0 && <RoundSelector leagueId={league.id} selectedRoundId={round.id} options={availableRounds.map((candidate) => ({ id: candidate.id, numero: candidate.numero, isCurrent: candidate.id === currentRound?.id }))} />}
+      </div>
+      <div className="my-2 flex items-center justify-between gap-3 opacity-60">
+        <p className="w-12 text-xs font-extrabold font-mono">POS</p>
+        <p className="flex-1 text-xs font-extrabold">NOME</p>
+        <p className="w-10 text-xs font-extrabold font-mono">PTS</p>
+      </div>
       {ranking.map((member) => {
-        const club = first(member.profile.clubes);
-        return <article key={member.usuario_id} className={`flex h-[60px] items-center gap-3 rounded-xl px-3 ${member.isCurrentUser ? "border border-primary bg-primary/12" : "bg-card"}`}>
+        return <article key={member.usuario_id} className={`flex h-[60px] items-center gap-3 rounded-xl px-3 backdrop-blur-sm ${member.isCurrentUser ? "border border-primary bg-primary/15" : "bg-primary/10"}`}>
           <strong className="w-8 text-[15px] font-extrabold text-foreground">{member.position}º</strong>
-          <span className={`grid size-9 shrink-0 place-items-center rounded-full text-xs font-extrabold ${member.isCurrentUser ? "bg-primary text-primary-foreground" : "bg-card-foreground text-muted-foreground"}`}>{initials(member.profile.apelido)}</span>
-          <span className="min-w-0 flex-1"><strong className="block truncate text-sm">{member.profile.apelido}{member.isCurrentUser ? " (você)" : ""}</strong><span className="block truncate text-xs text-muted-foreground">{club?.sigla ?? "—"} · {league.nome}</span></span>
-          <span className="grid justify-items-end gap-0.5"><strong className="font-mono text-[15px]">{points(member.points)}</strong><span className="text-[11px] font-bold text-muted-foreground">—</span></span>
+          <span className="min-w-0 flex-1"><strong className="block truncate">{member.profile.apelido}{member.isCurrentUser ? " (você)" : ""}</strong></span>
+          <span className="grid justify-items-end gap-0.5"><strong className="font-mono text-[15px]">{points(member.points)}</strong></span>
         </article>;
       })}
     </section>

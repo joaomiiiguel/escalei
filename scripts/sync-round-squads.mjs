@@ -4,7 +4,7 @@ const apiKey = process.env.API_FOOTBALL_KEY;
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
 const season = Number(process.env.API_FOOTBALL_SEASON ?? "2024");
-const roundNumber = Number(process.env.SIMULATION_ROUND ?? "30");
+const roundNumber = Number(process.env.SIMULATION_ROUND ?? "31");
 if (!apiKey || !url || !key) throw new Error("API_FOOTBALL_KEY e credenciais do Supabase são obrigatórias.");
 
 const db = createClient(url, key, { auth: { autoRefreshToken: false, persistSession: false } });

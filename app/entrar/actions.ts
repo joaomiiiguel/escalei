@@ -14,7 +14,7 @@ export async function signInWithGoogle(formData: FormData) {
   const inviteToken = await validInviteToken(formData);
   if (inviteToken) {
     const cookieStore = await cookies();
-    cookieStore.set("escalei_invite", inviteToken, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 });
+    cookieStore.set("escalou_invite", inviteToken, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 });
   }
   const supabase = await createClient();
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";

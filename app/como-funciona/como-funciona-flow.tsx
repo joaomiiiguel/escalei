@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/shadcn/button";
+import { Logo } from "@/components/ui/logo";
 import { SlideIllustration } from "./slide-illustration";
 
 const slides = [
@@ -56,7 +57,9 @@ export function ComoFuncionaFlow() {
   return (
     <main className="mx-auto grid h-dvh min-h-dvh w-full max-w-lg  overflow-hidden bg-background text-foreground">
 
-      <header className="flex items-center px-5"><span className="inline-flex items-center gap-2 text-[29px] font-extrabold tracking-[-0.8px]"><span aria-hidden="true" className="grid size-9 place-items-center rounded-full border-[3px] border-current text-sm">◉</span>escalei</span></header>
+      <header className="flex items-center px-5">
+        <Logo variant="circle" size="lg" />
+      </header>
 
       <section className="min-h-0 overflow-y-auto">
         <SlideIllustration slide={currentSlide} />

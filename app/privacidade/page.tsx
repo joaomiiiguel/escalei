@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Privacidade | Escalei",
-  description: "Política de privacidade do Escalei.",
+  title: "Privacidade | Escalou",
+  description: "Política de privacidade do Escalou.",
 };
 
 export default function PrivacyPage() {

@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { signOut } from "./actions";
 import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/ui/logo";
 import { LogOut } from "lucide-react";
 import { AdminNav } from "./admin-nav";
 
@@ -18,9 +19,8 @@ export default async function AdminLayout({ children }: Readonly<{ children: Rea
         <main className="!w-full bg-neutral-950 font-sans text-neutral-100 lg:grid lg:grid-cols-[276px_minmax(0,1fr)] lg:gap-0">
             <aside className="hidden min-h-dvh border-r border-neutral-800 bg-neutral-900 p-6 lg:flex lg:flex-col">
                 <div className="flex items-center gap-3">
-                    <span className="grid size-10 place-items-center rounded-[10px] bg-primary font-black text-primary-foreground">E</span>
                     <div>
-                        <p className="m-0 text-lg font-extrabold">escalei</p>
+                        <Logo size="lg" className="m-0 text-lg font-extrabold" />
                         <p className="m-0 text-xs font-semibold text-muted-foreground">Administração</p>
                     </div>
                 </div>

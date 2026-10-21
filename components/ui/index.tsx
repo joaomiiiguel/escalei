@@ -2,6 +2,7 @@ export * from "./app-nav";
 export * from "./badge";
 export * from "./bottom-sheet";
 export * from "./brand";
+export * from "./logo";
 export * from "./budget-bar";
 export * from "./button";
 export * from "./card";

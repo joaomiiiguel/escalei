@@ -12,10 +12,11 @@ import {
   Whistle,
 } from "lucide-react";
 import { WaitlistForm } from "./waitlist-form";
+import { Logo } from "@/components/ui/logo";
 
 export const metadata: Metadata = {
-  title: "Escalei Beta | Fantasy gratuito para disputar com amigos",
-  description: "Entre na lista de espera do Escalei, o fantasy gratuito do Brasileirão para disputar em ligas privadas com amigos.",
+  title: "Escalou Beta | Fantasy gratuito para disputar com amigos",
+  description: "Entre na lista de espera do Escalou, o fantasy gratuito do Brasileirão para disputar em ligas privadas com amigos.",
 };
 
 const navItems = [
@@ -76,10 +77,10 @@ const audiences = [
 ];
 
 const faqs = [
-  ["É gratuito?", "Sim. O beta do Escalei é gratuito."],
+  ["É gratuito?", "Sim. O beta do Escalou é gratuito."],
   [
     "Tem aposta ou prêmio em dinheiro?",
-    "Não. O Escalei é um fantasy gratuito para competir com amigos, sem apostas e sem premiação em dinheiro.",
+    "Não. O Escalou é um fantasy gratuito para competir com amigos, sem apostas e sem premiação em dinheiro.",
   ],
   [
     "Como entro no beta?",
@@ -89,7 +90,7 @@ const faqs = [
     "Preciso entender muito de futebol?",
     "Não. Quem acompanha o Brasileirão já consegue começar. A graça é testar suas escolhas contra a turma.",
   ],
-  ["Posso jogar com meus amigos?", "Sim. O Escalei foi pensado para ligas privadas, grupos de amigos e resenhas de futebol."],
+  ["Posso jogar com meus amigos?", "Sim. O Escalou foi pensado para ligas privadas, grupos de amigos e resenhas de futebol."],
 ];
 
 export default function BetaLandingPage() {
@@ -111,7 +112,7 @@ export default function BetaLandingPage() {
                 Monte seu time, desafie a sua turma e descubra quem realmente manja de Brasileirão.
               </p>
               <p className="mt-4 max-w-2xl text-base leading-7 text-[#9fb7a8]">
-                Entre na lista de espera do Escalei e receba o convite para o grupo oficial do beta no WhatsApp.
+                Entre na lista de espera do Escalou e receba o convite para o grupo oficial do beta no WhatsApp.
               </p>
               <div className="mt-7">
                 <Cta href="#lista-de-espera">Entrar na lista de espera</Cta>
@@ -213,7 +214,7 @@ export default function BetaLandingPage() {
         <div className="mx-auto max-w-4xl rounded-[28px] border border-primary/25 bg-[#073a24] p-6 text-center sm:p-10">
           <h2 className="text-3xl font-black leading-tight tracking-[-0.03em] sm:text-5xl">Quem vai mandar na sua resenha nesta rodada?</h2>
           <p className="mx-auto mt-5 max-w-2xl text-base font-semibold leading-7 text-[#cdeedd]">
-            Entre na lista de espera e seja um dos primeiros a disputar o Brasileirão com a sua turma no Escalei.
+            Entre na lista de espera e seja um dos primeiros a disputar o Brasileirão com a sua turma no Escalou.
           </p>
           <div className="mx-auto mt-7 max-w-sm">
             <Cta href="#lista-de-espera">Quero entrar na lista de espera</Cta>
@@ -225,7 +226,7 @@ export default function BetaLandingPage() {
       <footer className="border-t border-[#172a20] bg-[#030604] px-4 py-9 sm:px-6 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-5 text-sm text-[#8ca091] md:grid-cols-[1fr_auto] md:items-center">
           <div>
-            <p className="text-2xl font-black tracking-tight text-foreground">escalei</p>
+            <Logo size="md" />
             <p className="mt-2 font-semibold">Fantasy de futebol gratuito para disputar com amigos.</p>
             <p className="mt-2">Produto independente. Sem vínculo com clubes, ligas ou entidades esportivas.</p>
             <p className="mt-1 font-bold">Sem apostas e sem prêmios em dinheiro.</p>
@@ -245,9 +246,7 @@ function Header() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-[#172a20] bg-[#050806]/95 backdrop-blur supports-[backdrop-filter]:bg-[#050806]/85">
       <div className="mx-auto flex min-h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
-        <a href="#inicio" className="text-2xl font-black tracking-tight text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring">
-          escalei
-        </a>
+        <Logo href="#inicio" size="md" />
         <nav aria-label="Navegação da landing" className="hidden items-center gap-6 text-sm font-bold text-[#a5bdae] md:flex">
           {navItems.map((item) => (
             <a className="transition hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" href={item.href} key={item.href}>
@@ -324,7 +323,7 @@ function PhoneMockup() {
       <div className="rounded-[32px] border-2 border-[#31513f] bg-[#050806] p-3 shadow-[0_34px_100px_rgba(0,229,138,0.12)]">
         <div className="rounded-[24px] bg-[#08150e] p-4">
           <div className="flex items-center justify-between">
-            <p className="text-lg font-black">escalei</p>
+            <Logo size="sm" />
             <p className="rounded-full bg-primary/10 px-3 py-1 text-xs font-black text-primary">Rodada 29</p>
           </div>
           <div className="mt-3 flex items-end justify-between">

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Termos | Escalei",
-  description: "Termos de uso do Escalei.",
+  title: "Termos | Escalou",
+  description: "Termos de uso do Escalou.",
 };
 
 export default function TermsPage() {
@@ -15,10 +15,10 @@ export default function TermsPage() {
         </Link>
         <h1 className="mt-6 text-3xl font-black tracking-tight">Termos de uso</h1>
         <div className="mt-6 grid gap-4 text-sm leading-6 text-[#a5bdae]">
-          <p>O Escalei é um fantasy de futebol gratuito para disputar com amigos em ligas privadas.</p>
+          <p>O Escalou é um fantasy de futebol gratuito para disputar com amigos em ligas privadas.</p>
           <p>O beta fechado pode liberar convites aos poucos. O cadastro na lista de espera não garante acesso imediato.</p>
           <p>O produto não possui apostas, depósitos, odds, saques ou premiação em dinheiro.</p>
-          <p>Ao usar o Escalei, você concorda em respeitar as regras da rodada, os demais participantes e as orientações do beta.</p>
+          <p>Ao usar o Escalou, você concorda em respeitar as regras da rodada, os demais participantes e as orientações do beta.</p>
         </div>
       </article>
     </main>

@@ -19,6 +19,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { deleteAccount, signOut, updatePreferences, updateProfile } from "./actions";
 import { ProfileEditModal } from "./profile-edit-modal";
+import { useState } from "react";
 
 type ProfilePageProps = {
   searchParams: Promise<{ atualizado?: string; email_pendente?: string; erro?: string }>;
@@ -139,7 +140,7 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
           [roundsPlayed.toString(), "rodadas jogadas"],
           [averagePoints.toLocaleString("pt-BR", { maximumFractionDigits: 1, minimumFractionDigits: 1 }), "média por rodada"],
           [(leaguesCount ?? 0).toString(), "ligas"],
-        ].map(([value, label]) => <div className="rounded-xl bg-card px-3 py-2.5" key={label}><strong className="block text-lg font-extrabold tracking-tight text-foreground">{value}</strong><span className="block text-[11px] leading-4 text-muted-foreground">{label}</span></div>)}
+        ].map(([value, label]) => <div className="rounded-xl bg-secondary px-3 py-2.5 text-center gap-2" key={label}><strong className="block text-2xl font-extrabold tracking-tight text-primary">{value}</strong><span className="block text-[11px] leading-4 text-white font-mono">{label}</span></div>)}
       </section>
 
       <div className="grid gap-[18px]">
@@ -160,11 +161,24 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
 
         <Section title="SESSÃO">
           <form action={signOut} className="m-0"><button type="submit" className="flex min-h-14 w-full items-center gap-3 px-3.5 text-left text-[14.5px] font-semibold text-foreground transition hover:bg-muted"><LogOut className="size-[19px] text-muted-foreground" aria-hidden="true" /><span className="flex-1">Sair da conta</span><ChevronRight className="size-[18px] text-muted-foreground" aria-hidden="true" /></button></form>
-          <details className="group border-t border-border"><summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-3.5 text-destructive [&::-webkit-details-marker]:hidden"><Trash2 className="size-[19px]" aria-hidden="true" /><span className="flex-1 text-[14.5px] font-semibold">Excluir conta</span><ChevronRight className="size-[18px] text-destructive/70 transition group-open:rotate-90" aria-hidden="true" /></summary><form action={deleteAccount} className="m-0 grid gap-3 px-3.5 pb-4"><p className="text-xs leading-5 text-muted-foreground">Esta ação remove permanentemente seu perfil, suas escalações e seu acesso.</p><label className="grid gap-1.5 text-xs font-semibold text-foreground">Digite <strong>EXCLUIR</strong> para confirmar<input name="confirmacao" required autoComplete="off" className="h-10 rounded-xl border border-border bg-background px-3 text-sm font-medium text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-ring" /></label><button type="submit" className="h-10 rounded-xl bg-destructive px-4 text-sm font-bold text-destructive-foreground transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Excluir minha conta</button></form></details>
+          {/* <details className="group border-t border-border">
+            <summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-3.5 text-red-600 [&::-webkit-details-marker]:hidden">
+              <Trash2 className="size-[19px]" aria-hidden="true" />
+              <span className="flex-1 text-[14.5px] font-semibold">Excluir conta</span>
+              <ChevronRight className="size-[18px] text-red-600 transition group-open:rotate-90" aria-hidden="true" />
+            </summary>
+            <form action={deleteAccount} className="m-0 grid gap-3 px-3.5 pb-4">
+              <p className="text-xs leading-5 text-white">Esta ação remove permanentemente seu perfil, suas escalações e seu acesso.</p>
+              <label className="flex w-full gap-1.5 items-center text-xs">
+                <p className="w-1/2 text-start">Digite <strong>EXCLUIR</strong> para confirmar</p>
+                <input name="confirmacao" required autoComplete="off" onChange={(e) => setConfirmDeleteAccount(e.target.value.toLowerCase())} className="h-10 w-1/2 rounded-xl border border-border bg-background px-3 text-sm font-medium text-foreground outline-none focus:border-primary focus:ring-2 focus:ring-ring" />
+              </label>
+              <button type="submit" disabled={confirmDeleteAccount !== "excluir"} className="h-10 rounded-xl bg-red-600 px-4 text-sm font-bold text-red-foreground transition hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">Excluir minha conta</button></form>
+          </details> */}
         </Section>
       </div>
 
-      <p className="mt-6 px-4 text-center text-[11px] leading-4 text-muted-foreground">escalei · beta · produto independente, sem vínculo com clubes ou ligas.</p>
+      <p className="mt-6 px-4 text-center text-[11px] leading-4 text-muted-foreground">escalou · beta · produto independente, sem vínculo com clubes ou ligas.</p>
     </main>
   );
 }

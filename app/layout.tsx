@@ -4,7 +4,7 @@ import { getCurrentRound } from "@/lib/current-round";
 import "./globals.css";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Escalei", description: "Fantasy futebol" };
+export const metadata: Metadata = { title: "Escalou - Mostre que você entende de futebol", description: "Fantasy futebol" };
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
