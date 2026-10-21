@@ -58,7 +58,7 @@ export function ComoFuncionaFlow() {
     <main className="mx-auto grid h-dvh min-h-dvh w-full max-w-lg  overflow-hidden bg-background text-foreground">
 
       <header className="flex items-center px-5">
-        <Logo variant="circle" size="lg" />
+        <Logo size="lg" />
       </header>
 
       <section className="min-h-0 overflow-y-auto">
