@@ -146,7 +146,7 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
       <div className="grid gap-[18px]">
         <form action={updatePreferences} className="m-0 grid gap-2">
           <Section title="PREFERÊNCIAS">
-            <ToggleRow icon={Bell} label="Resumo da rodada por whats" defaultChecked={profile.notificacoes_email} />
+            <ToggleRow icon={Bell} label="Resumo da rodada por whats" defaultChecked={profile.notificacoes_email} disabled />
             <ToggleRow icon={Bell} label="Avisar antes da trava" defaultChecked disabled />
             <ToggleRow icon={Users} label="Novidades das minhas ligas" disabled />
           </Section>
@@ -160,7 +160,8 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
         </Section>
 
         <Section title="SESSÃO">
-          <form action={signOut} className="m-0"><button type="submit" className="flex min-h-14 w-full items-center gap-3 px-3.5 text-left text-[14.5px] font-semibold text-foreground transition hover:bg-muted"><LogOut className="size-[19px] text-muted-foreground" aria-hidden="true" /><span className="flex-1">Sair da conta</span><ChevronRight className="size-[18px] text-muted-foreground" aria-hidden="true" /></button></form>
+          <form action={signOut} className="m-0">
+            <button type="submit" className="flex min-h-14 w-full items-center gap-3 px-3.5 text-left text-[14.5px] font-semibold text-foreground transition hover:bg-muted"><LogOut className="size-[19px] text-muted-foreground" aria-hidden="true" /><span className="flex-1">Sair da conta</span><ChevronRight className="size-[18px] text-muted-foreground" aria-hidden="true" /></button></form>
           {/* <details className="group border-t border-border">
             <summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-3.5 text-red-600 [&::-webkit-details-marker]:hidden">
               <Trash2 className="size-[19px]" aria-hidden="true" />

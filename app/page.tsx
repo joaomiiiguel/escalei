@@ -7,10 +7,14 @@ import { displayedKickoff } from "@/lib/game-kickoff";
 import { Logo } from "@/components/ui";
 import TitleSection from "@/components/ui/title-section";
 import StatusRodada from "@/components/page/home/status-round";
+import DemoStatusPicker from "@/components/page/home/demo-status-picker";
 
 import RoundViewCTA from "@/components/page/home/round-view-cta";
 import MatchesRounds from "@/components/page/home/matches-rounds";
 import LiveMatches from "@/components/page/home/live-matches";
+
+/** Apelidos que têm acesso ao modo de demonstração. */
+const DEMO_USERS = new Set(["Joao"]);
 
 type ProximaRodada = Pick<Rodada, "numero" | "temporada" | "abre_em">;
 
@@ -106,24 +110,31 @@ export default async function Home() {
   const lastCompletedGame = completedGames.at(-1) ?? null;
   const matchLabel = (game: Jogo) => `${clubsById.get(game.clube_casa_id)?.sigla ?? "—"} × ${clubsById.get(game.clube_fora_id)?.sigla ?? "—"}`;
 
+  // ─── Header compartilhado entre modo demo e modo normal ───────────────────
+  const header = (
+    <header className="flex flex-col items-start justify-between">
+      <div className="w-full flex items-center justify-center">
+        <Logo size="md" />
+      </div>
+      <p className="text-sm text-muted-foreground">Olá, {profile.apelido} 👋</p>
+      <TitleSection title="Rodada 30 - Brasileirão 2026" />
+    </header>
+  );
 
-  // // Renderiza a view baseada no status da rodada
-  // if (round?.status === "EM_ANDAMENTO" && !unavailable && !roundDataUnavailable) {
-  //   return <ActiveRoundView round={round} games={games} team={team} teamStats={teamStats} clubsById={clubsById} />;
-  // }
+  // ─── Modo demonstração (só para apelidos em DEMO_USERS) ───────────────────
+  if (DEMO_USERS.has(String(profile.apelido))) {
+    return (
+      <main className="flex max-w-lg px-5 flex-col justify-start gap-4 pt-5 pb-44 text-white">
+        {header}
+        <DemoStatusPicker />
+      </main>
+    );
+  }
 
-  // // Renderiza a view padrão com os jogos da rodada
-  // return <DefaultRoundView profile={profile} round={round} nextRound={nextRound} unavailable={unavailable} roundDataUnavailable={roundDataUnavailable} now={now} team={team} games={games} clubsById={clubsById} />;
-
+  // ─── Render normal ────────────────────────────────────────────────────────
   return (
     <main className="flex max-w-lg px-5 flex-col justify-start gap-4 pt-5 pb-44 text-white">
-      <header className="flex flex-col items-start justify-between">
-        <div className="w-full flex items-center justify-center">
-          <Logo size="md" />
-        </div>
-        <p className="text-sm text-muted-foreground">Olá, {profile.apelido} 👋</p>
-        <TitleSection title={round ? `Rodada ${String(round.numero).padStart(2, "0")} - Brasileirão ${round.temporada ?? 2026}` : "Início - Brasileirão"} />
-      </header>
+      {header}
       {round?.status !== "ABERTA" && <LiveMatches
         completedGames={completedGames.length}
         games={games}

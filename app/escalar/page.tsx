@@ -10,6 +10,10 @@ import { Suspense } from "react";
 
 import type { SavedPlayer, SavedTeam, ActiveRound, RoundGame, PlayerStat } from "@/lib/types";
 import Image from "next/image";
+import DemoLineupPicker from "@/components/page/home/demo-lineup-picker";
+
+/** Apelidos que têm acesso ao modo de demonstração. */
+const DEMO_USERS = new Set(["Joao"]);
 
 function LineupSkeleton() {
   return (
@@ -42,7 +46,7 @@ type LineupBodyProps = {
   lastUpdated: string | null;
 };
 
-function LineupBody({ round, savedTeam, canEdit, editMode, balance, initialPlayers, roundPlayers, lastUpdated }: LineupBodyProps) {
+export function LineupBody({ round, savedTeam, canEdit, editMode, balance, initialPlayers, roundPlayers, lastUpdated }: LineupBodyProps) {
   if (!round) {
     return <Message>Não há rodada disponível no momento.</Message>;
   }
@@ -95,7 +99,7 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
   const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
   if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
 
-  const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
+  const { data: profile } = await supabase.from("perfis").select("id, apelido").eq("id", user.id).maybeSingle();
   if (!profile) redirect("/onboarding");
 
   const { data: wallet } = await supabase
@@ -160,6 +164,18 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
       roundLabel: game ? matchTime(displayedKickoff(game)) : "sem jogo",
     };
   });
+
+   // ─── Modo demonstração (só para apelidos em DEMO_USERS) ───────────────────
+    if (DEMO_USERS.has(String(profile?.apelido))) {
+      return (
+        <main className="flex max-w-lg px-5 flex-col justify-start gap-4 pt-5 pb-44 text-white">
+          <div className="w-full flex items-center justify-center">
+            <Logo size="md" />
+          </div>
+          <DemoLineupPicker />
+        </main>
+      );
+    }
 
   if (!round) {
     return (

@@ -1,4 +1,28 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+/**
+ * Edge Function: advance-simulated-round
+ *
+ * Orquestrador do ciclo de vida da rodada simulada do Brasileirão.
+ *
+ * Executado periodicamente (cron), realiza em ordem:
+ * 1. Abre a próxima rodada simulada quando a anterior está FECHADA e
+ *    `abre_em` já passou — atualiza `configuracoes.rodada_simulada_atual`
+ *    e inicializa o ranking via `fn_inicializar_ranking_rodada`.
+ * 2. Trava a rodada aberta quando `trava_em` passa (status EM_ANDAMENTO),
+ *    impedindo novas alterações de time.
+ * 3. Encerra jogos pendentes cujo `inicio_simulado_em` já passou,
+ *    consultando o status real na API-Football.
+ * 4. Pontua cada jogo encerrado ainda não pontuado via `score-match`.
+ * 5. Quando todos os jogos estão pontuados, agenda a conferência
+ *    (60 min após o último jogo pontuado) e executa a segunda leitura
+ *    de scouts (`conferencia = true`).
+ * 6. Após a conferência, atualiza preços (`fn_atualizar_precos`),
+ *    credita saldos (`fn_creditar_saldos_rodada`) e fecha a rodada.
+ *
+ * Trigger: POST chamado por cron externo ou manualmente.
+ * Env obrigatórias: API_FOOTBALL_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
+ *                   API_FOOTBALL_SEASON.
+ */
+import { createClient } from "@supabase/supabase-js";
 
 type Fixture = {
   fixture?: { status?: { short?: string } };
@@ -119,7 +143,8 @@ Deno.serve(async (request) => {
   let closeAt = round.fechamento_simulado_em;
   if (allScored && !closeAt) {
     const lastScoredAt = Math.max(
-      ...games.map((game) => new Date(game.pontuado_em as string).getTime()),
+      // allScored garante que pontuado_em não é null neste ponto
+      ...games.map((game) => new Date(game.pontuado_em!).getTime()),
     );
     closeAt = new Date(lastScoredAt + 60 * 60_000).toISOString();
     const { error } = await db.from("rodadas").update({ fechamento_simulado_em: closeAt }).eq("id", round.id);

@@ -1,4 +1,19 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+/**
+ * Edge Function: sync-round
+ *
+ * Sincroniza a rodada simulada atual com a API-Football.
+ *
+ * - Lê o número da rodada ativa em `configuracoes.rodada_simulada_atual`.
+ * - Busca os 10 jogos da rodada na API-Football (liga + temporada configuradas via env).
+ * - Faz upsert na tabela `rodadas` e na tabela `jogos`, mapeando clubes e
+ *   status para os valores internos do sistema.
+ * - Registra a execução em `sync_execucoes` com status de sucesso ou erro.
+ *
+ * Trigger: chamada manualmente ou por cron (ex.: supabase schedule).
+ * Env obrigatórias: API_FOOTBALL_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
+ *                   API_FOOTBALL_LEAGUE_ID, API_FOOTBALL_SEASON.
+ */
+import { createClient } from "@supabase/supabase-js";
 
 type ApiFixture = {
   fixture: { id: number; date: string; status: { short: string } };

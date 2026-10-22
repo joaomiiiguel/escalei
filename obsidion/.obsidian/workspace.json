@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "fd80f866a8769685",
+        "id": "e061301997856041",
         "type": "tabs",
         "children": [
           {
-            "id": "18124322e9a10e89",
+            "id": "f9d7a3720577f42f",
             "type": "leaf",
             "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Visualização em gráfico"
+              "type": "markdown",
+              "state": {
+                "file": "06-Planejamento/Plano de 1 Mês — Lançamento do Teste.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Plano de 1 Mês — Lançamento do Teste"
             }
           }
         ]
@@ -79,8 +83,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "32c278e33faa3c40",
@@ -185,15 +188,19 @@
       "bases:Criar nova base": false
     }
   },
-  "active": "18124322e9a10e89",
+  "active": "f9d7a3720577f42f",
   "lastOpenFiles": [
+    "06-Planejamento/Onboarding por Convite.md",
+    "07-Decisoes/Origem do projeto e decisões iniciais.md",
+    "Index.md",
+    "02-Tecnico/Ativação de Produção — Calendário e Orquestração.md",
+    "01-Produto/Visão e Tese.md",
+    "Orquestrador da Rodada Simulada.md",
     "01-Produto/Prompt de Design.md",
     "Anexos/Benchmark/draftkings-01-capa.png",
-    "07-Decisoes/Origem do projeto e decisões iniciais.md",
     "02-Tecnico/API-Football.md",
     "02-Tecnico/Banco de Dados — Modelo e Campos.md",
     "02-Tecnico/Arquitetura.md",
-    "Index.md",
     "06-Planejamento/Plano de 1 Mês — Lançamento do Teste.md",
     "06-Planejamento/Roadmap e Backlog.md",
     "03-Validacao/Plano de Validação.md",

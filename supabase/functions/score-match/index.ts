@@ -1,4 +1,21 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+/**
+ * Edge Function: score-match
+ *
+ * Pontua um jogo encerrado a partir dos scouts da API-Football.
+ *
+ * - Recebe `jogoId` (interno) e o flag opcional `conferencia` via POST JSON.
+ * - Busca estatísticas de jogadores e eventos do jogo na API-Football.
+ * - Relaciona jogadores e clubes com o catálogo local e calcula scouts
+ *   (gols, assistências, defesas, cartões, etc.).
+ * - Faz upsert em `estatisticas_jogador` e chama `fn_pontuar_jogo` para
+ *   calcular a pontuação de fantasy de cada escalado.
+ * - Quando `conferencia = true`, registra `conferido_em` no jogo (segunda
+ *   leitura de conferição após o prazo configurado).
+ *
+ * Trigger: POST chamado por `advance-simulated-round` ou manualmente.
+ * Env obrigatórias: API_FOOTBALL_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
+ */
+import { createClient } from "@supabase/supabase-js";
 
 type ApiPlayerStatistic = {
   player: { id: number };
