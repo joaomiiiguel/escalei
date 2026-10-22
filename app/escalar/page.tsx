@@ -46,7 +46,16 @@ type LineupBodyProps = {
   lastUpdated: string | null;
 };
 
-export function LineupBody({ round, savedTeam, canEdit, editMode, balance, initialPlayers, roundPlayers, lastUpdated }: LineupBodyProps) {
+function LineupBody({ 
+  round,
+  savedTeam,
+  canEdit,
+  editMode,
+  balance,
+  initialPlayers,
+  roundPlayers,
+  lastUpdated 
+}: LineupBodyProps) {
   if (!round) {
     return <Message>Não há rodada disponível no momento.</Message>;
   }
