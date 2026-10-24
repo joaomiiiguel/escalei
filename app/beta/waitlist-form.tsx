@@ -2,44 +2,37 @@
 
 import { useId, useState } from "react";
 import { CheckCircle2, Loader2 } from "lucide-react";
-
-type FormErrors = Partial<Record<"name" | "whatsapp" | "email" | "consent", string>>;
-
-function onlyDigits(value: string) {
-  return value.replace(/\D/g, "");
-}
-
-function validate(values: { name: string; whatsapp: string; email: string; consent: boolean }) {
-  const errors: FormErrors = {};
-  const digits = onlyDigits(values.whatsapp);
-
-  if (values.name.trim().length < 2) errors.name = "Informe seu nome ou apelido.";
-  if (digits.length < 10 || digits.length > 11) errors.whatsapp = "Informe um WhatsApp com DDD.";
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) errors.email = "Informe um e-mail válido.";
-  if (!values.consent) errors.consent = "Você precisa aceitar o contato sobre o beta.";
-
-  return errors;
-}
+import { joinWaitlist, type WaitlistResult } from "./actions";
+import { validateWaitlist as validate, type WaitlistErrors as FormErrors } from "@/lib/waitlist";
 
 export function WaitlistForm() {
   const id = useId();
   const [values, setValues] = useState({ name: "", whatsapp: "", email: "", consent: false });
   const [errors, setErrors] = useState<FormErrors>({});
   const [status, setStatus] = useState<"idle" | "loading" | "success">("idle");
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   function update(field: keyof typeof values, value: string | boolean) {
     setValues((current) => ({ ...current, [field]: value }));
     setErrors((current) => ({ ...current, [field]: undefined }));
   }
 
-  function submit(event: React.FormEvent<HTMLFormElement>) {
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const nextErrors = validate(values);
     setErrors(nextErrors);
+    setSubmitError(null);
     if (Object.keys(nextErrors).length > 0) return;
 
     setStatus("loading");
-    window.setTimeout(() => setStatus("success"), 650);
+    const result: WaitlistResult = await joinWaitlist(values).catch((): WaitlistResult => ({ ok: false, message: "Não foi possível entrar na lista agora. Tente novamente em instantes." }));
+    if (result.ok) {
+      setStatus("success");
+      return;
+    }
+    setErrors(result.errors ?? {});
+    setSubmitError(result.message ?? null);
+    setStatus("idle");
   }
 
   if (status === "success") {
@@ -133,6 +126,12 @@ export function WaitlistForm() {
           ) : null}
         </div>
       </div>
+
+      {submitError ? (
+        <p role="alert" className="mt-4 text-sm font-bold text-[#ff8f8f]">
+          {submitError}
+        </p>
+      ) : null}
 
       <button
         type="submit"
