@@ -60,6 +60,24 @@ tags:
 
 **Painéis:** funil de cadastro → 1ª escalação; retenção por coorte de rodada; K-fator (convites aceitos por usuário); tempo de montagem.
 
+### Instrumentação implementada (JOA-49, 24/10/2026)
+
+O PostHog liga quando `NEXT_PUBLIC_POSTHOG_KEY` está configurada (host opcional em `NEXT_PUBLIC_POSTHOG_HOST`); sem a chave, nada é enviado. O usuário é identificado só pelo id do Supabase, sem dados pessoais; autocapture e gravação de sessão ficam desligados.
+
+| Evento | Onde | Propriedades |
+|---|---|---|
+| `cadastro` | servidor, ao concluir o onboarding | `via_convite` |
+| `time_escalado` | servidor, ao salvar a escalação | `formacao`, `segundos` (desde a abertura do Montar Time), `edicao` |
+| `convite_aceito` | servidor, ao entrar no grupo pelo convite | — |
+| `inicio_visto` | tela inicial | `status_rodada` |
+| `pontos_vistos` | tela inicial com time em rodada em andamento ou fechada | `status_rodada`, `horas_desde_ultimo_jogo` |
+| `ranking_visto` | tela do grupo | `aba` (`rodada` ou `campeonato`) |
+| `fim_rodada_compartilhado` | botão "Compartilhar resumo" | `metodo` (`nativo` ou `copiado`) |
+
+Ainda sem evento, porque a funcionalidade não existe: `liga_criada`, `convite_enviado`, `clique_pro`, `pesquisa_respondida`, `pwa_instalado`, `conta_excluida`.
+
+**Painéis a criar no PostHog** (precisam de acesso ao projeto): funil `cadastro` → `time_escalado`; retenção por semana com `time_escalado` como evento de retorno; mediana de `time_escalado.segundos`; `pontos_vistos` com `horas_desde_ultimo_jogo` ≤ 24; contagem de `convite_aceito` por usuário (K-fator).
+
 ---
 
 *Criado em 28/09/2026. As metas são referência inicial; revisar depois do beta fechado.*

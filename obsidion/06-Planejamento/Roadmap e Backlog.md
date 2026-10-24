@@ -66,7 +66,7 @@ tags:
 - [ ] Seja PRO (fake door), Pesquisa, Como Funciona, Perfil com exclusão de conta
 - [ ] PWA (manifest, ícones, instalar)
 - [ ] E-mails: rodada aberta, lembrete de trava
-- [ ] Eventos do PostHog e painéis
+- [ ] Eventos do PostHog e painéis (eventos implementados em JOA-49; faltam os painéis no PostHog)
 
 **Publicação**
 - [ ] Termos de uso, privacidade e regulamento (versão simples)

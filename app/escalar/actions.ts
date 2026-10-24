@@ -4,11 +4,13 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { isFormation, normalizePlayerIds } from "@/lib/lineup-rules";
 import { createClient } from "@/lib/supabase/server";
+import { trackServerEvent } from "@/lib/analytics/server";
 
 /** Erros de regra lançados por `fn_salvar_escalacao` (SQLSTATE `ES4xx`) já trazem a mensagem para o usuário. */
 const RULE_ERROR_CODE = /^ES4\d\d$/;
 
-export async function saveLineup(input: { formation: string; playerIds: number[]; roundId: number }) {
+/** `durationSeconds` e `isEdit` vêm da tela e servem apenas para métricas. */
+export async function saveLineup(input: { formation: string; playerIds: number[]; roundId: number; durationSeconds?: number; isEdit?: boolean }) {
   if (!Number.isInteger(input.roundId) || !isFormation(input.formation) || !Array.isArray(input.playerIds)) {
     return { error: "Dados da escalação inválidos." };
   }
@@ -29,6 +31,9 @@ export async function saveLineup(input: { formation: string; playerIds: number[]
   if (error) {
     return { error: RULE_ERROR_CODE.test(error.code ?? "") ? error.message : "Não foi possível salvar seu time. Tente novamente." };
   }
+
+  const seconds = Number.isFinite(input.durationSeconds) && Number(input.durationSeconds) >= 0 ? Math.round(Number(input.durationSeconds)) : null;
+  trackServerEvent(user.id, "time_escalado", { formacao: input.formation, segundos: seconds, edicao: input.isEdit === true });
 
   revalidatePath("/");
   revalidatePath("/escalar");

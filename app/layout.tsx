@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/ui/navbar";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentRound } from "@/lib/current-round";
+import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 
@@ -36,6 +37,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     return (
         <html lang="pt-BR" className="dark">
             <body className="min-h-screen">
+                <AnalyticsProvider userId={user?.id ?? null} />
                 {children}
                 <Navbar hasCurrentTeam={hasCurrentTeam} isRoundInProgress={isRoundInProgress} />
             </body>

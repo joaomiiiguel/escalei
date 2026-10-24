@@ -17,6 +17,7 @@ export default function PrivacyPage() {
         <div className="mt-6 grid gap-4 text-sm leading-6 text-[#a5bdae]">
           <p>Usamos os dados enviados na lista de espera para comunicar novidades do beta e possíveis convites de acesso.</p>
           <p>Os dados podem incluir nome ou apelido, WhatsApp e e-mail informados no formulário.</p>
+          <p>Para melhorar o jogo, medimos o uso do app (por exemplo: telas visitadas, escalações salvas e resumos compartilhados) com o PostHog. Essas métricas usam apenas um identificador interno da sua conta, sem nome, apelido, e-mail ou telefone.</p>
           <p>Não vendemos dados pessoais e não usamos informações para ofertas relacionadas a apostas ou jogos de azar.</p>
           <p>Você pode solicitar remoção dos seus dados pelo canal oficial informado durante o beta.</p>
         </div>

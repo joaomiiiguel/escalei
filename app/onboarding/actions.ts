@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 import { addUserToInvitedLeague, canUserJoinInvite, getActiveInvite, isInviteToken } from "@/lib/invites";
 import { hasActiveLeagueMembership } from "@/lib/league-access";
+import { trackServerEvent } from "@/lib/analytics/server";
 
 export async function finishOnboarding(formData: FormData) {
     const apelido = String(formData.get("apelido") ?? "").trim();
@@ -69,5 +70,6 @@ export async function finishOnboarding(formData: FormData) {
       cookieStore.delete("escalei_invite");
     }
 
+    trackServerEvent(user.id, "cadastro", { via_convite: Boolean(inviteToken && isInviteToken(inviteToken)) });
     redirect("/");
 }
