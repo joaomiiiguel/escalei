@@ -115,6 +115,7 @@ Exemplo **ilustrativo** (preço médio hipotético: GOL C$ 8, DEF C$ 7, MEI C$ 9
 - Desempate: mais gols dos jogadores escalados no acumulado; persistindo o empate, os membros dividem a posição.
 - Implementado em `fn_ranking_campeonato` (JOA-141) e exibido na aba "Campeonato" da tela do grupo.
 - Administradores não disputam: mesmo sendo membros do grupo que criaram, ficam fora dos rankings da rodada e do campeonato e da contagem de membros (JOA-142).
+- Cada linha do ranking mostra ▲/▼ e quantas posições o membro subiu ou desceu em relação à rodada anterior: na aba Rodada, comparando com a posição no grupo na rodada anterior; na aba Campeonato, com o acumulado até a rodada anterior (JOA-144).
 
 ---
 

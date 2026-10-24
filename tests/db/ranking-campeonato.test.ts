@@ -102,4 +102,10 @@ describe("ranking do campeonato do grupo", () => {
     const rows = await db.query<{ usuario_id: string }>("select usuario_id from ranking_rodada where rodada_id = $1 order by usuario_id", [roundId]);
     expect(rows.rows.map((row) => row.usuario_id)).toEqual([USER_A, USER_B, USER_C]);
   });
+
+  it("calcula o ranking até uma rodada para comparar com a posição anterior", async () => {
+    const untilRound2 = await asUser(db, USER_A, async (tx) => (await tx.query<Row>("select * from fn_ranking_campeonato($1, 2026::smallint, false, 2::smallint)", [LEAGUE])).rows);
+    // Até a rodada 2: ana 70 pts (rodadas 1 e 2), bruno 50 pts (só a 1).
+    expect(untilRound2.map((row) => [row.apelido, row.pontos, row.posicao])).toEqual([["ana", "70.00", 1], ["bruno", "50.00", 2], ["carla", "0.00", 3]]);
+  });
 });
