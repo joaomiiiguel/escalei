@@ -4,17 +4,13 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 
-const FORMATIONS = {
-  "4-3-3": { ATA: 3, DEF: 4, GOL: 1, MEI: 3 },
-  "4-4-2": { ATA: 2, DEF: 4, GOL: 1, MEI: 4 },
-  "3-5-2": { ATA: 2, DEF: 3, GOL: 1, MEI: 5 },
-} as const;
+const FORMATIONS = ["4-3-3", "4-4-2", "3-5-2"] as const;
 
-type Formation = keyof typeof FORMATIONS;
-type Position = keyof (typeof FORMATIONS)[Formation];
+/** Erros de regra lançados por `fn_salvar_escalacao` (SQLSTATE `ES4xx`) já trazem a mensagem para o usuário. */
+const RULE_ERROR_CODE = /^ES4\d\d$/;
 
 export async function saveLineup(input: { formation: string; playerIds: number[]; roundId: number }) {
-  if (!Number.isInteger(input.roundId) || !(input.formation in FORMATIONS) || !Array.isArray(input.playerIds)) {
+  if (!Number.isInteger(input.roundId) || !FORMATIONS.includes(input.formation as (typeof FORMATIONS)[number]) || !Array.isArray(input.playerIds)) {
     return { error: "Dados da escalação inválidos." };
   }
 
@@ -27,52 +23,15 @@ export async function saveLineup(input: { formation: string; playerIds: number[]
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { error: "Sua sessão expirou. Entre novamente para salvar." };
 
-  const now = new Date().toISOString();
-  const { data: round } = await supabase
-    .from("rodadas")
-    .select("id")
-    .eq("id", input.roundId)
-    .eq("status", "ABERTA")
-    .gt("trava_em", now)
-    .maybeSingle();
-  if (!round) return { error: "A janela de edição desta rodada já foi encerrada." };
-
-  const { data: wallet, error: walletError } = await supabase
-    .from("carteiras")
-    .select("saldo")
-    .eq("usuario_id", user.id)
-    .maybeSingle();
-  if (walletError || !wallet) return { error: "Não foi possível consultar seu saldo. Tente novamente." };
-
-  const { data: players, error: playersError } = await supabase
-    .from("jogadores")
-    .select("id, posicao, preco")
-    .eq("ativo", true)
-    .in("id", playerIds);
-  if (playersError || !players || players.length !== 11) return { error: "Um ou mais jogadores não estão mais disponíveis." };
-
-  const formation = input.formation as Formation;
-  const positions = players.reduce<Record<Position, number>>((counts, player) => {
-    counts[player.posicao as Position] += 1;
-    return counts;
-  }, { ATA: 0, DEF: 0, GOL: 0, MEI: 0 });
-  const isValidFormation = (Object.keys(FORMATIONS[formation]) as Position[]).every((position) => positions[position] === FORMATIONS[formation][position]);
-  const cost = players.reduce((total, player) => total + Number(player.preco), 0);
-  if (!isValidFormation) return { error: "Os jogadores não correspondem à formação escolhida." };
-  if (cost > Number(wallet.saldo)) return { error: "A escalação ultrapassa o seu saldo disponível." };
-
-  const { data: team, error: teamError } = await supabase
-    .from("times")
-    .upsert({ usuario_id: user.id, rodada_id: round.id, formacao: formation, custo: cost, salvo_em: now }, { onConflict: "usuario_id,rodada_id" })
-    .select("id")
-    .single();
-  if (teamError || !team) return { error: "Não foi possível salvar seu time. Tente novamente." };
-
-  const { error: removeError } = await supabase.from("times_jogadores").delete().eq("time_id", team.id);
-  if (removeError) return { error: "Não foi possível atualizar os jogadores do time." };
-
-  const { error: insertError } = await supabase.from("times_jogadores").insert(players.map((player) => ({ time_id: team.id, jogador_id: player.id, posicao: player.posicao, preco_pago: player.preco })));
-  if (insertError) return { error: "Não foi possível salvar os jogadores do time." };
+  // Trava, formação, disponibilidade dos jogadores e saldo são validados no banco, de forma atômica.
+  const { error } = await supabase.rpc("fn_salvar_escalacao", {
+    p_rodada_id: input.roundId,
+    p_formacao: input.formation,
+    p_jogadores: playerIds,
+  });
+  if (error) {
+    return { error: RULE_ERROR_CODE.test(error.code ?? "") ? error.message : "Não foi possível salvar seu time. Tente novamente." };
+  }
 
   revalidatePath("/");
   revalidatePath("/escalar");

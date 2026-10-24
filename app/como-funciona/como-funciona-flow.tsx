@@ -10,7 +10,7 @@ import { SlideIllustration } from "./slide-illustration";
 const slides = [
   {
     title: "Monte seu time em 3 minutos",
-    description: "Você começa com C$ 50 de saldo para escolher 11 jogadores do Brasileirão. Sem taxa, sem cartão, sem aposta.",
+    description: "Você começa com C$ 60 de saldo para escolher 11 jogadores do Brasileirão. Sem taxa, sem cartão, sem aposta.",
   },
   {
     title: "Acompanhe cada rodada",

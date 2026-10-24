@@ -74,7 +74,8 @@ obsidion/                 Especificação, decisões, regras e planejamento
 
 - Formaçōes permitidas: `4-3-3`, `4-4-2` e `3-5-2`.
 - Posições: `GOL`, `DEF`, `MEI`, `ATA`.
-- O custo máximo de escalação é C$ 100,00.
+- O custo da escalação é limitado ao saldo atual do usuário. O saldo inicial é C$ 60,00 e cresce a cada rodada fechada: cada jogador rende `max(pontos − preço pago, 0)` (veja `obsidion/01-Produto/Regras do Jogo.md`).
+- Salve escalações pela função `fn_salvar_escalacao`, que valida trava, formação e saldo no banco.
 - Uma escalação é única por usuário e rodada.
 - Não permita salvar ou alterar o time depois da trava da rodada.
 - Use as regras e a tabela de pontuação de `obsidion/Regras do Jogo.md` como fonte de verdade antes de implementar cálculos.

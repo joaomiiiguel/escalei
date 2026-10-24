@@ -49,7 +49,7 @@ const steps = [
   },
   {
     title: "Monte seu time",
-    text: "Comece com C$ 50 e escolha 11 jogadores dentro do seu saldo.",
+    text: "Comece com C$ 60 e escolha 11 jogadores dentro do seu saldo.",
   },
   {
     title: "Dispute com a turma",
@@ -60,7 +60,7 @@ const steps = [
 const rules = [
   "11 jogadores por rodada",
   "Formações 4-3-3, 4-4-2 ou 3-5-2",
-  "Saldo inicial de C$ 50",
+  "Saldo inicial de C$ 60",
   "Pontos liberados após cada jogo terminar",
   "Ranking atualizado a cada jogo encerrado",
   "Ligas privadas para disputar com amigos",
@@ -329,7 +329,7 @@ function PhoneMockup() {
           <div className="mt-3 flex items-end justify-between">
             <div>
               <p className="text-[11px] font-bold text-[#789383]">Orçamento</p>
-              <p className="text-lg font-black text-[#ffd54a]">C$ 100</p>
+              <p className="text-lg font-black text-[#ffd54a]">C$ 60</p>
             </div>
             <div className="flex items-center gap-2 text-xs font-black text-primary">
               <Flag className="size-4" aria-hidden="true" />

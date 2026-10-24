@@ -116,7 +116,7 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
     .select("saldo")
     .eq("usuario_id", user.id)
     .maybeSingle();
-  const balance = Number(wallet?.saldo ?? 50);
+  const balance = Number(wallet?.saldo ?? 60);
 
   const { data: round } = await getCurrentRound<ActiveRound>(
     supabase,

@@ -14,7 +14,7 @@ tags:
 ← [[Index]] · Fonte dos dados: [[API-Football]]
 
 > [!abstract] Resumo
-> 11 jogadores numa de 3 formações, orçamento de **C$ 100**, trava no primeiro jogo da rodada, **pontos lançados a cada jogo encerrado** (sem parcial ao vivo), sem prêmio.
+> 11 jogadores numa de 3 formações, saldo inicial de **C$ 60** que cresce com o desempenho da escalação, trava no primeiro jogo da rodada, **pontos lançados a cada jogo encerrado** (sem parcial ao vivo), sem prêmio.
 
 ## Posições: 4, e não 5
 
@@ -31,9 +31,11 @@ Sem técnico, sem capitão e sem banco de reservas no MVP.
 
 ## Saldo, orçamento e preço
 
-- Saldo inicial: **C$ 50,00** por usuário.
-- Uma escalação só pode ser salva se o custo dos 11 jogadores couber no saldo atual.
-- Ao fechar a rodada, cada jogador rende `max(pontos da rodada − preço pago, 0)` para o saldo do usuário. Não há perda quando o desempenho ficar abaixo do preço.
+- Saldo inicial: **C$ 60,00** por usuário (definido em 24/10/2026; antes era C$ 50,00).
+- O orçamento da escalação é o **saldo atual**, e não um teto fixo: ele vai aumentando conforme o desempenho das escalações.
+- Uma escalação só pode ser salva se o custo dos 11 jogadores couber no saldo atual. A validação acontece no banco (`fn_salvar_escalacao`), junto com a trava e a formação.
+- Ao fechar a rodada, cada jogador rende `max(pontos da rodada − preço pago, 0)` para o saldo do usuário (`fn_creditar_saldos_rodada`). Não há perda quando o desempenho ficar abaixo do preço, então o saldo nunca diminui.
+- O custo do time não tem limite fixo de C$ 100: com o saldo acumulado, o usuário pode montar times mais caros nas rodadas seguintes.
 - Exemplo: jogador comprado por C$ 5,00 que marca 6,20 pontos rende C$ 1,20; se marcar 3,00 pontos, rende C$ 0,00.
 - **Preço inicial** = `clamp(3 + média de pontos na temporada, 2, 20)`. Jogador sem histórico começa em C$ 5.
 - **Variação depois de cada rodada** = `clamp(0,25 × (pontos na rodada − média dos últimos 5 jogos), −2, +2)`, com preço mínimo de C$ 2.

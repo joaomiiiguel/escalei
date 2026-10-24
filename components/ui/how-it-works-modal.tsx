@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 
 const steps = [
-  ["1", "Monte seu time", "Comece com C$ 50, escolha 11 jogadores e respeite o seu saldo."],
+  ["1", "Monte seu time", "Comece com C$ 60, escolha 11 jogadores e respeite o seu saldo."],
   ["2", "Salve antes da trava", "Você pode mudar sua escalação até o início do primeiro jogo da rodada."],
   ["3", "Acompanhe a rodada", "Os pontos dos seus jogadores são lançados quando cada jogo termina."],
   ["4", "Compare com os amigos", "Entre em ligas e acompanhe sua posição no ranking da rodada."],
@@ -75,7 +75,7 @@ export function HowItWorksModal() {
               <div className="flex gap-3 rounded-xl bg-card p-3 items-center">
                 <Users className="size-6 shrink-0 text-primary" />
                 <div><h4 className="font-bold text-foreground">Preços e ligas</h4>
-                  <p className="mt-0.5 text-xs leading-4 text-muted-foreground">Monte seu time com C$ 100 e compare a pontuação com seus amigos.</p>
+                  <p className="mt-0.5 text-xs leading-4 text-muted-foreground">Comece com C$ 60; o saldo cresce conforme o desempenho dos jogadores que você escala.</p>
                 </div>
               </div>
             </div>
