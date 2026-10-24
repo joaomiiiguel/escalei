@@ -46,7 +46,7 @@ tags:
 - [ ] Seed: 20 clubes com sigla e cores, `tabela_pontuacao` v1, `configuracoes`
 
 **Dados**
-- [ ] Cliente da API-Football com controle de cota (`sync_execucoes`)
+- [x] Cliente da API-Football com controle de cota (`sync_execucoes`, JOA-63)
 - [ ] Jobs `sync-elencos`, `sync-lesoes`, `sync-rodada`
 - [ ] `pontuacao.ts` + `fn_pontuar_jogo`, com teste contra resposta real gravada
 - [ ] Job `pontuar-jogo` (disparado no `ENCERRADO`)
