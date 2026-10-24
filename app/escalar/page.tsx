@@ -3,6 +3,7 @@ import { LineupBuilder, Logo, RoundLineup, SavedLineup, type LineupPlayer } from
 import TitleSection from "@/components/ui/title-section";
 import { createClient } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
+import { isRoundEditable, playerRoundStatus } from "@/lib/lineup-rules";
 import { getCurrentRound } from "@/lib/current-round";
 import { displayedKickoff } from "@/lib/game-kickoff";
 import { Clock3 } from "lucide-react";
@@ -156,16 +157,7 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
     const game = gamesByClub.get(savedPlayer?.clube_id);
     const stat = statsByPlayer.get(player.id);
     const statGame = stat?.jogos ? (Array.isArray(stat.jogos) ? stat.jogos[0] : stat.jogos) : null;
-    const rawStatus = statGame?.status ?? game?.status ?? "SEM_JOGO";
-    const roundStatus: LineupPlayer["roundStatus"] = rawStatus === "ENCERRADO"
-      ? "ENCERRADO"
-      : rawStatus === "EM_ANDAMENTO"
-        ? "EM_ANDAMENTO"
-        : rawStatus === "A_JOGAR"
-          ? "A_JOGAR"
-          : rawStatus === "ADIADO" || rawStatus === "CANCELADO"
-            ? "ADIADO"
-            : "SEM_JOGO";
+    const roundStatus = playerRoundStatus(statGame?.status ?? game?.status);
     return {
       ...player,
       roundPoints: Number(stat?.pontos ?? 0),
@@ -201,7 +193,7 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
     );
   }
 
-  const canEdit = round?.status === "ABERTA" && new Date() < new Date(round.trava_em);
+  const canEdit = isRoundEditable(round);
 
   if (!canEdit && !savedTeam) {
     return (

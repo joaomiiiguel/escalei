@@ -2,22 +2,19 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { isFormation, normalizePlayerIds } from "@/lib/lineup-rules";
 import { createClient } from "@/lib/supabase/server";
-
-const FORMATIONS = ["4-3-3", "4-4-2", "3-5-2"] as const;
 
 /** Erros de regra lançados por `fn_salvar_escalacao` (SQLSTATE `ES4xx`) já trazem a mensagem para o usuário. */
 const RULE_ERROR_CODE = /^ES4\d\d$/;
 
 export async function saveLineup(input: { formation: string; playerIds: number[]; roundId: number }) {
-  if (!Number.isInteger(input.roundId) || !FORMATIONS.includes(input.formation as (typeof FORMATIONS)[number]) || !Array.isArray(input.playerIds)) {
+  if (!Number.isInteger(input.roundId) || !isFormation(input.formation) || !Array.isArray(input.playerIds)) {
     return { error: "Dados da escalação inválidos." };
   }
 
-  const playerIds = [...new Set(input.playerIds)];
-  if (playerIds.length !== 11 || playerIds.some((id) => !Number.isInteger(id) || id <= 0)) {
-    return { error: "Selecione os 11 jogadores antes de salvar." };
-  }
+  const playerIds = normalizePlayerIds(input.playerIds);
+  if (!playerIds) return { error: "Selecione os 11 jogadores antes de salvar." };
 
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
