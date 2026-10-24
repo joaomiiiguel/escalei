@@ -107,6 +107,13 @@ Exemplo **ilustrativo** (preço médio hipotético: GOL C$ 8, DEF C$ 7, MEI C$ 9
 3. Menor custo do time
 4. Quem salvou o time primeiro
 
+## Ranking do campeonato do grupo
+
+- Cada grupo tem dois rankings: o **da rodada** e o **do campeonato**.
+- O ranking do campeonato soma os pontos de **todas as rodadas já travadas da temporada** (em andamento ou fechadas) de cada membro do grupo. Rodada sem escalação soma 0.
+- Desempate: mais gols dos jogadores escalados no acumulado; persistindo o empate, os membros dividem a posição.
+- Implementado em `fn_ranking_campeonato` (JOA-141) e exibido na aba "Campeonato" da tela do grupo.
+
 ---
 
 *Criado em 28/09/2026. Pesos inspirados no padrão que o público já conhece; são proposta de produto.*

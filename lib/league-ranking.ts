@@ -116,3 +116,40 @@ export function combineLeagueRanking({
     lastUpdated,
   };
 }
+
+export type ChampionshipRowInput = {
+  usuario_id: string;
+  apelido: string;
+  pontos: number | string;
+  rodadas_disputadas: number;
+  posicao: number;
+};
+
+export type ChampionshipMember = {
+  usuario_id: string;
+  apelido: string;
+  points: number;
+  rounds: number;
+  position: number;
+  isCurrentUser: boolean;
+};
+
+/** Prepara o ranking do campeonato do grupo (já ordenado pelo banco) para exibição. */
+export function buildChampionshipRanking(rows: ChampionshipRowInput[], currentUserId: string): {
+  ranking: ChampionshipMember[];
+  currentMember: ChampionshipMember | undefined;
+  differenceToLeader: number | null;
+} {
+  const ranking = rows.map((row) => ({
+    usuario_id: row.usuario_id,
+    apelido: row.apelido,
+    points: Number(row.pontos),
+    rounds: row.rodadas_disputadas,
+    position: row.posicao,
+    isCurrentUser: row.usuario_id === currentUserId,
+  }));
+  const currentMember = ranking.find((member) => member.isCurrentUser);
+  const leader = ranking[0];
+  const differenceToLeader = currentMember && leader ? Math.max(0, leader.points - currentMember.points) : null;
+  return { ranking, currentMember, differenceToLeader };
+}
