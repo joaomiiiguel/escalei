@@ -2,6 +2,9 @@
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
+/* O app é somente escuro: `dark:` depende da classe em <html>, não do tema do sistema. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
     --color-background: #050505;
     --color-foreground: #eff7ef;
@@ -31,10 +34,31 @@
 }
 
 :root {
-    color-scheme: dark;
+    color-scheme: only dark;
     font-family: Arial, sans-serif;
     background: var(--color-background);
     color: var(--color-foreground);
+    accent-color: var(--color-primary);
+    caret-color: var(--color-primary);
+    scrollbar-color: var(--color-border) transparent;
+    -webkit-tap-highlight-color: transparent;
+}
+
+/* Autopreenchimento do Chrome/Safari (Android e iOS) aplica fundo claro próprio. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-text-fill-color: var(--color-foreground);
+    caret-color: var(--color-foreground);
+    box-shadow: 0 0 0 1000px var(--color-card) inset;
+    transition: background-color 9999s ease-out 0s;
+}
+
+option {
+    color: var(--color-foreground);
+    background-color: var(--color-popover);
 }
 
 * {

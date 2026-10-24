@@ -2,9 +2,11 @@ import { Navbar } from "@/components/ui/navbar";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentRound } from "@/lib/current-round";
 import "./globals.css";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 
 export const metadata: Metadata = { title: "Escalou - Mostre que você entende de futebol", description: "Fantasy futebol" };
+// Tema fixo: evita que o modo claro/escuro do sistema, iOS ou Android altere as cores.
+export const viewport: Viewport = { themeColor: "#050505", colorScheme: "dark" };
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
@@ -32,7 +34,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     }
 
     return (
-        <html lang="pt-BR">
+        <html lang="pt-BR" className="dark">
             <body className="min-h-screen">
                 {children}
                 <Navbar hasCurrentTeam={hasCurrentTeam} isRoundInProgress={isRoundInProgress} />
