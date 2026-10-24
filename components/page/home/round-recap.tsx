@@ -2,6 +2,7 @@ import { RoundRecapCard } from "@/components/ui";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { bestPlayer, formatRecapPoints, groupPosition, recapPoints, recapShareText, type RecapRankingRow, type RecapStat, type RoundRecap } from "@/lib/round-recap";
+import { getAdministratorIds, withoutAdministrators } from "@/lib/league-members";
 import { ShareRecapButton } from "./share-recap-button";
 
 type Membership = { entrou_em: string; ligas: { id: string; nome: string; arquivada_em: string | null } | { id: string; nome: string; arquivada_em: string | null }[] | null };
@@ -24,14 +25,16 @@ export default async function RoundRecapSection({ userId, roundId, roundNumber, 
   const { data: membersData } = league
     ? await admin.from("ligas_membros").select("usuario_id").eq("liga_id", league.id)
     : { data: [] };
-  const memberIds = (membersData ?? []).map((member) => member.usuario_id as string);
-  const ranking = (rankingData ?? []) as RecapRankingRow[];
+  const allRanking = (rankingData ?? []) as RecapRankingRow[];
+  const administratorIds = await getAdministratorIds(admin, [...new Set([...(membersData ?? []).map((member) => member.usuario_id as string), ...allRanking.map((row) => row.usuario_id)])]);
+  const memberIds = withoutAdministrators((membersData ?? []) as { usuario_id: string }[], administratorIds).map((member) => member.usuario_id);
+  const ranking = withoutAdministrators(allRanking, administratorIds);
   const namesById = new Map((players ?? []).map((player) => [player.id as number, (player.nome_exibicao || player.nome) as string]));
 
   const recap: RoundRecap = {
     roundNumber,
     points: recapPoints(stats),
-    overallPosition: ranking.find((row) => row.usuario_id === userId)?.posicao ?? null,
+    overallPosition: groupPosition(ranking, ranking.map((row) => row.usuario_id), userId),
     overallTotal: ranking.length,
     groupName: league?.nome ?? null,
     groupPosition: groupPosition(ranking, memberIds, userId),

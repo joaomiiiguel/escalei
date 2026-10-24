@@ -6,6 +6,7 @@ import { createClient } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
 import { buildChampionshipRanking, type ChampionshipRowInput } from "@/lib/league-ranking";
+import { getAdministratorIds, withoutAdministrators } from "@/lib/league-members";
 import { RoundSelector } from "./round-selector";
 import { RankingViewTabs, type RankingView } from "./ranking-view-tabs";
 import { TrackEvent } from "@/components/analytics/track-event";
@@ -60,7 +61,9 @@ export default async function LeagueDetailPage({ params, searchParams }: { param
     admin.from("ligas_membros").select("usuario_id, perfis!ligas_membros_usuario_id_fkey(apelido, clubes(sigla))").eq("liga_id", league.id).order("entrou_em"),
     getCurrentRound<Round>(admin, "id, numero, temporada, simulada, status, trava_em"),
   ]);
-  const members = ((membersData ?? []) as unknown as LeagueMember[]).flatMap((member) => {
+  const leagueMembers = (membersData ?? []) as unknown as LeagueMember[];
+  const administratorIds = await getAdministratorIds(admin, leagueMembers.map((member) => member.usuario_id));
+  const members = withoutAdministrators(leagueMembers, administratorIds).flatMap((member) => {
     const memberProfile = first(member.perfis);
     return memberProfile ? [{ ...member, profile: memberProfile }] : [];
   });
