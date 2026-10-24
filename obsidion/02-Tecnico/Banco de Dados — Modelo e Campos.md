@@ -340,7 +340,7 @@ O ranking da liga é uma **view**: `ranking_rodada` ⋈ `ligas_membros`, com a p
 | Campo | Tipo | Regra |
 |---|---|---|
 | `id` | `bigserial` PK | |
-| `tipo` | `tipo_sync` not null | |
+| `tipo` | `text` not null | `RODADA`, `JOGO`, `PONTUACAO` ou `ORQUESTRADOR` |
 | `referencia` | `text` | ex.: `fixture=1234`, `rodada=29` |
 | `iniciado_em` · `terminado_em` | `timestamptz` | |
 | `requisicoes` | `smallint` not null | chamadas feitas nesta execução |
@@ -349,11 +349,13 @@ O ranking da liga é uma **view**: `ranking_rodada` ⋈ `ligas_membros`, com a p
 | `erro` | `text` | |
 
 > [!important] A cota é de 100 requisições/dia
-> Todo job **consulta a soma de `requisicoes` do dia** antes de chamar a API e se recusa a rodar abaixo de uma reserva (ex.: 15). Isso garante que sobra cota para pontuar os jogos que terminam à noite.
+> Todo job **consulta a última `cota_restante` do dia (UTC)** antes de chamar a API e se recusa a chamar quando ela estiver na reserva de 15 requisições. Isso garante que sobra cota para pontuar os jogos que terminam à noite.
+>
+> Implementado em `supabase/functions/_shared/api-football.ts` (JOA-63): `startSyncExecution` registra a execução e carrega a cota conhecida, `ApiFootballClient.get` bloqueia com `QuotaReservedError` e atualiza a cota pelo header `x-ratelimit-requests-remaining`, e `finishSyncExecution` grava requisições, cota e erro. Usado por `sync-round`, `score-match` e `advance-simulated-round`.
 
 ### `configuracoes`
 
-Chave-valor para ajustes sem deploy: `temporada_atual`, `liga_api_id` (71), `orcamento` (100), `reserva_cota_api` (15), `pesquisa_ativa`.
+Chave-valor para ajustes sem deploy: `temporada_atual`, `liga_api_id` (71), `orcamento` (não usado: o orçamento é o saldo da carteira, que começa em C$ 60), `reserva_cota_api` (15), `pesquisa_ativa`.
 
 ---
 

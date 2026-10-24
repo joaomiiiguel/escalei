@@ -4,7 +4,9 @@
  * Pontua um jogo encerrado a partir dos scouts da API-Football.
  *
  * - Recebe `jogoId` (interno) e o flag opcional `conferencia` via POST JSON.
- * - Busca estatísticas de jogadores e eventos do jogo na API-Football.
+ * - Busca estatísticas de jogadores e eventos do jogo na API-Football,
+ *   registrando a execução em `sync_execucoes` e respeitando a reserva diária
+ *   de requisições (`_shared/api-football.ts`).
  * - Relaciona jogadores e clubes com o catálogo local e calcula scouts
  *   (gols, assistências, defesas, cartões, etc.).
  * - Faz upsert em `estatisticas_jogador` e chama `fn_pontuar_jogo` para
@@ -16,6 +18,7 @@
  * Env obrigatórias: API_FOOTBALL_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
  */
 import { createClient } from "@supabase/supabase-js";
+import { finishSyncExecution, QuotaReservedError, startSyncExecution, type ApiFootballPayload, type SyncExecution } from "../_shared/api-football.ts";
 
 type ApiPlayerStatistic = {
   player: { id: number };
@@ -71,20 +74,32 @@ Deno.serve(async (request) => {
     return Response.json({ error: "A pontuação só pode ser lida após o encerramento do jogo." }, { status: 409 });
   }
 
-  const headers = { "x-apisports-key": apiKey, Accept: "application/json" };
-  const [playersResponse, eventsResponse] = await Promise.all([
-    fetch(`https://v3.football.api-sports.io/fixtures/players?fixture=${jogo.api_football_id}`, { headers }),
-    fetch(`https://v3.football.api-sports.io/fixtures/events?fixture=${jogo.api_football_id}`, { headers }),
-  ]);
-  const [playersPayload, eventsPayload] = await Promise.all([
-    playersResponse.json().catch(() => ({})),
-    eventsResponse.json().catch(() => ({})),
-  ]);
+  let execution: SyncExecution;
+  try {
+    execution = await startSyncExecution(supabase, apiKey, "PONTUACAO", `api-football:fixture-${jogo.api_football_id}${conferencia ? ":conferencia" : ""}`);
+  } catch {
+    return Response.json({ error: "Não foi possível registrar a sincronização." }, { status: 500 });
+  }
+
+  let playersResponse: Response, eventsResponse: Response, playersPayload: ApiFootballPayload, eventsPayload: ApiFootballPayload;
+  try {
+    ({ response: playersResponse, payload: playersPayload } = await execution.client.get(`/fixtures/players?fixture=${jogo.api_football_id}`));
+    ({ response: eventsResponse, payload: eventsPayload } = await execution.client.get(`/fixtures/events?fixture=${jogo.api_football_id}`));
+  } catch (error) {
+    if (error instanceof QuotaReservedError) {
+      await finishSyncExecution(supabase, execution, error.message);
+      return Response.json({ error: "Pontuação adiada para preservar a cota diária da API-Football." }, { status: 429 });
+    }
+    await finishSyncExecution(supabase, execution, "Falha ao consultar os scouts na API-Football.");
+    return Response.json({ error: "A API-Football não retornou os scouts da partida." }, { status: 502 });
+  }
   const playerGroups = playersPayload.response as ApiPlayerGroup[] | undefined;
   const events = eventsPayload.response as ApiEvent[] | undefined;
   if (!playersResponse.ok || !eventsResponse.ok || !Array.isArray(playerGroups) || !Array.isArray(events) || Object.keys(playersPayload.errors ?? {}).length || Object.keys(eventsPayload.errors ?? {}).length) {
+    await finishSyncExecution(supabase, execution, "A API-Football não retornou os scouts da partida.");
     return Response.json({ error: "A API-Football não retornou os scouts da partida." }, { status: 502 });
   }
+  await finishSyncExecution(supabase, execution);
 
   const playerApiIds = playerGroups.flatMap((group) => group.players.map((player) => player.player.id));
   const teamApiIds = playerGroups.map((group) => group.team.id);

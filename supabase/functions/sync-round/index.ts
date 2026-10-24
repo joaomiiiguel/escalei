@@ -7,13 +7,15 @@
  * - Busca os 10 jogos da rodada na API-Football (liga + temporada configuradas via env).
  * - Faz upsert na tabela `rodadas` e na tabela `jogos`, mapeando clubes e
  *   status para os valores internos do sistema.
- * - Registra a execução em `sync_execucoes` com status de sucesso ou erro.
+ * - Registra a execução em `sync_execucoes` (requisições, cota restante e erro)
+ *   e respeita a reserva diária de requisições (`_shared/api-football.ts`).
  *
  * Trigger: chamada manualmente ou por cron (ex.: supabase schedule).
  * Env obrigatórias: API_FOOTBALL_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
  *                   API_FOOTBALL_LEAGUE_ID, API_FOOTBALL_SEASON.
  */
 import { createClient } from "@supabase/supabase-js";
+import { finishSyncExecution, QuotaReservedError, startSyncExecution, type SyncExecution } from "../_shared/api-football.ts";
 
 type ApiFixture = {
   fixture: { id: number; date: string; status: { short: string } };
@@ -45,20 +47,16 @@ Deno.serve(async () => {
   if (simulationConfigError || !Number.isInteger(simulationRound) || simulationRound < 1 || simulationRound > 38) {
     return Response.json({ error: "A rodada simulada não está configurada." }, { status: 500 });
   }
-  const startedAt = new Date().toISOString();
-  const { data: execution, error: executionError } = await supabase
-    .from("sync_execucoes")
-    .insert({ tipo: "RODADA", referencia: `api-football:${season}:rodada-${simulationRound}`, iniciado_em: startedAt, requisicoes: 0, sucesso: false })
-    .select("id")
-    .single();
-  if (executionError || !execution) return Response.json({ error: "Não foi possível registrar a sincronização." }, { status: 500 });
+  let execution: SyncExecution;
+  try {
+    execution = await startSyncExecution(supabase, apiKey, "RODADA", `api-football:${season}:rodada-${simulationRound}`);
+  } catch {
+    return Response.json({ error: "Não foi possível registrar a sincronização." }, { status: 500 });
+  }
 
   try {
     const roundName = `Regular Season - ${simulationRound}`;
-    const response = await fetch(`https://v3.football.api-sports.io/fixtures?league=${leagueId}&season=${season}&round=${encodeURIComponent(roundName)}`, {
-      headers: { "x-apisports-key": apiKey, Accept: "application/json" },
-    });
-    const payload = await response.json().catch(() => ({}));
+    const { response, payload } = await execution.client.get(`/fixtures?league=${leagueId}&season=${season}&round=${encodeURIComponent(roundName)}`);
     const matches = payload.response as ApiFixture[] | undefined;
     if (!response.ok || !Array.isArray(matches) || Object.keys(payload.errors ?? {}).length || matches.length !== 10) {
       throw new Error(`A API-Football não retornou os 10 jogos da rodada ${simulationRound}.`);
@@ -85,10 +83,14 @@ Deno.serve(async () => {
     const { error: gamesError } = await supabase.from("jogos").upsert(games, { onConflict: "id" });
     if (gamesError) throw new Error("Não foi possível gravar as partidas da rodada.");
 
-    await supabase.from("sync_execucoes").update({ terminado_em: new Date().toISOString(), requisicoes: 1, sucesso: true }).eq("id", execution.id);
+    await finishSyncExecution(supabase, execution);
     return Response.json({ rodada: simulationRound, jogos: games.length, fonte: "API-Football" });
   } catch (error) {
-    await supabase.from("sync_execucoes").update({ terminado_em: new Date().toISOString(), requisicoes: 1, sucesso: false, erro: "Falha na sincronização da rodada via API-Football." }).eq("id", execution.id);
+    if (error instanceof QuotaReservedError) {
+      await finishSyncExecution(supabase, execution, error.message);
+      return Response.json({ error: "Sincronização adiada para preservar a cota diária da API-Football." }, { status: 429 });
+    }
+    await finishSyncExecution(supabase, execution, "Falha na sincronização da rodada via API-Football.");
     console.error(error);
     return Response.json({ error: "A sincronização da rodada falhou." }, { status: 500 });
   }

@@ -10,7 +10,8 @@
  * 2. Trava a rodada aberta quando `trava_em` passa (status EM_ANDAMENTO),
  *    impedindo novas alterações de time.
  * 3. Encerra jogos pendentes cujo `inicio_simulado_em` já passou,
- *    consultando o status real na API-Football.
+ *    consultando o status real na API-Football (com registro em
+ *    `sync_execucoes` e guarda da reserva diária de requisições).
  * 4. Pontua cada jogo encerrado ainda não pontuado via `score-match`.
  * 5. Quando todos os jogos estão pontuados, agenda a conferência
  *    (60 min após o último jogo pontuado) e executa a segunda leitura
@@ -23,6 +24,7 @@
  *                   API_FOOTBALL_SEASON.
  */
 import { createClient } from "@supabase/supabase-js";
+import { finishSyncExecution, QuotaReservedError, startSyncExecution } from "../_shared/api-football.ts";
 
 type Fixture = {
   fixture?: { status?: { short?: string } };
@@ -104,13 +106,25 @@ Deno.serve(async (request) => {
 
   const completed: number[] = [];
   const pending: number[] = [];
-  for (const game of dueGames ?? []) {
-    if (!game.api_football_id) continue;
-    const fixtureResponse = await fetch(`https://v3.football.api-sports.io/fixtures?id=${game.api_football_id}`, {
-      headers: { "x-apisports-key": apiKey, Accept: "application/json" },
-    });
-    const fixturePayload = await fixtureResponse.json().catch(() => ({}));
-    const fixture = fixturePayload.response?.[0] as Fixture | undefined;
+  let quotaReserved = false;
+  const pollableGames = (dueGames ?? []).filter((game) => game.api_football_id);
+  const execution = pollableGames.length
+    ? await startSyncExecution(db, apiKey, "JOGO", `api-football:rodada-${number}:status`).catch(() => null)
+    : null;
+  if (pollableGames.length && !execution) return Response.json({ error: "Não foi possível registrar a sincronização." }, { status: 500 });
+  for (const game of pollableGames) {
+    if (!execution) break;
+    let fixtureResponse: Response;
+    let fixturePayload: { response?: unknown };
+    try {
+      ({ response: fixtureResponse, payload: fixturePayload } = await execution.client.get(`/fixtures?id=${game.api_football_id}`));
+    } catch (error) {
+      if (!(error instanceof QuotaReservedError)) throw error;
+      quotaReserved = true;
+      pending.push(...pollableGames.slice(pollableGames.indexOf(game)).map((item) => item.id));
+      break;
+    }
+    const fixture = (Array.isArray(fixturePayload.response) ? fixturePayload.response[0] : undefined) as Fixture | undefined;
     const status = fixture?.fixture?.status?.short;
     if (!fixtureResponse.ok || !fixture || !finishedStatuses.has(status ?? "")) {
       pending.push(game.id);
@@ -120,9 +134,13 @@ Deno.serve(async (request) => {
       status: "ENCERRADO", status_api: status, gols_casa: fixture.goals?.home ?? 0, gols_fora: fixture.goals?.away ?? 0,
       api_atualizado_em: now.toISOString(),
     }).eq("id", game.id);
-    if (gameError) return Response.json({ error: "Não foi possível encerrar um jogo simulado." }, { status: 500 });
+    if (gameError) {
+      await finishSyncExecution(db, execution, "Não foi possível encerrar um jogo simulado.");
+      return Response.json({ error: "Não foi possível encerrar um jogo simulado." }, { status: 500 });
+    }
     completed.push(game.id);
   }
+  if (execution) await finishSyncExecution(db, execution, quotaReserved ? "Consulta interrompida para preservar a cota diária da API-Football." : undefined);
 
   const { data: unscoredGames, error: unscoredError } = await db.from("jogos")
     .select("id").eq("rodada_id", round.id).eq("status", "ENCERRADO").is("pontuado_em", null);
@@ -175,5 +193,5 @@ Deno.serve(async (request) => {
     }
   }
 
-  return Response.json({ rodada: number, rodadaAberta: openedRound, encerrados: completed, pendentes: [...new Set(pending)], conferenciaEm: closeAt ?? null });
+  return Response.json({ rodada: number, rodadaAberta: openedRound, encerrados: completed, pendentes: [...new Set(pending)], conferenciaEm: closeAt ?? null, cotaReservada: quotaReserved });
 });
