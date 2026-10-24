@@ -153,3 +153,26 @@ export function buildChampionshipRanking(rows: ChampionshipRowInput[], currentUs
   const differenceToLeader = currentMember && leader ? Math.max(0, leader.points - currentMember.points) : null;
   return { ranking, currentMember, differenceToLeader };
 }
+
+export type PositionChange = { direction: "up" | "down" | "same"; places: number };
+
+/** Posições com empate dividindo a mesma colocação (1º, 1º, 3º...), por pontos decrescentes. */
+export function rankByPoints<T extends { usuario_id: string; points: number }>(rows: T[]): Array<T & { position: number }> {
+  const ordered = [...rows].sort((first, second) => second.points - first.points);
+  let lastPoints: number | null = null;
+  let lastPosition = 0;
+  return ordered.map((row, index) => {
+    const position = row.points === lastPoints ? lastPosition : index + 1;
+    lastPoints = row.points;
+    lastPosition = position;
+    return { ...row, position };
+  });
+}
+
+/** Variação em relação à posição anterior; `null` quando não há posição anterior para comparar. */
+export function positionChange(current: number, previous: number | null | undefined): PositionChange | null {
+  if (previous === null || previous === undefined) return null;
+  if (current < previous) return { direction: "up", places: previous - current };
+  if (current > previous) return { direction: "down", places: current - previous };
+  return { direction: "same", places: 0 };
+}

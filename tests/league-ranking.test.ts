@@ -2,6 +2,8 @@ import { describe, it, expect } from "vitest";
 import {
   buildChampionshipRanking,
   combineLeagueRanking,
+  positionChange,
+  rankByPoints,
   formatInitials,
   formatPoints,
   type LeagueMemberInput,
@@ -190,5 +192,28 @@ describe("buildChampionshipRanking", () => {
   it("não calcula distância quando o usuário não está no ranking", () => {
     expect(buildChampionshipRanking(rows, "x").differenceToLeader).toBeNull();
     expect(buildChampionshipRanking([], "a")).toEqual({ ranking: [], currentMember: undefined, differenceToLeader: null });
+  });
+});
+
+describe("variação de posição no ranking", () => {
+  it("ordena por pontos e divide a posição em empates", () => {
+    const ranked = rankByPoints([
+      { usuario_id: "a", points: 10 },
+      { usuario_id: "b", points: 30 },
+      { usuario_id: "c", points: 10 },
+      { usuario_id: "d", points: 5 },
+    ]);
+    expect(ranked.map((row) => [row.usuario_id, row.position])).toEqual([["b", 1], ["a", 2], ["c", 2], ["d", 4]]);
+  });
+
+  it("indica subida, descida e posição mantida", () => {
+    expect(positionChange(1, 3)).toEqual({ direction: "up", places: 2 });
+    expect(positionChange(4, 2)).toEqual({ direction: "down", places: 2 });
+    expect(positionChange(2, 2)).toEqual({ direction: "same", places: 0 });
+  });
+
+  it("não indica nada sem posição anterior", () => {
+    expect(positionChange(1, null)).toBeNull();
+    expect(positionChange(1, undefined)).toBeNull();
   });
 });
