@@ -32,6 +32,7 @@ Sem técnico, sem capitão e sem banco de reservas no MVP.
 ## Saldo, orçamento e preço
 
 - Saldo inicial: **C$ 60,00** por usuário (definido em 24/10/2026; antes era C$ 50,00).
+  - Quem começou com C$ 50,00 e já tinha recebido rendimento ganhou um ajuste único de +C$ 10,00 (movimentação `AJUSTE_SALDO_INICIAL`, JOA-143).
 - O orçamento da escalação é o **saldo atual**, e não um teto fixo: ele vai aumentando conforme o desempenho das escalações.
 - Uma escalação só pode ser salva se o custo dos 11 jogadores couber no saldo atual. A validação acontece no banco (`fn_salvar_escalacao`), junto com a trava e a formação.
 - Ao fechar a rodada, cada jogador rende `max(pontos da rodada − preço pago, 0)` para o saldo do usuário (`fn_creditar_saldos_rodada`). Não há perda quando o desempenho ficar abaixo do preço, então o saldo nunca diminui.
