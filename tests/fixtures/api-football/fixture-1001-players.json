@@ -1,0 +1,334 @@
+{
+  "get": "fixtures/players",
+  "parameters": {
+    "fixture": "1001"
+  },
+  "errors": [],
+  "results": 2,
+  "response": [
+    {
+      "team": {
+        "id": 100,
+        "name": "Clube Casa"
+      },
+      "players": [
+        {
+          "player": {
+            "id": 9001,
+            "name": "Goleiro Casa"
+          },
+          "statistics": [
+            {
+              "games": {
+                "minutes": 90,
+                "position": "G",
+                "substitute": false,
+                "rating": "7.4"
+              },
+              "goals": {
+                "total": null,
+                "assists": null,
+                "saves": 3,
+                "conceded": 0
+              },
+              "shots": {
+                "total": null,
+                "on": null
+              },
+              "tackles": {
+                "total": null
+              },
+              "fouls": {
+                "drawn": null,
+                "committed": null
+              },
+              "offsides": null,
+              "cards": {
+                "yellow": null,
+                "red": null
+              },
+              "penalty": {
+                "won": null,
+                "committed": null,
+                "missed": null,
+                "saved": null
+              }
+            }
+          ]
+        },
+        {
+          "player": {
+            "id": 9002,
+            "name": "Zagueiro Casa"
+          },
+          "statistics": [
+            {
+              "games": {
+                "minutes": 90,
+                "position": "D",
+                "substitute": false,
+                "rating": "8.1"
+              },
+              "goals": {
+                "total": 1,
+                "assists": null,
+                "saves": null,
+                "conceded": null
+              },
+              "shots": {
+                "total": null,
+                "on": null
+              },
+              "tackles": {
+                "total": 2
+              },
+              "fouls": {
+                "drawn": null,
+                "committed": null
+              },
+              "offsides": null,
+              "cards": {
+                "yellow": 1,
+                "red": null
+              },
+              "penalty": {
+                "won": null,
+                "committed": null,
+                "missed": null,
+                "saved": null
+              }
+            }
+          ]
+        },
+        {
+          "player": {
+            "id": 9003,
+            "name": "Lateral Reserva"
+          },
+          "statistics": [
+            {
+              "games": {
+                "minutes": 30,
+                "position": "D",
+                "substitute": true,
+                "rating": null
+              },
+              "goals": {
+                "total": null,
+                "assists": null,
+                "saves": null,
+                "conceded": null
+              },
+              "shots": {
+                "total": null,
+                "on": null
+              },
+              "tackles": {
+                "total": null
+              },
+              "fouls": {
+                "drawn": null,
+                "committed": null
+              },
+              "offsides": null,
+              "cards": {
+                "yellow": null,
+                "red": null
+              },
+              "penalty": {
+                "won": null,
+                "committed": null,
+                "missed": null,
+                "saved": null
+              }
+            }
+          ]
+        },
+        {
+          "player": {
+            "id": 9004,
+            "name": "Atacante Casa"
+          },
+          "statistics": [
+            {
+              "games": {
+                "minutes": 80,
+                "position": "F",
+                "substitute": false,
+                "rating": "7.9"
+              },
+              "goals": {
+                "total": 1,
+                "assists": null,
+                "saves": null,
+                "conceded": null
+              },
+              "shots": {
+                "total": 4,
+                "on": 2
+              },
+              "tackles": {
+                "total": null
+              },
+              "fouls": {
+                "drawn": null,
+                "committed": null
+              },
+              "offsides": 1,
+              "cards": {
+                "yellow": null,
+                "red": null
+              },
+              "penalty": {
+                "won": null,
+                "committed": null,
+                "missed": null,
+                "saved": null
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "team": {
+        "id": 200,
+        "name": "Clube Visitante"
+      },
+      "players": [
+        {
+          "player": {
+            "id": 9005,
+            "name": "Meia Visitante"
+          },
+          "statistics": [
+            {
+              "games": {
+                "minutes": 90,
+                "position": "M",
+                "substitute": false,
+                "rating": "5.2"
+              },
+              "goals": {
+                "total": null,
+                "assists": null,
+                "saves": null,
+                "conceded": null
+              },
+              "shots": {
+                "total": null,
+                "on": null
+              },
+              "tackles": {
+                "total": null
+              },
+              "fouls": {
+                "drawn": null,
+                "committed": 2
+              },
+              "offsides": null,
+              "cards": {
+                "yellow": null,
+                "red": 1
+              },
+              "penalty": {
+                "won": null,
+                "committed": null,
+                "missed": null,
+                "saved": null
+              }
+            }
+          ]
+        },
+        {
+          "player": {
+            "id": 9006,
+            "name": "Goleiro Reserva"
+          },
+          "statistics": [
+            {
+              "games": {
+                "minutes": 0,
+                "position": "G",
+                "substitute": true,
+                "rating": null
+              },
+              "goals": {
+                "total": null,
+                "assists": null,
+                "saves": null,
+                "conceded": null
+              },
+              "shots": {
+                "total": null,
+                "on": null
+              },
+              "tackles": {
+                "total": null
+              },
+              "fouls": {
+                "drawn": null,
+                "committed": null
+              },
+              "offsides": null,
+              "cards": {
+                "yellow": null,
+                "red": null
+              },
+              "penalty": {
+                "won": null,
+                "committed": null,
+                "missed": null,
+                "saved": null
+              }
+            }
+          ]
+        },
+        {
+          "player": {
+            "id": 9999,
+            "name": "Fora do Catálogo"
+          },
+          "statistics": [
+            {
+              "games": {
+                "minutes": 90,
+                "position": "M",
+                "substitute": false,
+                "rating": null
+              },
+              "goals": {
+                "total": 1,
+                "assists": null,
+                "saves": null,
+                "conceded": null
+              },
+              "shots": {
+                "total": null,
+                "on": null
+              },
+              "tackles": {
+                "total": null
+              },
+              "fouls": {
+                "drawn": null,
+                "committed": null
+              },
+              "offsides": null,
+              "cards": {
+                "yellow": null,
+                "red": null
+              },
+              "penalty": {
+                "won": null,
+                "committed": null,
+                "missed": null,
+                "saved": null
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

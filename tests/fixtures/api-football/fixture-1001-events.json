@@ -1,0 +1,62 @@
+{
+  "get": "fixtures/events",
+  "parameters": {
+    "fixture": "1001"
+  },
+  "errors": [],
+  "results": 4,
+  "response": [
+    {
+      "time": {
+        "elapsed": 12
+      },
+      "team": {
+        "id": 100
+      },
+      "player": {
+        "id": 9002
+      },
+      "type": "Goal",
+      "detail": "Normal Goal"
+    },
+    {
+      "time": {
+        "elapsed": 40
+      },
+      "team": {
+        "id": 200
+      },
+      "player": {
+        "id": 9005
+      },
+      "type": "Card",
+      "detail": "Red Card"
+    },
+    {
+      "time": {
+        "elapsed": 55
+      },
+      "team": {
+        "id": 100
+      },
+      "player": {
+        "id": 9004
+      },
+      "type": "Goal",
+      "detail": "Normal Goal"
+    },
+    {
+      "time": {
+        "elapsed": 77
+      },
+      "team": {
+        "id": 100
+      },
+      "player": {
+        "id": 9005
+      },
+      "type": "Goal",
+      "detail": "Own Goal"
+    }
+  ]
+}
