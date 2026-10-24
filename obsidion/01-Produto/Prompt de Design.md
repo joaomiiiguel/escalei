@@ -48,7 +48,7 @@ IDENTIDADE VISUAL (marca nova — proponha)
 
 REGRAS DO JOGO QUE A INTERFACE PRECISA DEIXAR CLARAS
 - A cada rodada do Brasileirão o usuário escala 11 jogadores numa formação (4-3-3, 4-4-2 ou 3-5-2),
-  dentro de um orçamento de C$ 100 (cartoletas). Posições: GOL, DEF, MEI, ATA (não há separação entre
+  dentro do saldo do usuário (começa em C$ 60 e cresce com o desempenho da escalação). Posições: GOL, DEF, MEI, ATA (não há separação entre
   zagueiro e lateral). O preço de cada jogador sobe ou desce conforme a média dos últimos jogos.
 - A escalação TRAVA no início do primeiro jogo da rodada (contagem regressiva sempre visível).
 - NÃO há parcial ao vivo. Os pontos de cada jogador aparecem QUANDO O JOGO DELE TERMINA, e o ranking

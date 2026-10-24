@@ -58,7 +58,7 @@ tags:
 - [ ] ONB-01: onboarding exclusivo por convite de liga (ver [[Onboarding por Convite]])
 - [ ] Início
 - [ ] Montar Time + Mercado + Detalhe do Jogador + escalação automática
-- [ ] Trigger de trava e de validação de formação/orçamento
+- [x] Trava e validação de formação/saldo no banco (`fn_salvar_escalacao` + RLS, JOA-138)
 - [ ] Meu Time na Rodada
 - [ ] Ranking (geral, ligas, clube) com `ranking_rodada`
 - [ ] Ligas: criar, convidar (link + WhatsApp), entrar por código
