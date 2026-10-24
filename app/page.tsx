@@ -13,6 +13,8 @@ import RoundViewCTA from "@/components/page/home/round-view-cta";
 import MatchesRounds from "@/components/page/home/matches-rounds";
 import LiveMatches from "@/components/page/home/live-matches";
 import RoundRecapSection from "@/components/page/home/round-recap";
+import { TrackEvent } from "@/components/analytics/track-event";
+import { hoursSince } from "@/lib/analytics/events";
 
 /** Apelidos que têm acesso ao modo de demonstração. */
 const DEMO_USERS = new Set(["Joao"]);
@@ -136,6 +138,8 @@ export default async function Home() {
   return (
     <main className="flex max-w-lg px-5 flex-col justify-start gap-4 pt-5 pb-44 text-white">
       {header}
+      <TrackEvent event="inicio_visto" properties={{ status_rodada: round?.status ?? null }} />
+      {team && (round?.status === "EM_ANDAMENTO" || round?.status === "FECHADA") && <TrackEvent event="pontos_vistos" properties={{ status_rodada: round.status, horas_desde_ultimo_jogo: hoursSince(completedGames.map((game) => game.pontuado_em)) }} />}
       {round?.status !== "ABERTA" && <LiveMatches
         completedGames={completedGames.length}
         games={games}

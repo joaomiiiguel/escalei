@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState, useTransition } from "react";
+import { useCallback, useMemo, useRef, useState, useTransition } from "react";
 import { saveLineup } from "@/app/escalar/actions";
 import { LineupFormation, type LineupPlayer } from "./lineup-formation";
 import { LineupSummary } from "./lineup-summary";
@@ -15,6 +15,7 @@ export function LineupBuilder({ budget, initialFormation = "4-3-3", initialPlaye
   const [isAutoSelecting, setIsAutoSelecting] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [isSaving, startSaving] = useTransition();
+  const openedAt = useRef(Date.now());
   const totalCost = useMemo(() => selectedPlayers.reduce((total, player) => total + player.price, 0), [selectedPlayers]);
   const handleSelectedPlayersChange = useCallback((players: LineupPlayer[]) => setSelectedPlayers(players), []);
   const handleFormationChange = useCallback((nextFormation: Formation) => {
@@ -24,10 +25,16 @@ export function LineupBuilder({ budget, initialFormation = "4-3-3", initialPlaye
   const save = useCallback(() => {
     setMessage(null);
     startSaving(async () => {
-      const result = await saveLineup({ formation, playerIds: selectedPlayers.map((player) => player.id), roundId });
+      const result = await saveLineup({
+        formation,
+        playerIds: selectedPlayers.map((player) => player.id),
+        roundId,
+        durationSeconds: (Date.now() - openedAt.current) / 1000,
+        isEdit: initialPlayers.length > 0,
+      });
       setMessage(result.error ?? "Não foi possível salvar seu time.");
     });
-  }, [formation, roundId, selectedPlayers]);
+  }, [formation, initialPlayers.length, roundId, selectedPlayers]);
   const autoSelect = useCallback(async () => {
     setIsAutoSelecting(true);
     setMessage(null);

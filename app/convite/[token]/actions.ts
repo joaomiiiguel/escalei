@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { addUserToInvitedLeague, canUserJoinInvite } from "@/lib/invites";
+import { trackServerEvent } from "@/lib/analytics/server";
 
 export async function acceptInvite(formData: FormData) {
   const token = String(formData.get("token") ?? "");
@@ -15,5 +16,6 @@ export async function acceptInvite(formData: FormData) {
   if (!profile) redirect(`/onboarding?convite=${token}`);
 
   const joined = await addUserToInvitedLeague(token, user.id);
+  if (joined) trackServerEvent(user.id, "convite_aceito", {});
   redirect(joined ? "/" : `/convite/${token}?erro=indisponivel`);
 }

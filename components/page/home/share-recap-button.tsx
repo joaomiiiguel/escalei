@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Share2 } from "lucide-react";
+import { trackEvent } from "@/lib/analytics/client";
 
 export function ShareRecapButton({ text, url }: { text: string; url: string | null }) {
   const [status, setStatus] = useState<string | null>(null);
@@ -12,10 +13,12 @@ export function ShareRecapButton({ text, url }: { text: string; url: string | nu
     try {
       if (typeof navigator.share === "function") {
         await navigator.share(payload);
+        trackEvent("fim_rodada_compartilhado", { metodo: "nativo" });
         return;
       }
       await navigator.clipboard.writeText(url ? `${text} ${url}` : text);
       setStatus("Resumo copiado. É só colar no grupo.");
+      trackEvent("fim_rodada_compartilhado", { metodo: "copiado" });
     } catch (error) {
       if (error instanceof DOMException && error.name === "AbortError") return;
       setStatus("Não foi possível compartilhar agora.");

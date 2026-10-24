@@ -8,6 +8,7 @@ import { getCurrentRound } from "@/lib/current-round";
 import { buildChampionshipRanking, type ChampionshipRowInput } from "@/lib/league-ranking";
 import { RoundSelector } from "./round-selector";
 import { RankingViewTabs, type RankingView } from "./ranking-view-tabs";
+import { TrackEvent } from "@/components/analytics/track-event";
 import { Logo } from "@/components/ui";
 
 type League = { id: string; nome: string; icone: string | null; tipo: "ABERTA" | "CONVITE"; temporada: number; token_convite: string; arquivada_em: string | null };
@@ -133,6 +134,7 @@ export default async function LeagueDetailPage({ params, searchParams }: { param
     </section>
 
     <RankingViewTabs leagueId={league.id} active={view} />
+    <TrackEvent key={view} event="ranking_visto" properties={{ aba: view }} />
 
     <section className="grid grid-cols-3 gap-4" aria-label={view === "campeonato" ? "Seu desempenho no campeonato" : "Seu desempenho na rodada"}>
       <div className="rounded-xl bg-secondary px-3 py-2.5 text-center"><strong className="block text-3xl font-mono text-primary font-extrabold leading-tight">{currentMember ? `${currentMember.position}º` : "—"}</strong><span className="text-[11px] font-mono text-white">sua posição</span></div>
