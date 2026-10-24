@@ -1,15 +1,8 @@
 import { NextResponse } from "next/server";
 import { getCurrentRound } from "@/lib/current-round";
+import { FORMATIONS, isFormation, isRoundEditable, type Position } from "@/lib/lineup-rules";
 import { createClient } from "@/lib/supabase/server";
 
-const formations = {
-  "4-3-3": { GOL: 1, DEF: 4, MEI: 3, ATA: 3 },
-  "4-4-2": { GOL: 1, DEF: 4, MEI: 4, ATA: 2 },
-  "3-5-2": { GOL: 1, DEF: 3, MEI: 5, ATA: 2 },
-} as const;
-
-type Formation = keyof typeof formations;
-type Position = keyof (typeof formations)[Formation];
 type Candidate = {
   id: number;
   name: string;
@@ -27,7 +20,7 @@ function asNumber(value: number | string | null | undefined) {
 
 export async function GET(request: Request) {
   const formation = new URL(request.url).searchParams.get("formacao");
-  if (!formation || !(formation in formations)) return NextResponse.json({ error: "Formação inválida." }, { status: 400 });
+  if (!isFormation(formation)) return NextResponse.json({ error: "Formação inválida." }, { status: 400 });
 
   const db = await createClient();
   const { data: { user } } = await db.auth.getUser();
@@ -45,7 +38,7 @@ export async function GET(request: Request) {
     id: number; numero: number; status: "AGENDADA" | "ABERTA" | "EM_ANDAMENTO" | "FECHADA"; trava_em: string;
   }>(db, "id, numero, status, trava_em");
   if (roundError || !round) return NextResponse.json({ error: "Rodada indisponível." }, { status: 404 });
-  if (round.status !== "ABERTA" || new Date() >= new Date(round.trava_em)) {
+  if (!isRoundEditable(round)) {
     return NextResponse.json({ error: "A escalação automática está disponível somente enquanto o mercado estiver aberto." }, { status: 409 });
   }
 
@@ -103,7 +96,7 @@ export async function GET(request: Request) {
     } satisfies Candidate;
   });
 
-  const required = formations[formation as Formation];
+  const required = FORMATIONS[formation];
   const byPosition = (Object.keys(required) as Position[]).reduce<Record<Position, Candidate[]>>((groups, position) => {
     groups[position] = candidates.filter((candidate) => candidate.position === position)
       .sort((first, second) => first.price - second.price || second.score - first.score || first.name.localeCompare(second.name));

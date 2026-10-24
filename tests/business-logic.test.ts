@@ -1,220 +1,134 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, expect, it, vi } from "vitest";
+import {
+  FORMATIONS,
+  isFormation,
+  isRoundEditable,
+  lineupCost,
+  normalizePlayerIds,
+  playerRoundStatus,
+  validateLineup,
+  type Formation,
+  type LineupPlayer,
+  type Position,
+} from "@/lib/lineup-rules";
 
-const FORMATIONS = {
-  "4-3-3": { ATA: 3, DEF: 4, GOL: 1, MEI: 3 },
-  "4-4-2": { ATA: 2, DEF: 4, GOL: 1, MEI: 4 },
-  "3-5-2": { ATA: 2, DEF: 3, GOL: 1, MEI: 5 },
-} as const;
+// `vitest.setup.ts` substitui o módulo por um mock; aqui testamos a implementação real.
+const { pickCurrentRound } = await vi.importActual<typeof import("@/lib/current-round")>("@/lib/current-round");
 
-type Formation = keyof typeof FORMATIONS;
-type Position = keyof (typeof FORMATIONS)[Formation];
-
-function validateFormation(formation: string, players: Array<{ posicao: Position; preco: number }>): { valid: boolean; error?: string; cost?: number } {
-  if (!(formation in FORMATIONS)) {
-    return { valid: false, error: "Formação inválida." };
-  }
-
-  if (players.length !== 11) {
-    return { valid: false, error: "Selecione os 11 jogadores antes de salvar." };
-  }
-
-  const formationKey = formation as Formation;
-  const positions = players.reduce<Record<Position, number>>((counts, player) => {
-    counts[player.posicao] += 1;
-    return counts;
-  }, { ATA: 0, DEF: 0, GOL: 0, MEI: 0 });
-
-  const isValidFormation = (Object.keys(FORMATIONS[formationKey]) as Position[]).every(
-    (position) => positions[position] === FORMATIONS[formationKey][position]
+function lineupFor(formation: Formation, price = 5): LineupPlayer[] {
+  return (Object.keys(FORMATIONS[formation]) as Position[]).flatMap((position) =>
+    Array.from({ length: FORMATIONS[formation][position] }, () => ({ posicao: position, preco: price })),
   );
-
-  if (!isValidFormation) {
-    return { valid: false, error: "Os jogadores não correspondem à formação escolhida." };
-  }
-
-  const cost = players.reduce((total, player) => total + Number(player.preco), 0);
-  return { valid: true, cost };
 }
 
-describe("Formation Validation", () => {
-  describe("validateFormation", () => {
-    it("should reject invalid formation", () => {
-      const result = validateFormation("5-5-5", []);
-      expect(result.valid).toBe(false);
-      expect(result.error).toBe("Formação inválida.");
-    });
+describe("formações", () => {
+  it.each(Object.keys(FORMATIONS) as Formation[])("aceita uma escalação %s completa", (formation) => {
+    expect(validateLineup(formation, lineupFor(formation), 60)).toBeNull();
+  });
 
-    it("should reject wrong number of players", () => {
-      const players = Array(10).fill({ posicao: "ATA" as Position, preco: 10 });
-      const result = validateFormation("4-3-3", players);
-      expect(result.valid).toBe(false);
-      expect(result.error).toBe("Selecione os 11 jogadores antes de salvar.");
-    });
+  it("aceita somente as formações do regulamento", () => {
+    expect(isFormation("4-3-3")).toBe(true);
+    expect(isFormation("5-4-1")).toBe(false);
+    expect(isFormation("toString")).toBe(false);
+    expect(validateLineup("5-4-1", lineupFor("4-3-3"), 60)).toBe("Formação inválida.");
+  });
 
-    it("should validate 4-3-3 formation correctly", () => {
-      const players = [
-        ...Array(3).fill({ posicao: "ATA" as Position, preco: 12 }),
-        ...Array(3).fill({ posicao: "MEI" as Position, preco: 10 }),
-        ...Array(4).fill({ posicao: "DEF" as Position, preco: 8 }),
-        { posicao: "GOL" as Position, preco: 6 },
-      ];
-      const result = validateFormation("4-3-3", players);
-      expect(result.valid).toBe(true);
-      expect(result.cost).toBe(3 * 12 + 3 * 10 + 4 * 8 + 6);
-    });
+  it("recusa posições que não batem com a formação", () => {
+    expect(validateLineup("4-4-2", lineupFor("4-3-3"), 60)).toBe("Os jogadores não correspondem à formação escolhida.");
+  });
 
-    it("should validate 4-4-2 formation correctly", () => {
-      const players = [
-        ...Array(2).fill({ posicao: "ATA" as Position, preco: 12 }),
-        ...Array(4).fill({ posicao: "MEI" as Position, preco: 10 }),
-        ...Array(4).fill({ posicao: "DEF" as Position, preco: 8 }),
-        { posicao: "GOL" as Position, preco: 6 },
-      ];
-      const result = validateFormation("4-4-2", players);
-      expect(result.valid).toBe(true);
-      expect(result.cost).toBe(2 * 12 + 4 * 10 + 4 * 8 + 6);
-    });
+  it("recusa escalação incompleta", () => {
+    expect(validateLineup("4-3-3", lineupFor("4-3-3").slice(1), 60)).toBe("Selecione os 11 jogadores antes de salvar.");
+  });
 
-    it("should validate 3-5-2 formation correctly", () => {
-      const players = [
-        ...Array(2).fill({ posicao: "ATA" as Position, preco: 12 }),
-        ...Array(5).fill({ posicao: "MEI" as Position, preco: 10 }),
-        ...Array(3).fill({ posicao: "DEF" as Position, preco: 8 }),
-        { posicao: "GOL" as Position, preco: 6 },
-      ];
-      const result = validateFormation("3-5-2", players);
-      expect(result.valid).toBe(true);
-      expect(result.cost).toBe(2 * 12 + 5 * 10 + 3 * 8 + 6);
-    });
-
-    it("should reject wrong position counts for 4-3-3", () => {
-      const players = [
-        ...Array(4).fill({ posicao: "ATA" as Position, preco: 12 }), // 4 instead of 3
-        ...Array(3).fill({ posicao: "MEI" as Position, preco: 10 }),
-        ...Array(3).fill({ posicao: "DEF" as Position, preco: 8 }), // 3 instead of 4
-        { posicao: "GOL" as Position, preco: 6 },
-      ];
-      const result = validateFormation("4-3-3", players);
-      expect(result.valid).toBe(false);
-      expect(result.error).toBe("Os jogadores não correspondem à formação escolhida.");
-    });
+  it("normaliza ids e recusa repetidos ou inválidos", () => {
+    const ids = Array.from({ length: 11 }, (_, index) => index + 1);
+    expect(normalizePlayerIds(ids)).toEqual(ids);
+    expect(normalizePlayerIds([...ids.slice(0, 10), 1])).toBeNull();
+    expect(normalizePlayerIds([...ids.slice(0, 10), 0])).toBeNull();
+    expect(normalizePlayerIds("1,2,3")).toBeNull();
   });
 });
 
-describe("Budget Calculation", () => {
-  it("should calculate total cost correctly", () => {
-    const players = [
-      { preco: 12.5, posicao: "ATA" as Position },
-      { preco: 10.0, posicao: "ATA" as Position },
-      { preco: 9.5, posicao: "MEI" as Position },
-      { preco: 8.0, posicao: "MEI" as Position },
-      { preco: 8.0, posicao: "MEI" as Position },
-      { preco: 7.5, posicao: "DEF" as Position },
-      { preco: 7.0, posicao: "DEF" as Position },
-      { preco: 6.5, posicao: "DEF" as Position },
-      { preco: 6.0, posicao: "DEF" as Position },
-      { preco: 5.5, posicao: "GOL" as Position },
-      { preco: 5.0, posicao: "DEF" as Position },
-    ];
-    const total = players.reduce((sum, p) => sum + p.preco, 0);
-    expect(total).toBeCloseTo(85.5, 1);
+describe("saldo", () => {
+  it("soma o custo com duas casas, mesmo com preços em texto vindos do banco", () => {
+    expect(lineupCost([{ posicao: "GOL", preco: "5.10" }, { posicao: "DEF", preco: 4.2 }])).toBe(9.3);
   });
 
-  it("should detect budget exceeded", () => {
-    const players = Array(11).fill({ preco: 10, posicao: "ATA" as Position });
-    const budget = 50;
-    const total = players.reduce((sum, p) => sum + p.preco, 0);
-    expect(total).toBeGreaterThan(budget);
+  it("aceita custo igual ao saldo inicial de C$ 60", () => {
+    const players = lineupFor("4-3-3", 5);
+    players[0] = { ...players[0], preco: 10 };
+    expect(lineupCost(players)).toBe(60);
+    expect(validateLineup("4-3-3", players, 60)).toBeNull();
+  });
+
+  it("recusa custo acima do saldo atual", () => {
+    expect(validateLineup("4-3-3", lineupFor("4-3-3", 6), 60)).toBe("A escalação ultrapassa o seu saldo disponível.");
+  });
+
+  it("não tem teto fixo de C$ 100 quando o saldo cresceu", () => {
+    expect(validateLineup("4-3-3", lineupFor("4-3-3", 10), 120)).toBeNull();
   });
 });
 
-describe("Round Status Logic", () => {
-  const roundStatusPriority: Record<string, number> = {
-    EM_ANDAMENTO: 0,
-    ABERTA: 1,
-    FECHADA: 2,
-    AGENDADA: 3,
-  };
+describe("trava da rodada", () => {
+  const now = new Date("2026-10-25T15:00:00-03:00");
 
-  it("should prioritize EM_ANDAMENTO over ABERTA", () => {
+  it("permite editar rodada aberta antes da trava", () => {
+    expect(isRoundEditable({ status: "ABERTA", trava_em: "2026-10-25T16:00:00-03:00" }, now)).toBe(true);
+  });
+
+  it("bloqueia no instante da trava e depois dela", () => {
+    expect(isRoundEditable({ status: "ABERTA", trava_em: "2026-10-25T15:00:00-03:00" }, now)).toBe(false);
+    expect(isRoundEditable({ status: "ABERTA", trava_em: "2026-10-25T14:59:00-03:00" }, now)).toBe(false);
+  });
+
+  it.each(["AGENDADA", "EM_ANDAMENTO", "FECHADA"] as const)("bloqueia rodada %s", (status) => {
+    expect(isRoundEditable({ status, trava_em: "2026-10-26T16:00:00-03:00" }, now)).toBe(false);
+  });
+
+  it("bloqueia quando não há rodada", () => {
+    expect(isRoundEditable(null, now)).toBe(false);
+  });
+});
+
+describe("rodada atual", () => {
+  const round = (numero: number, status: "AGENDADA" | "ABERTA" | "EM_ANDAMENTO" | "FECHADA", trava_em: string) => ({ numero, status, trava_em });
+
+  it("prioriza em andamento, depois aberta, fechada e agendada", () => {
     const rounds = [
-      { status: "ABERTA" as const, numero: 1 },
-      { status: "EM_ANDAMENTO" as const, numero: 2 },
+      round(1, "FECHADA", "2026-10-01T16:00:00Z"),
+      round(3, "AGENDADA", "2026-10-20T16:00:00Z"),
+      round(2, "ABERTA", "2026-10-10T16:00:00Z"),
     ];
-    const sorted = [...rounds].sort((a, b) => roundStatusPriority[a.status] - roundStatusPriority[b.status]);
-    expect(sorted[0].status).toBe("EM_ANDAMENTO");
+    expect(pickCurrentRound(rounds, { simulated: false })?.numero).toBe(2);
+    expect(pickCurrentRound([...rounds, round(4, "EM_ANDAMENTO", "2026-10-05T16:00:00Z")], { simulated: false })?.numero).toBe(4);
   });
 
-  it("should prioritize ABERTA over FECHADA", () => {
-    const rounds = [
-      { status: "FECHADA" as const, numero: 1 },
-      { status: "ABERTA" as const, numero: 2 },
-    ];
-    const sorted = [...rounds].sort((a, b) => roundStatusPriority[a.status] - roundStatusPriority[b.status]);
-    expect(sorted[0].status).toBe("ABERTA");
-  });
-});
-
-describe("Player Status Mapping", () => {
-  function mapRoundStatus(rawStatus: string): "A_JOGAR" | "ADIADO" | "EM_ANDAMENTO" | "ENCERRADO" | "SEM_JOGO" {
-    if (rawStatus === "ENCERRADO") return "ENCERRADO";
-    if (rawStatus === "EM_ANDAMENTO") return "EM_ANDAMENTO";
-    if (rawStatus === "A_JOGAR") return "A_JOGAR";
-    if (rawStatus === "ADIADO" || rawStatus === "CANCELADO") return "ADIADO";
-    return "SEM_JOGO";
-  }
-
-  it("should map ENCERRADO correctly", () => {
-    expect(mapRoundStatus("ENCERRADO")).toBe("ENCERRADO");
+  it("entre fechadas usa a trava mais recente e entre agendadas a mais próxima", () => {
+    expect(pickCurrentRound([round(1, "FECHADA", "2026-10-01T16:00:00Z"), round(2, "FECHADA", "2026-10-08T16:00:00Z")], { simulated: false })?.numero).toBe(2);
+    expect(pickCurrentRound([round(5, "AGENDADA", "2026-11-08T16:00:00Z"), round(4, "AGENDADA", "2026-11-01T16:00:00Z")], { simulated: false })?.numero).toBe(4);
   });
 
-  it("should map EM_ANDAMENTO correctly", () => {
-    expect(mapRoundStatus("EM_ANDAMENTO")).toBe("EM_ANDAMENTO");
+  it("em rodadas simuladas desempata pelo maior número", () => {
+    expect(pickCurrentRound([round(30, "FECHADA", "2026-10-01T16:00:00Z"), round(31, "FECHADA", "2026-09-01T16:00:00Z")], { simulated: true })?.numero).toBe(31);
   });
 
-  it("should map A_JOGAR correctly", () => {
-    expect(mapRoundStatus("A_JOGAR")).toBe("A_JOGAR");
-  });
-
-  it("should map ADIADO correctly", () => {
-    expect(mapRoundStatus("ADIADO")).toBe("ADIADO");
-    expect(mapRoundStatus("CANCELADO")).toBe("ADIADO");
-  });
-
-  it("should default to SEM_JOGO for unknown status", () => {
-    expect(mapRoundStatus("DESCONHECIDO")).toBe("SEM_JOGO");
-    expect(mapRoundStatus("")).toBe("SEM_JOGO");
+  it("devolve null sem rodadas", () => {
+    expect(pickCurrentRound([], { simulated: false })).toBeNull();
   });
 });
 
-describe("Points Formatting", () => {
-  function points(value: number): string {
-    return value.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
-  }
-
-  it("should format integer points", () => {
-    expect(points(10)).toBe("10,0");
-    expect(points(0)).toBe("0,0");
-  });
-
-  it("should format decimal points", () => {
-    expect(points(10.5)).toBe("10,5");
-    expect(points(10.25)).toBe("10,3"); // rounding
-  });
-
-  it("should format large numbers", () => {
-    expect(points(1234.5)).toBe("1.234,5");
-  });
-});
-
-describe("Currency Formatting", () => {
-  function currency(value: number): string {
-    return `C$ ${value.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-  }
-
-  it("should format currency correctly", () => {
-    expect(currency(50)).toBe("C$ 50,00");
-    expect(currency(50.5)).toBe("C$ 50,50");
-    expect(currency(100)).toBe("C$ 100,00");
+describe("situação do jogo do escalado", () => {
+  it.each([
+    ["ENCERRADO", "ENCERRADO"],
+    ["EM_ANDAMENTO", "EM_ANDAMENTO"],
+    ["A_JOGAR", "A_JOGAR"],
+    ["ADIADO", "ADIADO"],
+    ["CANCELADO", "ADIADO"],
+    ["DESCONHECIDO", "SEM_JOGO"],
+    [undefined, "SEM_JOGO"],
+  ])("mapeia %s para %s", (gameStatus, expected) => {
+    expect(playerRoundStatus(gameStatus)).toBe(expected);
   });
 });

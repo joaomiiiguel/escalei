@@ -16,6 +16,23 @@ const roundPriority: Record<StatusRodada, number> = {
   AGENDADA: 3,
 };
 
+/**
+ * Escolhe a rodada exibida: em andamento, depois aberta, fechada e agendada.
+ * Rodadas simuladas desempatam pelo número mais alto; as reais, pela trava
+ * mais recente (ou a próxima trava, para rodadas agendadas).
+ */
+export function pickCurrentRound<T extends CurrentRound>(rounds: T[], { simulated }: { simulated: boolean }): T | null {
+  return [...rounds].sort((first, second) => {
+    const priorityDifference = roundPriority[first.status] - roundPriority[second.status];
+    if (priorityDifference !== 0) return priorityDifference;
+    if (simulated) return second.numero - first.numero;
+
+    const firstLock = new Date(first.trava_em).getTime();
+    const secondLock = new Date(second.trava_em).getTime();
+    return first.status === "AGENDADA" ? firstLock - secondLock : secondLock - firstLock;
+  })[0] ?? null;
+}
+
 function currentSeason() {
   return Number(new Intl.DateTimeFormat("en-US", {
     timeZone: "America/Fortaleza",
@@ -36,9 +53,7 @@ export async function getCurrentRound<T extends CurrentRound>(supabase: Supabase
 
   if (simulationResult.error) return { data: null as T | null, error: simulationResult.error };
   if (simulationResult.data?.length) {
-    const round = (simulationResult.data as unknown as T[])
-      .sort((first, second) => roundPriority[first.status] - roundPriority[second.status] || second.numero - first.numero)[0];
-    return { data: round ?? null, error: null };
+    return { data: pickCurrentRound(simulationResult.data as unknown as T[], { simulated: true }), error: null };
   }
 
   if (currentSeasonResult.error) return { data: null as T | null, error: currentSeasonResult.error };
@@ -51,15 +66,5 @@ export async function getCurrentRound<T extends CurrentRound>(supabase: Supabase
 
   if (fallbackResult.error || !fallbackResult.data) return { data: null as T | null, error: fallbackResult.error };
 
-  const round = (fallbackResult.data as unknown as T[])
-    .sort((first, second) => {
-      const priorityDifference = roundPriority[first.status] - roundPriority[second.status];
-      if (priorityDifference !== 0) return priorityDifference;
-
-      const firstLock = new Date(first.trava_em).getTime();
-      const secondLock = new Date(second.trava_em).getTime();
-      return first.status === "AGENDADA" ? firstLock - secondLock : secondLock - firstLock;
-    })[0] ?? null;
-
-  return { data: round, error: null };
+  return { data: pickCurrentRound(fallbackResult.data as unknown as T[], { simulated: false }), error: null };
 }
