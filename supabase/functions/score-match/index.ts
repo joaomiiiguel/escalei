@@ -18,30 +18,8 @@
  * Env obrigatórias: API_FOOTBALL_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
  */
 import { createClient } from "@supabase/supabase-js";
+import { buildScouts, type ApiEvent, type ApiPlayerGroup } from "../_shared/scouts.ts";
 import { finishSyncExecution, QuotaReservedError, startSyncExecution, type ApiFootballPayload, type SyncExecution } from "../_shared/api-football.ts";
-
-type ApiPlayerStatistic = {
-  player: { id: number };
-  statistics: Array<{
-    games?: { minutes?: number | null; position?: string | null; substitute?: boolean | null; rating?: string | null };
-    goals?: { total?: number | null; assists?: number | null; saves?: number | null; conceded?: number | null };
-    shots?: { total?: number | null; on?: number | null };
-    tackles?: { total?: number | null };
-    fouls?: { drawn?: number | null; committed?: number | null };
-    offsides?: number | null;
-    cards?: { yellow?: number | null; red?: number | null };
-    penalty?: { won?: number | null; committed?: number | null; missed?: number | null; saved?: number | null };
-  }>;
-};
-
-type ApiPlayerGroup = { team: { id: number }; players: ApiPlayerStatistic[] };
-type ApiEvent = { type?: string; detail?: string; player?: { id?: number | null } };
-
-const numberOrZero = (value: number | null | undefined) => Number.isFinite(value) ? Number(value) : 0;
-const gamePosition = (value: string | null | undefined) => {
-  const normalized = value?.toUpperCase();
-  return normalized === "G" || normalized === "D" || normalized === "M" || normalized === "F" ? normalized : null;
-};
 
 Deno.serve(async (request) => {
   if (request.method !== "POST") return Response.json({ error: "Use POST." }, { status: 405 });
@@ -109,56 +87,15 @@ Deno.serve(async (request) => {
   ]);
   if (jogadoresError || clubesError) return Response.json({ error: "Não foi possível relacionar os scouts ao catálogo local." }, { status: 500 });
 
-  const jogadorIdByApiId = new Map((jogadores ?? []).map((jogador) => [jogador.api_football_id, jogador.id]));
-  const clubeIdByApiId = new Map((clubes ?? []).map((clube) => [clube.api_football_id, clube.id]));
-  const ownGoalsByPlayerApiId = new Map<number, number>();
-  for (const event of events) {
-    if (event.type === "Goal" && event.detail === "Own Goal" && event.player?.id) {
-      ownGoalsByPlayerApiId.set(event.player.id, (ownGoalsByPlayerApiId.get(event.player.id) ?? 0) + 1);
-    }
-  }
-
-  const scouts = playerGroups.flatMap((group) => group.players.flatMap((player) => {
-    const localPlayerId = jogadorIdByApiId.get(player.player.id);
-    const localClubId = clubeIdByApiId.get(group.team.id);
-    const stat = player.statistics[0];
-    if (!localPlayerId || !localClubId || !stat) return [];
-    const minutes = numberOrZero(stat.games?.minutes);
-    const goalsConceded = numberOrZero(stat.goals?.conceded);
-    const isHome = localClubId === jogo.clube_casa_id;
-    const opponentGoals = isHome ? numberOrZero(jogo.gols_fora) : numberOrZero(jogo.gols_casa);
-    return [{
-      jogo_id: jogo.id,
-      jogador_id: localPlayerId,
-      rodada_id: jogo.rodada_id,
-      clube_id: localClubId,
-      minutos: minutes,
-      posicao_jogo: gamePosition(stat.games?.position),
-      substituto: stat.games?.substitute === true,
-      nota_api: stat.games?.rating ? Number(stat.games.rating) : null,
-      gols: numberOrZero(stat.goals?.total),
-      assistencias: numberOrZero(stat.goals?.assists),
-      finalizacoes: numberOrZero(stat.shots?.total),
-      finalizacoes_no_gol: numberOrZero(stat.shots?.on),
-      desarmes: numberOrZero(stat.tackles?.total),
-      faltas_sofridas: numberOrZero(stat.fouls?.drawn),
-      faltas_cometidas: numberOrZero(stat.fouls?.committed),
-      impedimentos: numberOrZero(stat.offsides),
-      amarelos: numberOrZero(stat.cards?.yellow),
-      vermelhos: numberOrZero(stat.cards?.red),
-      defesas: numberOrZero(stat.goals?.saves),
-      gols_sofridos: goalsConceded,
-      penaltis_sofridos: numberOrZero(stat.penalty?.won),
-      penaltis_cometidos: numberOrZero(stat.penalty?.committed),
-      penaltis_perdidos: numberOrZero(stat.penalty?.missed),
-      penaltis_defendidos: numberOrZero(stat.penalty?.saved),
-      gols_contra: ownGoalsByPlayerApiId.get(player.player.id) ?? 0,
-      sem_sofrer_gol: minutes >= 60 && opponentGoals === 0,
-      versao_leitura: conferencia ? 2 : 1,
-      payload_api: player,
-      lido_em: new Date().toISOString(),
-    }];
-  }));
+  const scouts = buildScouts({
+    jogo,
+    playerGroups,
+    events,
+    jogadorIdByApiId: new Map((jogadores ?? []).map((jogador) => [jogador.api_football_id, jogador.id])),
+    clubeIdByApiId: new Map((clubes ?? []).map((clube) => [clube.api_football_id, clube.id])),
+    conferencia,
+    lidoEm: new Date().toISOString(),
+  });
 
   if (scouts.length === 0) return Response.json({ error: "Nenhum scout pôde ser associado aos jogadores locais." }, { status: 422 });
   const { error: scoutsError } = await supabase
