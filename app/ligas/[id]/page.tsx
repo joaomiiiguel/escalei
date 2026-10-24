@@ -5,7 +5,9 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
+import { buildChampionshipRanking, type ChampionshipRowInput } from "@/lib/league-ranking";
 import { RoundSelector } from "./round-selector";
+import { RankingViewTabs, type RankingView } from "./ranking-view-tabs";
 import { Logo } from "@/components/ui";
 
 type League = { id: string; nome: string; icone: string | null; tipo: "ABERTA" | "CONVITE"; temporada: number; token_convite: string; arquivada_em: string | null };
@@ -28,9 +30,10 @@ function points(value: number) {
   return value.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 }
 
-export default async function LeagueDetailPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ rodada?: string }> }) {
+export default async function LeagueDetailPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ rodada?: string; visao?: string }> }) {
   const { id } = await params;
-  const { rodada: requestedRoundId } = await searchParams;
+  const { rodada: requestedRoundId, visao } = await searchParams;
+  const view: RankingView = visao === "campeonato" ? "campeonato" : "rodada";
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/entrar");
@@ -74,12 +77,12 @@ export default async function LeagueDetailPage({ params, searchParams }: { param
   const requestedRound = Number(requestedRoundId);
   const round = availableRounds.find((candidate) => candidate.id === requestedRound) ?? currentRound;
   const memberIds = members.map((member) => member.usuario_id);
-  const { data: teamsData } = round && memberIds.length
+  const { data: teamsData } = view === "rodada" && round && memberIds.length
     ? await admin.from("times").select("usuario_id, times_jogadores(jogador_id)").eq("rodada_id", round.id).in("usuario_id", memberIds)
     : { data: [] };
   const teams = (teamsData ?? []) as unknown as Team[];
   const playerIds = [...new Set(teams.flatMap((team) => team.times_jogadores?.map((player) => player.jogador_id) ?? []))];
-  const { data: statsData } = round && playerIds.length
+  const { data: statsData } = view === "rodada" && round && playerIds.length
     ? await admin.from("estatisticas_jogador").select("jogador_id, pontos").eq("rodada_id", round.id).in("jogador_id", playerIds)
     : { data: [] };
   const pointsByPlayer = new Map(((statsData ?? []) as Stat[]).map((stat) => [stat.jogador_id, Number(stat.pontos)]));
@@ -95,9 +98,25 @@ export default async function LeagueDetailPage({ params, searchParams }: { param
     lastPosition = position;
     return { ...member, position };
   });
-  const currentMember = ranking.find((member) => member.isCurrentUser);
-  const leader = ranking[0];
-  const differenceToLeader = currentMember && leader ? Math.max(0, leader.points - currentMember.points) : null;
+  const season = currentRound?.temporada ?? league.temporada;
+  const { data: championshipData, error: championshipError } = view === "campeonato"
+    ? await supabase.rpc("fn_ranking_campeonato", { p_liga_id: league.id, p_temporada: season, p_simulada: Boolean(currentRound?.simulada) })
+    : { data: [], error: null };
+  const championship = buildChampionshipRanking((championshipData ?? []) as ChampionshipRowInput[], user.id);
+  const roundCurrentMember = ranking.find((member) => member.isCurrentUser);
+  const roundLeader = ranking[0];
+  const displayed = view === "campeonato"
+    ? {
+      rows: championship.ranking.map((member) => ({ ...member, detail: `${member.rounds} ${member.rounds === 1 ? "rodada" : "rodadas"}` })),
+      currentMember: championship.currentMember,
+      differenceToLeader: championship.differenceToLeader,
+    }
+    : {
+      rows: ranking.map((member) => ({ usuario_id: member.usuario_id, apelido: member.profile.apelido, points: member.points, position: member.position, isCurrentUser: member.isCurrentUser, detail: null as string | null })),
+      currentMember: roundCurrentMember,
+      differenceToLeader: roundCurrentMember && roundLeader ? Math.max(0, roundLeader.points - roundCurrentMember.points) : null,
+    };
+  const { currentMember, differenceToLeader } = displayed;
   const joinedDate = new Intl.DateTimeFormat("pt-BR", { month: "short", year: "numeric", timeZone: "America/Sao_Paulo" }).format(new Date(membership.entrou_em));
 
   return <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-3.5 px-5 pt-1 pb-40 text-foreground">
@@ -113,7 +132,9 @@ export default async function LeagueDetailPage({ params, searchParams }: { param
       </div>
     </section>
 
-    <section className="grid grid-cols-3 gap-4" aria-label="Seu desempenho na liga">
+    <RankingViewTabs leagueId={league.id} active={view} />
+
+    <section className="grid grid-cols-3 gap-4" aria-label={view === "campeonato" ? "Seu desempenho no campeonato" : "Seu desempenho na rodada"}>
       <div className="rounded-xl bg-secondary px-3 py-2.5 text-center"><strong className="block text-3xl font-mono text-primary font-extrabold leading-tight">{currentMember ? `${currentMember.position}º` : "—"}</strong><span className="text-[11px] font-mono text-white">sua posição</span></div>
       <div className="rounded-xl bg-secondary px-3 py-2.5 text-center"><strong className="block text-3xl font-mono text-primary font-extrabold leading-tight">{currentMember ? points(currentMember.points) : "—"}</strong><span className="text-[11px] font-mono text-white">seus pontos</span></div>
       <div className="rounded-xl bg-secondary px-3 py-2.5 text-center"><strong className="block text-3xl font-mono text-primary font-extrabold leading-tight">{differenceToLeader === null ? "—" : differenceToLeader === 0 ? "—" : `−${points(differenceToLeader)}`}</strong><span className="text-[11px] font-mono text-white">para o 1º</span></div>
@@ -123,18 +144,20 @@ export default async function LeagueDetailPage({ params, searchParams }: { param
 
     <section className="grid gap-1" aria-labelledby="ranking-title">
       <div className="mb-1 flex items-center justify-between gap-3">
-        <h2 id="ranking-title" className="text-[17px] font-extrabold">{round ? `Ranking da Rodada ${String(round.numero).padStart(2, "0")}` : "Ranking da liga"}</h2>
-        {round && availableRounds.length > 0 && <RoundSelector leagueId={league.id} selectedRoundId={round.id} options={availableRounds.map((candidate) => ({ id: candidate.id, numero: candidate.numero, isCurrent: candidate.id === currentRound?.id }))} />}
+        <h2 id="ranking-title" className="text-[17px] font-extrabold">{view === "campeonato" ? `Ranking do Campeonato ${season}` : round ? `Ranking da Rodada ${String(round.numero).padStart(2, "0")}` : "Ranking da liga"}</h2>
+        {view === "rodada" && round && availableRounds.length > 0 && <RoundSelector leagueId={league.id} selectedRoundId={round.id} options={availableRounds.map((candidate) => ({ id: candidate.id, numero: candidate.numero, isCurrent: candidate.id === currentRound?.id }))} />}
       </div>
       <div className="my-2 flex items-center justify-between gap-3 opacity-60">
         <p className="w-12 text-xs font-extrabold font-mono">POS</p>
         <p className="flex-1 text-xs font-extrabold">NOME</p>
         <p className="w-10 text-xs font-extrabold font-mono">PTS</p>
       </div>
-      {ranking.map((member) => {
+      {view === "campeonato" && championshipError && <p role="alert" className="rounded-xl bg-destructive/20 p-3 text-sm font-semibold text-destructive-foreground">Não foi possível carregar o ranking do campeonato. Tente novamente em instantes.</p>}
+      {view === "campeonato" && !championshipError && <p className="text-xs text-muted-foreground">Soma dos pontos de todas as rodadas já travadas da temporada. Empate: mais gols dos escalados.</p>}
+      {displayed.rows.map((member) => {
         return <article key={member.usuario_id} className={`flex h-[60px] items-center gap-3 rounded-xl px-3 backdrop-blur-sm ${member.isCurrentUser ? "border border-primary bg-primary/15" : "bg-primary/10"}`}>
           <strong className="w-8 text-[15px] font-extrabold text-foreground">{member.position}º</strong>
-          <span className="min-w-0 flex-1"><strong className="block truncate">{member.profile.apelido}{member.isCurrentUser ? " (você)" : ""}</strong></span>
+          <span className="min-w-0 flex-1"><strong className="block truncate">{member.apelido}{member.isCurrentUser ? " (você)" : ""}</strong>{member.detail && <span className="block text-xs text-muted-foreground">{member.detail}</span>}</span>
           <span className="grid justify-items-end gap-0.5"><strong className="font-mono text-[15px]">{points(member.points)}</strong></span>
         </article>;
       })}

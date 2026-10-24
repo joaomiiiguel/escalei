@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
 import {
+  buildChampionshipRanking,
   combineLeagueRanking,
   formatInitials,
   formatPoints,
@@ -165,5 +166,29 @@ describe("League Ranking Utilities", () => {
 
       expect(result.differenceToLeader).toBe(0);
     });
+  });
+});
+
+describe("buildChampionshipRanking", () => {
+  const rows = [
+    { usuario_id: "b", apelido: "bruno", pontos: "80.00", rodadas_disputadas: 2, posicao: 1 },
+    { usuario_id: "a", apelido: "ana", pontos: "72.50", rodadas_disputadas: 3, posicao: 2 },
+    { usuario_id: "c", apelido: "carla", pontos: "0.00", rodadas_disputadas: 0, posicao: 3 },
+  ];
+
+  it("converte pontos para número e marca o usuário atual", () => {
+    const { ranking, currentMember } = buildChampionshipRanking(rows, "a");
+    expect(ranking.map((member) => [member.apelido, member.points, member.rounds, member.position])).toEqual([["bruno", 80, 2, 1], ["ana", 72.5, 3, 2], ["carla", 0, 0, 3]]);
+    expect(currentMember).toMatchObject({ apelido: "ana", isCurrentUser: true });
+  });
+
+  it("calcula a distância para o líder do campeonato", () => {
+    expect(buildChampionshipRanking(rows, "a").differenceToLeader).toBe(7.5);
+    expect(buildChampionshipRanking(rows, "b").differenceToLeader).toBe(0);
+  });
+
+  it("não calcula distância quando o usuário não está no ranking", () => {
+    expect(buildChampionshipRanking(rows, "x").differenceToLeader).toBeNull();
+    expect(buildChampionshipRanking([], "a")).toEqual({ ranking: [], currentMember: undefined, differenceToLeader: null });
   });
 });

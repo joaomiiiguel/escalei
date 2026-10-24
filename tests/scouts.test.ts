@@ -4,9 +4,9 @@ import players from "./fixtures/api-football/fixture-1001-players.json";
 import events from "./fixtures/api-football/fixture-1001-events.json";
 
 /** Ids locais dos jogadores das fixtures (o 9999 fica fora do catálogo de propósito). */
-export const LOCAL_PLAYER_IDS = new Map([[9001, 101], [9002, 102], [9003, 103], [9004, 104], [9005, 105], [9006, 106]]);
-export const LOCAL_CLUB_IDS = new Map([[100, 1], [200, 2]]);
-export const GAME = { id: 1001, rodada_id: 1, clube_casa_id: 1, clube_fora_id: 2, gols_casa: 3, gols_fora: 0 };
+const LOCAL_PLAYER_IDS = new Map([[9001, 101], [9002, 102], [9003, 103], [9004, 104], [9005, 105], [9006, 106]]);
+const LOCAL_CLUB_IDS = new Map([[100, 1], [200, 2]]);
+const GAME = { id: 1001, rodada_id: 1, clube_casa_id: 1, clube_fora_id: 2, gols_casa: 3, gols_fora: 0 };
 
 function scouts(conferencia = false) {
   return buildScouts({
