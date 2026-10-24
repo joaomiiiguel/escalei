@@ -35,11 +35,11 @@ export function LineupSummary({ budget = 100, selectedPlayers = 0, isSaving = fa
     </div>
 
     <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-2">
-      <button type="button" onClick={onAutoSelect} disabled={isAutoSelecting || isSaving} className="flex min-h-8 items-center justify-center gap-2 rounded-xl bg-muted px-4 text-sm font-bold text-foreground disabled:cursor-not-allowed disabled:opacity-50">
+      <button type="button" onClick={onAutoSelect} disabled={isAutoSelecting || isSaving} className="flex min-h-9 items-center justify-center gap-2 rounded-xl bg-muted px-4 text-sm font-bold text-foreground disabled:cursor-not-allowed disabled:opacity-50">
         <WandSparkles className="size-4" aria-hidden="true" />
         {isAutoSelecting ? "Montando..." : "Escalação automática"}
       </button>
-      <button type="button" onClick={onSave} disabled={!canSave || isSaving} className="min-h-8 rounded-xl bg-primary px-4 text-sm font-bold text-primary-foreground disabled:bg-muted disabled:text-muted-foreground">
+      <button type="button" onClick={onSave} disabled={!canSave || isSaving} className="min-h-9 rounded-xl bg-primary px-4 text-sm font-bold text-primary-foreground disabled:bg-muted disabled:text-muted-foreground">
         {isSaving ? "Salvando..." : budget < 0 ? "Orçamento excedido" : canSave ? "Salvar time" : `Faltam ${remainingSlots}`}
       </button>
     </div>

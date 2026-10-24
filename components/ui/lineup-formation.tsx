@@ -155,10 +155,9 @@ function PlayerPickerSheet({ maxAvailablePrice, onClose, onSelect, position, sel
   }
 
   const sheet = (
-    <div className="fixed inset-0 z-[70] flex items-end mx-auto max-w-lg">
+    <div className="fixed inset-0 z-[70] flex items-end mx-auto max-w-lg px-4">
       <button type="button" className={`absolute inset-0 bg-black/65 transition-opacity duration-200 ${isOpen ? "opacity-100" : "opacity-0"}`} onClick={close} aria-label="Fechar lista de jogadores" />
       <section className={`relative z-10 grid h-[82dvh] w-full grid-rows-[auto_auto_auto_minmax(0,1fr)] overflow-hidden rounded-t-3xl border-t border-border bg-card/40 backdrop-blur-md shadow-2xl transition-transform duration-200 ease-out motion-reduce:transition-none ${isOpen ? "translate-y-0" : "translate-y-full"}`} role="dialog" aria-modal="true" aria-labelledby="player-picker-title">
-        <div className="mx-auto mt-3 h-1 w-9 rounded-full bg-muted-foreground/60" aria-hidden="true" />
         <header className="flex items-center justify-between px-5 pb-3 pt-4"><div><h2 id="player-picker-title" className="text-lg font-extrabold text-foreground">Mercado</h2><p className="text-xs font-medium text-muted-foreground">{isLoading ? "Carregando jogadores" : `${players.length} jogadores`}</p></div><button type="button" onClick={close} className="grid size-9 place-items-center rounded-full bg-muted text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label="Fechar"><X className="size-4" /></button></header>
         <div className="border-t border-border px-5 pt-3">
           <label className="relative block"><Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" /><Input value={search} onChange={(event) => setSearch(event.target.value)} className="h-9 border-0 bg-muted pl-9 pr-9 text-sm" placeholder="Buscar jogador ou clube" aria-label="Buscar jogador ou clube" />{search && <button type="button" onClick={() => setSearch("")} className="absolute right-2 top-1/2 grid size-6 -translate-y-1/2 place-items-center rounded-full text-muted-foreground hover:bg-background" aria-label="Limpar busca"><X className="size-3.5" /></button>}</label>
