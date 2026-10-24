@@ -6,6 +6,7 @@ import { USER_A, USER_B, seedRound, seedUser } from "./seed";
 
 const USER_C = "00000000-0000-4000-8000-00000000000c";
 const OUTSIDER = "00000000-0000-4000-8000-00000000000d";
+const ADMIN = "00000000-0000-4000-8000-00000000000e";
 const LEAGUE = "10000000-0000-4000-8000-000000000001";
 
 let db: PGlite;
@@ -27,8 +28,11 @@ describe("ranking do campeonato do grupo", () => {
     await seedUser(db, USER_B, "bruno");
     await seedUser(db, USER_C, "carla");
     await seedUser(db, OUTSIDER, "fora");
+    await seedUser(db, ADMIN, "admin");
+    await db.query("insert into administradores (usuario_id, nome) values ($1, $2)", [ADMIN, "Admin"]);
     await db.query("insert into ligas (id, nome, dono_id, codigo_convite, temporada) values ($1, 'Amigos do Bairro', $2, 'ABCDEFGH', 2026)", [LEAGUE, USER_A]);
-    for (const userId of [USER_A, USER_B, USER_C]) {
+    // O administrador que cria o grupo também vira membro, mas não disputa.
+    for (const userId of [ADMIN, USER_A, USER_B, USER_C]) {
       await db.query("insert into ligas_membros (liga_id, usuario_id) values ($1, $2)", [LEAGUE, userId]);
     }
     const closed1 = await seedRound(db, 1, "FECHADA", "-14 days");
@@ -44,6 +48,7 @@ describe("ranking do campeonato do grupo", () => {
     await team(USER_B, live, 30, 1);
     await team(USER_B, otherSeason, 500, 5); // outra temporada: não conta
     await team(OUTSIDER, closed1, 300, 9); // fora do grupo: não aparece
+    await team(ADMIN, closed1, 200, 9); // administrador: não aparece
   }, 60_000);
 
   it("soma os pontos das rodadas travadas da temporada e desempata pelos gols dos escalados", async () => {
@@ -85,5 +90,16 @@ describe("ranking do campeonato do grupo", () => {
     } finally {
       await db.query("update ligas set arquivada_em = null where id = $1", [LEAGUE]);
     }
+  });
+
+  it("não inclui administradores do grupo no ranking", async () => {
+    expect((await ranking(USER_A)).map((row) => row.apelido)).not.toContain("admin");
+  });
+
+  it("inicializa o ranking da rodada sem administradores", async () => {
+    const roundId = await seedRound(db, 5, "ABERTA", "13 days");
+    await db.query("select fn_inicializar_ranking_rodada($1)", [roundId]);
+    const rows = await db.query<{ usuario_id: string }>("select usuario_id from ranking_rodada where rodada_id = $1 order by usuario_id", [roundId]);
+    expect(rows.rows.map((row) => row.usuario_id)).toEqual([USER_A, USER_B, USER_C]);
   });
 });
