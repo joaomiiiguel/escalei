@@ -12,6 +12,7 @@ import DemoStatusPicker from "@/components/page/home/demo-status-picker";
 import RoundViewCTA from "@/components/page/home/round-view-cta";
 import MatchesRounds from "@/components/page/home/matches-rounds";
 import LiveMatches from "@/components/page/home/live-matches";
+import RoundRecapSection from "@/components/page/home/round-recap";
 
 /** Apelidos que têm acesso ao modo de demonstração. */
 const DEMO_USERS = new Set(["Joao"]);
@@ -76,7 +77,7 @@ export default async function Home() {
     const playerIds = team?.times_jogadores?.map((player) => player.jogador_id) ?? [];
 
     // Puxa as estatísticas do time
-    if (round.status === "EM_ANDAMENTO" && playerIds.length > 0) {
+    if ((round.status === "EM_ANDAMENTO" || round.status === "FECHADA") && playerIds.length > 0) {
       const { data: statsData, error: statsError } = await supabase
         .from("estatisticas_jogador")
         .select("jogador_id, jogo_id, pontos")
@@ -144,6 +145,8 @@ export default async function Home() {
       />}
 
       <StatusRodada unavailable={unavailable} round={round} now={now} nextRound={null} />
+
+      {round?.status === "FECHADA" && team && <RoundRecapSection userId={user.id} roundId={round.id} roundNumber={round.numero} stats={teamStats} />}
 
       <RoundViewCTA team={team} round={round} now={now} games={games} clubsById={clubsById} teamStats={teamStats} />
 
