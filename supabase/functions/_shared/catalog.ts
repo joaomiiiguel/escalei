@@ -72,19 +72,39 @@ function baseCode(team: ApiTeam["team"]): string {
 
 /**
  * Clubes da temporada prontos para upsert. Preserva o id de quem já existe
- * (pelo id da API) e evita colisão de sigla com outros clubes do catálogo.
+ * (pelo id da API). Se a sigla oficial estiver com um clube fora da temporada
+ * (por exemplo, um cadastro antigo sem id da API), esse clube recebe uma sigla
+ * provisória em `renames` e a oficial fica com o clube da temporada.
  */
 export function buildClubs(teams: ApiTeam[], saved: SavedClub[], now: string) {
   const byApiId = new Map(saved.flatMap((club) => (club.api_football_id ? [[club.api_football_id, club] as const] : [])));
-  const usedCodes = new Map(saved.map((club) => [club.sigla, club.id]));
-  return teams.map(({ team }) => {
+  const seasonIds = new Set(teams.map(({ team }) => byApiId.get(team.id)?.id ?? CLUB_ID_OFFSET + team.id));
+  const savedByCode = new Map(saved.map((club) => [club.sigla, club]));
+  const usedCodes = new Set(saved.map((club) => club.sigla));
+  const renames: Array<{ id: number; sigla: string }> = [];
+  const placeholder = () => {
+    for (let index = 1; ; index += 1) {
+      const code = `X${String(index).padStart(2, "0")}`;
+      if (!usedCodes.has(code)) return code;
+    }
+  };
+  const clubs = teams.map(({ team }) => {
     if (!Number.isInteger(team.id) || !team.name?.trim()) throw new Error(`Clube inválido retornado pela API-Football: ${team.name ?? team.id}.`);
     const id = byApiId.get(team.id)?.id ?? CLUB_ID_OFFSET + team.id;
     let sigla = baseCode(team);
-    for (let suffix = 1; usedCodes.has(sigla) && usedCodes.get(sigla) !== id; suffix += 1) sigla = `${sigla.slice(0, 2)}${suffix}`;
-    usedCodes.set(sigla, id);
+    const holder = savedByCode.get(sigla);
+    if (holder && holder.id !== id && !seasonIds.has(holder.id)) {
+      const code = placeholder();
+      usedCodes.add(code);
+      renames.push({ id: holder.id, sigla: code });
+      savedByCode.delete(sigla);
+    }
+    for (let suffix = 1; savedByCode.has(sigla) && savedByCode.get(sigla)!.id !== id; suffix += 1) sigla = `${sigla.slice(0, 2)}${suffix}`;
+    savedByCode.set(sigla, { id, sigla, api_football_id: team.id });
+    usedCodes.add(sigla);
     return { id, api_football_id: team.id, nome: team.name.trim(), sigla, logo_url: team.logo ?? null, ativo: true, api_atualizado_em: now };
   });
+  return { clubs, renames };
 }
 
 /** Estatística da Série A com mais jogos (jogador transferido dentro da liga aparece mais de uma vez). */

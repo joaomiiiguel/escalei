@@ -21,7 +21,7 @@ const weights = scoringWeights([...migration.matchAll(/\(1, '([a-z_]+)', '(GOL|D
 const NOW = "2026-10-27T18:00:00.000Z";
 
 describe("clubes da Série A 2026 (resposta real da API)", () => {
-  const clubs = buildClubs(teams.response as ApiTeam[], [], NOW);
+  const { clubs } = buildClubs(teams.response as ApiTeam[], [], NOW);
 
   it("monta os 20 clubes com siglas únicas", () => {
     expect(clubs).toHaveLength(20);
@@ -33,12 +33,28 @@ describe("clubes da Série A 2026 (resposta real da API)", () => {
     expect(clubs.find((club) => club.nome === "Mirassol")?.sigla).toBe("MIR");
   });
 
-  it("preserva o id de clubes já cadastrados e evita sigla de outro clube", () => {
+  it("preserva o id de clubes já cadastrados", () => {
     const flamengo = (teams.response as ApiTeam[]).find((item) => item.team.name === "Flamengo")!;
-    const saved = [{ id: 7, sigla: "FLA", api_football_id: flamengo.team.id }, { id: 99, sigla: "REM", api_football_id: null }];
-    const result = buildClubs(teams.response as ApiTeam[], saved, NOW);
+    const { clubs: result } = buildClubs(teams.response as ApiTeam[], [{ id: 7, sigla: "FLA", api_football_id: flamengo.team.id }], NOW);
     expect(result.find((club) => club.nome === "Flamengo")).toMatchObject({ id: 7, sigla: "FLA" });
-    expect(result.find((club) => club.nome === "Remo")?.sigla).toBe("RE1");
+  });
+
+  it("libera a sigla oficial presa em um clube antigo fora da temporada", () => {
+    const saved = [{ id: 4287, sigla: "REM", api_football_id: null }, { id: 6685, sigla: "SAN", api_football_id: null }, { id: 1, sigla: "X01", api_football_id: null }];
+    const { clubs: result, renames } = buildClubs(teams.response as ApiTeam[], saved, NOW);
+    expect(result.find((club) => club.nome === "Remo")?.sigla).toBe("REM");
+    expect(result.find((club) => club.nome === "Santos")?.sigla).toBe("SAN");
+    expect(renames.map((rename) => rename.id).sort()).toEqual([4287, 6685]);
+    expect(renames.every((rename) => /^X0[23]$/.test(rename.sigla))).toBe(true);
+    expect(new Set(renames.map((rename) => rename.sigla)).size).toBe(2);
+  });
+
+  it("não tira a sigla de outro clube da temporada", () => {
+    const corinthians = (teams.response as ApiTeam[]).find((item) => item.team.name === "Corinthians")!;
+    const { clubs: result, renames } = buildClubs(teams.response as ApiTeam[], [{ id: 131, sigla: "COR", api_football_id: corinthians.team.id }], NOW);
+    expect(renames).toEqual([]);
+    expect(result.find((club) => club.nome === "Corinthians")?.sigla).toBe("COR");
+    expect(result.find((club) => club.nome === "Coritiba")?.sigla).toBe("CTB");
   });
 });
 

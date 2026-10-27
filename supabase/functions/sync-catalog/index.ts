@@ -63,7 +63,12 @@ Deno.serve(async (request) => {
     ]);
     if (clubsError || playersError || weightsError || !weightRows?.length) throw new CatalogError("Não foi possível ler o catálogo atual.");
 
-    const clubs = buildClubs(teamsPayload.response as ApiTeam[], savedClubs ?? [], now);
+    const { clubs, renames } = buildClubs(teamsPayload.response as ApiTeam[], savedClubs ?? [], now);
+    // Libera as siglas oficiais presas em clubes fora da temporada antes de gravar os da temporada.
+    for (const rename of renames) {
+      const { error } = await db.from("clubes").update({ sigla: rename.sigla, ativo: false }).eq("id", rename.id);
+      if (error) throw new CatalogError(`Não foi possível liberar a sigla de um clube antigo: ${error.message}`);
+    }
     const { error: upsertClubsError } = await db.from("clubes").upsert(clubs, { onConflict: "id" });
     if (upsertClubsError) throw new CatalogError(`Não foi possível gravar os clubes: ${upsertClubsError.message}`);
     const clubIds = clubs.map((club) => club.id);
