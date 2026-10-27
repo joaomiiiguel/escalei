@@ -48,6 +48,19 @@ curl -s "https://v3.football.api-sports.io/fixtures/players?fixture=ID_DO_JOGO" 
 - **Queda da API:** a rodada fecha mais tarde. O app mostra "pontuação atrasada" em vez de pontos errados.
 - **Mudança de plano:** confirmar disponibilidade da Série A antes de sincronizar dados reais.
 
+
+## Consumo e verificação (27/10/2026)
+
+**Plano informado:** 7.500 requisições/dia.
+
+**Consumo esperado por rodada de 10 jogos:** sincronização horária da rodada (24/dia) + status dos jogos em lote durante as partidas (`/fixtures?ids=`, até 20 jogos por chamada, ~60 por rodada) + pontuação e conferência (4 por jogo, 40 por rodada). Bem abaixo de 1.000/dia.
+
+**Incidente de 24–27/10:** 5 jogos encerrados sem pontuação eram tentados a cada 2 minutos (2 requisições cada) → ~7.200 requisições/dia, todas com falha. Corrigido em JOA-145 com pausa crescente entre tentativas, limite de tentativas e orçamento diário contado pelo projeto.
+
+**Chave:** em 27/10 a chave configurada (`.env` e secrets das Edge Functions) era recusada pela API (`/status` → "Missing application key").
+
+**Verificar plano e temporada:** `npm run check:api -- 2026`. O `/status` não consome cota; o resto gasta no máximo 3 requisições. Mostra o plano, o uso do dia, a cobertura declarada da Série A na temporada e se o último jogo encerrado tem scouts de jogadores.
+
 ---
 
 *Criado em 28/09/2026.*
