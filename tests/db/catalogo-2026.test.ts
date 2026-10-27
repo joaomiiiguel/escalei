@@ -9,7 +9,7 @@ describe("catálogo 2026 gravado no banco", () => {
   it("aceita os clubes e jogadores reais montados pela sincronização", async () => {
     const db = await createMigratedDatabase();
     const now = new Date().toISOString();
-    const clubs = buildClubs(teams.response as ApiTeam[], [], now);
+    const { clubs } = buildClubs(teams.response as ApiTeam[], [], now);
     for (const club of clubs) {
       await db.query("insert into clubes (id, api_football_id, nome, sigla, logo_url, ativo, api_atualizado_em) values ($1, $2, $3, $4, $5, $6, $7)", [club.id, club.api_football_id, club.nome, club.sigla, club.logo_url, club.ativo, club.api_atualizado_em]);
     }
