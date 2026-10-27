@@ -26,8 +26,31 @@ export function positionsOf(formation: Formation): Position[] {
   return Object.keys(FORMATIONS[formation]) as Position[];
 }
 
+/**
+ * Dinheiro do jogo em centavos: preços têm casas decimais e somas em ponto
+ * flutuante erram por pouco (60,00000000000001 > 60), recusando times válidos.
+ */
+export function toCents(value: number | string): number {
+  return Math.round(Number(value) * 100);
+}
+
+/** Soma de preços exata em duas casas. */
+export function sumPrices(prices: Array<number | string>): number {
+  return prices.reduce<number>((total, price) => total + toCents(price), 0) / 100;
+}
+
+/** O custo cabe no saldo? Comparação em centavos. */
+export function fitsBudget(cost: number | string, budget: number | string): boolean {
+  return toCents(cost) <= toCents(budget);
+}
+
+/** Saldo que sobra depois de gastar `prices`, em duas casas. */
+export function remainingBudget(budget: number | string, prices: Array<number | string>): number {
+  return (toCents(budget) - toCents(sumPrices(prices))) / 100;
+}
+
 export function lineupCost(players: LineupPlayer[]): number {
-  return Math.round(players.reduce((total, player) => total + Number(player.preco), 0) * 100) / 100;
+  return sumPrices(players.map((player) => player.preco));
 }
 
 /** Ids únicos e válidos, ou `null` quando a lista não forma uma escalação completa. */
@@ -49,7 +72,7 @@ export function validateLineup(formation: string, players: LineupPlayer[], balan
   if (positionsOf(formation).some((position) => counts[position] !== FORMATIONS[formation][position])) {
     return "Os jogadores não correspondem à formação escolhida.";
   }
-  if (lineupCost(players) > balance) return "A escalação ultrapassa o seu saldo disponível.";
+  if (!fitsBudget(lineupCost(players), balance)) return "A escalação ultrapassa o seu saldo disponível.";
   return null;
 }
 
