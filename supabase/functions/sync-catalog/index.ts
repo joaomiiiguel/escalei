@@ -15,7 +15,7 @@
  * Env obrigatórias: API_FOOTBALL_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
  *                   API_FOOTBALL_LEAGUE_ID, API_FOOTBALL_SEASON.
  */
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { describeApiErrors, errorMessage, finishSyncExecution, QuotaReservedError, startSyncExecution, type SyncExecution } from "../_shared/api-football.ts";
 import { buildClubs, buildPlayers, scoringWeights, type ApiPlayer, type ApiTeam } from "../_shared/catalog.ts";
 
@@ -25,6 +25,20 @@ class CatalogError extends Error {
 }
 
 const MAX_PLAYER_PAGES = 80;
+const READ_PAGE_SIZE = 1000;
+
+type SavedPlayerRow = { id: number; api_football_id: number | null; preco: number; preco_inicial: number | null };
+
+/** Lê todos os jogadores: o PostgREST devolve no máximo 1.000 linhas por consulta. */
+async function readAllPlayers(db: SupabaseClient): Promise<{ data: SavedPlayerRow[] | null; error: unknown }> {
+  const rows: SavedPlayerRow[] = [];
+  for (let from = 0; ; from += READ_PAGE_SIZE) {
+    const { data, error } = await db.from("jogadores").select("id, api_football_id, preco, preco_inicial").order("id").range(from, from + READ_PAGE_SIZE - 1);
+    if (error) return { data: null, error };
+    rows.push(...((data ?? []) as SavedPlayerRow[]));
+    if (!data || data.length < READ_PAGE_SIZE) return { data: rows, error: null };
+  }
+}
 const BATCH_SIZE = 500;
 
 Deno.serve(async (request) => {
@@ -58,7 +72,7 @@ Deno.serve(async (request) => {
 
     const [{ data: savedClubs, error: clubsError }, { data: savedPlayers, error: playersError }, { data: weightRows, error: weightsError }] = await Promise.all([
       db.from("clubes").select("id, sigla, api_football_id"),
-      db.from("jogadores").select("id, api_football_id, preco, preco_inicial"),
+      readAllPlayers(db),
       db.from("tabela_pontuacao").select("scout, posicao, pontos").eq("versao", 1),
     ]);
     if (clubsError || playersError || weightsError || !weightRows?.length) throw new CatalogError("Não foi possível ler o catálogo atual.");
