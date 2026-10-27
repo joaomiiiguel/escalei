@@ -29,29 +29,41 @@ const SUPABASE_STUB = `
   alter default privileges in schema public grant all on sequences to anon, authenticated, service_role;
 
   create schema cron;
-  create table cron.job (jobid bigserial primary key, jobname text, schedule text, command text);
+  create table cron.job (jobid bigserial primary key, jobname text, schedule text, command text, active boolean not null default true);
   create function cron.schedule(p_name text, p_schedule text, p_command text) returns bigint language sql as $$
     insert into cron.job (jobname, schedule, command) values (p_name, p_schedule, p_command) returning jobid
   $$;
   create function cron.unschedule(p_jobid bigint) returns boolean language sql as $$
     delete from cron.job where jobid = p_jobid returning true
   $$;
+  create function cron.alter_job(job_id bigint, schedule text default null, command text default null, database text default null, username text default null, active boolean default null) returns void language sql as $$
+    update cron.job set schedule = coalesce(alter_job.schedule, job.schedule), command = coalesce(alter_job.command, job.command), active = coalesce(alter_job.active, job.active) where job.jobid = job_id
+  $$;
   create schema vault;
   create table vault.decrypted_secrets (name text primary key, decrypted_secret text);
   insert into vault.decrypted_secrets values ('cron_project_url', 'http://localhost'), ('cron_publishable_key', 'teste');
 `;
 
-/** Cria um Postgres em memória com todas as migrations do projeto aplicadas em ordem. */
-export async function createMigratedDatabase(): Promise<PGlite> {
+/** Aplica uma migration do projeto pelo nome do arquivo. */
+export async function applyMigration(db: PGlite, file: string): Promise<void> {
+  const sql = readFileSync(path.join(MIGRATIONS_DIR, file), "utf8").replace(PLATFORM_EXTENSIONS, "");
+  try {
+    await db.exec(sql);
+  } catch (error) {
+    throw new Error(`Falha ao aplicar ${file}: ${error instanceof Error ? error.message : String(error)}`);
+  }
+}
+
+/**
+ * Cria um Postgres em memória com as migrations do projeto aplicadas em ordem.
+ * Com `before`, para antes da migration indicada (para testar o efeito dela sobre dados).
+ */
+export async function createMigratedDatabase(options: { before?: string } = {}): Promise<PGlite> {
   const db = await PGlite.create({ extensions: { citext, pgcrypto } });
   await db.exec(SUPABASE_STUB);
   for (const file of readdirSync(MIGRATIONS_DIR).filter((name) => name.endsWith(".sql")).sort()) {
-    const sql = readFileSync(path.join(MIGRATIONS_DIR, file), "utf8").replace(PLATFORM_EXTENSIONS, "");
-    try {
-      await db.exec(sql);
-    } catch (error) {
-      throw new Error(`Falha ao aplicar ${file}: ${error instanceof Error ? error.message : String(error)}`);
-    }
+    if (options.before && file >= options.before) break;
+    await applyMigration(db, file);
   }
   return db;
 }

@@ -13,7 +13,7 @@ import {
 } from "@/lib/lineup-rules";
 
 // `vitest.setup.ts` substitui o módulo por um mock; aqui testamos a implementação real.
-const { pickCurrentRound } = await vi.importActual<typeof import("@/lib/current-round")>("@/lib/current-round");
+const { getCurrentRound, pickCurrentRound } = await vi.importActual<typeof import("@/lib/current-round")>("@/lib/current-round");
 
 function lineupFor(formation: Formation, price = 5): LineupPlayer[] {
   return (Object.keys(FORMATIONS[formation]) as Position[]).flatMap((position) =>
@@ -130,5 +130,40 @@ describe("situação do jogo do escalado", () => {
     [undefined, "SEM_JOGO"],
   ])("mapeia %s para %s", (gameStatus, expected) => {
     expect(playerRoundStatus(gameStatus)).toBe(expected);
+  });
+});
+
+describe("fonte da rodada atual", () => {
+  type Row = { id: number; numero: number; status: "AGENDADA" | "ABERTA" | "EM_ANDAMENTO" | "FECHADA"; trava_em: string; temporada: number; simulada: boolean };
+  /** Supabase falso: aplica os filtros `eq` sobre as linhas informadas. */
+  function fakeSupabase(rows: Row[]) {
+    return {
+      from: () => ({
+        select: () => {
+          const filters: Array<[keyof Row, unknown]> = [];
+          const result = () => ({ data: rows.filter((row) => filters.every(([column, value]) => row[column] === value)), error: null });
+          const builder = {
+            eq: (column: keyof Row, value: unknown) => { filters.push([column, value]); return builder; },
+            order: async () => result(),
+            then: (resolve: (value: ReturnType<typeof result>) => unknown) => Promise.resolve(result()).then(resolve),
+          };
+          return builder;
+        },
+      }),
+    } as never;
+  }
+  const season = Number(new Intl.DateTimeFormat("en-US", { timeZone: "America/Fortaleza", year: "numeric" }).format(new Date()));
+  const simulated: Row = { id: 1, numero: 31, status: "ABERTA", trava_em: "2026-10-20T00:00:00Z", temporada: 2024, simulada: true };
+  const real33: Row = { id: 2, numero: 33, status: "ABERTA", trava_em: "2026-10-28T21:30:00Z", temporada: season, simulada: false };
+  const real34: Row = { id: 3, numero: 34, status: "AGENDADA", trava_em: "2026-11-01T18:00:00Z", temporada: season, simulada: false };
+
+  it("prefere as rodadas reais da temporada corrente às simuladas", async () => {
+    const { data } = await getCurrentRound<Row>(fakeSupabase([simulated, real34, real33]), "*");
+    expect(data?.numero).toBe(33);
+  });
+
+  it("usa a simulação quando ainda não há rodadas reais", async () => {
+    const { data } = await getCurrentRound<Row>(fakeSupabase([simulated]), "*");
+    expect(data?.numero).toBe(31);
   });
 });

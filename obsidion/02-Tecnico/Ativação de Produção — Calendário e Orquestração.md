@@ -2,7 +2,7 @@
 titulo: Ativação de Produção — Calendário e Orquestração
 tipo: operacao
 projeto: Fantasy Futebol
-status: planejado
+status: implementado (JOA-147)
 criado-em: 2026-10-15
 tags:
   - projeto/fantasy-futebol
@@ -151,6 +151,32 @@ em `sync_execucoes`, para permitir auditoria e controle da cota.
    rodada seguinte.
 7. Verificar RLS, registros em `sync_execucoes`, alertas e um procedimento de
    pausa/retomada do cron antes de liberar usuários reais.
+
+## Implementação (JOA-147, 27/10/2026)
+
+Decisões de produto: estreia na **rodada 33** (trava em 28/10/2026 às 21:30 UTC), todos os saldos em **C$ 60**, **dados da simulação apagados**, grupos ativos na **temporada 2026** e rodadas 1–32 fora do campeonato.
+
+| Peça | Arquivo | Agendamento |
+|---|---|---|
+| Catálogo (clubes, elencos, preço inicial) | `supabase/functions/sync-catalog` + `_shared/catalog.ts` | segunda 09:00 UTC (`sincronizar-catalogo`) |
+| Calendário oficial a partir de `rodada_estreia` | `supabase/functions/sync-calendar` + `_shared/calendar.ts` | a cada 6 h (`sincronizar-calendario`) |
+| Orquestrador de produção | `supabase/functions/advance-round` | a cada 2 min (`avancar-rodada`) |
+| Preparação (tipos, `rodada_estreia` = 33) | `20261027200000_preparar_temporada_2026.sql` | — |
+| Virada (apaga simulação, saldos, grupos, crons) | `20261027210000_virada_temporada_2026.sql` | — |
+
+**Preço inicial:** média estimada aplicando a tabela de pontuação aos totais da temporada de `/players` (sem clean sheet e impedimentos, que esse endpoint não traz) → `clamp(3 + média, 2, 20)`, C$ 5 sem jogos. Só é redefinido com `{"redefinirPrecos": true}`; depois a variação por rodada fica com `fn_atualizar_precos`.
+
+**Jogos adiados ou cancelados:** os jogadores pontuam 0 (Regras do Jogo) e o jogo não bloqueia o fechamento da rodada.
+
+**Ordem de publicação:**
+1. `supabase db push` da preparação (`20261027200000`).
+2. Publicar `sync-catalog`, `sync-calendar`, `advance-round` (e `score-match`, que já existe) com `--import-map supabase/functions/deno.json`.
+3. Chamar `sync-catalog` com `{"redefinirPrecos": true}` (≈ 45 requisições).
+4. `supabase db push` da virada (`20261027210000`) — apaga a simulação.
+5. Chamar `sync-calendar` (1 requisição): cria as rodadas 33–38, a 33 já aberta e com ranking inicializado.
+6. Conferir o app e `sync_execucoes`; o orquestrador assume a cada 2 min.
+
+**Limitação conhecida:** com rodadas encavaladas (a próxima abre enquanto a anterior está em andamento) a tela inicial mostra a rodada em andamento; escalar a seguinte fica pelo menu até tratarmos esse caso.
 
 ## Referências externas
 

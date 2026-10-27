@@ -14,6 +14,8 @@ export default defineConfig({
     globals: true,
     setupFiles: ["./vitest.setup.ts"],
     include: ["**/*.test.{ts,tsx}"],
+    // Os testes de banco criam Postgres em memória (PGlite); muitos em paralelo disputam CPU e estouram o tempo.
+    maxWorkers: 2,
     coverage: {
       provider: "v8",
       reporter: ["text", "json", "html"],

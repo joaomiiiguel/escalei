@@ -120,7 +120,7 @@ export default async function Home() {
         <Logo size="md" />
       </div>
       <p className="text-sm text-muted-foreground">Olá, {profile.apelido} 👋</p>
-      <TitleSection title="Rodada 30 - Brasileirão 2026" />
+      <TitleSection title={round ? `Rodada ${round.numero} - Brasileirão ${round.temporada ?? ""}`.trim() : "Brasileirão"} />
     </header>
   );
 
