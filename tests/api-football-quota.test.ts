@@ -9,6 +9,7 @@ import {
   finishSyncExecution,
   parseRemaining,
   QuotaReservedError,
+  remainingReadingValidSince,
   startOfQuotaDay,
   startSyncExecution,
   type Budget,
@@ -26,9 +27,10 @@ const budget = (usedToday: number, limit = 7500, reserve = 500): Budget => ({ li
 function fakeDb({ usedToday = 0, lastKnownRemaining = null as number | null, config = [] as Array<{ chave: string; valor: unknown }> } = {}) {
   const inserted: unknown[] = [];
   const updated: unknown[] = [];
+  const filters: unknown[][] = [];
   const chain = {
     select: () => chain,
-    gte: () => chain,
+    gte: (...args: unknown[]) => { filters.push(args); return chain; },
     not: () => chain,
     order: () => chain,
     limit: () => chain,
@@ -40,7 +42,7 @@ function fakeDb({ usedToday = 0, lastKnownRemaining = null as number | null, con
     update: (row: unknown) => { updated.push(row); return chain; },
   };
   const rpc = vi.fn(async () => ({ data: usedToday, error: null }));
-  return { db: { from: () => chain, rpc } as never, inserted, updated, rpc };
+  return { db: { from: () => chain, rpc } as never, inserted, updated, rpc, filters };
 }
 
 describe("orçamento diário da API-Football", () => {
@@ -139,5 +141,35 @@ describe("registro da execução", () => {
     const execution = await startSyncExecution(db, "chave", "JOGO", "teste", { fetchFn: async () => apiResponse(null) });
     await execution.client.get("/fixtures?ids=1");
     await expect(execution.client.get("/fixtures?ids=2")).rejects.toBeInstanceOf(QuotaReservedError);
+  });
+});
+
+describe("leitura recente da cota", () => {
+  it("considera só leituras dos últimos 10 minutos do mesmo dia UTC", () => {
+    expect(remainingReadingValidSince(new Date("2026-10-27T12:00:00Z"))).toBe("2026-10-27T11:50:00.000Z");
+    expect(remainingReadingValidSince(new Date("2026-10-27T00:05:00Z"))).toBe("2026-10-27T00:00:00.000Z");
+  });
+
+  it("busca a última cota informada pela API só entre as leituras recentes", async () => {
+    const { db, filters } = fakeDb();
+    await startSyncExecution(db, "chave", "RODADA", "teste", { now: new Date("2026-10-27T18:00:00Z"), fetchFn: async () => apiResponse(null) });
+    expect(filters).toContainEqual(["terminado_em", "2026-10-27T17:50:00.000Z"]);
+  });
+
+  it("não regrava a cota herdada quando a execução é barrada, para o bloqueio não se renovar", async () => {
+    const { db, updated } = fakeDb({ lastKnownRemaining: 99 });
+    const execution = await startSyncExecution(db, "chave", "PONTUACAO", "teste", { fetchFn: vi.fn() });
+    await expect(execution.client.get("/fixtures/players?fixture=1")).rejects.toBeInstanceOf(QuotaReservedError);
+    await finishSyncExecution(db, execution, "reserva", vi.fn());
+    expect(updated).toEqual([expect.objectContaining({ requisicoes: 0, cota_restante: null })]);
+  });
+
+  it("grava a cota lida da resposta da API nesta execução", async () => {
+    const { db, updated } = fakeDb({ lastKnownRemaining: 99 });
+    const execution = await startSyncExecution(db, "chave", "RODADA", "teste", { fetchFn: async () => apiResponse(7400) });
+    execution.client.remaining = null; // leitura antiga descartada pela janela de 10 minutos
+    await execution.client.get("/fixtures?ids=1");
+    await finishSyncExecution(db, execution, undefined, vi.fn());
+    expect(updated).toEqual([expect.objectContaining({ requisicoes: 1, cota_restante: 7400, sucesso: true })]);
   });
 });

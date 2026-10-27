@@ -349,7 +349,7 @@ O ranking da liga é uma **view**: `ranking_rodada` ⋈ `ligas_membros`, com a p
 | `erro` | `text` | |
 
 > [!important] Orçamento diário da API-Football (plano de 7.500 requisições/dia)
-> O projeto conta o próprio consumo: `fn_requisicoes_api_football(início do dia UTC)` soma `requisicoes` do dia. Cada chamada é recusada antes de sair quando o consumo chega a `api_football_limite_diario` − `api_football_reserva_diaria` (7.500 − 500, em `configuracoes`), ou quando o cabeçalho `x-ratelimit-requests-remaining` da API já está dentro da reserva. Chave inválida ou limite atingido devolvidos pela API interrompem a execução. O erro devolvido pela API é gravado em `erro`.
+> O projeto conta o próprio consumo: `fn_requisicoes_api_football(início do dia UTC)` soma `requisicoes` do dia. Cada chamada é recusada antes de sair quando o consumo chega a `api_football_limite_diario` − `api_football_reserva_diaria` (7.500 − 500, em `configuracoes`), ou quando o cabeçalho `x-ratelimit-requests-remaining` da API, lido nos últimos 10 minutos, já está dentro da reserva. Leituras mais antigas são ignoradas, e uma execução barrada não regrava a leitura herdada (JOA-146): assim uma cota de uma chave já trocada não bloqueia o dia inteiro. Chave inválida ou limite atingido devolvidos pela API interrompem a execução. O erro devolvido pela API é gravado em `erro`.
 >
 > O log avisa (`[api-football] Consumo do dia passou de 50%/80%`) nos logs das Edge Functions.
 >
