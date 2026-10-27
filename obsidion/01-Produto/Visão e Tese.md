@@ -21,7 +21,7 @@ Um fantasy de futebol **rápido de jogar e feito para disputar com os amigos**. 
 > [!question] Hipóteses
 > - **H1 · Retenção:** pessoas jogam rodada após rodada **mesmo sem prêmio em dinheiro**.
 > - **H2 · Viralidade:** ligas privadas fazem o jogo se espalhar sozinho (convite pelo WhatsApp).
-> - **H3 · Monetização:** existe disposição para pagar um PRO (~R$ 9,90/mês) ou interesse de patrocinador em "pagar a rodada".
+> - **H3 · Monetização:** existe disposição para pagar um passe de rodada (R$ 4,99 avulso ou R$ 19,99 por 5; ver [[2026-10-27 — Passes de rodada pagos]]), um PRO (~R$ 9,90/mês) ou interesse de patrocinador em "pagar a rodada".
 >
 > Métricas e metas em [[Plano de Validação]].
 
