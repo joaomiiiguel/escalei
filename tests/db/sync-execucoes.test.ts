@@ -35,3 +35,14 @@ describe("controle de consumo da API-Football", () => {
     await expect(asUser(db, USER_A, (tx) => tx.query("select fn_requisicoes_api_football(now())"))).rejects.toThrow(/permission denied/);
   }, 60_000);
 });
+
+describe("crons da simulação", () => {
+  it("ficam pausados (inativos, não removidos) para a migração ao Brasileirão 2026", async () => {
+    const db = await createMigratedDatabase();
+    const jobs = await db.query<{ jobname: string; active: boolean }>("select jobname, active from cron.job order by jobname");
+    expect(jobs.rows).toEqual([
+      { jobname: "avancar-rodada-simulada", active: false },
+      { jobname: "sincronizar-rodada-horaria", active: false },
+    ]);
+  }, 60_000);
+});
