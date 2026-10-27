@@ -13,7 +13,7 @@ tags:
 # Fantasy Futebol — Índice
 
 > [!abstract] Em uma frase
-> **App mobile (PWA) de fantasy futebol gratuito no MVP** para o Brasileirão Série A, estilo Cartola, criado como **projeto pessoal**. O MVP não tem apostas, prêmio em dinheiro nem pagamento. O primeiro objetivo é **validar se as pessoas voltam toda rodada** e convidam amigos, com custo estimado de ~R$ 40.
+> **App mobile (PWA) de fantasy futebol** para o Brasileirão Série A, estilo Cartola, criado como **projeto pessoal**. Não tem apostas nem prêmio em dinheiro. Escalar exige um **passe de rodada** pago por PIX, com 2 rodadas de cortesia (ver [[2026-10-27 — Passes de rodada pagos]]). O primeiro objetivo é **validar se as pessoas voltam toda rodada** e convidam amigos, com custo estimado de ~R$ 40.
 
 > [!important] Status em 28/09/2026
 > **Pré-validação.** Nada foi construído. Plano: beta em 17–19/10 e **lançamento do teste em 24–26/10** ([[Plano de 1 Mês — Lançamento do Teste]]). Próximo passo: criar a chave grátis da API-Football e rodar as 3 chamadas de verificação da cobertura da Série A 2026 (ver [[API-Football]]).
@@ -38,7 +38,11 @@ tags:
 - [[Plano de Validação]]: hipóteses, métricas com meta, decisão, recrutamento e eventos
 
 **Negócio**
-- [[Custos e Monetização]]: custo da validação, hipótese interna pós-validação, fontes de receita e ponto de equilíbrio
+- [[Custos e Monetização]]: custo da validação, passes de rodada, hipótese interna pós-validação, fontes de receita e ponto de equilíbrio
+
+**Decisões**
+- [[Origem do projeto e decisões iniciais]]
+- [[2026-10-27 — Passes de rodada pagos]]: R$ 4,99 avulso, R$ 19,99 o pacote com 5, PIX, 2 passes de cortesia
 
 **Jurídico e riscos**
 - [[Jurídico e Riscos]]: art. 49 da Lei 14.790, CNPJ, LGPD, antifraude, imagem e marca, **conflito com o emprego**

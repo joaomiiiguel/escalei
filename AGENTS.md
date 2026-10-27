@@ -2,9 +2,10 @@
 
 ## Produto e escopo
 
-Escalou é um PWA mobile-first de fantasy futebol gratuito para o Brasileirão Série A.
+Escalou é um PWA mobile-first de fantasy futebol para o Brasileirão Série A.
 
 - O produto não possui apostas, prêmio em dinheiro ou linguagem que sugira jogo de azar.
+- Escalar exige um passe de rodada pago por PIX (R$ 4,99 avulso, R$ 19,99 o pacote com 5, 2 passes de cortesia no onboarding). A receita dos passes nunca forma nem financia prêmio. Ver `obsidion/07-Decisoes/2026-10-27 — Passes de rodada pagos.md`.
 - A meta do MVP é validar retenção por rodada e competição entre amigos.
 - A interface, documentação e mensagens ao usuário devem estar em português do Brasil (`pt-BR`).
 - A fonte de requisitos do produto está em `obsidion/`. Consulte-a antes de tomar decisões de regra de negócio, escopo ou UX.
@@ -77,6 +78,7 @@ obsidion/                 Especificação, decisões, regras e planejamento
 - O custo da escalação é limitado ao saldo atual do usuário. O saldo inicial é C$ 60,00 e cresce a cada rodada fechada: cada jogador rende `max(pontos − preço pago, 0)` (veja `obsidion/01-Produto/Regras do Jogo.md`).
 - Salve escalações pela função `fn_salvar_escalacao`, que valida trava, formação e saldo no banco.
 - Uma escalação é única por usuário e rodada.
+- Salvar exige passe de rodada válido; o passe é consumido na trava e vale para todos os grupos. Não confunda passe (dinheiro real, em centavos) com o saldo em C$.
 - Não permita salvar ou alterar o time depois da trava da rodada.
 - Use as regras e a tabela de pontuação de `obsidion/Regras do Jogo.md` como fonte de verdade antes de implementar cálculos.
 

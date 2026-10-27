@@ -72,10 +72,17 @@ tags:
 - [ ] Termos de uso, privacidade e regulamento (versão simples)
 - [ ] Teste de ponta a ponta numa rodada passada, com as respostas gravadas
 
+### Passes de rodada (decidido em 27/10/2026)
+- [ ] JOA-151 · Schema de passes: produtos, pedidos e lotes com RLS
+- [ ] JOA-152 · Exigir passe para escalar e consumir na trava da rodada
+- [ ] JOA-153 · Pagamento via PIX com webhook idempotente
+- [ ] JOA-154 · UI de passes: compra, saldo e aviso de cortesia
+- [ ] JOA-155 · Admin de pedidos: nota manual, cortesias e estornos
+
 ### Depois da validação (só se passar)
 - [ ] Parcial ao vivo (API Pro)
 - [ ] Push notifications
-- [ ] Prêmio: CNPJ, antifraude, pagamento PIX, IR
+- [ ] Prêmio: CNPJ, antifraude, pagamento de prêmio, IR (independente da receita dos passes)
 - [ ] Patrocínio da rodada
 - [ ] PRO de verdade
 - [ ] Modo Rápido (Tiers), capitão, mais ligas (Série B, estaduais)

@@ -14,7 +14,7 @@ tags:
 ← [[Index]] · Fonte dos dados: [[API-Football]]
 
 > [!abstract] Resumo
-> 11 jogadores numa de 3 formações, saldo inicial de **C$ 60** que cresce com o desempenho da escalação, trava no primeiro jogo da rodada, **pontos lançados a cada jogo encerrado** (sem parcial ao vivo), sem prêmio.
+> 11 jogadores numa de 3 formações, saldo inicial de **C$ 60** que cresce com o desempenho da escalação, trava no primeiro jogo da rodada, **pontos lançados a cada jogo encerrado** (sem parcial ao vivo), sem prêmio. Escalar exige um **passe de rodada**.
 
 ## Posições: 4, e não 5
 
@@ -43,6 +43,17 @@ Sem técnico, sem capitão e sem banco de reservas no MVP.
 - A variação aparece no mercado como ▲/▼.
 
 > [!note] Os coeficientes são chute inicial. Calibrar com o histórico da temporada antes do beta, para que um time "só de craques" estoure o orçamento e um time "só de baratos" pontue mal.
+
+## Passe de rodada
+
+- Para salvar uma escalação, o usuário precisa de um **passe de rodada** (R$ 4,99 avulso ou R$ 19,99 o pacote com 5, pago por PIX). Ver [[2026-10-27 — Passes de rodada pagos]].
+- O passe é **dinheiro real** e não se mistura com o saldo em C$, que é a moeda do jogo.
+- Um passe vale para **uma rodada** e para **todos os grupos** do usuário.
+- É consumido na **trava** da rodada. Editar o time várias vezes antes da trava gasta um passe só.
+- Validade: temporada da compra e a seguinte; usa primeiro o que vence antes.
+- Usuário novo ganha **2 passes de cortesia** ao concluir o onboarding.
+- Rodada cancelada por inteiro devolve o passe. Administradores são isentos.
+- Sem passe, o mercado fica aberto para consulta e a rodada soma 0 no ranking.
 
 ## Trava e status
 
