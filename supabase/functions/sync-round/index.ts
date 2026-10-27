@@ -15,7 +15,7 @@
  *                   API_FOOTBALL_LEAGUE_ID, API_FOOTBALL_SEASON.
  */
 import { createClient } from "@supabase/supabase-js";
-import { finishSyncExecution, QuotaReservedError, startSyncExecution, type SyncExecution } from "../_shared/api-football.ts";
+import { ApiAccessError, describeApiErrors, finishSyncExecution, QuotaReservedError, startSyncExecution, type SyncExecution } from "../_shared/api-football.ts";
 
 type ApiFixture = {
   fixture: { id: number; date: string; status: { short: string } };
@@ -26,6 +26,11 @@ type ApiFixture = {
 const statusByApi: Record<string, "A_JOGAR" | "EM_ANDAMENTO" | "ENCERRADO" | "ADIADO" | "CANCELADO"> = {
   TBD: "A_JOGAR", NS: "A_JOGAR", "1H": "EM_ANDAMENTO", HT: "EM_ANDAMENTO", "2H": "EM_ANDAMENTO", ET: "EM_ANDAMENTO", BT: "EM_ANDAMENTO", P: "EM_ANDAMENTO", INT: "EM_ANDAMENTO", LIVE: "EM_ANDAMENTO", FT: "ENCERRADO", AET: "ENCERRADO", PEN: "ENCERRADO", PST: "ADIADO", SUSP: "ADIADO", CANC: "CANCELADO", ABD: "CANCELADO", AWD: "CANCELADO", WO: "CANCELADO",
 };
+
+/** Falha esperada da sincronização, com mensagem segura para o log. */
+class SyncRoundError extends Error {
+  override name = "SyncRoundError";
+}
 
 Deno.serve(async () => {
   const apiKey = Deno.env.get("API_FOOTBALL_KEY");
@@ -59,29 +64,30 @@ Deno.serve(async () => {
     const { response, payload } = await execution.client.get(`/fixtures?league=${leagueId}&season=${season}&round=${encodeURIComponent(roundName)}`);
     const matches = payload.response as ApiFixture[] | undefined;
     if (!response.ok || !Array.isArray(matches) || Object.keys(payload.errors ?? {}).length || matches.length !== 10) {
-      throw new Error(`A API-Football não retornou os 10 jogos da rodada ${simulationRound}.`);
+      const apiErrors = describeApiErrors(payload);
+      throw new SyncRoundError(`A API-Football não retornou os 10 jogos da rodada ${simulationRound} (HTTP ${response.status}; ${Array.isArray(matches) ? matches.length : 0} jogos${apiErrors ? `; ${apiErrors}` : ""}).`);
     }
 
     const externalClubIds = [...new Set(matches.flatMap((match) => [match.teams.home.id, match.teams.away.id]))];
     const { data: clubs, error: clubsError } = await supabase.from("clubes").select("id, api_football_id").in("api_football_id", externalClubIds).eq("ativo", true);
-    if (clubsError || clubs?.length !== 20) throw new Error("Os clubes da rodada ainda não foram sincronizados pela API-Football.");
+    if (clubsError || clubs?.length !== 20) throw new SyncRoundError("Os clubes da rodada ainda não foram sincronizados pela API-Football.");
     const clubIdByApiId = new Map(clubs.map((club) => [club.api_football_id, club.id]));
     const starts = matches.map((match) => new Date(match.fixture.date)).sort((a, b) => a.getTime() - b.getTime());
     const { data: round, error: roundError } = await supabase.from("rodadas").upsert({
       temporada: season, numero: simulationRound, rotulo_api: roundName, simulada: true, status: "EM_ANDAMENTO", abre_em: starts[0].toISOString(), trava_em: starts[0].toISOString(), fechada_em: null, versao_regras: 1,
     }, { onConflict: "temporada,numero" }).select("id").single();
-    if (roundError || !round) throw new Error("Não foi possível gravar a rodada simulada.");
+    if (roundError || !round) throw new SyncRoundError("Não foi possível gravar a rodada simulada.");
 
     const { data: previousGames, error: previousGamesError } = await supabase.from("jogos").select("id, api_football_id").in("api_football_id", matches.map((match) => match.fixture.id));
-    if (previousGamesError) throw new Error("Não foi possível consultar partidas existentes.");
+    if (previousGamesError) throw new SyncRoundError("Não foi possível consultar partidas existentes.");
     const internalIdByApiId = new Map((previousGames ?? []).map((game) => [game.api_football_id, game.id]));
     const games = matches.map((match) => {
       const status = statusByApi[match.fixture.status.short];
-      if (!status) throw new Error(`Status da API-Football sem mapeamento: ${match.fixture.status.short}.`);
+      if (!status) throw new SyncRoundError(`Status da API-Football sem mapeamento: ${match.fixture.status.short}.`);
       return { id: internalIdByApiId.get(match.fixture.id) ?? 1_500_000_000 + match.fixture.id, api_football_id: match.fixture.id, rodada_id: round.id, clube_casa_id: clubIdByApiId.get(match.teams.home.id), clube_fora_id: clubIdByApiId.get(match.teams.away.id), inicio_em: match.fixture.date, status, status_api: match.fixture.status.short, gols_casa: match.goals.home, gols_fora: match.goals.away, api_atualizado_em: new Date().toISOString() };
     });
     const { error: gamesError } = await supabase.from("jogos").upsert(games, { onConflict: "id" });
-    if (gamesError) throw new Error("Não foi possível gravar as partidas da rodada.");
+    if (gamesError) throw new SyncRoundError("Não foi possível gravar as partidas da rodada.");
 
     await finishSyncExecution(supabase, execution);
     return Response.json({ rodada: simulationRound, jogos: games.length, fonte: "API-Football" });
@@ -90,7 +96,7 @@ Deno.serve(async () => {
       await finishSyncExecution(supabase, execution, error.message);
       return Response.json({ error: "Sincronização adiada para preservar a cota diária da API-Football." }, { status: 429 });
     }
-    await finishSyncExecution(supabase, execution, "Falha na sincronização da rodada via API-Football.");
+    await finishSyncExecution(supabase, execution, error instanceof SyncRoundError || error instanceof ApiAccessError ? error.message : "Falha na sincronização da rodada via API-Football.");
     console.error(error);
     return Response.json({ error: "A sincronização da rodada falhou." }, { status: 500 });
   }

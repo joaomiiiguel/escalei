@@ -83,6 +83,8 @@ obsidion/                 Especificação, decisões, regras e planejamento
 ## API-Football
 
 - A cobertura da API e o plano contratado podem mudar: não assuma que o plano gratuito possui dados de estatísticas sem verificação.
+- Verifique o plano e a cobertura com `npm run check:api -- <temporada>` antes de trocar a temporada sincronizada.
+- Toda chamada à API passa por `supabase/functions/_shared/api-football.ts` (registro em `sync_execucoes` e orçamento diário em `configuracoes`). Não chame a API em laço sem pausa entre tentativas.
 
 ## Qualidade e validação
 

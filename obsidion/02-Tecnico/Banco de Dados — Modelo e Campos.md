@@ -348,14 +348,26 @@ O ranking da liga é uma **view**: `ranking_rodada` ⋈ `ligas_membros`, com a p
 | `sucesso` | `bool` not null | |
 | `erro` | `text` | |
 
-> [!important] A cota é de 100 requisições/dia
-> Todo job **consulta a última `cota_restante` do dia (UTC)** antes de chamar a API e se recusa a chamar quando ela estiver na reserva de 15 requisições. Isso garante que sobra cota para pontuar os jogos que terminam à noite.
+> [!important] Orçamento diário da API-Football (plano de 7.500 requisições/dia)
+> O projeto conta o próprio consumo: `fn_requisicoes_api_football(início do dia UTC)` soma `requisicoes` do dia. Cada chamada é recusada antes de sair quando o consumo chega a `api_football_limite_diario` − `api_football_reserva_diaria` (7.500 − 500, em `configuracoes`), ou quando o cabeçalho `x-ratelimit-requests-remaining` da API já está dentro da reserva. Chave inválida ou limite atingido devolvidos pela API interrompem a execução. O erro devolvido pela API é gravado em `erro`.
 >
-> Implementado em `supabase/functions/_shared/api-football.ts` (JOA-63): `startSyncExecution` registra a execução e carrega a cota conhecida, `ApiFootballClient.get` bloqueia com `QuotaReservedError` e atualiza a cota pelo header `x-ratelimit-requests-remaining`, e `finishSyncExecution` grava requisições, cota e erro. Usado por `sync-round`, `score-match` e `advance-simulated-round`.
+> O log avisa (`[api-football] Consumo do dia passou de 50%/80%`) nos logs das Edge Functions.
+>
+> Implementado em `supabase/functions/_shared/api-football.ts` (JOA-63, JOA-145) e usado por `sync-round`, `score-match` e `advance-simulated-round`.
+
+### Tentativas de pontuação em `jogos` (JOA-145)
+
+| Campo | Tipo | Regra |
+|---|---|---|
+| `pontuacao_tentativas` | `smallint` not null default 0 | falhas seguidas ao pontuar ou conferir o jogo |
+| `pontuacao_proxima_tentativa_em` | `timestamptz` | pausa crescente: 2, 4, 8, 16, 32 e depois 60 min |
+| `pontuacao_ultimo_erro` | `text` | última mensagem de erro |
+
+Depois de `api_football_max_tentativas_pontuacao` (10) falhas o jogo para de ser tentado; para tentar de novo, zere `pontuacao_tentativas`.
 
 ### `configuracoes`
 
-Chave-valor para ajustes sem deploy: `temporada_atual`, `liga_api_id` (71), `orcamento` (não usado: o orçamento é o saldo da carteira, que começa em C$ 60), `reserva_cota_api` (15), `pesquisa_ativa`.
+Chave-valor para ajustes sem deploy: `temporada_atual`, `liga_api_id` (71), `orcamento` (não usado: o orçamento é o saldo da carteira, que começa em C$ 60), `api_football_limite_diario` (7500), `api_football_reserva_diaria` (500), `api_football_max_tentativas_pontuacao` (10), `pesquisa_ativa`.
 
 ---
 

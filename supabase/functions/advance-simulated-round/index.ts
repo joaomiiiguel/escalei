@@ -10,9 +10,11 @@
  * 2. Trava a rodada aberta quando `trava_em` passa (status EM_ANDAMENTO),
  *    impedindo novas alterações de time.
  * 3. Encerra jogos pendentes cujo `inicio_simulado_em` já passou,
- *    consultando o status real na API-Football (com registro em
- *    `sync_execucoes` e guarda da reserva diária de requisições).
- * 4. Pontua cada jogo encerrado ainda não pontuado via `score-match`.
+ *    consultando o status real na API-Football em lotes de até 20 jogos
+ *    (com registro em `sync_execucoes` e orçamento diário de requisições).
+ *    Jogos adiados ou cancelados na API deixam de ser consultados.
+ * 4. Pontua cada jogo encerrado ainda não pontuado via `score-match`,
+ *    respeitando a pausa crescente entre tentativas que falharam.
  * 5. Quando todos os jogos estão pontuados, agenda a conferência
  *    (60 min após o último jogo pontuado) e executa a segunda leitura
  *    de scouts (`conferencia = true`).
@@ -24,14 +26,18 @@
  *                   API_FOOTBALL_SEASON.
  */
 import { createClient } from "@supabase/supabase-js";
-import { finishSyncExecution, QuotaReservedError, startSyncExecution } from "../_shared/api-football.ts";
+import { ApiAccessError, describeApiErrors, finishSyncExecution, QuotaReservedError, startSyncExecution } from "../_shared/api-football.ts";
+import { chunk, DEFAULT_MAX_SCORING_ATTEMPTS, isDueForScoring } from "../_shared/retry.ts";
 
 type Fixture = {
-  fixture?: { status?: { short?: string } };
+  fixture?: { id?: number; status?: { short?: string } };
   goals?: { home?: number | null; away?: number | null };
 };
 
 const finishedStatuses = new Set(["FT", "AET", "PEN"]);
+const interruptedStatuses: Record<string, "ADIADO" | "CANCELADO"> = { PST: "ADIADO", SUSP: "ADIADO", CANC: "CANCELADO", ABD: "CANCELADO", AWD: "CANCELADO", WO: "CANCELADO" };
+
+type ScoringCandidate = { id: number; pontuacao_tentativas: number | null; pontuacao_proxima_tentativa_em: string | null };
 
 Deno.serve(async (request) => {
   if (request.method !== "POST") return Response.json({ error: "Use POST." }, { status: 405 });
@@ -112,50 +118,81 @@ Deno.serve(async (request) => {
     ? await startSyncExecution(db, apiKey, "JOGO", `api-football:rodada-${number}:status`).catch(() => null)
     : null;
   if (pollableGames.length && !execution) return Response.json({ error: "Não foi possível registrar a sincronização." }, { status: 500 });
-  for (const game of pollableGames) {
+  let pollError: string | undefined;
+  // Uma requisição consulta até 20 jogos (`/fixtures?ids=`).
+  for (const batch of chunk(pollableGames)) {
     if (!execution) break;
-    let fixtureResponse: Response;
-    let fixturePayload: { response?: unknown };
+    let fixtures: Fixture[];
     try {
-      ({ response: fixtureResponse, payload: fixturePayload } = await execution.client.get(`/fixtures?id=${game.api_football_id}`));
+      const { response, payload } = await execution.client.get(`/fixtures?ids=${batch.map((game) => game.api_football_id).join("-")}`);
+      const apiErrors = describeApiErrors(payload);
+      if (!response.ok || apiErrors || !Array.isArray(payload.response)) {
+        pollError = `A API-Football não retornou o status dos jogos (HTTP ${response.status}${apiErrors ? `; ${apiErrors}` : ""}).`;
+        pending.push(...batch.map((game) => game.id));
+        continue;
+      }
+      fixtures = payload.response as Fixture[];
     } catch (error) {
-      if (!(error instanceof QuotaReservedError)) throw error;
-      quotaReserved = true;
-      pending.push(...pollableGames.slice(pollableGames.indexOf(game)).map((item) => item.id));
+      if (!(error instanceof QuotaReservedError) && !(error instanceof ApiAccessError)) throw error;
+      quotaReserved = error instanceof QuotaReservedError;
+      pollError = error.message;
+      pending.push(...pollableGames.slice(pollableGames.indexOf(batch[0])).map((item) => item.id));
       break;
     }
-    const fixture = (Array.isArray(fixturePayload.response) ? fixturePayload.response[0] : undefined) as Fixture | undefined;
-    const status = fixture?.fixture?.status?.short;
-    if (!fixtureResponse.ok || !fixture || !finishedStatuses.has(status ?? "")) {
-      pending.push(game.id);
-      continue;
+    const fixtureByApiId = new Map(fixtures.map((fixture) => [fixture.fixture?.id, fixture]));
+    for (const game of batch) {
+      const fixture = fixtureByApiId.get(game.api_football_id);
+      const status = fixture?.fixture?.status?.short ?? "";
+      const interruptedStatus = interruptedStatuses[status];
+      if (!fixture || (!finishedStatuses.has(status) && !interruptedStatus)) {
+        pending.push(game.id);
+        continue;
+      }
+      // Jogo adiado ou cancelado deixa de ser consultado; não recebe pontuação inventada.
+      const update = interruptedStatus
+        ? { status: interruptedStatus, status_api: status, api_atualizado_em: now.toISOString() }
+        : { status: "ENCERRADO", status_api: status, gols_casa: fixture.goals?.home ?? 0, gols_fora: fixture.goals?.away ?? 0, api_atualizado_em: now.toISOString() };
+      const { error: gameError } = await db.from("jogos").update(update).eq("id", game.id);
+      if (gameError) {
+        await finishSyncExecution(db, execution, "Não foi possível atualizar um jogo simulado.");
+        return Response.json({ error: "Não foi possível atualizar um jogo simulado." }, { status: 500 });
+      }
+      if (!interruptedStatus) completed.push(game.id);
     }
-    const { error: gameError } = await db.from("jogos").update({
-      status: "ENCERRADO", status_api: status, gols_casa: fixture.goals?.home ?? 0, gols_fora: fixture.goals?.away ?? 0,
-      api_atualizado_em: now.toISOString(),
-    }).eq("id", game.id);
-    if (gameError) {
-      await finishSyncExecution(db, execution, "Não foi possível encerrar um jogo simulado.");
-      return Response.json({ error: "Não foi possível encerrar um jogo simulado." }, { status: 500 });
-    }
-    completed.push(game.id);
   }
-  if (execution) await finishSyncExecution(db, execution, quotaReserved ? "Consulta interrompida para preservar a cota diária da API-Football." : undefined);
+  if (execution) await finishSyncExecution(db, execution, pollError);
+
+  const { data: maxAttemptsConfig } = await db.from("configuracoes").select("valor").eq("chave", "api_football_max_tentativas_pontuacao").maybeSingle();
+  const maxAttempts = Number(maxAttemptsConfig?.valor ?? DEFAULT_MAX_SCORING_ATTEMPTS);
+
+  /** Chama `score-match` só para jogos fora da pausa entre tentativas; para se faltar orçamento. */
+  const scoreGames = async (candidates: ScoringCandidate[], conferencia: boolean) => {
+    for (const game of candidates) {
+      if (!isDueForScoring(game, now, maxAttempts)) {
+        pending.push(game.id);
+        continue;
+      }
+      const response = await fetch(`${url}/functions/v1/score-match`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${serviceRoleKey}`, apikey: serviceRoleKey, "Content-Type": "application/json" },
+        body: JSON.stringify({ jogoId: game.id, conferencia }),
+      });
+      if (!response.ok) pending.push(game.id);
+      if (response.status === 429) {
+        quotaReserved = true;
+        pending.push(...candidates.slice(candidates.indexOf(game) + 1).map((item) => item.id));
+        break;
+      }
+    }
+  };
 
   const { data: unscoredGames, error: unscoredError } = await db.from("jogos")
-    .select("id").eq("rodada_id", round.id).eq("status", "ENCERRADO").is("pontuado_em", null);
+    .select("id, pontuacao_tentativas, pontuacao_proxima_tentativa_em").eq("rodada_id", round.id).eq("status", "ENCERRADO").is("pontuado_em", null);
   if (unscoredError) return Response.json({ error: "Não foi possível localizar jogos a pontuar." }, { status: 500 });
-  for (const game of unscoredGames ?? []) {
-    const response = await fetch(`${url}/functions/v1/score-match`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${serviceRoleKey}`, apikey: serviceRoleKey, "Content-Type": "application/json" },
-      body: JSON.stringify({ jogoId: game.id }),
-    });
-    if (!response.ok) pending.push(game.id);
-  }
+  if (!quotaReserved) await scoreGames((unscoredGames ?? []) as ScoringCandidate[], false);
 
   const { data: games, error: gamesError } = await db.from("jogos")
-    .select("id, pontuado_em, conferido_em").eq("rodada_id", round.id);
+    .select("id, status, pontuado_em, conferido_em, pontuacao_tentativas, pontuacao_proxima_tentativa_em").eq("rodada_id", round.id);
   if (gamesError || !games) return Response.json({ error: "Não foi possível verificar o encerramento da rodada." }, { status: 500 });
   const allScored = games.length > 0 && games.every((game) => game.pontuado_em);
   let closeAt = round.fechamento_simulado_em;
@@ -169,13 +206,8 @@ Deno.serve(async (request) => {
     if (error) return Response.json({ error: "Não foi possível agendar a conferência da rodada." }, { status: 500 });
   }
   if (allScored && closeAt && now >= new Date(closeAt)) {
-    for (const game of games.filter((item) => !item.conferido_em)) {
-      const response = await fetch(`${url}/functions/v1/score-match`, {
-        method: "POST",
-        headers: { Authorization: `Bearer ${serviceRoleKey}`, apikey: serviceRoleKey, "Content-Type": "application/json" },
-        body: JSON.stringify({ jogoId: game.id, conferencia: true }),
-      });
-      if (!response.ok) pending.push(game.id);
+    if (!quotaReserved) {
+      await scoreGames(games.filter((item) => !item.conferido_em && item.status === "ENCERRADO") as ScoringCandidate[], true);
     }
     const { data: unchecked } = await db.from("jogos").select("id").eq("rodada_id", round.id).is("conferido_em", null);
     if (!unchecked?.length) {

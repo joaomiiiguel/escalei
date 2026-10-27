@@ -8,6 +8,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
+    "check:api": "node --env-file=.env scripts/check-api-football.mjs",
     "sync:clubs": "node --env-file=.env scripts/sync-clubes.mjs",
     "sync:players": "node --env-file=.env scripts/sync-players.mjs",
     "sync:round": "node --env-file=.env scripts/sync-current-round.mjs",
