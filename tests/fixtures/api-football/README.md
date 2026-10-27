@@ -15,3 +15,13 @@ Cenário: clube da casa (API 100) 3 × 0 visitante (API 200), partida encerrada.
 | `fixture-1001-players.json` | Primeira leitura dos scouts |
 | `fixture-1001-events.json` | Eventos (inclui um gol contra) |
 | `fixture-1001-players-conferencia.json` | Segunda leitura: uma finalização do atacante reclassificada como no gol e o amarelo do zagueiro anulado |
+
+## Temporada 2026 (`2026/`)
+
+Respostas **reais** gravadas em 27/10/2026 (plano Pro), sem a chave da API:
+
+| Arquivo | Endpoint |
+|---|---|
+| `teams.json` | `/teams?league=71&season=2026` |
+| `players-page-1.json` | `/players?league=71&season=2026&page=1` (1 de 44 páginas) |
+| `fixtures.json` | `/fixtures?league=71&season=2026`, reduzido aos campos usados (id, data, status, rodada, clubes, placar) |

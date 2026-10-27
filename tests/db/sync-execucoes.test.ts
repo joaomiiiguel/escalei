@@ -6,7 +6,7 @@ import { USER_A } from "./seed";
 describe("sync_execucoes", () => {
   it("aceita execuções de todas as funções que chamam a API-Football e fica fora do alcance dos usuários", async () => {
     const db = await createMigratedDatabase();
-    for (const tipo of ["RODADA", "JOGO", "PONTUACAO", "ORQUESTRADOR"]) {
+    for (const tipo of ["RODADA", "JOGO", "PONTUACAO", "ORQUESTRADOR", "CATALOGO", "CALENDARIO"]) {
       await db.query("insert into sync_execucoes (tipo, requisicoes, cota_restante, sucesso) values ($1, 2, 80, true)", [tipo]);
     }
     await expect(db.query("insert into sync_execucoes (tipo, sucesso) values ('OUTRO', true)")).rejects.toThrow(/sync_execucoes_tipo_check/);
@@ -38,7 +38,7 @@ describe("controle de consumo da API-Football", () => {
 
 describe("crons da simulação", () => {
   it("ficam pausados (inativos, não removidos) para a migração ao Brasileirão 2026", async () => {
-    const db = await createMigratedDatabase();
+    const db = await createMigratedDatabase({ before: "20261027210000_virada_temporada_2026.sql" });
     const jobs = await db.query<{ jobname: string; active: boolean }>("select jobname, active from cron.job order by jobname");
     expect(jobs.rows).toEqual([
       { jobname: "avancar-rodada-simulada", active: false },

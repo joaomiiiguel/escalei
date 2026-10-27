@@ -44,17 +44,26 @@ const SUPABASE_STUB = `
   insert into vault.decrypted_secrets values ('cron_project_url', 'http://localhost'), ('cron_publishable_key', 'teste');
 `;
 
-/** Cria um Postgres em memória com todas as migrations do projeto aplicadas em ordem. */
-export async function createMigratedDatabase(): Promise<PGlite> {
+/** Aplica uma migration do projeto pelo nome do arquivo. */
+export async function applyMigration(db: PGlite, file: string): Promise<void> {
+  const sql = readFileSync(path.join(MIGRATIONS_DIR, file), "utf8").replace(PLATFORM_EXTENSIONS, "");
+  try {
+    await db.exec(sql);
+  } catch (error) {
+    throw new Error(`Falha ao aplicar ${file}: ${error instanceof Error ? error.message : String(error)}`);
+  }
+}
+
+/**
+ * Cria um Postgres em memória com as migrations do projeto aplicadas em ordem.
+ * Com `before`, para antes da migration indicada (para testar o efeito dela sobre dados).
+ */
+export async function createMigratedDatabase(options: { before?: string } = {}): Promise<PGlite> {
   const db = await PGlite.create({ extensions: { citext, pgcrypto } });
   await db.exec(SUPABASE_STUB);
   for (const file of readdirSync(MIGRATIONS_DIR).filter((name) => name.endsWith(".sql")).sort()) {
-    const sql = readFileSync(path.join(MIGRATIONS_DIR, file), "utf8").replace(PLATFORM_EXTENSIONS, "");
-    try {
-      await db.exec(sql);
-    } catch (error) {
-      throw new Error(`Falha ao aplicar ${file}: ${error instanceof Error ? error.message : String(error)}`);
-    }
+    if (options.before && file >= options.before) break;
+    await applyMigration(db, file);
   }
   return db;
 }

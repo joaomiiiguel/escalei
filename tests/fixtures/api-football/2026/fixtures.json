@@ -1,0 +1,10655 @@
+{
+ "get": "fixtures",
+ "parameters": {
+  "league": "71",
+  "season": "2026"
+ },
+ "errors": [],
+ "results": 380,
+ "paging": {
+  "current": 1,
+  "total": 1
+ },
+ "response": [
+  {
+   "fixture": {
+    "id": 1492116,
+    "date": "2026-01-28T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 1"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492119,
+    "date": "2026-01-28T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 1"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492114,
+    "date": "2026-01-28T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 1"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492110,
+    "date": "2026-01-28T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 1"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492115,
+    "date": "2026-01-28T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 1"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492113,
+    "date": "2026-01-28T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 1"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492112,
+    "date": "2026-01-28T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 1"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492118,
+    "date": "2026-01-29T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 1"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492117,
+    "date": "2026-01-29T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 1"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492111,
+    "date": "2026-01-30T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 1"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492124,
+    "date": "2026-02-04T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 2"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492122,
+    "date": "2026-02-04T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 2"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492128,
+    "date": "2026-02-04T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 2"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492127,
+    "date": "2026-02-04T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 2"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492126,
+    "date": "2026-02-05T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 2"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 5,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492125,
+    "date": "2026-02-05T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 2"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 5,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492121,
+    "date": "2026-02-05T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 2"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492129,
+    "date": "2026-02-05T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 2"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492123,
+    "date": "2026-02-06T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 2"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492139,
+    "date": "2026-02-11T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 3"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492132,
+    "date": "2026-02-11T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 3"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492136,
+    "date": "2026-02-11T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 3"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492131,
+    "date": "2026-02-11T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 3"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492137,
+    "date": "2026-02-12T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 3"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492138,
+    "date": "2026-02-12T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 3"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492130,
+    "date": "2026-02-12T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 3"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492134,
+    "date": "2026-02-12T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 3"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492133,
+    "date": "2026-02-12T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 3"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492135,
+    "date": "2026-02-13T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 3"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492120,
+    "date": "2026-02-19T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 2"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492142,
+    "date": "2026-02-25T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 4"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492148,
+    "date": "2026-02-25T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 4"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492143,
+    "date": "2026-02-25T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 4"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492144,
+    "date": "2026-02-25T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 4"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492147,
+    "date": "2026-02-26T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 4"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492146,
+    "date": "2026-02-26T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 4"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492149,
+    "date": "2026-02-26T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 4"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492156,
+    "date": "2026-03-11T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 5"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492151,
+    "date": "2026-03-11T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 5"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492152,
+    "date": "2026-03-11T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 5"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492154,
+    "date": "2026-03-12T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 5"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492153,
+    "date": "2026-03-12T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 5"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492157,
+    "date": "2026-03-12T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 5"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492159,
+    "date": "2026-03-12T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 5"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492158,
+    "date": "2026-03-12T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 5"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492155,
+    "date": "2026-03-13T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 5"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492169,
+    "date": "2026-03-14T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 6"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492160,
+    "date": "2026-03-14T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 6"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492166,
+    "date": "2026-03-15T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 6"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492165,
+    "date": "2026-03-15T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 6"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492168,
+    "date": "2026-03-15T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 6"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492167,
+    "date": "2026-03-15T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 6"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492163,
+    "date": "2026-03-15T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 6"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492164,
+    "date": "2026-03-15T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 6"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492161,
+    "date": "2026-03-15T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 6"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492162,
+    "date": "2026-03-16T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 6"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492172,
+    "date": "2026-03-18T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 7"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492177,
+    "date": "2026-03-18T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 7"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492170,
+    "date": "2026-03-18T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 7"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492171,
+    "date": "2026-03-18T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 7"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492176,
+    "date": "2026-03-18T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 7"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492178,
+    "date": "2026-03-19T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 7"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492179,
+    "date": "2026-03-19T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 7"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492175,
+    "date": "2026-03-19T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 7"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492174,
+    "date": "2026-03-19T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 7"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492173,
+    "date": "2026-03-20T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 7"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492181,
+    "date": "2026-03-21T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 8"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492184,
+    "date": "2026-03-21T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 8"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492187,
+    "date": "2026-03-22T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 8"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492188,
+    "date": "2026-03-22T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 8"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492180,
+    "date": "2026-03-22T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 8"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492183,
+    "date": "2026-03-22T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 8"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492186,
+    "date": "2026-03-22T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 8"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492185,
+    "date": "2026-03-22T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 8"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492189,
+    "date": "2026-03-22T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 8"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492182,
+    "date": "2026-03-22T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 8"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492150,
+    "date": "2026-03-29T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 5"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492197,
+    "date": "2026-04-01T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 9"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492191,
+    "date": "2026-04-01T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 9"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492190,
+    "date": "2026-04-01T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 9"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492195,
+    "date": "2026-04-01T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 9"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492194,
+    "date": "2026-04-01T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 9"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492196,
+    "date": "2026-04-02T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 9"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492199,
+    "date": "2026-04-02T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 9"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492193,
+    "date": "2026-04-02T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 9"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 4
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492198,
+    "date": "2026-04-03T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 9"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492192,
+    "date": "2026-04-03T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 9"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492208,
+    "date": "2026-04-04T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 10"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492204,
+    "date": "2026-04-04T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 10"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492209,
+    "date": "2026-04-05T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 10"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492202,
+    "date": "2026-04-05T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 10"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492205,
+    "date": "2026-04-05T20:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 10"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492200,
+    "date": "2026-04-05T20:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 10"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492201,
+    "date": "2026-04-05T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 10"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492203,
+    "date": "2026-04-05T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 10"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492207,
+    "date": "2026-04-05T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 10"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492206,
+    "date": "2026-04-05T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 10"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492219,
+    "date": "2026-04-11T19:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 11"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492217,
+    "date": "2026-04-11T19:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 11"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492216,
+    "date": "2026-04-11T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 11"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492218,
+    "date": "2026-04-11T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 11"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492215,
+    "date": "2026-04-11T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 11"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492210,
+    "date": "2026-04-12T14:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 11"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492211,
+    "date": "2026-04-12T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 11"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492214,
+    "date": "2026-04-12T21:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 11"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492212,
+    "date": "2026-04-12T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 11"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492213,
+    "date": "2026-04-12T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 11"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492221,
+    "date": "2026-04-18T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 12"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 4
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492228,
+    "date": "2026-04-18T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 12"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492229,
+    "date": "2026-04-18T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 12"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492223,
+    "date": "2026-04-18T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 12"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492225,
+    "date": "2026-04-19T14:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 12"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492227,
+    "date": "2026-04-19T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 12"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492222,
+    "date": "2026-04-19T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 12"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492226,
+    "date": "2026-04-19T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 12"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492220,
+    "date": "2026-04-19T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 12"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492224,
+    "date": "2026-04-19T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 12"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492232,
+    "date": "2026-04-25T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 13"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492233,
+    "date": "2026-04-25T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 13"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492238,
+    "date": "2026-04-25T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 13"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492239,
+    "date": "2026-04-26T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 13"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492237,
+    "date": "2026-04-26T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 13"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492235,
+    "date": "2026-04-26T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 13"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492230,
+    "date": "2026-04-26T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 13"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492234,
+    "date": "2026-04-26T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 13"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492236,
+    "date": "2026-04-26T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 13"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492231,
+    "date": "2026-04-26T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 13"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 4
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492241,
+    "date": "2026-05-02T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 14"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492247,
+    "date": "2026-05-02T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 14"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492249,
+    "date": "2026-05-02T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 14"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492240,
+    "date": "2026-05-02T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 14"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492243,
+    "date": "2026-05-03T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 14"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492248,
+    "date": "2026-05-03T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 14"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492244,
+    "date": "2026-05-03T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 14"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492245,
+    "date": "2026-05-03T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 14"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492242,
+    "date": "2026-05-03T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 14"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492246,
+    "date": "2026-05-03T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 14"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492253,
+    "date": "2026-05-09T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 15"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492254,
+    "date": "2026-05-09T21:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 15"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492251,
+    "date": "2026-05-10T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 15"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492250,
+    "date": "2026-05-10T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 15"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492257,
+    "date": "2026-05-10T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 15"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492258,
+    "date": "2026-05-10T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 15"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492252,
+    "date": "2026-05-10T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 15"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492256,
+    "date": "2026-05-10T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 15"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492255,
+    "date": "2026-05-10T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 15"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492259,
+    "date": "2026-05-10T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 15"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492267,
+    "date": "2026-05-16T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 16"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492261,
+    "date": "2026-05-16T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 16"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492266,
+    "date": "2026-05-16T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 16"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492268,
+    "date": "2026-05-17T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 16"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492269,
+    "date": "2026-05-17T14:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 16"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492262,
+    "date": "2026-05-17T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 16"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492263,
+    "date": "2026-05-17T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 16"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492265,
+    "date": "2026-05-17T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 16"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492264,
+    "date": "2026-05-17T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 16"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492260,
+    "date": "2026-05-17T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 16"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492277,
+    "date": "2026-05-23T20:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 17"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492279,
+    "date": "2026-05-23T20:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 17"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492274,
+    "date": "2026-05-23T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 17"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492275,
+    "date": "2026-05-23T22:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 17"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492273,
+    "date": "2026-05-24T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 17"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492272,
+    "date": "2026-05-24T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 17"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492276,
+    "date": "2026-05-24T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 17"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492270,
+    "date": "2026-05-24T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 17"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492278,
+    "date": "2026-05-24T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 17"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492271,
+    "date": "2026-05-25T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 17"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492284,
+    "date": "2026-05-30T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 18"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492280,
+    "date": "2026-05-30T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 18"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492281,
+    "date": "2026-05-30T20:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 18"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492285,
+    "date": "2026-05-30T20:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 18"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492288,
+    "date": "2026-05-30T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 18"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492282,
+    "date": "2026-05-31T14:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 18"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492286,
+    "date": "2026-05-31T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 18"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492289,
+    "date": "2026-05-31T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 18"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492283,
+    "date": "2026-05-31T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 18"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492287,
+    "date": "2026-05-31T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 18"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492291,
+    "date": "2026-07-16T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 19"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492299,
+    "date": "2026-07-16T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 19"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492140,
+    "date": "2026-07-17T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 4"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492295,
+    "date": "2026-07-17T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 19"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492297,
+    "date": "2026-07-17T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 19"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492290,
+    "date": "2026-07-21T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 19"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492294,
+    "date": "2026-07-22T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 19"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492296,
+    "date": "2026-07-23T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 19"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492298,
+    "date": "2026-07-23T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 19"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492292,
+    "date": "2026-07-23T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 19"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 4
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492141,
+    "date": "2026-07-23T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 4"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492293,
+    "date": "2026-07-23T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 19"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492308,
+    "date": "2026-07-25T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 20"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492300,
+    "date": "2026-07-25T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 20"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492309,
+    "date": "2026-07-25T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 20"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492301,
+    "date": "2026-07-26T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 20"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492303,
+    "date": "2026-07-26T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 20"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492304,
+    "date": "2026-07-26T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 20"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492305,
+    "date": "2026-07-26T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 20"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492302,
+    "date": "2026-07-26T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 20"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492306,
+    "date": "2026-07-26T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 20"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492307,
+    "date": "2026-07-26T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 20"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492316,
+    "date": "2026-07-29T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 21"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492317,
+    "date": "2026-07-29T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 21"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492315,
+    "date": "2026-07-30T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 21"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492319,
+    "date": "2026-07-30T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 21"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 4
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492313,
+    "date": "2026-07-30T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 21"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492314,
+    "date": "2026-07-31T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 21"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492326,
+    "date": "2026-08-08T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 22"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492328,
+    "date": "2026-08-08T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 22"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492323,
+    "date": "2026-08-08T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 22"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492321,
+    "date": "2026-08-09T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 22"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492324,
+    "date": "2026-08-09T14:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 22"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492320,
+    "date": "2026-08-09T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 22"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492327,
+    "date": "2026-08-09T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 22"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492329,
+    "date": "2026-08-09T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 22"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492322,
+    "date": "2026-08-09T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 22"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492325,
+    "date": "2026-08-09T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 22"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492334,
+    "date": "2026-08-15T19:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 23"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492330,
+    "date": "2026-08-15T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 23"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492337,
+    "date": "2026-08-16T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 23"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492332,
+    "date": "2026-08-16T14:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 23"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492338,
+    "date": "2026-08-16T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 23"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492331,
+    "date": "2026-08-16T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 23"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492339,
+    "date": "2026-08-16T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 23"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492336,
+    "date": "2026-08-16T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 23"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 5
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492333,
+    "date": "2026-08-16T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 23"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492335,
+    "date": "2026-08-17T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 23"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492345,
+    "date": "2026-08-22T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 24"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492346,
+    "date": "2026-08-22T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 24"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492344,
+    "date": "2026-08-22T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 24"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492347,
+    "date": "2026-08-23T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 24"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492349,
+    "date": "2026-08-23T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 24"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492341,
+    "date": "2026-08-23T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 24"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492348,
+    "date": "2026-08-23T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 24"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492342,
+    "date": "2026-08-23T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 24"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492343,
+    "date": "2026-08-23T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 24"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492340,
+    "date": "2026-08-24T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 24"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492351,
+    "date": "2026-08-29T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 25"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492358,
+    "date": "2026-08-29T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 25"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492359,
+    "date": "2026-08-30T00:20:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 25"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492350,
+    "date": "2026-08-30T14:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 25"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492354,
+    "date": "2026-08-30T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 25"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492353,
+    "date": "2026-08-30T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 25"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492355,
+    "date": "2026-08-30T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 25"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492356,
+    "date": "2026-08-30T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 25"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492352,
+    "date": "2026-08-30T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 25"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492357,
+    "date": "2026-08-31T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 25"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492145,
+    "date": "2026-09-02T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 4"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492361,
+    "date": "2026-09-05T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 26"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492368,
+    "date": "2026-09-05T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 26"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492365,
+    "date": "2026-09-06T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 26"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492363,
+    "date": "2026-09-06T14:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 26"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492366,
+    "date": "2026-09-06T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 26"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492364,
+    "date": "2026-09-06T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 26"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492367,
+    "date": "2026-09-06T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 26"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492360,
+    "date": "2026-09-06T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 26"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492362,
+    "date": "2026-09-06T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 26"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492369,
+    "date": "2026-09-07T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 26"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492374,
+    "date": "2026-09-12T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 27"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492376,
+    "date": "2026-09-12T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 27"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492370,
+    "date": "2026-09-12T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 27"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492373,
+    "date": "2026-09-12T20:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 27"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492378,
+    "date": "2026-09-12T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 27"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492372,
+    "date": "2026-09-12T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 27"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492379,
+    "date": "2026-09-13T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 27"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492377,
+    "date": "2026-09-13T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 27"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492375,
+    "date": "2026-09-13T20:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 27"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492371,
+    "date": "2026-09-14T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 27"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492311,
+    "date": "2026-09-16T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 21"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492381,
+    "date": "2026-09-19T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 28"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492385,
+    "date": "2026-09-19T20:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 28"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492386,
+    "date": "2026-09-19T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 28"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492388,
+    "date": "2026-09-19T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 28"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 5,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492387,
+    "date": "2026-09-20T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 28"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492384,
+    "date": "2026-09-20T14:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 28"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492382,
+    "date": "2026-09-20T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 28"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492389,
+    "date": "2026-09-20T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 28"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492383,
+    "date": "2026-09-20T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 28"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492380,
+    "date": "2026-09-20T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 28"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492318,
+    "date": "2026-10-02T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 21"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492310,
+    "date": "2026-10-03T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 21"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492395,
+    "date": "2026-10-07T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 29"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492392,
+    "date": "2026-10-07T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 29"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492397,
+    "date": "2026-10-07T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 29"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492399,
+    "date": "2026-10-07T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 29"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492391,
+    "date": "2026-10-07T23:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 29"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492393,
+    "date": "2026-10-08T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 29"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492398,
+    "date": "2026-10-08T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 29"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492390,
+    "date": "2026-10-08T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 29"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492396,
+    "date": "2026-10-09T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 29"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492394,
+    "date": "2026-10-09T00:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 29"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492409,
+    "date": "2026-10-10T21:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 30"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492408,
+    "date": "2026-10-11T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 30"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492400,
+    "date": "2026-10-11T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 30"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492407,
+    "date": "2026-10-11T20:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 30"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492405,
+    "date": "2026-10-11T20:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 30"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492406,
+    "date": "2026-10-11T20:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 30"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492401,
+    "date": "2026-10-11T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 30"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492404,
+    "date": "2026-10-12T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 30"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492403,
+    "date": "2026-10-12T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 30"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 4
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492402,
+    "date": "2026-10-13T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 30"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 4,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492417,
+    "date": "2026-10-16T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 31"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492413,
+    "date": "2026-10-17T21:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 31"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492411,
+    "date": "2026-10-17T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 31"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492410,
+    "date": "2026-10-17T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 31"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492419,
+    "date": "2026-10-18T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 31"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492415,
+    "date": "2026-10-18T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 31"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492416,
+    "date": "2026-10-18T19:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 31"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 4
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492412,
+    "date": "2026-10-18T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 31"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 3
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492418,
+    "date": "2026-10-18T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 31"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492414,
+    "date": "2026-10-19T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 31"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492422,
+    "date": "2026-10-23T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 32"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492424,
+    "date": "2026-10-24T19:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 32"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492429,
+    "date": "2026-10-24T19:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 32"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492425,
+    "date": "2026-10-24T19:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 32"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492426,
+    "date": "2026-10-24T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 32"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 0
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492428,
+    "date": "2026-10-24T21:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 32"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492420,
+    "date": "2026-10-24T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 32"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": 2,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492427,
+    "date": "2026-10-25T00:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 32"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": 1,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492421,
+    "date": "2026-10-26T22:30:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 32"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": 0,
+    "away": 1
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492423,
+    "date": "2026-10-26T23:00:00+00:00",
+    "status": {
+     "short": "FT"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 32"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": 3,
+    "away": 2
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492312,
+    "date": "2026-07-29T20:00:00+00:00",
+    "status": {
+     "short": "PST"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 21"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492435,
+    "date": "2026-10-28T22:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 33"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492438,
+    "date": "2026-10-28T22:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 33"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492432,
+    "date": "2026-10-28T22:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 33"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492431,
+    "date": "2026-10-29T00:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 33"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492437,
+    "date": "2026-10-29T00:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 33"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492434,
+    "date": "2026-10-29T22:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 33"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492430,
+    "date": "2026-10-29T22:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 33"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492439,
+    "date": "2026-10-29T23:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 33"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492436,
+    "date": "2026-10-30T00:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 33"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492433,
+    "date": "2026-10-30T23:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 33"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492442,
+    "date": "2026-11-02T23:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 34"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492443,
+    "date": "2026-11-03T22:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 34"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492446,
+    "date": "2026-11-04T00:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 34"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492445,
+    "date": "2026-11-04T22:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 34"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492440,
+    "date": "2026-11-04T22:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 34"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492441,
+    "date": "2026-11-05T00:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 34"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492448,
+    "date": "2026-11-05T00:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 34"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492447,
+    "date": "2026-11-05T22:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 34"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492444,
+    "date": "2026-11-06T00:30:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 34"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492449,
+    "date": "2026-11-06T23:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 34"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492457,
+    "date": "2026-11-18T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 35"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492453,
+    "date": "2026-11-18T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 35"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492454,
+    "date": "2026-11-18T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 35"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492450,
+    "date": "2026-11-18T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 35"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492458,
+    "date": "2026-11-18T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 35"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492452,
+    "date": "2026-11-18T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 35"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492459,
+    "date": "2026-11-18T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 35"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492451,
+    "date": "2026-11-18T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 35"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492456,
+    "date": "2026-11-18T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 35"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492455,
+    "date": "2026-11-18T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 35"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492462,
+    "date": "2026-11-22T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 36"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492467,
+    "date": "2026-11-22T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 36"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492463,
+    "date": "2026-11-22T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 36"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492468,
+    "date": "2026-11-22T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 36"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492466,
+    "date": "2026-11-22T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 36"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492469,
+    "date": "2026-11-22T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 36"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492465,
+    "date": "2026-11-22T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 36"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492460,
+    "date": "2026-11-22T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 36"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492464,
+    "date": "2026-11-22T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 36"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492461,
+    "date": "2026-11-22T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 36"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492476,
+    "date": "2026-11-29T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 37"
+   },
+   "teams": {
+    "home": {
+     "id": 119,
+     "name": "Internacional"
+    },
+    "away": {
+     "id": 794,
+     "name": "RB Bragantino"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492471,
+    "date": "2026-11-29T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 37"
+   },
+   "teams": {
+    "home": {
+     "id": 120,
+     "name": "Botafogo"
+    },
+    "away": {
+     "id": 118,
+     "name": "Bahia"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492475,
+    "date": "2026-11-29T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 37"
+   },
+   "teams": {
+    "home": {
+     "id": 124,
+     "name": "Fluminense"
+    },
+    "away": {
+     "id": 135,
+     "name": "Cruzeiro"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492478,
+    "date": "2026-11-29T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 37"
+   },
+   "teams": {
+    "home": {
+     "id": 126,
+     "name": "Sao Paulo"
+    },
+    "away": {
+     "id": 1198,
+     "name": "Remo"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492473,
+    "date": "2026-11-29T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 37"
+   },
+   "teams": {
+    "home": {
+     "id": 131,
+     "name": "Corinthians"
+    },
+    "away": {
+     "id": 130,
+     "name": "Gremio"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492472,
+    "date": "2026-11-29T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 37"
+   },
+   "teams": {
+    "home": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    },
+    "away": {
+     "id": 121,
+     "name": "Palmeiras"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492479,
+    "date": "2026-11-29T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 37"
+   },
+   "teams": {
+    "home": {
+     "id": 136,
+     "name": "Vitoria"
+    },
+    "away": {
+     "id": 128,
+     "name": "Santos"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492474,
+    "date": "2026-11-29T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 37"
+   },
+   "teams": {
+    "home": {
+     "id": 147,
+     "name": "Coritiba"
+    },
+    "away": {
+     "id": 127,
+     "name": "Flamengo"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492470,
+    "date": "2026-11-29T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 37"
+   },
+   "teams": {
+    "home": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    },
+    "away": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492477,
+    "date": "2026-11-29T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 37"
+   },
+   "teams": {
+    "home": {
+     "id": 7848,
+     "name": "Mirassol"
+    },
+    "away": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492481,
+    "date": "2026-12-02T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 38"
+   },
+   "teams": {
+    "home": {
+     "id": 118,
+     "name": "Bahia"
+    },
+    "away": {
+     "id": 1062,
+     "name": "Atletico-MG"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492486,
+    "date": "2026-12-02T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 38"
+   },
+   "teams": {
+    "home": {
+     "id": 121,
+     "name": "Palmeiras"
+    },
+    "away": {
+     "id": 147,
+     "name": "Coritiba"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492484,
+    "date": "2026-12-02T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 38"
+   },
+   "teams": {
+    "home": {
+     "id": 127,
+     "name": "Flamengo"
+    },
+    "away": {
+     "id": 132,
+     "name": "Chapecoense-sc"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492488,
+    "date": "2026-12-02T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 38"
+   },
+   "teams": {
+    "home": {
+     "id": 128,
+     "name": "Santos"
+    },
+    "away": {
+     "id": 120,
+     "name": "Botafogo"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492485,
+    "date": "2026-12-02T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 38"
+   },
+   "teams": {
+    "home": {
+     "id": 130,
+     "name": "Gremio"
+    },
+    "away": {
+     "id": 7848,
+     "name": "Mirassol"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492489,
+    "date": "2026-12-02T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 38"
+   },
+   "teams": {
+    "home": {
+     "id": 133,
+     "name": "Vasco DA Gama"
+    },
+    "away": {
+     "id": 136,
+     "name": "Vitoria"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492480,
+    "date": "2026-12-02T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 38"
+   },
+   "teams": {
+    "home": {
+     "id": 134,
+     "name": "Atletico Paranaense"
+    },
+    "away": {
+     "id": 126,
+     "name": "Sao Paulo"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492483,
+    "date": "2026-12-02T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 38"
+   },
+   "teams": {
+    "home": {
+     "id": 135,
+     "name": "Cruzeiro"
+    },
+    "away": {
+     "id": 119,
+     "name": "Internacional"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492482,
+    "date": "2026-12-02T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 38"
+   },
+   "teams": {
+    "home": {
+     "id": 794,
+     "name": "RB Bragantino"
+    },
+    "away": {
+     "id": 124,
+     "name": "Fluminense"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  },
+  {
+   "fixture": {
+    "id": 1492487,
+    "date": "2026-12-02T21:00:00+00:00",
+    "status": {
+     "short": "NS"
+    }
+   },
+   "league": {
+    "id": 71,
+    "season": 2026,
+    "round": "Regular Season - 38"
+   },
+   "teams": {
+    "home": {
+     "id": 1198,
+     "name": "Remo"
+    },
+    "away": {
+     "id": 131,
+     "name": "Corinthians"
+    }
+   },
+   "goals": {
+    "home": null,
+    "away": null
+   }
+  }
+ ]
+}
