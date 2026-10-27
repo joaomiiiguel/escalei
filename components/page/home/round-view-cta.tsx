@@ -29,7 +29,7 @@ const RoundViewCTA = ({ team, round, now, games, clubsById, teamStats }: { team:
     const nextGameStatus = nextGame?.status === "EM_ANDAMENTO" ? "em andamento" : "próximo";
 
     return (
-        <section className={isUnselected ? "rounded-2xl bg-primary p-3 outline outline-1.5 -outline-offset-1 outline-primary" : "rounded-2xl border border-border bg-secondary/70 p-3"}>
+        <section className={"rounded-2xl border border-border bg-secondary/70 p-3"}>
             <div className="flex items-center justify-between gap-3 mb-4">
                 <p className="text-sm font-extrabold tracking-[0.12em] text-white">MEU TIME</p>
                 {team?.formacao && <span className="rounded-lg border border-primary/40 px-3 py-1 text-xs font-extrabold text-foreground">{team.formacao}</span>}
@@ -57,7 +57,7 @@ const RoundViewCTA = ({ team, round, now, games, clubsById, teamStats }: { team:
                     </p>}
                 </div>
                 : <div className="flex items-center gap-3">
-                    <div className={isUnselected ? "grid size-11 shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground" : "grid size-11 shrink-0 place-items-center rounded-xl bg-primary/20 text-primary"}>
+                    <div className={"grid size-11 shrink-0 place-items-center rounded-xl bg-primary/20 text-primary"}>
                         <ShieldCheck className="size-[22px]" aria-hidden="true" />
                     </div>
                     <div className="min-w-0">

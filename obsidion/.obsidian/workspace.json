@@ -4,21 +4,17 @@
     "type": "split",
     "children": [
       {
-        "id": "e061301997856041",
+        "id": "d218c03ccdd5b644",
         "type": "tabs",
         "children": [
           {
-            "id": "f9d7a3720577f42f",
+            "id": "518d9387bf4341e6",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "06-Planejamento/Plano de 1 Mês — Lançamento do Teste.md",
-                "mode": "source",
-                "source": false
-              },
+              "type": "empty",
+              "state": {},
               "icon": "lucide-file",
-              "title": "Plano de 1 Mês — Lançamento do Teste"
+              "title": "Nova aba"
             }
           }
         ]
@@ -188,11 +184,12 @@
       "bases:Criar nova base": false
     }
   },
-  "active": "f9d7a3720577f42f",
+  "active": "518d9387bf4341e6",
   "lastOpenFiles": [
+    "Index.md",
+    "06-Planejamento/Plano de 1 Mês — Lançamento do Teste.md",
     "06-Planejamento/Onboarding por Convite.md",
     "07-Decisoes/Origem do projeto e decisões iniciais.md",
-    "Index.md",
     "02-Tecnico/Ativação de Produção — Calendário e Orquestração.md",
     "01-Produto/Visão e Tese.md",
     "Orquestrador da Rodada Simulada.md",
@@ -201,7 +198,6 @@
     "02-Tecnico/API-Football.md",
     "02-Tecnico/Banco de Dados — Modelo e Campos.md",
     "02-Tecnico/Arquitetura.md",
-    "06-Planejamento/Plano de 1 Mês — Lançamento do Teste.md",
     "06-Planejamento/Roadmap e Backlog.md",
     "03-Validacao/Plano de Validação.md",
     "05-Juridico-e-Riscos/Jurídico e Riscos.md",
