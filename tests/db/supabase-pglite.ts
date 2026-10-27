@@ -29,12 +29,15 @@ const SUPABASE_STUB = `
   alter default privileges in schema public grant all on sequences to anon, authenticated, service_role;
 
   create schema cron;
-  create table cron.job (jobid bigserial primary key, jobname text, schedule text, command text);
+  create table cron.job (jobid bigserial primary key, jobname text, schedule text, command text, active boolean not null default true);
   create function cron.schedule(p_name text, p_schedule text, p_command text) returns bigint language sql as $$
     insert into cron.job (jobname, schedule, command) values (p_name, p_schedule, p_command) returning jobid
   $$;
   create function cron.unschedule(p_jobid bigint) returns boolean language sql as $$
     delete from cron.job where jobid = p_jobid returning true
+  $$;
+  create function cron.alter_job(job_id bigint, schedule text default null, command text default null, database text default null, username text default null, active boolean default null) returns void language sql as $$
+    update cron.job set schedule = coalesce(alter_job.schedule, job.schedule), command = coalesce(alter_job.command, job.command), active = coalesce(alter_job.active, job.active) where job.jobid = job_id
   $$;
   create schema vault;
   create table vault.decrypted_secrets (name text primary key, decrypted_secret text);
