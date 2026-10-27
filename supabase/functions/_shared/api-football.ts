@@ -8,7 +8,9 @@
  * - O orçamento é contado pelo próprio projeto: soma das requisições do dia
  *   (UTC, quando a API zera o contador) contra `api_football_limite_diario`
  *   menos `api_football_reserva_diaria`, lidos de `configuracoes`. O cabeçalho
- *   de cota da API é usado como segunda proteção.
+ *   de cota da API é usado como segunda proteção, mas só quando a leitura é
+ *   recente: uma leitura antiga (por exemplo, de uma chave já trocada) não
+ *   pode bloquear as chamadas até a virada do dia.
  * - Erros de chave inválida ou de limite atingido devolvidos pela API
  *   interrompem a execução com `ApiAccessError` / `QuotaReservedError`.
  *
@@ -27,6 +29,9 @@ export const USAGE_WARNING_LEVELS = [0.5, 0.8] as const;
 
 /** Cabeçalho da API-Football com as requisições restantes no dia. */
 const DAILY_REMAINING_HEADER = "x-ratelimit-requests-remaining";
+
+/** Idade máxima de uma leitura do cabeçalho de cota para ainda bloquear chamadas. */
+export const REMAINING_READING_MAX_AGE_MINUTES = 10;
 
 export type SyncType = "RODADA" | "JOGO" | "PONTUACAO" | "ORQUESTRADOR";
 
@@ -55,6 +60,13 @@ export function parseRemaining(headers: Headers): number | null {
 /** Início do dia em UTC, quando a API-Football renova a cota. */
 export function startOfQuotaDay(now: Date): string {
   return new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())).toISOString();
+}
+
+/** Leituras do cabeçalho de cota feitas a partir deste instante ainda valem: no mesmo dia UTC e nos últimos minutos. */
+export function remainingReadingValidSince(now: Date): string {
+  const recent = new Date(now.getTime() - REMAINING_READING_MAX_AGE_MINUTES * 60_000).toISOString();
+  const dayStart = startOfQuotaDay(now);
+  return recent > dayStart ? recent : dayStart;
 }
 
 type FetchFn = (input: string, init?: RequestInit) => Promise<Response>;
@@ -97,6 +109,8 @@ export function crossedUsageLevel(before: number, after: number, limit: number):
 
 export class ApiFootballClient {
   requests = 0;
+  /** Cota lida do cabeçalho de uma resposta desta execução; `null` se nenhuma resposta trouxe o cabeçalho. */
+  observedRemaining: number | null = null;
 
   constructor(
     private readonly apiKey: string,
@@ -122,7 +136,8 @@ export class ApiFootballClient {
     const response = await this.fetchFn(`${API_FOOTBALL_BASE_URL}${path}`, {
       headers: { "x-apisports-key": this.apiKey, Accept: "application/json" },
     });
-    this.remaining = parseRemaining(response.headers) ?? this.remaining;
+    this.observedRemaining = parseRemaining(response.headers) ?? this.observedRemaining;
+    this.remaining = this.observedRemaining ?? this.remaining;
     const payload = await response.json().catch(() => ({})) as ApiFootballPayload;
     const blocking = blockingApiError(payload);
     if (blocking) throw blocking;
@@ -152,9 +167,9 @@ export async function startSyncExecution(
     db.rpc("fn_requisicoes_api_football", { p_desde: dayStart }),
     db.from("sync_execucoes")
       .select("cota_restante")
-      .gte("iniciado_em", dayStart)
+      .gte("terminado_em", remainingReadingValidSince(now))
       .not("cota_restante", "is", null)
-      .order("iniciado_em", { ascending: false })
+      .order("terminado_em", { ascending: false })
       .limit(1)
       .maybeSingle(),
   ]);
@@ -187,7 +202,8 @@ export async function finishSyncExecution(
   await db.from("sync_execucoes").update({
     terminado_em: new Date().toISOString(),
     requisicoes: client.requests,
-    cota_restante: client.remaining,
+    // Só grava a cota vinda de uma resposta real: repetir a leitura herdada a faria parecer recente.
+    cota_restante: client.observedRemaining,
     sucesso: !error,
     erro: error ? error.slice(0, 1000) : null,
   }).eq("id", execution.id);
