@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
 import { LogOut } from "lucide-react";
 import { AdminNav } from "./admin-nav";
+import { AdminMobileMenu } from "./admin-mobile-menu";
 
 export default async function AdminLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const supabase = await createClient();
@@ -17,6 +18,7 @@ export default async function AdminLayout({ children }: Readonly<{ children: Rea
 
     return (
         <main className="!w-full bg-neutral-950 font-sans text-neutral-100 lg:grid lg:grid-cols-[276px_minmax(0,1fr)] lg:gap-0">
+            <AdminMobileMenu apelido={profile?.apelido ?? null} />
             <aside className="hidden min-h-dvh border-r border-neutral-800 bg-neutral-900 p-6 lg:flex lg:flex-col">
                 <div className="flex items-center gap-3">
                     <div>
