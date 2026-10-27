@@ -151,8 +151,9 @@ export function buildPlayers(
       posicao: position,
       preco: price,
       preco_inicial: price,
-      media_temporada: average ?? 0,
-      media_ult5: average ?? 0,
+      // O banco exige médias não negativas; o preço usa a média real (com piso de C$ 2).
+      media_temporada: Math.max(average ?? 0, 0),
+      media_ult5: Math.max(average ?? 0, 0),
       jogos_temporada: n(statistic.games?.appearences),
       ativo: true,
       api_atualizado_em: options.now,
