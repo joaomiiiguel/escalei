@@ -7,6 +7,7 @@ import { ButtonGroup } from "./button-group";
 import { Button } from "./button";
 import { Input } from "./input";
 import { TeamLogo } from "./team-logo";
+import { fitsBudget, remainingBudget, sumPrices } from "@/lib/lineup-rules";
 
 
 type Formation = "4-3-3" | "4-4-2" | "3-5-2";
@@ -170,7 +171,7 @@ function PlayerPickerSheet({ maxAvailablePrice, onClose, onSelect, position, sel
           </div>
         </div>
         <div className="min-h-0 overflow-y-auto overscroll-contain border-t border-border px-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))]">
-          {isLoading ? <PlayerListSkeleton /> : hasError ? <p className="py-10 text-center text-sm text-muted-foreground">Não foi possível carregar os jogadores. Feche e tente novamente.</p> : visiblePlayers.length === 0 ? <div className="py-12 text-center"><Search className="mx-auto mb-3 size-8 text-muted-foreground" aria-hidden="true" /><p className="text-sm font-bold text-foreground">Nenhum jogador encontrado</p><p className="mt-1 text-xs text-muted-foreground">Tente outro nome ou clube.</p></div> : <ul className="divide-y divide-border">{visiblePlayers.map((player) => { const isSelected = selectedPlayerIds.has(player.id); const isOverBudget = player.price > maxAvailablePrice; const isUnavailable = isSelected || isOverBudget; return <li key={player.id}><button type="button" disabled={isUnavailable} onClick={() => onSelect(player)} className="flex w-full items-center justify-between gap-3 py-3 text-left outline-none transition-colors hover:bg-muted/40 focus-visible:bg-muted/40 disabled:cursor-not-allowed disabled:opacity-40"><TeamLogo className="size-9 shrink-0 rounded-full" logoUrl={player.logoUrl} nome={player.clubName} sigla={player.club} /><div className="min-w-0 flex-1"><p className="truncate text-sm font-bold text-foreground">{player.name}</p><p className="mt-0.5 text-xs font-medium text-muted-foreground">{isSelected ? "Já escalado" : isOverBudget ? "Fora do orçamento" : `${player.club} · ${player.position}`}</p></div><strong className="shrink-0 text-sm text-primary">C$ {player.price.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</strong></button></li>; })}</ul>}
+          {isLoading ? <PlayerListSkeleton /> : hasError ? <p className="py-10 text-center text-sm text-muted-foreground">Não foi possível carregar os jogadores. Feche e tente novamente.</p> : visiblePlayers.length === 0 ? <div className="py-12 text-center"><Search className="mx-auto mb-3 size-8 text-muted-foreground" aria-hidden="true" /><p className="text-sm font-bold text-foreground">Nenhum jogador encontrado</p><p className="mt-1 text-xs text-muted-foreground">Tente outro nome ou clube.</p></div> : <ul className="divide-y divide-border">{visiblePlayers.map((player) => { const isSelected = selectedPlayerIds.has(player.id); const isOverBudget = !fitsBudget(player.price, maxAvailablePrice); const isUnavailable = isSelected || isOverBudget; return <li key={player.id}><button type="button" disabled={isUnavailable} onClick={() => onSelect(player)} className="flex w-full items-center justify-between gap-3 py-3 text-left outline-none transition-colors hover:bg-muted/40 focus-visible:bg-muted/40 disabled:cursor-not-allowed disabled:opacity-40"><TeamLogo className="size-9 shrink-0 rounded-full" logoUrl={player.logoUrl} nome={player.clubName} sigla={player.club} /><div className="min-w-0 flex-1"><p className="truncate text-sm font-bold text-foreground">{player.name}</p><p className="mt-0.5 text-xs font-medium text-muted-foreground">{isSelected ? "Já escalado" : isOverBudget ? "Fora do orçamento" : `${player.club} · ${player.position}`}</p></div><strong className="shrink-0 text-sm text-primary">C$ {player.price.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</strong></button></li>; })}</ul>}
         </div>
       </section>
     </div>
@@ -188,11 +189,12 @@ export function LineupFormation({ autoPlayers, budget = 100, className = "", for
   const lines = formationLines[selectedFormation];
   const closePlayerPicker = useCallback(() => setSelectedSlot(null), []);
   const selectedPlayers = Object.values(playersBySlot);
-  const totalCost = selectedPlayers.reduce((total, player) => total + player.price, 0);
+  const totalCost = sumPrices(selectedPlayers.map((player) => player.price));
   const currentSlotPrice = selectedSlot ? playersBySlot[selectedSlot.key]?.price ?? 0 : 0;
-  const maxAvailablePrice = budget - totalCost + currentSlotPrice;
+  // Em centavos: somas de preços com casas decimais não podem recusar quem cabe no saldo.
+  const maxAvailablePrice = remainingBudget(budget, [totalCost, -currentSlotPrice]);
   const selectPlayer = useCallback((player: LineupPlayer) => {
-    if (!selectedSlot || player.price > maxAvailablePrice) return;
+    if (!selectedSlot || !fitsBudget(player.price, maxAvailablePrice)) return;
     setPlayersBySlot((current) => ({ ...current, [selectedSlot.key]: player }));
     setSelectedSlot(null);
   }, [maxAvailablePrice, selectedSlot]);

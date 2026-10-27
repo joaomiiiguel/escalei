@@ -2,6 +2,7 @@
 
 import { useCallback, useMemo, useRef, useState, useTransition } from "react";
 import { saveLineup } from "@/app/escalar/actions";
+import { fitsBudget, remainingBudget, sumPrices } from "@/lib/lineup-rules";
 import { LineupFormation, type LineupPlayer } from "./lineup-formation";
 import { LineupSummary } from "./lineup-summary";
 
@@ -16,7 +17,7 @@ export function LineupBuilder({ budget, initialFormation = "4-3-3", initialPlaye
   const [message, setMessage] = useState<string | null>(null);
   const [isSaving, startSaving] = useTransition();
   const openedAt = useRef(Date.now());
-  const totalCost = useMemo(() => selectedPlayers.reduce((total, player) => total + player.price, 0), [selectedPlayers]);
+  const totalCost = useMemo(() => sumPrices(selectedPlayers.map((player) => player.price)), [selectedPlayers]);
   const handleSelectedPlayersChange = useCallback((players: LineupPlayer[]) => setSelectedPlayers(players), []);
   const handleFormationChange = useCallback((nextFormation: Formation) => {
     setFormation(nextFormation);
@@ -42,7 +43,8 @@ export function LineupBuilder({ budget, initialFormation = "4-3-3", initialPlaye
       const response = await fetch(`/api/escalacao-automatica?formacao=${formation}`);
       const data = await response.json() as { players?: LineupPlayer[]; hasPerformanceData?: boolean; error?: string; algorithmVersion?: string };
       if (!response.ok || !data.players) throw new Error(data.error ?? "Não foi possível montar a escalação automática.");
-      if (data.players.length !== 11 || data.players.reduce((total, player) => total + player.price, 0) > budget) throw new Error("Não há jogadores suficientes dentro do seu saldo.");
+      if (data.players.length !== 11) throw new Error("Não foi possível montar os 11 jogadores. Tente outra formação.");
+      if (!fitsBudget(sumPrices(data.players.map((player) => player.price)), budget)) throw new Error("Não há jogadores suficientes dentro do seu saldo.");
       setAutoPlayers(data.players);
       const versionInfo = data.algorithmVersion ? ` (v${data.algorithmVersion})` : "";
       setMessage(data.hasPerformanceData ? `Escalação baseada em desempenho e contexto da rodada${versionInfo}. Revise antes de salvar.` : `Escalação montada com os sinais disponíveis da rodada${versionInfo}. Revise antes de salvar.`);
@@ -55,6 +57,6 @@ export function LineupBuilder({ budget, initialFormation = "4-3-3", initialPlaye
 
   return <>
     <LineupFormation autoPlayers={autoPlayers} budget={budget} className="h-[65vh]" formation={formation} initialPlayers={initialPlayers} onFormationChange={handleFormationChange} onSelectedPlayersChange={handleSelectedPlayersChange} />
-    <LineupSummary budget={budget - totalCost} isAutoSelecting={isAutoSelecting} isSaving={isSaving} onAutoSelect={autoSelect} onSave={save} saveMessage={message} selectedPlayers={selectedPlayers.length} />
+    <LineupSummary budget={remainingBudget(budget, [totalCost])} isAutoSelecting={isAutoSelecting} isSaving={isSaving} onAutoSelect={autoSelect} onSave={save} saveMessage={message} selectedPlayers={selectedPlayers.length} />
   </>;
 }

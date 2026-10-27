@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getCurrentRound } from "@/lib/current-round";
-import { FORMATIONS, isFormation, isRoundEditable, type Position } from "@/lib/lineup-rules";
+import { pickAutoLineup } from "@/lib/auto-lineup";
+import { isFormation, isRoundEditable, type Position } from "@/lib/lineup-rules";
 import { createClient } from "@/lib/supabase/server";
 
 type Candidate = {
@@ -96,38 +97,13 @@ export async function GET(request: Request) {
     } satisfies Candidate;
   });
 
-  const required = FORMATIONS[formation];
-  const byPosition = (Object.keys(required) as Position[]).reduce<Record<Position, Candidate[]>>((groups, position) => {
-    groups[position] = candidates.filter((candidate) => candidate.position === position)
-      .sort((first, second) => first.price - second.price || second.score - first.score || first.name.localeCompare(second.name));
-    return groups;
-  }, {} as Record<Position, Candidate[]>);
-  if ((Object.keys(required) as Position[]).some((position) => byPosition[position].length < required[position])) {
-    return NextResponse.json({ error: "Não há jogadores suficientes em todas as posições para esta rodada." }, { status: 422 });
+  const result = pickAutoLineup(candidates, formation, budget);
+  if (!result.ok) {
+    return result.reason === "POSICOES_INSUFICIENTES"
+      ? NextResponse.json({ error: "Não há jogadores suficientes em todas as posições para esta rodada." }, { status: 422 })
+      : NextResponse.json({ error: "Não há escalação válida dentro do seu saldo." }, { status: 422 });
   }
-
-  const selected = (Object.keys(required) as Position[]).flatMap((position) => byPosition[position].slice(0, required[position]));
-  let cost = selected.reduce((total, player) => total + player.price, 0);
-  if (cost > budget) return NextResponse.json({ error: "Não há escalação válida dentro do seu saldo." }, { status: 422 });
-
-  for (;;) {
-    let bestUpgrade: { position: Position; current: Candidate; next: Candidate; gain: number; cost: number } | null = null;
-    for (const position of Object.keys(required) as Position[]) {
-      const currentPlayers = selected.filter((player) => player.position === position);
-      for (const current of currentPlayers) for (const next of byPosition[position]) {
-        const extraCost = next.price - current.price;
-        const gain = next.score - current.score;
-        if (gain <= 0 || cost + extraCost > budget || selected.some((player) => player.id === next.id)) continue;
-        const value = extraCost <= 0 ? gain + budget : gain / extraCost;
-        const bestValue = bestUpgrade ? (bestUpgrade.cost <= 0 ? bestUpgrade.gain + budget : bestUpgrade.gain / bestUpgrade.cost) : -Infinity;
-        if (value > bestValue) bestUpgrade = { position, current, next, gain, cost: extraCost };
-      }
-    }
-    if (!bestUpgrade) break;
-    const index = selected.findIndex((player) => player.id === bestUpgrade.current.id);
-    selected[index] = bestUpgrade.next;
-    cost += bestUpgrade.cost;
-  }
+  const { players: selected, cost } = result;
 
   return NextResponse.json({
     players: selected.map(({ score: _score, ...player }) => player),
