@@ -296,6 +296,11 @@ describe(`rodada ${ROUND} de ${SEASON} de ponta a ponta, com respostas reais da 
     for (const game of goals.rows) expect([game.marcados_casa, game.marcados_fora]).toEqual([game.gols_casa, game.gols_fora]);
   });
 
+  it("pênalti cometido desconta pontos com a grafia real da API (`commited`)", async () => {
+    const result = await db.query<{ penaltis_cometidos: number }>("select penaltis_cometidos from estatisticas_jogador where jogador_id = $1", [PLAYER_ID_OFFSET + 152410]);
+    expect(result.rows).toEqual([{ penaltis_cometidos: 2 }]);
+  });
+
   it("confere, atualiza preços, credita saldos e fecha a rodada", async () => {
     const lastGame = round32.fixtures.map((fixture) => fixture.fixture.date).sort().at(-1)!;
     await tick(simulated(atReal(lastGame, GAME_MINUTES + 10)));
