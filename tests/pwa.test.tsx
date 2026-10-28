@@ -3,7 +3,8 @@ import path from "node:path";
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import manifest from "@/app/manifest";
-import { InstallInvite } from "@/components/page/home/install-invite";
+import { InstallInvite } from "@/components/pwa/install-invite";
+import { Navbar } from "@/components/ui/navbar";
 import {
   detectPlatform,
   INSTALL_INVITE_COOLDOWN_DAYS,
@@ -118,6 +119,15 @@ describe("InstallInvite", () => {
     expect(screen.queryByRole("complementary", { name: "Instalar o app" })).toBeNull();
   });
 
+  it("reserva espaço no fim da página só enquanto o convite está visível", () => {
+    render(<InstallInvite />);
+    expect(document.body.classList.contains("pb-20")).toBe(false);
+    act(() => { window.dispatchEvent(Object.assign(new Event("beforeinstallprompt"), { prompt: vi.fn(), userChoice: new Promise(() => undefined) })); });
+    expect(document.body.classList.contains("pb-20")).toBe(true);
+    fireEvent.click(screen.getByRole("button", { name: "Dispensar convite para instalar" }));
+    expect(document.body.classList.contains("pb-20")).toBe(false);
+  });
+
   it("dispensar esconde o convite e grava a data", () => {
     render(<InstallInvite />);
     act(() => { window.dispatchEvent(Object.assign(new Event("beforeinstallprompt"), { prompt: vi.fn(), userChoice: new Promise(() => undefined) })); });
@@ -125,5 +135,23 @@ describe("InstallInvite", () => {
     fireEvent.click(screen.getByRole("button", { name: "Dispensar convite para instalar" }));
     expect(screen.queryByRole("complementary", { name: "Instalar o app" })).toBeNull();
     expect(parseDismissedAt(window.localStorage.getItem(INSTALL_INVITE_DISMISSED_KEY))).not.toBeNull();
+  });
+});
+
+describe("convite na navbar", () => {
+  beforeEach(() => {
+    window.localStorage.clear();
+    window.matchMedia = vi.fn().mockReturnValue({ matches: false }) as unknown as typeof window.matchMedia;
+  });
+  afterEach(cleanup);
+
+  it("fica na pilha fixa do rodapé, acima da navegação", () => {
+    const { container } = render(<Navbar />);
+    act(() => { window.dispatchEvent(Object.assign(new Event("beforeinstallprompt"), { prompt: vi.fn(), userChoice: new Promise(() => undefined) })); });
+    const stack = container.querySelector("[data-app-navbar]")!;
+    const invite = screen.getByRole("complementary", { name: "Instalar o app" });
+    expect(stack.contains(invite)).toBe(true);
+    expect(stack.firstElementChild).toBe(invite);
+    expect(stack.className).toContain("fixed");
   });
 });

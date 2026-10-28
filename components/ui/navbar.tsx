@@ -4,6 +4,7 @@ import { House, Shirt, Trophy, UserRound } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HowItWorksModal } from "./how-it-works-modal";
+import { InstallInvite } from "@/components/pwa/install-invite";
 
 const publicPaths = ["/entrar", "/onboarding", "/convite", "/admin", "/beta", "/termos", "/privacidade", "/regulamento"];
 
@@ -37,6 +38,7 @@ export function Navbar({
     <>
       <HowItWorksModal />
       <div className="fixed inset-x-0 bottom-0 z-50 mx-auto w-full max-w-lg mb-5 px-4" data-app-navbar>
+        <InstallInvite />
         {showCta && (
           <div className="bg-background pb-3">
             <Link
