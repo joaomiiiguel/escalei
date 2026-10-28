@@ -27,6 +27,25 @@ describe("scouts a partir da API-Football", () => {
     expect(scouts().map((row) => row.jogador_id)).toEqual([101, 102, 103, 104, 105, 106]);
   });
 
+  it("atribui ao clube restante do jogo um time que a API devolve com outro id", () => {
+    const [home, away] = players.response as ApiPlayerGroup[];
+    const rows = buildScouts({
+      jogo: GAME,
+      playerGroups: [home, { ...away, team: { id: 22722 } }],
+      events: events.response as ApiEvent[],
+      jogadorIdByApiId: LOCAL_PLAYER_IDS,
+      clubeIdByApiId: LOCAL_CLUB_IDS,
+      conferencia: false,
+      lidoEm: "2026-10-25T21:00:00.000Z",
+    });
+    expect(rows.map((row) => [row.jogador_id, row.clube_id])).toEqual(scouts().map((row) => [row.jogador_id, row.clube_id]));
+  });
+
+  it("não adivinha o clube quando os dois times vêm com ids desconhecidos", () => {
+    const groups = (players.response as ApiPlayerGroup[]).map((group, index) => ({ ...group, team: { id: 50_000 + index } }));
+    expect(buildScouts({ jogo: GAME, playerGroups: groups, events: [], jogadorIdByApiId: LOCAL_PLAYER_IDS, clubeIdByApiId: LOCAL_CLUB_IDS, conferencia: false, lidoEm: "2026-10-25T21:00:00.000Z" })).toEqual([]);
+  });
+
   it("converte valores nulos em zero", () => {
     expect(byPlayer(103)).toMatchObject({ minutos: 30, gols: 0, desarmes: 0, amarelos: 0, defesas: 0, nota_api: null, substituto: true });
   });
