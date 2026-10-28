@@ -1,12 +1,14 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { type ReactNode, useEffect, useRef, useState } from "react";
 import { Download, Share, SquarePlus, X } from "lucide-react";
 import {
+  detectIosBrowser,
   detectPlatform,
   INSTALL_INVITE_DISMISSED_KEY,
+  type InstallInviteMode,
   installInviteMode,
-  isIosSafari,
+  type IosBrowser,
   isStandalone,
   parseDismissedAt,
 } from "@/lib/pwa";
@@ -33,27 +35,39 @@ function saveDismissedAt() {
   }
 }
 
+/** Primeiro passo no iOS: onde fica o Compartilhar em cada navegador. */
+const SHARE_STEP: Record<Exclude<IosBrowser, "embutido">, ReactNode> = {
+  safari: <>Toque em <strong className="text-foreground">Compartilhar</strong> na barra do Safari (ou em ··· e depois Compartilhar).</>,
+  chrome: <>Toque em <strong className="text-foreground">Compartilhar</strong> na barra de endereço do Chrome.</>,
+  edge: <>Toque no menu <strong className="text-foreground">···</strong> do Edge e depois em <strong className="text-foreground">Compartilhar</strong>.</>,
+  firefox: <>Abra o menu do Firefox e toque em <strong className="text-foreground">Compartilhar</strong>.</>,
+};
+
 /** Espaço extra no fim da página enquanto o convite fixo estiver visível, para ele não cobrir conteúdo. */
 const BODY_SPACING_CLASS = "pb-20";
 
 /**
  * Convite para instalar o app, fixo acima da navbar em todas as telas do app
- * até ser fechado ou o app ser instalado (JOA-77, JOA-156, JOA-159).
+ * até ser fechado ou o app ser instalado (JOA-77, JOA-156, JOA-159, JOA-162).
  */
 export function InstallInvite() {
-  const [mode, setMode] = useState<"prompt" | "ios" | null>(null);
+  const [mode, setMode] = useState<InstallInviteMode | null>(null);
+  const [iosBrowser, setIosBrowser] = useState<IosBrowser>("safari");
   const promptEvent = useRef<BeforeInstallPromptEvent | null>(null);
   const sheet = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
     const userAgent = navigator.userAgent;
+    const platform = detectPlatform(userAgent, navigator.maxTouchPoints);
+    const browser = platform === "ios" ? detectIosBrowser(userAgent) : null;
+    if (browser) setIosBrowser(browser);
     const base = {
       standalone: isStandalone(
         window.matchMedia("(display-mode: standalone)").matches,
         (navigator as Navigator & { standalone?: boolean }).standalone,
       ),
-      platform: detectPlatform(userAgent, navigator.maxTouchPoints),
-      iosSafari: isIosSafari(userAgent),
+      platform,
+      iosBrowser: browser,
       dismissedAt: readDismissedAt(),
     };
     setMode(installInviteMode({ ...base, hasInstallPrompt: false, now: Date.now() }));
@@ -106,11 +120,17 @@ export function InstallInvite() {
         <Download className="size-5 shrink-0 text-primary" aria-hidden="true" />
         <div className="grid flex-1">
           <strong className="text-sm font-bold">Instale o Escalou</strong>
-          <span className="text-xs text-muted-foreground">Abra direto da tela inicial, em tela cheia.</span>
+          <span className="text-xs text-muted-foreground">
+            {mode === "abrir-no-navegador"
+              ? "Abra este link no Safari ou no Chrome para instalar o Escalou."
+              : "Abra direto da tela inicial, em tela cheia."}
+          </span>
         </div>
-        <button type="button" onClick={install} className="h-9 rounded-xl bg-primary px-3.5 text-sm font-bold text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-          Instalar
-        </button>
+        {mode !== "abrir-no-navegador" && (
+          <button type="button" onClick={install} className="h-9 rounded-xl bg-primary px-3.5 text-sm font-bold text-primary-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+            Instalar
+          </button>
+        )}
         <button type="button" onClick={dismiss} aria-label="Dispensar convite para instalar" className="grid size-8 place-items-center rounded-lg text-muted-foreground hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
           <X className="size-4" aria-hidden="true" />
         </button>
@@ -128,7 +148,7 @@ export function InstallInvite() {
           <ol className="grid gap-3 text-sm text-muted-foreground">
             <li className="flex items-center gap-3">
               <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-secondary text-primary"><Share className="size-[18px]" aria-hidden="true" /></span>
-              <span>Toque em <strong className="text-foreground">Compartilhar</strong> na barra do Safari.</span>
+              <span>{SHARE_STEP[iosBrowser === "embutido" ? "safari" : iosBrowser]}</span>
             </li>
             <li className="flex items-center gap-3">
               <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-secondary text-primary"><SquarePlus className="size-[18px]" aria-hidden="true" /></span>

@@ -16,9 +16,23 @@ export function detectPlatform(userAgent: string, maxTouchPoints = 0): InstallPl
   return "outro";
 }
 
-/** No iOS só o Safari instala apps da web; Chrome, Firefox e apps com navegador embutido não. */
-export function isIosSafari(userAgent: string) {
-  return /Safari/i.test(userAgent) && !/CriOS|FxiOS|EdgiOS|OPiOS|GSA|Instagram|FBAN|FBAV|Line\//i.test(userAgent);
+/**
+ * Navegador no iOS. Desde o iOS 16.4, Safari, Chrome, Edge e Firefox adicionam
+ * à Tela de Início pelo menu Compartilhar; navegadores embutidos em outros apps
+ * (Instagram, Facebook, Google App etc.) não instalam (JOA-162).
+ */
+export type IosBrowser = "safari" | "chrome" | "edge" | "firefox" | "embutido";
+
+const IOS_IN_APP = /Instagram|FBAN|FBAV|FBIOS|Line\/|GSA\/|Twitter|LinkedInApp|musical_ly|BytedanceWebview|OPiOS|DuckDuckGo/i;
+
+export function detectIosBrowser(userAgent: string): IosBrowser {
+  if (IOS_IN_APP.test(userAgent)) return "embutido";
+  if (/EdgiOS/i.test(userAgent)) return "edge";
+  if (/CriOS/i.test(userAgent)) return "chrome";
+  if (/FxiOS/i.test(userAgent)) return "firefox";
+  // WebViews de outros apps costumam omitir "Version/" e "Safari/".
+  if (/Version\/[\d.]+.*Safari\//i.test(userAgent)) return "safari";
+  return "embutido";
 }
 
 export function isStandalone(matchesStandalone: boolean, navigatorStandalone?: boolean) {
@@ -28,21 +42,25 @@ export function isStandalone(matchesStandalone: boolean, navigatorStandalone?: b
 export type InstallInviteState = {
   standalone: boolean;
   platform: InstallPlatform;
-  iosSafari: boolean;
+  /** Só no iOS; `null` nas demais plataformas. */
+  iosBrowser: IosBrowser | null;
   hasInstallPrompt: boolean;
   dismissedAt: number | null;
   now: number;
 };
 
+export type InstallInviteMode = "prompt" | "ios" | "abrir-no-navegador";
+
 /**
  * O que oferecer: o prompt nativo (Android/Chrome), as instruções manuais
- * do Safari no iOS ou nada (já instalado, dispensado há pouco ou sem suporte).
+ * do iOS, o aviso para sair do navegador embutido de outro app, ou nada
+ * (já instalado, dispensado há pouco ou sem suporte).
  */
-export function installInviteMode(state: InstallInviteState): "prompt" | "ios" | null {
+export function installInviteMode(state: InstallInviteState): InstallInviteMode | null {
   if (state.standalone) return null;
   if (state.dismissedAt !== null && state.now - state.dismissedAt < INSTALL_INVITE_COOLDOWN_DAYS * 86_400_000) return null;
   if (state.hasInstallPrompt) return "prompt";
-  if (state.platform === "ios" && state.iosSafari) return "ios";
+  if (state.platform === "ios" && state.iosBrowser) return state.iosBrowser === "embutido" ? "abrir-no-navegador" : "ios";
   return null;
 }
 

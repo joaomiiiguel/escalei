@@ -6,22 +6,28 @@ import manifest from "@/app/manifest";
 import { InstallInvite } from "@/components/pwa/install-invite";
 import { Navbar } from "@/components/ui/navbar";
 import {
+  detectIosBrowser,
   detectPlatform,
   INSTALL_INVITE_COOLDOWN_DAYS,
   INSTALL_INVITE_DISMISSED_KEY,
   installInviteMode,
-  isIosSafari,
   isStandalone,
   parseDismissedAt,
 } from "@/lib/pwa";
 
 const IPHONE_SAFARI = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1";
 const IPHONE_CHROME = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/130.0 Mobile/15E148 Safari/604.1";
+const IPHONE_EDGE = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 EdgiOS/130.0.2849.80 Mobile/15E148 Safari/605.1.15";
+const IPHONE_FIREFOX = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) FxiOS/132.0 Mobile/15E148 Safari/605.1.15";
+const IPHONE_INSTAGRAM = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 Instagram 350.0.0.31.104 (iPhone15,2; iOS 18_0; pt_BR; pt; scale=3.00; 1179x2556; 642000000)";
+const IPHONE_FACEBOOK = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148 [FBAN/FBIOS;FBAV/480.0.0.40.108;FBBV/650000000;FBDV/iPhone15,2;FBMD/iPhone;FBSN/iOS;FBSV/18.0;FBSS/3;FBID/phone;FBLC/pt_BR;FBOP/5]";
+const IPHONE_GOOGLE_APP = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) GSA/340.0.689826579 Mobile/15E148 Safari/604.1";
+const IPHONE_WEBVIEW = "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148";
 const IPAD_DESKTOP_MODE = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Safari/605.1.15";
 const ANDROID_CHROME = "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Mobile Safari/537.36";
 
 const DAY = 86_400_000;
-const base = { standalone: false, platform: "android" as const, iosSafari: false, hasInstallPrompt: true, dismissedAt: null, now: 100 * DAY };
+const base = { standalone: false, platform: "android" as const, iosBrowser: null, hasInstallPrompt: true, dismissedAt: null, now: 100 * DAY };
 
 describe("manifest", () => {
   const data = manifest();
@@ -58,9 +64,18 @@ describe("plataforma", () => {
     expect(detectPlatform(ANDROID_CHROME)).toBe("android");
   });
 
-  it("só considera instalável no iOS o Safari", () => {
-    expect(isIosSafari(IPHONE_SAFARI)).toBe(true);
-    expect(isIosSafari(IPHONE_CHROME)).toBe(false);
+  it("reconhece os navegadores do iOS que instalam", () => {
+    expect(detectIosBrowser(IPHONE_SAFARI)).toBe("safari");
+    expect(detectIosBrowser(IPAD_DESKTOP_MODE)).toBe("safari");
+    expect(detectIosBrowser(IPHONE_CHROME)).toBe("chrome");
+    expect(detectIosBrowser(IPHONE_EDGE)).toBe("edge");
+    expect(detectIosBrowser(IPHONE_FIREFOX)).toBe("firefox");
+  });
+
+  it("trata navegadores embutidos em outros apps como não instaláveis", () => {
+    for (const userAgent of [IPHONE_INSTAGRAM, IPHONE_FACEBOOK, IPHONE_GOOGLE_APP, IPHONE_WEBVIEW]) {
+      expect(detectIosBrowser(userAgent), userAgent).toBe("embutido");
+    }
   });
 
   it("detecta o app aberto pela tela inicial", () => {
@@ -75,9 +90,20 @@ describe("convite para instalar", () => {
     expect(installInviteMode(base)).toBe("prompt");
   });
 
-  it("mostra instruções manuais no Safari do iOS", () => {
-    expect(installInviteMode({ ...base, platform: "ios", iosSafari: true, hasInstallPrompt: false })).toBe("ios");
-    expect(installInviteMode({ ...base, platform: "ios", iosSafari: false, hasInstallPrompt: false })).toBeNull();
+  it("mostra instruções manuais no Safari, Chrome, Edge e Firefox do iOS", () => {
+    for (const iosBrowser of ["safari", "chrome", "edge", "firefox"] as const) {
+      expect(installInviteMode({ ...base, platform: "ios", iosBrowser, hasInstallPrompt: false })).toBe("ios");
+    }
+  });
+
+  it("pede para abrir no Safari ou no Chrome quando está num navegador embutido", () => {
+    expect(installInviteMode({ ...base, platform: "ios", iosBrowser: "embutido", hasInstallPrompt: false })).toBe("abrir-no-navegador");
+  });
+
+  it("o aviso de navegador embutido também respeita instalação e intervalo", () => {
+    const ios = { ...base, platform: "ios" as const, iosBrowser: "embutido" as const, hasInstallPrompt: false };
+    expect(installInviteMode({ ...ios, standalone: true })).toBeNull();
+    expect(installInviteMode({ ...ios, dismissedAt: ios.now - DAY })).toBeNull();
   });
 
   it("some quando o app já está instalado ou sem suporte", () => {
@@ -135,6 +161,56 @@ describe("InstallInvite", () => {
     fireEvent.click(screen.getByRole("button", { name: "Dispensar convite para instalar" }));
     expect(screen.queryByRole("complementary", { name: "Instalar o app" })).toBeNull();
     expect(parseDismissedAt(window.localStorage.getItem(INSTALL_INVITE_DISMISSED_KEY))).not.toBeNull();
+  });
+});
+
+describe("InstallInvite no iPhone", () => {
+  const originalUserAgent = navigator.userAgent;
+  const setUserAgent = (value: string) => Object.defineProperty(window.navigator, "userAgent", { value, configurable: true });
+
+  beforeEach(() => {
+    window.localStorage.clear();
+    window.matchMedia = vi.fn().mockReturnValue({ matches: false }) as unknown as typeof window.matchMedia;
+    HTMLDialogElement.prototype.showModal ??= function (this: HTMLDialogElement) { this.setAttribute("open", ""); };
+  });
+  afterEach(() => {
+    cleanup();
+    setUserAgent(originalUserAgent);
+  });
+
+  it.each([
+    ["Safari", IPHONE_SAFARI, /na barra do Safari/],
+    ["Chrome", IPHONE_CHROME, /na barra de endereço do Chrome/],
+    ["Edge", IPHONE_EDGE, /menu ··· do Edge/],
+    ["Firefox", IPHONE_FIREFOX, /menu do Firefox/],
+  ])("no %s mostra o convite e os passos do próprio navegador", (_name, userAgent, step) => {
+    setUserAgent(userAgent);
+    render(<InstallInvite />);
+    expect(screen.getByRole("complementary", { name: "Instalar o app" })).toBeTruthy();
+
+    fireEvent.click(screen.getByRole("button", { name: "Instalar" }));
+    const sheet = screen.getByRole("dialog", { name: "Adicionar à Tela de Início" });
+    expect(sheet.textContent).toMatch(step);
+    expect(sheet.textContent).toMatch(/Adicionar à Tela de Início e confirme/);
+  });
+
+  it.each([["Instagram", IPHONE_INSTAGRAM], ["Facebook", IPHONE_FACEBOOK]])("no %s pede para abrir no Safari ou no Chrome, sem botão de instalar", (_name, userAgent) => {
+    setUserAgent(userAgent);
+    render(<InstallInvite />);
+    const invite = screen.getByRole("complementary", { name: "Instalar o app" });
+    expect(invite.textContent).toContain("Abra este link no Safari ou no Chrome para instalar o Escalou.");
+    expect(screen.queryByRole("button", { name: "Instalar" })).toBeNull();
+
+    fireEvent.click(screen.getByRole("button", { name: "Dispensar convite para instalar" }));
+    expect(screen.queryByRole("complementary", { name: "Instalar o app" })).toBeNull();
+    expect(parseDismissedAt(window.localStorage.getItem(INSTALL_INVITE_DISMISSED_KEY))).not.toBeNull();
+  });
+
+  it("não aparece no iPhone com o app já instalado", () => {
+    setUserAgent(IPHONE_CHROME);
+    window.matchMedia = vi.fn().mockReturnValue({ matches: true }) as unknown as typeof window.matchMedia;
+    render(<InstallInvite />);
+    expect(screen.queryByRole("complementary", { name: "Instalar o app" })).toBeNull();
   });
 });
 
