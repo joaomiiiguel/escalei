@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { ArrowLeft, Crown, UserMinus, UsersRound } from "lucide-react";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { Button } from "@/components/shadcn/button";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/admin-access";
 import { addGroupInviteEmail, addGroupMember, deactivateGroup, removeGroupMember } from "../../actions";
 import { InviteLink } from "../invite-link";
 
@@ -18,11 +18,7 @@ function first<T>(value: T | T[] | null) {
 
 export default async function AdminGroupDetail({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ adicionado?: string; removido?: string; convite_email?: string; erro?: string }> }) {
   const [{ id }, query] = await Promise.all([params, searchParams]);
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) redirect("/entrar");
-  const { data: adminAccess } = await supabase.from("administradores").select("usuario_id").eq("usuario_id", user.id).maybeSingle();
-  if (!adminAccess) redirect("/");
+  const { supabase, user } = await requireAdmin();
 
   const admin = createAdminClient();
   const [{ data: groupData }, { data: membersData }, { data: profilesData }, { data: emailInvites }] = await Promise.all([

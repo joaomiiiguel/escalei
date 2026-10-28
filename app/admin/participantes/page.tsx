@@ -1,5 +1,6 @@
 import { Layers3, UsersRound } from "lucide-react";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { requireAdmin } from "@/lib/admin-access";
 
 type Participant = {
     usuario_id: string;
@@ -15,6 +16,7 @@ function first<T>(value: T | T[] | null) {
 }
 
 export default async function AdminParticipants() {
+    await requireAdmin();
     const admin = createAdminClient();
 
     const [

@@ -4,27 +4,13 @@ import { randomBytes } from "node:crypto";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/admin-access";
 
 const INVITE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 function createInviteCode() {
   return Array.from(randomBytes(8), (byte) => INVITE_ALPHABET[byte % INVITE_ALPHABET.length]).join("");
-}
-
-async function requireAdmin() {
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) redirect("/entrar");
-
-  const { data: admin } = await supabase
-    .from("administradores")
-    .select("usuario_id")
-    .eq("usuario_id", user.id)
-    .maybeSingle();
-
-  if (!admin) redirect("/");
-  return { supabase, user };
 }
 
 export async function createGroup(formData: FormData) {
