@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { addUserToInvitedLeague, canUserJoinInvite, getActiveInvite, isInviteToken } from "@/lib/invites";
 import { hasActiveLeagueMembership } from "@/lib/league-access";
 import { trackServerEvent } from "@/lib/analytics/server";
+import { TERMOS_VERSAO } from "@/lib/legal";
 
 export async function finishOnboarding(formData: FormData) {
     const apelido = String(formData.get("apelido") ?? "").trim();
@@ -52,7 +53,7 @@ export async function finishOnboarding(formData: FormData) {
         apelido,
         clube_coracao_id: clube,
         telefone: cookieStore.get("escalou_verified_phone")?.value ?? cookieStore.get("escalei_verified_phone")?.value ?? null,
-        termos_versao: "v1",
+        termos_versao: TERMOS_VERSAO,
         termos_aceitos_em: new Date().toISOString(),
       }, { onConflict: "id" })
       .select("id")

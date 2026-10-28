@@ -235,6 +235,7 @@ export default function BetaLandingPage() {
             <a href="#como-funciona">Como funciona</a>
             <Link href="/termos">Termos</Link>
             <Link href="/privacidade">Privacidade</Link>
+            <Link href="/regulamento">Regulamento</Link>
           </nav>
         </div>
       </footer>
