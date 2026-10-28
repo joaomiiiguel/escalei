@@ -32,7 +32,7 @@ vi.mock("lucide-react", () => {
   const icons = [
     "ArrowLeft", "Users", "Clock3", "Check", "LockKeyhole", "Pencil", "Trophy",
     "CalendarDays", "ArrowDownUp", "Search", "TriangleAlert", "X",
-    "Download", "Share", "SquarePlus"
+    "Download", "Share", "SquarePlus", "CircleHelp", "ShieldCheck"
   ];
   const mocked: Record<string, any> = {};
   for (const icon of icons) {

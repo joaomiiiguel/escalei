@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { buildScouts, type ApiEvent, type ApiPlayerGroup } from "@/supabase/functions/_shared/scouts";
 import players from "./fixtures/api-football/fixture-1001-players.json";
 import events from "./fixtures/api-football/fixture-1001-events.json";
+import palmeirasBragantino from "./fixtures/api-football/2026/rodada-32/fixture-1492426-players.json";
 
 /** Ids locais dos jogadores das fixtures (o 9999 fica fora do catálogo de propósito). */
 const LOCAL_PLAYER_IDS = new Map([[9001, 101], [9002, 102], [9003, 103], [9004, 104], [9005, 105], [9006, 106]]);
@@ -55,6 +56,24 @@ describe("scouts a partir da API-Football", () => {
     expect(byPlayer(102)).toMatchObject({ gols: 1, desarmes: 2, amarelos: 1 });
     expect(byPlayer(104)).toMatchObject({ gols: 1, finalizacoes: 4, finalizacoes_no_gol: 2, impedimentos: 1 });
     expect(byPlayer(105)).toMatchObject({ vermelhos: 1, faltas_cometidas: 2 });
+  });
+
+  it("lê pênalti cometido com a grafia da API (`commited`) e aceita a forma corrigida", () => {
+    // Resposta real: Guzmán Rodríguez (RB Bragantino) cometeu 2 pênaltis em Palmeiras 2 × 0 RB Bragantino.
+    const rows = buildScouts({
+      jogo: { id: 1492426, rodada_id: 1, clube_casa_id: 1, clube_fora_id: 2, gols_casa: 2, gols_fora: 0 },
+      playerGroups: palmeirasBragantino.response as ApiPlayerGroup[],
+      events: [],
+      jogadorIdByApiId: new Map([[152410, 1]]),
+      clubeIdByApiId: new Map([[121, 1], [794, 2]]),
+      conferencia: false,
+      lidoEm: "2026-10-25T21:00:00.000Z",
+    });
+    expect(rows).toEqual([expect.objectContaining({ jogador_id: 1, penaltis_cometidos: 2 })]);
+
+    const [group] = players.response as ApiPlayerGroup[];
+    const corrected = { ...group, players: group.players.map((player) => ({ ...player, statistics: [{ ...player.statistics[0], penalty: { committed: 1 } }] })) };
+    expect(buildScouts({ jogo: GAME, playerGroups: [corrected], events: [], jogadorIdByApiId: LOCAL_PLAYER_IDS, clubeIdByApiId: LOCAL_CLUB_IDS, conferencia: false, lidoEm: "2026-10-25T21:00:00.000Z" })[0].penaltis_cometidos).toBe(1);
   });
 
   it("conta gol contra pelos eventos", () => {

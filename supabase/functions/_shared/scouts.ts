@@ -20,7 +20,8 @@ export type ApiPlayerStatistic = {
     fouls?: { drawn?: number | null; committed?: number | null };
     offsides?: number | null;
     cards?: { yellow?: number | null; red?: number | null };
-    penalty?: { won?: number | null; committed?: number | null; missed?: number | null; saved?: number | null };
+    /** A API grava `commited`, com um "t" só (diferente de `fouls.committed`). */
+    penalty?: { won?: number | null; commited?: number | null; committed?: number | null; missed?: number | null; saved?: number | null };
   }>;
 };
 
@@ -104,7 +105,7 @@ export function buildScouts({ jogo, playerGroups, events, jogadorIdByApiId, club
       defesas: numberOrZero(stat.goals?.saves),
       gols_sofridos: numberOrZero(stat.goals?.conceded),
       penaltis_sofridos: numberOrZero(stat.penalty?.won),
-      penaltis_cometidos: numberOrZero(stat.penalty?.committed),
+      penaltis_cometidos: numberOrZero(stat.penalty?.commited ?? stat.penalty?.committed),
       penaltis_perdidos: numberOrZero(stat.penalty?.missed),
       penaltis_defendidos: numberOrZero(stat.penalty?.saved),
       gols_contra: ownGoalsByPlayerApiId.get(player.player.id) ?? 0,

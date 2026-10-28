@@ -3,15 +3,15 @@
 import { CircleHelp, ShieldCheck, Trophy, Users, X } from "lucide-react";
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
+import { formatScoringPoints, SCORING_NOTES, SCORING_TABLE } from "@/lib/scoring-table";
 
 const steps = [
   ["1", "Monte seu time", "Comece com C$ 60, escolha 11 jogadores e respeite o seu saldo."],
-  ["2", "Salve antes da trava", "Você pode mudar sua escalação até o início do primeiro jogo da rodada."],
+  ["2", "Salve antes da trava", "Você pode mudar sua escalação até 1 hora antes do primeiro jogo da rodada."],
   ["3", "Acompanhe a rodada", "Os pontos dos seus jogadores são lançados quando cada jogo termina."],
   ["4", "Compare com os amigos", "Entre em ligas e acompanhe sua posição no ranking da rodada."],
 ];
 
-const scoring = [["Gol", "+8,0"], ["Assistência", "+5,0"], ["Finalização no gol", "+1,2"], ["Finalização para fora", "+0,8"], ["Desarme", "+1,5"], ["Falta sofrida", "+0,5"], ["Defesa (GOL)", "+1,3"], ["Defesa de pênalti (GOL)", "+7,0"], ["Jogo sem sofrer gol (GOL, DEF)", "+5,0"], ["Gol sofrido (GOL)", "−1,0"], ["Falta cometida", "−0,3"], ["Impedimento", "−0,1"], ["Cartão amarelo", "−1,0"], ["Cartão vermelho", "−3,0"], ["Pênalti perdido", "−4,0"], ["Gol contra", "−3,0"]];
 
 export function HowItWorksModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -58,10 +58,13 @@ export function HowItWorksModal() {
               <div className="flex items-center gap-2">
                 <Trophy className="size-4 text-primary" />
                 <h3 className="text-sm font-extrabold text-foreground">Tabela de pontuação</h3></div>
-              <span className="text-[9px] font-bold text-muted-foreground">PONTOS</span></div>{scoring.map(([label, points]) => (
-                <div className="flex items-center justify-between border-b border-border/70 px-3 py-1.5 last:border-0" key={label}>
+              <span className="text-[9px] font-bold text-muted-foreground">PONTOS</span></div>{SCORING_TABLE.map(({ scout, label, pontos }) => (
+                <div className="flex items-center justify-between border-b border-border/70 px-3 py-1.5 last:border-0" key={scout}>
                   <span className="text-xs text-foreground">{label}</span>
-                  <strong className={`text-xs ${points.startsWith("+") ? "text-primary" : "text-muted-foreground"}`}>{points}</strong></div>))}
+                  <strong className={`text-xs ${pontos > 0 ? "text-primary" : "text-muted-foreground"}`}>{formatScoringPoints(pontos)}</strong></div>))}
+            <ul className="grid gap-1 border-t border-border px-3 py-2.5">{SCORING_NOTES.map((note) => (
+              <li className="text-[11px] leading-4 text-muted-foreground" key={note}>{note}</li>))}
+            </ul>
           </section>
           <section className="mt-4">
             <h3 className="mb-2 text-sm font-extrabold text-foreground">Detalhes que importam</h3><div className="grid gap-2">
@@ -69,7 +72,7 @@ export function HowItWorksModal() {
                 <ShieldCheck className="size-6 shrink-0 text-primary" />
                 <div>
                   <h4 className="font-bold text-foreground">A trava</h4>
-                  <p className="mt-0.5 text-xs leading-4 text-muted-foreground">A escalação fecha no início do primeiro jogo. Depois disso não dá para mudar.</p>
+                  <p className="mt-0.5 text-xs leading-4 text-muted-foreground">A escalação fecha 1 hora antes do primeiro jogo da rodada. Depois disso não dá para mudar.</p>
                 </div>
               </div>
               <div className="flex gap-3 rounded-xl bg-card p-3 items-center">

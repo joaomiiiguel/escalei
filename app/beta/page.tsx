@@ -153,7 +153,7 @@ export default function BetaLandingPage() {
         </div>
         <div className="mt-5 flex gap-3 rounded-2xl border border-[#ffd54a55] bg-[#ffd54a14] p-4 text-sm font-extrabold leading-6 text-[#ffd54a]">
           <Clock3 className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
-          A escalação trava no início do primeiro jogo da rodada.
+          A escalação trava 1 hora antes do primeiro jogo da rodada.
         </div>
       </Section>
 
