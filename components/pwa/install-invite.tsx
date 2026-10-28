@@ -33,7 +33,13 @@ function saveDismissedAt() {
   }
 }
 
-/** Banner discreto na Início convidando a instalar o app (JOA-77 / JOA-156). */
+/** Espaço extra no fim da página enquanto o convite fixo estiver visível, para ele não cobrir conteúdo. */
+const BODY_SPACING_CLASS = "pb-20";
+
+/**
+ * Convite para instalar o app, fixo acima da navbar em todas as telas do app
+ * até ser fechado ou o app ser instalado (JOA-77, JOA-156, JOA-159).
+ */
 export function InstallInvite() {
   const [mode, setMode] = useState<"prompt" | "ios" | null>(null);
   const promptEvent = useRef<BeforeInstallPromptEvent | null>(null);
@@ -66,6 +72,12 @@ export function InstallInvite() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!mode) return;
+    document.body.classList.add(BODY_SPACING_CLASS);
+    return () => document.body.classList.remove(BODY_SPACING_CLASS);
+  }, [mode]);
+
   if (!mode) return null;
 
   const dismiss = () => {
@@ -90,7 +102,7 @@ export function InstallInvite() {
 
   return (
     <>
-      <aside aria-label="Instalar o app" className="flex items-center gap-3 rounded-2xl border border-border bg-secondary px-3.5 py-3">
+      <aside aria-label="Instalar o app" className="mb-3 flex items-center gap-3 rounded-2xl border border-border bg-secondary px-3.5 py-3 shadow-lg">
         <Download className="size-5 shrink-0 text-primary" aria-hidden="true" />
         <div className="grid flex-1">
           <strong className="text-sm font-bold">Instale o Escalou</strong>
