@@ -1,0 +1,295 @@
+{
+  "get": "fixtures/events",
+  "parameters": {
+    "fixture": "1492422"
+  },
+  "results": 13,
+  "response": [
+    {
+      "time": {
+        "elapsed": 26,
+        "extra": null
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "player": {
+        "id": 414405,
+        "name": "K. Arroyo"
+      },
+      "assist": {
+        "id": 365287,
+        "name": "Wesley"
+      },
+      "type": "subst",
+      "detail": "Substitution 1",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 45,
+        "extra": null
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "player": {
+        "id": 10089,
+        "name": "Fabricio Bruno"
+      },
+      "assist": {
+        "id": 25618,
+        "name": "Matheus Pereira"
+      },
+      "type": "Goal",
+      "detail": "Normal Goal",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 46,
+        "extra": null
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "player": {
+        "id": 10310,
+        "name": "Ze Ricardo"
+      },
+      "assist": {
+        "id": 5211,
+        "name": "L. Picco"
+      },
+      "type": "subst",
+      "detail": "Substitution 1",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 50,
+        "extra": null
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "player": {
+        "id": 10388,
+        "name": "Patrick"
+      },
+      "assist": {
+        "id": null,
+        "name": null
+      },
+      "type": "Card",
+      "detail": "Yellow Card",
+      "comments": "Foul"
+    },
+    {
+      "time": {
+        "elapsed": 62,
+        "extra": null
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "player": {
+        "id": 504950,
+        "name": "Ze Lucas"
+      },
+      "assist": {
+        "id": 10494,
+        "name": "Matheus Henrique"
+      },
+      "type": "subst",
+      "detail": "Substitution 2",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 62,
+        "extra": null
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "player": {
+        "id": 197073,
+        "name": "Eduardo Melo"
+      },
+      "assist": {
+        "id": 355193,
+        "name": "David Braga"
+      },
+      "type": "subst",
+      "detail": "Substitution 2",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 62,
+        "extra": null
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "player": {
+        "id": 10388,
+        "name": "Patrick"
+      },
+      "assist": {
+        "id": 9962,
+        "name": "Vitor Bueno"
+      },
+      "type": "subst",
+      "detail": "Substitution 3",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 79,
+        "extra": null
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "player": {
+        "id": 10114,
+        "name": "Zé Ivaldo"
+      },
+      "assist": {
+        "id": null,
+        "name": null
+      },
+      "type": "Card",
+      "detail": "Yellow Card",
+      "comments": "Foul"
+    },
+    {
+      "time": {
+        "elapsed": 84,
+        "extra": null
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "player": {
+        "id": 25398,
+        "name": "William Furtado"
+      },
+      "assist": {
+        "id": 2411,
+        "name": "Fagner"
+      },
+      "type": "subst",
+      "detail": "Substitution 3",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 84,
+        "extra": null
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "player": {
+        "id": 30408,
+        "name": "Gerson"
+      },
+      "assist": {
+        "id": 9445,
+        "name": "Bruno Rodrigues"
+      },
+      "type": "subst",
+      "detail": "Substitution 4",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 86,
+        "extra": null
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "player": {
+        "id": 54894,
+        "name": "Jaja"
+      },
+      "assist": {
+        "id": 631345,
+        "name": "Tico"
+      },
+      "type": "subst",
+      "detail": "Substitution 4",
+      "comments": null
+    },
+    {
+      "time": {
+        "elapsed": 90,
+        "extra": 4
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "player": {
+        "id": 268877,
+        "name": "Marcelinho"
+      },
+      "assist": {
+        "id": null,
+        "name": null
+      },
+      "type": "Card",
+      "detail": "Yellow Card",
+      "comments": "Foul"
+    },
+    {
+      "time": {
+        "elapsed": 90,
+        "extra": null
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "player": {
+        "id": 9882,
+        "name": "Ze Welison"
+      },
+      "assist": {
+        "id": 686109,
+        "name": "D. M. Gonzalez A."
+      },
+      "type": "subst",
+      "detail": "Substitution 5",
+      "comments": null
+    }
+  ]
+}

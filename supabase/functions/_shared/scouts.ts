@@ -62,9 +62,21 @@ export function buildScouts({ jogo, playerGroups, events, jogadorIdByApiId, club
     }
   }
 
-  return playerGroups.flatMap((group) => group.players.flatMap((player) => {
+  // A API às vezes devolve um dos times do jogo com outro id em /fixtures/players
+  // (ex.: Chapecoense como 22722, sem nome, em vez de 132). Se só um time ficou
+  // sem correspondência, ele é o clube do jogo que sobrou.
+  const fixtureClubs = [jogo.clube_casa_id, jogo.clube_fora_id];
+  const mappedClubs = playerGroups.map((group) => {
+    const clubId = clubeIdByApiId.get(group.team.id);
+    return clubId !== undefined && fixtureClubs.includes(clubId) ? clubId : undefined;
+  });
+  const unmatchedClubs = fixtureClubs.filter((clubId) => !mappedClubs.includes(clubId));
+  const unmatchedGroups = mappedClubs.filter((clubId) => clubId === undefined).length;
+  const clubIds = mappedClubs.map((clubId) => clubId ?? (unmatchedClubs.length === 1 && unmatchedGroups === 1 ? unmatchedClubs[0] : undefined));
+
+  return playerGroups.flatMap((group, groupIndex) => group.players.flatMap((player) => {
     const localPlayerId = jogadorIdByApiId.get(player.player.id);
-    const localClubId = clubeIdByApiId.get(group.team.id);
+    const localClubId = clubIds[groupIndex];
     const stat = player.statistics[0];
     if (!localPlayerId || !localClubId || !stat) return [];
     const minutes = numberOrZero(stat.games?.minutes);

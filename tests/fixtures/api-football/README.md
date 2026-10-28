@@ -25,3 +25,15 @@ Respostas **reais** gravadas em 27/10/2026 (plano Pro), sem a chave da API:
 | `teams.json` | `/teams?league=71&season=2026` |
 | `players-page-1.json` | `/players?league=71&season=2026&page=1` (1 de 44 páginas) |
 | `fixtures.json` | `/fixtures?league=71&season=2026`, reduzido aos campos usados (id, data, status, rodada, clubes, placar) |
+
+### Rodada 32 (`2026/rodada-32/`)
+
+Respostas **reais** de `/fixtures/players` e `/fixtures/events` dos 10 jogos da
+rodada 32, gravadas em 28/10/2026 com `npm run record:round -- 2026 32`
+(20 requisições), sem a chave da API. Usadas no teste ponta a ponta
+`tests/db/rodada-ponta-a-ponta.test.ts`.
+
+Particularidade real: em `fixture-1492420-players.json` (Chapecoense × Fluminense)
+a API devolve a Chapecoense com o id de time `22722` e nome nulo, diferente do id
+`132` de `/teams` e `/fixtures`. `buildScouts` atribui esse time ao clube do jogo
+que ficou sem correspondência.
