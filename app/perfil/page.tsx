@@ -7,6 +7,7 @@ import {
   LogOut,
   Mail,
   Moon,
+  ScrollText,
   Shield,
   Shirt,
   Trash2,
@@ -155,8 +156,9 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
 
         <Section title="SOBRE">
           <Link href="/como-funciona" className="flex min-h-14 items-center gap-3 border-b border-border px-3.5 !text-foreground transition hover:bg-muted"><BookOpen className="size-[19px] !text-muted-foreground" aria-hidden="true" /><span className="flex-1 text-[14.5px] font-semibold">Como funciona</span><ChevronRight className="size-[18px] text-muted-foreground" aria-hidden="true" /></Link>
-          <details className="group border-b border-border last:border-b-0"><summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-3.5 text-foreground [&::-webkit-details-marker]:hidden"><FileText className="size-[19px] text-muted-foreground" aria-hidden="true" /><span className="flex-1 text-[14.5px] font-semibold">Termos de uso</span><ChevronRight className="size-[18px] text-muted-foreground transition group-open:rotate-90" aria-hidden="true" /></summary><p className="px-3.5 pb-3 text-xs leading-5 text-muted-foreground">Termos aceitos{profile.termos_aceitos_em ? ` em ${new Intl.DateTimeFormat("pt-BR").format(new Date(profile.termos_aceitos_em))}` : ""}{profile.termos_versao ? ` · versão ${profile.termos_versao}` : ""}.</p></details>
-          <details className="group"><summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-3.5 text-foreground [&::-webkit-details-marker]:hidden"><Shield className="size-[19px] text-muted-foreground" aria-hidden="true" /><span className="flex-1 text-[14.5px] font-semibold">Privacidade</span><ChevronRight className="size-[18px] text-muted-foreground transition group-open:rotate-90" aria-hidden="true" /></summary><p className="px-3.5 pb-3 text-xs leading-5 text-muted-foreground">Seus dados de perfil e escalações ficam vinculados à sua conta. Você pode solicitar a exclusão permanentemente abaixo.</p></details>
+          <Link href="/termos" className="flex min-h-14 items-center gap-3 border-b border-border px-3.5 !text-foreground transition hover:bg-muted"><FileText className="size-[19px] !text-muted-foreground" aria-hidden="true" /><span className="grid flex-1"><span className="text-[14.5px] font-semibold">Termos de uso</span>{profile.termos_aceitos_em && <span className="text-xs text-muted-foreground">Aceitos em {new Intl.DateTimeFormat("pt-BR").format(new Date(profile.termos_aceitos_em))}{profile.termos_versao ? ` · versão ${profile.termos_versao}` : ""}</span>}</span><ChevronRight className="size-[18px] text-muted-foreground" aria-hidden="true" /></Link>
+          <Link href="/privacidade" className="flex min-h-14 items-center gap-3 border-b border-border px-3.5 !text-foreground transition hover:bg-muted"><Shield className="size-[19px] !text-muted-foreground" aria-hidden="true" /><span className="flex-1 text-[14.5px] font-semibold">Privacidade</span><ChevronRight className="size-[18px] text-muted-foreground" aria-hidden="true" /></Link>
+          <Link href="/regulamento" className="flex min-h-14 items-center gap-3 px-3.5 !text-foreground transition hover:bg-muted"><ScrollText className="size-[19px] !text-muted-foreground" aria-hidden="true" /><span className="flex-1 text-[14.5px] font-semibold">Regulamento do teste</span><ChevronRight className="size-[18px] text-muted-foreground" aria-hidden="true" /></Link>
         </Section>
 
         <Section title="SESSÃO">
