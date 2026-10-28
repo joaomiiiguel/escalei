@@ -39,10 +39,6 @@ export default async function Home() {
   // Se não tiver perfil redireciona para onboarding
   if (!profile) redirect("/onboarding");
 
-  // Se for admin redireciona para admin
-  const { data: admin } = await supabase.from("administradores").select("usuario_id").eq("usuario_id", user.id).maybeSingle();
-  if (admin) redirect("/admin/grupos");
-
   // Puxa a rodada atual
   const { data: currentRound, error: currentRoundError } = await getCurrentRound<Rodada>(
     supabase,
