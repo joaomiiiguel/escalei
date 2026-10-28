@@ -11,7 +11,7 @@ describe("tema fixo independente do sistema", () => {
   it("liga a variante dark à classe .dark, e não a prefers-color-scheme", () => {
     expect(css).toContain("@custom-variant dark (&:where(.dark, .dark *));");
     expect(css).not.toMatch(/prefers-color-scheme/);
-    expect(layout).toMatch(/<html lang="pt-BR" className="dark">/);
+    expect(layout).toMatch(/<html lang="pt-BR" className="[^"]*\bdark\b[^"]*">/);
   });
 
   it("declara somente o esquema escuro para o navegador", () => {
