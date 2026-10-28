@@ -14,7 +14,9 @@ export const metadata: Metadata = {
     icons: { icon: "/icons/icon-192.png", apple: "/icons/apple-touch-icon.png" },
 };
 // Tema fixo: evita que o modo claro/escuro do sistema, iOS ou Android altere as cores.
-export const viewport: Viewport = { themeColor: "#050505", colorScheme: "dark" };
+// `minimumScale: 1`: se algum elemento passar da largura da tela, o Chrome do Android
+// não reduz o zoom da página inteira para caber (JOA-161). O zoom com pinça continua liberado.
+export const viewport: Viewport = { width: "device-width", initialScale: 1, minimumScale: 1, themeColor: "#050505", colorScheme: "dark" };
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
@@ -42,8 +44,8 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     }
 
     return (
-        <html lang="pt-BR" className="dark">
-            <body className="min-h-screen">
+        <html lang="pt-BR" className="dark overflow-x-hidden">
+            <body className="min-h-screen overflow-x-clip">
                 <AnalyticsProvider userId={user?.id ?? null} />
                 <PwaSetup />
                 {children}
