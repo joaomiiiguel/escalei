@@ -3,8 +3,10 @@ import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/shadcn/button";
 import { Input } from "@/components/ui/input";
 import { createGroup } from "../../actions";
+import { requireAdmin } from "@/lib/admin-access";
 
 export default async function NewAdminGroup({ searchParams }: { searchParams: Promise<{ erro?: string }> }) {
+  await requireAdmin();
   const { erro } = await searchParams;
 
   return <section className="w-full max-w-5xl">

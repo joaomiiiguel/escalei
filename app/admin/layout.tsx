@@ -1,5 +1,4 @@
-import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/admin-access";
 import { signOut } from "./actions";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/ui/logo";
@@ -8,9 +7,7 @@ import { AdminNav } from "./admin-nav";
 import { AdminMobileMenu } from "./admin-mobile-menu";
 
 export default async function AdminLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-    const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) redirect("/entrar");
+    const { supabase, user } = await requireAdmin();
 
     const [{ data: profile }] = await Promise.all([
         supabase.from("perfis").select("apelido").eq("id", user.id).maybeSingle(),

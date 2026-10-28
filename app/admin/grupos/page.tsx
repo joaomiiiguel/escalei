@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Layers3, Pencil, Plus, UsersRound } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/admin-access";
 import { InviteLink } from "./invite-link";
 
 type Group = {
@@ -20,7 +20,7 @@ function first<T>(value: T | T[] | null) {
 }
 
 export default async function AdminGroups({ searchParams }: { searchParams: Promise<{ inativado?: string; erro?: string }> }) {
-  const supabase = await createClient();
+  const { supabase } = await requireAdmin();
 
   const [{ data: groups }, params] = await Promise.all([
     supabase.from("ligas").select("id, nome, icone, temporada, token_convite, codigo_convite, criada_em, ligas_membros(count), perfis!ligas_dono_id_fkey(apelido)").is("arquivada_em", null).order("criada_em", { ascending: false }),
