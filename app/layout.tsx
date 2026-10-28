@@ -2,10 +2,17 @@ import { Navbar } from "@/components/ui/navbar";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentRound } from "@/lib/current-round";
 import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
+import { PwaSetup } from "@/components/pwa/pwa-setup";
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 
-export const metadata: Metadata = { title: "Escalou - Mostre que você entende de futebol", description: "Fantasy futebol" };
+export const metadata: Metadata = {
+    title: "Escalou - Mostre que você entende de futebol",
+    description: "Fantasy futebol",
+    applicationName: "Escalou",
+    appleWebApp: { capable: true, title: "Escalou", statusBarStyle: "black" },
+    icons: { icon: "/icons/icon-192.png", apple: "/icons/apple-touch-icon.png" },
+};
 // Tema fixo: evita que o modo claro/escuro do sistema, iOS ou Android altere as cores.
 export const viewport: Viewport = { themeColor: "#050505", colorScheme: "dark" };
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -38,6 +45,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         <html lang="pt-BR" className="dark">
             <body className="min-h-screen">
                 <AnalyticsProvider userId={user?.id ?? null} />
+                <PwaSetup />
                 {children}
                 <Navbar hasCurrentTeam={hasCurrentTeam} isRoundInProgress={isRoundInProgress} />
             </body>
