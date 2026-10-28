@@ -20,24 +20,20 @@
  */
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { ApiAccessError, describeApiErrors, finishSyncExecution, QuotaReservedError, startSyncExecution } from "../_shared/api-football.ts";
-import { STATUS_BY_API } from "../_shared/calendar.ts";
-import { chunk, DEFAULT_MAX_SCORING_ATTEMPTS, isDueForScoring } from "../_shared/retry.ts";
+import { chunk, DEFAULT_MAX_SCORING_ATTEMPTS } from "../_shared/retry.ts";
+import {
+  checkAtFor,
+  dueRoundTransitions,
+  gamesToPoll,
+  gamesToScore,
+  gameUpdateFromFixture,
+  interruptedToSettle,
+  isRoundResolved,
+  type FlowFixture as Fixture,
+  type FlowGame as Game,
+} from "../_shared/round-flow.ts";
 
 type Round = { id: number; numero: number; status: string; abre_em: string | null; trava_em: string; fechamento_simulado_em: string | null };
-type Game = {
-  id: number;
-  api_football_id: number | null;
-  status: string;
-  inicio_em: string;
-  pontuado_em: string | null;
-  conferido_em: string | null;
-  pontuacao_tentativas: number | null;
-  pontuacao_proxima_tentativa_em: string | null;
-};
-type Fixture = { fixture?: { id?: number; status?: { short?: string } }; goals?: { home?: number | null; away?: number | null } };
-
-const CHECK_DELAY_MINUTES = 60;
-const INTERRUPTED = new Set(["ADIADO", "CANCELADO"]);
 
 Deno.serve(async (request) => {
   if (request.method !== "POST") return Response.json({ error: "Use POST." }, { status: 405 });
@@ -60,19 +56,19 @@ Deno.serve(async (request) => {
 
   // 1 e 2: abertura e trava pelos horários oficiais.
   for (const round of rounds) {
-    if (round.status === "AGENDADA" && round.abre_em && now >= new Date(round.abre_em)) {
-      const { error } = await db.from("rodadas").update({ status: "ABERTA" }).eq("id", round.id).eq("status", "AGENDADA");
-      if (error) return Response.json({ error: `Não foi possível abrir a rodada ${round.numero}.` }, { status: 500 });
-      const { error: rankingError } = await db.rpc("fn_inicializar_ranking_rodada", { p_rodada_id: round.id });
-      if (rankingError) return Response.json({ error: `Não foi possível inicializar o ranking da rodada ${round.numero}.` }, { status: 500 });
-      round.status = "ABERTA";
-      summary.abertas.push(round.numero);
-    }
-    if (round.status === "ABERTA" && now >= new Date(round.trava_em)) {
-      const { error } = await db.from("rodadas").update({ status: "EM_ANDAMENTO" }).eq("id", round.id).eq("status", "ABERTA");
-      if (error) return Response.json({ error: `Não foi possível travar a rodada ${round.numero}.` }, { status: 500 });
-      round.status = "EM_ANDAMENTO";
-      summary.travadas.push(round.numero);
+    for (const next of dueRoundTransitions(round, now)) {
+      if (next === "ABERTA") {
+        const { error } = await db.from("rodadas").update({ status: "ABERTA" }).eq("id", round.id).eq("status", "AGENDADA");
+        if (error) return Response.json({ error: `Não foi possível abrir a rodada ${round.numero}.` }, { status: 500 });
+        const { error: rankingError } = await db.rpc("fn_inicializar_ranking_rodada", { p_rodada_id: round.id });
+        if (rankingError) return Response.json({ error: `Não foi possível inicializar o ranking da rodada ${round.numero}.` }, { status: 500 });
+        summary.abertas.push(round.numero);
+      } else {
+        const { error } = await db.from("rodadas").update({ status: "EM_ANDAMENTO" }).eq("id", round.id).eq("status", "ABERTA");
+        if (error) return Response.json({ error: `Não foi possível travar a rodada ${round.numero}.` }, { status: 500 });
+        summary.travadas.push(round.numero);
+      }
+      round.status = next;
     }
   }
 
@@ -113,7 +109,7 @@ async function advanceLiveRound(
   if (!games) return Response.json({ error: `Não foi possível ler os jogos da rodada ${round.numero}.` }, { status: 500 });
 
   // 3: só consulta a API para jogos que já começaram e ainda não terminaram.
-  const live = games.filter((game) => game.api_football_id && ["A_JOGAR", "EM_ANDAMENTO"].includes(game.status) && new Date(game.inicio_em) <= now);
+  const live = gamesToPoll(games, now);
   if (live.length) {
     const execution = await startSyncExecution(db, context.apiKey, "JOGO", `api-football:rodada-${round.numero}:status`).catch(() => null);
     if (!execution) return Response.json({ error: "Não foi possível registrar a sincronização." }, { status: 500 });
@@ -138,24 +134,17 @@ async function advanceLiveRound(
       }
       const byApiId = new Map(fixtures.map((fixture) => [fixture.fixture?.id, fixture]));
       for (const game of batch) {
-        const fixture = byApiId.get(game.api_football_id!);
-        const apiStatus = fixture?.fixture?.status?.short ?? "";
-        const status = STATUS_BY_API[apiStatus];
-        if (!fixture || !status || status === game.status && status === "A_JOGAR") {
+        const update = gameUpdateFromFixture(game, byApiId.get(game.api_football_id!), nowIso);
+        if (!update) {
           summary.pendentes.push(game.id);
           continue;
-        }
-        const update: Record<string, unknown> = { status, status_api: apiStatus, api_atualizado_em: nowIso };
-        if (status === "EM_ANDAMENTO" || status === "ENCERRADO") {
-          update.gols_casa = fixture.goals?.home ?? 0;
-          update.gols_fora = fixture.goals?.away ?? 0;
         }
         const { error } = await db.from("jogos").update(update).eq("id", game.id);
         if (error) {
           await finishSyncExecution(db, execution, "Não foi possível atualizar um jogo.");
           return Response.json({ error: "Não foi possível atualizar um jogo." }, { status: 500 });
         }
-        if (status === "ENCERRADO") summary.encerrados.push(game.id);
+        if (update.status === "ENCERRADO") summary.encerrados.push(game.id);
       }
     }
     await finishSyncExecution(db, execution, pollError);
@@ -164,7 +153,7 @@ async function advanceLiveRound(
   }
 
   // 5: adiados e cancelados pontuam 0 e não bloqueiam o fechamento.
-  for (const game of games.filter((item) => INTERRUPTED.has(item.status) && (!item.pontuado_em || !item.conferido_em))) {
+  for (const game of interruptedToSettle(games)) {
     if (!game.pontuado_em) {
       const { error } = await db.rpc("fn_pontuar_jogo", { p_jogo_id: game.id });
       if (error) return Response.json({ error: "Não foi possível registrar o jogo adiado." }, { status: 500 });
@@ -174,13 +163,11 @@ async function advanceLiveRound(
   }
 
   // 4: pontuação dos encerrados, respeitando a pausa entre tentativas.
-  const scoreGames = async (candidates: Game[], conferencia: boolean) => {
-    for (const game of candidates) {
+  const scoreGames = async (conferencia: boolean) => {
+    const { due, waiting } = gamesToScore(games!, conferencia, now, context.maxAttempts);
+    summary.pendentes.push(...waiting.map((game) => game.id));
+    for (const game of due) {
       if (summary.cotaReservada) break;
-      if (!isDueForScoring({ pontuacao_tentativas: game.pontuacao_tentativas, pontuacao_proxima_tentativa_em: game.pontuacao_proxima_tentativa_em }, now, context.maxAttempts)) {
-        summary.pendentes.push(game.id);
-        continue;
-      }
       const response = await fetch(`${context.url}/functions/v1/score-match`, {
         method: "POST",
         headers: { Authorization: `Bearer ${context.serviceRoleKey}`, apikey: context.serviceRoleKey, "Content-Type": "application/json" },
@@ -190,23 +177,21 @@ async function advanceLiveRound(
       if (response.status === 429) summary.cotaReservada = true;
     }
   };
-  await scoreGames(games.filter((game) => game.status === "ENCERRADO" && !game.pontuado_em), false);
+  await scoreGames(false);
 
   // 6: conferência e fechamento.
   games = await loadGames();
   if (!games) return Response.json({ error: `Não foi possível ler os jogos da rodada ${round.numero}.` }, { status: 500 });
-  const resolved = games.length > 0 && games.every((game) => game.pontuado_em && (game.status === "ENCERRADO" || INTERRUPTED.has(game.status)));
-  if (!resolved) return null;
+  if (!isRoundResolved(games)) return null;
   let checkAt = round.fechamento_simulado_em;
   if (!checkAt) {
-    const lastScoredAt = Math.max(...games.map((game) => new Date(game.pontuado_em!).getTime()));
-    checkAt = new Date(lastScoredAt + CHECK_DELAY_MINUTES * 60_000).toISOString();
+    checkAt = checkAtFor(games);
     const { error } = await db.from("rodadas").update({ fechamento_simulado_em: checkAt }).eq("id", round.id);
     if (error) return Response.json({ error: "Não foi possível agendar a conferência da rodada." }, { status: 500 });
   }
   if (now < new Date(checkAt)) return null;
 
-  await scoreGames(games.filter((game) => game.status === "ENCERRADO" && !game.conferido_em), true);
+  await scoreGames(true);
   const { data: unchecked } = await db.from("jogos").select("id").eq("rodada_id", round.id).is("conferido_em", null);
   if (unchecked?.length) return null;
 
