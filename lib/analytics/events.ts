@@ -11,6 +11,7 @@ export type AnalyticsEvents = {
   ranking_visto: { aba: "rodada" | "campeonato" };
   convite_aceito: Record<string, never>;
   fim_rodada_compartilhado: { metodo: "nativo" | "copiado" };
+  pwa_instalado: { origem: "appinstalled" | "standalone"; plataforma: "ios" | "android" | "outro" };
 };
 
 export type AnalyticsEventName = keyof AnalyticsEvents;

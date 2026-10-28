@@ -30,7 +30,9 @@ export function initAnalytics(userId: string | null) {
   return true;
 }
 
+/** Retorna `false` quando o PostHog não está configurado e o evento não foi enviado. */
 export function trackEvent<E extends AnalyticsEventName>(event: E, properties: AnalyticsEvents[E]) {
-  if (!initialized) return;
+  if (!initialized) return false;
   posthog.capture(event, properties);
+  return true;
 }
