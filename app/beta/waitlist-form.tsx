@@ -1,7 +1,8 @@
 "use client";
 
 import { useId, useState } from "react";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
+import { LoadingContent } from "@/components/ui/loading-content";
 import { joinWaitlist, type WaitlistResult } from "./actions";
 import { validateWaitlist as validate, type WaitlistErrors as FormErrors } from "@/lib/waitlist";
 
@@ -136,10 +137,10 @@ export function WaitlistForm() {
       <button
         type="submit"
         disabled={status === "loading"}
+        aria-busy={status === "loading" || undefined}
         className="mt-5 inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 text-sm font-black text-primary-foreground outline-none transition hover:brightness-95 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-wait disabled:opacity-75"
       >
-        {status === "loading" ? <Loader2 className="size-4 animate-spin" aria-hidden="true" /> : null}
-        {status === "loading" ? "Entrando..." : "Entrar na lista de espera"}
+        <LoadingContent loading={status === "loading"} loadingText="Entrando…">Entrar na lista de espera</LoadingContent>
       </button>
     </form>
   );
