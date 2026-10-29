@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { parseAvailability } from "@/lib/player-availability";
 import { createClient } from "@/lib/supabase/server";
 
 const positions = ["GOL", "DEF", "MEI", "ATA"] as const;
@@ -12,7 +13,7 @@ export async function GET(request: Request) {
   const supabase = await createClient();
   const { data, error } = await supabase
     .from("jogadores")
-    .select("id, nome, nome_exibicao, posicao, preco, clubes(nome, sigla, logo_url)")
+    .select("id, nome, nome_exibicao, posicao, preco, status, status_motivo, clubes(nome, sigla, logo_url)")
     .eq("ativo", true)
     .eq("posicao", position)
     .order("nome_exibicao")
@@ -34,6 +35,8 @@ export async function GET(request: Request) {
       logoUrl: clube?.logo_url ?? null,
       position: player.posicao,
       price: Number(player.preco),
+      status: parseAvailability(player.status),
+      statusReason: player.status_motivo ?? null,
     };
   });
 

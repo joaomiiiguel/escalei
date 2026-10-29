@@ -1,7 +1,8 @@
-import { CalendarDays, Check, Clock3, LockKeyhole, Pencil, Trophy } from "lucide-react";
+import { CalendarDays, Check, Clock3, LockKeyhole, Pencil, TriangleAlert, Trophy } from "lucide-react";
 import Link from "next/link";
 import { LineupFormation, type LineupPlayer } from "./lineup-formation";
 import { Badge } from "./badge";
+import { availabilityText, isUnavailable } from "@/lib/player-availability";
 
 type Formation = "4-3-3" | "4-4-2" | "3-5-2";
 function currency(value: number) {
@@ -10,6 +11,7 @@ function currency(value: number) {
 
 export function SavedLineup({ budget, formation, players, travaEm }: { budget: number; formation: Formation; players: LineupPlayer[]; travaEm: string }) {
   const spent = players.reduce((total, player) => total + player.price, 0);
+  const unavailable = players.filter((player) => isUnavailable(player.status));
   const lockDate = new Intl.DateTimeFormat("pt-BR", { weekday: "short", hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" }).format(new Date(travaEm));
 
   return <section className="flex min-h-0 flex-1 flex-col gap-4 pb-28" aria-label="Time salvo">
@@ -22,6 +24,13 @@ export function SavedLineup({ budget, formation, players, travaEm }: { budget: n
     <div className="flex flex-row justify-center items-center gap-4 bg-primary pb-2 pt-7 rounded-b-xl -mt-10">
       <h1 className="text-xs font-mono font-extrabold text-secondary">Sua escalação está salva!</h1>
     </div>
+    {unavailable.length > 0 && <div role="alert" className="flex items-start gap-3 rounded-xl border border-destructive-foreground/30 bg-destructive px-4 py-3 text-destructive-foreground">
+      <TriangleAlert className="mt-0.5 size-5 shrink-0" aria-hidden="true" />
+      <div>
+        <p className="text-sm font-extrabold">Troque até a trava</p>
+        <p className="text-[11px] leading-4">{unavailable.map((player) => `${player.name} (${availabilityText(player.status, player.statusReason)})`).join(", ")} não {unavailable.length === 1 ? "pode" : "podem"} ser {unavailable.length === 1 ? "escalado" : "escalados"}. Se continuar no time, soma 0 se não entrar em campo.</p>
+      </div>
+    </div>}
     <div className="flex items-center gap-3 rounded-xl bg-primary/15 px-4 py-3 text-primary">
       <LockKeyhole className="size-5 shrink-0" />
       <div><p className="text-sm font-extrabold">Você pode alterar até {lockDate}</p><p className="text-[11px] text-primary/75">A escalação trava no apito inicial do primeiro jogo.</p></div>

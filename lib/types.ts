@@ -13,6 +13,8 @@ export type SavedPlayer = {
   nome_exibicao: string;
   posicao: "ATA" | "DEF" | "GOL" | "MEI";
   preco: number;
+  status?: string | null;
+  status_motivo?: string | null;
   clubes: { nome: string; sigla: string; logo_url: string | null } | { nome: string; sigla: string; logo_url: string | null }[] | null;
 };
 export type SavedTeam = { formacao: "4-3-3" | "4-4-2" | "3-5-2"; times_jogadores: { jogadores: SavedPlayer | null }[] };
