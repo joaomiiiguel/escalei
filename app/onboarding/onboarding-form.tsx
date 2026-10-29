@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useActionState, useState } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/shadcn/button";
 import { Checkbox } from "@/components/shadcn/checkbox";
@@ -15,13 +15,18 @@ export function OnboardingForm({ clubs, erro, inviteToken, finishOnboarding }: {
   const [clubId, setClubId] = useState("");
   const [apelido, setApelido] = useState("");
   const [termos, setTermos] = useState(false);
+  // O botão fica fora do <form> (rodapé fixo), então o pendente vem do useActionState e não do useFormStatus.
+  const [, submitProfile, isSubmitting] = useActionState(async (_state: null, formData: FormData) => {
+    await finishOnboarding(formData);
+    return null;
+  }, null);
 
   return (
     <main className="mx-auto grid h-dvh min-h-dvh w-full !max-w-[490px]  overflow-hidden bg-background !p-0 text-foreground">
       <div className="flex items-center px-5">
         <a href="/entrar" aria-label="Voltar para entrar" className="grid size-11 place-items-center rounded-full bg-border text-[22px] text-foreground no-underline">←</a>
       </div>
-      <form id="onboarding-profile-form" action={finishOnboarding} className="grid min-h-0 content-start gap-5 overflow-y-auto px-5 pb-6 pt-1 !m-0">
+      <form id="onboarding-profile-form" action={submitProfile} className="grid min-h-0 content-start gap-5 overflow-y-auto px-5 pb-6 pt-1 !m-0">
         {inviteToken && <input type="hidden" name="convite" value={inviteToken} />}
 
         <header className="grid gap-2">
@@ -64,7 +69,7 @@ export function OnboardingForm({ clubs, erro, inviteToken, finishOnboarding }: {
       </form>
 
       <div className="border-t border-[#1e2921] bg-background px-5 py-5">
-        <Button type="submit" form="onboarding-profile-form" disabled={apelido.length < 3 || !termos} className="flex items-center justify-center gap-2 h-[52px] w-full rounded-[14px] !border-0 bg-primary text-base font-bold text-primary-foreground hover:bg-primary transition disabled:opacity-50 disabled:pointer-events-none">
+        <Button type="submit" form="onboarding-profile-form" disabled={apelido.length < 3 || !termos} loading={isSubmitting} loadingText="Salvando…" className="flex items-center justify-center gap-2 h-[52px] w-full rounded-[14px] !border-0 bg-primary text-base font-bold text-primary-foreground hover:bg-primary transition disabled:opacity-50 disabled:pointer-events-none">
           <ArrowRight aria-hidden="true" />Continuar</Button></div>
     </main>
   );
