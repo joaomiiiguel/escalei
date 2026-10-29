@@ -1,4 +1,4 @@
-import { Button } from "@/components/shadcn/button";
+import { SubmitButton } from "@/components/ui/submit-button";
 import { Logo } from "@/components/ui/logo";
 import GoogleIcon from '@mui/icons-material/Google';
 import { ShieldX } from "lucide-react";
@@ -18,9 +18,9 @@ export function GoogleSignIn({ error, inviteToken, signInWithGoogle }: { error?:
       <div className="grid gap-3 text-center mb-10">
         <form action={signInWithGoogle}>
           <input type="hidden" name="convite" value={inviteToken} />
-          <Button type="submit" variant="outline" className="py-5 w-full rounded-lg border-primary bg-primary/20 text-primary hover:bg-border">
+          <SubmitButton variant="outline" loadingText="Entrando…" className="py-5 w-full rounded-lg border-primary bg-primary/20 text-primary hover:bg-border">
             <GoogleIcon className="h-5" /> Entrar com Google
-          </Button>
+          </SubmitButton>
         </form>
       </div>
     </div>

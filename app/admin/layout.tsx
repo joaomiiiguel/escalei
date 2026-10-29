@@ -1,6 +1,6 @@
 import { requireAdmin } from "@/lib/admin-access";
 import { signOut } from "./actions";
-import { Button } from "@/components/ui/button";
+import { SubmitButton } from "@/components/ui/submit-button";
 import { Logo } from "@/components/ui/logo";
 import { LogOut } from "lucide-react";
 import { AdminNav } from "./admin-nav";
@@ -30,7 +30,7 @@ export default async function AdminLayout({ children }: Readonly<{ children: Rea
                         <div><p className="m-0 text-sm font-bold">{profile?.apelido ?? "Administrador"}</p><p className="m-0 text-xs text-muted-foreground">Admin</p></div>
                     </div>
                     <form action={signOut}>
-                        <Button type="submit" variant="outline" className="h-10 w-full"><LogOut aria-hidden="true" />Sair</Button>
+                        <SubmitButton variant="outline" loadingText="Saindo…" className="h-10 w-full"><LogOut aria-hidden="true" />Sair</SubmitButton>
                     </form>
                 </div>
             </aside>

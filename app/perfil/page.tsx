@@ -4,7 +4,6 @@ import {
   BookOpen,
   ChevronRight,
   FileText,
-  LogOut,
   Mail,
   Moon,
   ScrollText,
@@ -20,6 +19,8 @@ import { createClient } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { deleteAccount, signOut, updatePreferences, updateProfile } from "./actions";
 import { ProfileEditModal } from "./profile-edit-modal";
+import { SignOutButton } from "./sign-out-button";
+import { NativeSubmitButton } from "@/components/ui/submit-button";
 import { useState } from "react";
 
 type ProfilePageProps = {
@@ -151,7 +152,7 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
             <ToggleRow icon={Bell} label="Avisar antes da trava" defaultChecked disabled />
             <ToggleRow icon={Users} label="Novidades das minhas ligas" disabled />
           </Section>
-          <button type="submit" className="h-10 rounded-xl border border-border bg-primary/70 px-4 text-sm font-bold text-card transition hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:bg-primary">Salvar preferências</button>
+          <NativeSubmitButton loadingText="Salvando…" className="h-10 rounded-xl border border-border bg-primary/70 px-4 text-sm font-bold text-card transition hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:bg-primary disabled:cursor-wait disabled:opacity-75">Salvar preferências</NativeSubmitButton>
         </form>
 
         <Section title="SOBRE">
@@ -163,7 +164,7 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
 
         <Section title="SESSÃO">
           <form action={signOut} className="m-0">
-            <button type="submit" className="flex min-h-14 w-full items-center gap-3 px-3.5 text-left text-[14.5px] font-semibold text-foreground transition hover:bg-muted"><LogOut className="size-[19px] text-muted-foreground" aria-hidden="true" /><span className="flex-1">Sair da conta</span><ChevronRight className="size-[18px] text-muted-foreground" aria-hidden="true" /></button></form>
+            <SignOutButton /></form>
           {/* <details className="group border-t border-border">
             <summary className="flex min-h-14 cursor-pointer list-none items-center gap-3 px-3.5 text-red-600 [&::-webkit-details-marker]:hidden">
               <Trash2 className="size-[19px]" aria-hidden="true" />
