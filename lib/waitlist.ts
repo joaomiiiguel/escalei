@@ -28,3 +28,21 @@ export function toWaitlistEntry(values: WaitlistValues): WaitlistEntry {
     email: values.email.trim().toLowerCase(),
   };
 }
+
+/** Formata o WhatsApp gravado só com dígitos: "(11) 98765-4321". */
+export function formatWhatsapp(digits: string) {
+  const match = /^(\d{2})(\d{4,5})(\d{4})$/.exec(digits);
+  return match ? `(${match[1]}) ${match[2]}-${match[3]}` : digits;
+}
+
+/** Link para abrir conversa no WhatsApp com o DDI do Brasil. */
+export function whatsappLink(digits: string) {
+  return `https://wa.me/55${digits}`;
+}
+
+const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
+
+/** Conta quantas inscrições aconteceram nos últimos 7 dias. */
+export function countRecentSignups(entries: { criado_em: string }[], now = new Date()) {
+  return entries.filter((entry) => now.getTime() - new Date(entry.criado_em).getTime() <= WEEK_MS).length;
+}
