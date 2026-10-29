@@ -1,0 +1,6113 @@
+{
+  "get": "injuries",
+  "parameters": {
+    "ids": "1492435-1492438-1492432-1492431-1492437-1492434-1492430-1492439-1492436-1492433"
+  },
+  "results": 218,
+  "response": [
+    {
+      "player": {
+        "id": 197513,
+        "name": "T. Borbas",
+        "photo": "https://media.api-sports.io/football/players/197513.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 5923,
+        "name": "M. Cassierra",
+        "photo": "https://media.api-sports.io/football/players/5923.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 6031,
+        "name": "Cuello",
+        "photo": "https://media.api-sports.io/football/players/6031.png",
+        "type": "Missing Fixture",
+        "reason": "Ribs Injury"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 9978,
+        "name": "Everson",
+        "photo": "https://media.api-sports.io/football/players/9978.png",
+        "type": "Missing Fixture",
+        "reason": "Foot Injury"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 905,
+        "name": "Fred",
+        "photo": "https://media.api-sports.io/football/players/905.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 152857,
+        "name": "Ruan Tressoldi",
+        "photo": "https://media.api-sports.io/football/players/152857.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 30398,
+        "name": "Vitor Hugo",
+        "photo": "https://media.api-sports.io/football/players/30398.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 143367,
+        "name": "Gabriel Pec",
+        "photo": "https://media.api-sports.io/football/players/143367.png",
+        "type": "Missing Fixture",
+        "reason": "Broken Leg"
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 37161,
+        "name": "L. Sinisterra",
+        "photo": "https://media.api-sports.io/football/players/37161.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 414405,
+        "name": "K. Arroyo",
+        "photo": "https://media.api-sports.io/football/players/414405.png",
+        "type": "Questionable",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 606701,
+        "name": "Felipe Morais",
+        "photo": "https://media.api-sports.io/football/players/606701.png",
+        "type": "Questionable",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 197513,
+        "name": "T. Borbas",
+        "photo": "https://media.api-sports.io/football/players/197513.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 5923,
+        "name": "M. Cassierra",
+        "photo": "https://media.api-sports.io/football/players/5923.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 6031,
+        "name": "Cuello",
+        "photo": "https://media.api-sports.io/football/players/6031.png",
+        "type": "Missing Fixture",
+        "reason": "Ribs Injury"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 9978,
+        "name": "Everson",
+        "photo": "https://media.api-sports.io/football/players/9978.png",
+        "type": "Missing Fixture",
+        "reason": "Foot Injury"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 905,
+        "name": "Fred",
+        "photo": "https://media.api-sports.io/football/players/905.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 152857,
+        "name": "Ruan Tressoldi",
+        "photo": "https://media.api-sports.io/football/players/152857.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 30398,
+        "name": "Vitor Hugo",
+        "photo": "https://media.api-sports.io/football/players/30398.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 1062,
+        "name": "Atletico-MG",
+        "logo": "https://media.api-sports.io/football/teams/1062.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 143367,
+        "name": "Gabriel Pec",
+        "photo": "https://media.api-sports.io/football/players/143367.png",
+        "type": "Missing Fixture",
+        "reason": "Broken Leg"
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 37161,
+        "name": "L. Sinisterra",
+        "photo": "https://media.api-sports.io/football/players/37161.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 414405,
+        "name": "K. Arroyo",
+        "photo": "https://media.api-sports.io/football/players/414405.png",
+        "type": "Questionable",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 606701,
+        "name": "Felipe Morais",
+        "photo": "https://media.api-sports.io/football/players/606701.png",
+        "type": "Questionable",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 135,
+        "name": "Cruzeiro",
+        "logo": "https://media.api-sports.io/football/teams/135.png"
+      },
+      "fixture": {
+        "id": 1492430,
+        "timezone": "UTC",
+        "date": "2026-10-29T22:30:00+00:00",
+        "timestamp": 1793313000
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10059,
+        "name": "Kanu",
+        "photo": "https://media.api-sports.io/football/players/10059.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 118,
+        "name": "Bahia",
+        "logo": "https://media.api-sports.io/football/teams/118.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10109,
+        "name": "Leo Vieira",
+        "photo": "https://media.api-sports.io/football/players/10109.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 118,
+        "name": "Bahia",
+        "logo": "https://media.api-sports.io/football/teams/118.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10040,
+        "name": "Artur",
+        "photo": "https://media.api-sports.io/football/players/10040.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 516821,
+        "name": "N. Bosshardt",
+        "photo": "https://media.api-sports.io/football/players/516821.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 8451,
+        "name": "Buta",
+        "photo": "https://media.api-sports.io/football/players/8451.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 25272,
+        "name": "Cauly",
+        "photo": "https://media.api-sports.io/football/players/25272.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 46795,
+        "name": "D. Duarte",
+        "photo": "https://media.api-sports.io/football/players/46795.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10375,
+        "name": "Iago Borduchi",
+        "photo": "https://media.api-sports.io/football/players/10375.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 47368,
+        "name": "Jonathan Calleri",
+        "photo": "https://media.api-sports.io/football/players/47368.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 106510,
+        "name": "Ferreira",
+        "photo": "https://media.api-sports.io/football/players/106510.png",
+        "type": "Questionable",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10059,
+        "name": "Kanu",
+        "photo": "https://media.api-sports.io/football/players/10059.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 118,
+        "name": "Bahia",
+        "logo": "https://media.api-sports.io/football/teams/118.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10109,
+        "name": "Leo Vieira",
+        "photo": "https://media.api-sports.io/football/players/10109.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 118,
+        "name": "Bahia",
+        "logo": "https://media.api-sports.io/football/teams/118.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10040,
+        "name": "Artur",
+        "photo": "https://media.api-sports.io/football/players/10040.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 516821,
+        "name": "N. Bosshardt",
+        "photo": "https://media.api-sports.io/football/players/516821.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 8451,
+        "name": "Buta",
+        "photo": "https://media.api-sports.io/football/players/8451.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 25272,
+        "name": "Cauly",
+        "photo": "https://media.api-sports.io/football/players/25272.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 46795,
+        "name": "D. Duarte",
+        "photo": "https://media.api-sports.io/football/players/46795.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10375,
+        "name": "Iago Borduchi",
+        "photo": "https://media.api-sports.io/football/players/10375.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 47368,
+        "name": "Jonathan Calleri",
+        "photo": "https://media.api-sports.io/football/players/47368.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 106510,
+        "name": "Ferreira",
+        "photo": "https://media.api-sports.io/football/players/106510.png",
+        "type": "Questionable",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 126,
+        "name": "Sao Paulo",
+        "logo": "https://media.api-sports.io/football/teams/126.png"
+      },
+      "fixture": {
+        "id": 1492431,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 468162,
+        "name": "Davi Gomes",
+        "photo": "https://media.api-sports.io/football/players/468162.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 794,
+        "name": "RB Bragantino",
+        "logo": "https://media.api-sports.io/football/teams/794.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10247,
+        "name": "Gabriel",
+        "photo": "https://media.api-sports.io/football/players/10247.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 794,
+        "name": "RB Bragantino",
+        "logo": "https://media.api-sports.io/football/teams/794.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 304827,
+        "name": "Gustavo Marques",
+        "photo": "https://media.api-sports.io/football/players/304827.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 794,
+        "name": "RB Bragantino",
+        "logo": "https://media.api-sports.io/football/teams/794.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 68113,
+        "name": "A. Hurtado",
+        "photo": "https://media.api-sports.io/football/players/68113.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 794,
+        "name": "RB Bragantino",
+        "logo": "https://media.api-sports.io/football/teams/794.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 363689,
+        "name": "Rodriguinho",
+        "photo": "https://media.api-sports.io/football/players/363689.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 794,
+        "name": "RB Bragantino",
+        "logo": "https://media.api-sports.io/football/teams/794.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 9944,
+        "name": "Tiago Volpi",
+        "photo": "https://media.api-sports.io/football/players/9944.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 794,
+        "name": "RB Bragantino",
+        "logo": "https://media.api-sports.io/football/teams/794.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 63998,
+        "name": "Camilo Reijers",
+        "photo": "https://media.api-sports.io/football/players/63998.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10384,
+        "name": "Heitor",
+        "photo": "https://media.api-sports.io/football/players/10384.png",
+        "type": "Missing Fixture",
+        "reason": "Hamstring Injury"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 201201,
+        "name": "Mauricio Garcez",
+        "photo": "https://media.api-sports.io/football/players/201201.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 106495,
+        "name": "Rafael Carvalheira",
+        "photo": "https://media.api-sports.io/football/players/106495.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 455091,
+        "name": "Robert Conceicao",
+        "photo": "https://media.api-sports.io/football/players/455091.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 278496,
+        "name": "Vinicius Balieiro",
+        "photo": "https://media.api-sports.io/football/players/278496.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10348,
+        "name": "Yago Felipe",
+        "photo": "https://media.api-sports.io/football/players/10348.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 468162,
+        "name": "Davi Gomes",
+        "photo": "https://media.api-sports.io/football/players/468162.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 794,
+        "name": "RB Bragantino",
+        "logo": "https://media.api-sports.io/football/teams/794.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10247,
+        "name": "Gabriel",
+        "photo": "https://media.api-sports.io/football/players/10247.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 794,
+        "name": "RB Bragantino",
+        "logo": "https://media.api-sports.io/football/teams/794.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 304827,
+        "name": "Gustavo Marques",
+        "photo": "https://media.api-sports.io/football/players/304827.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 794,
+        "name": "RB Bragantino",
+        "logo": "https://media.api-sports.io/football/teams/794.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 68113,
+        "name": "A. Hurtado",
+        "photo": "https://media.api-sports.io/football/players/68113.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 794,
+        "name": "RB Bragantino",
+        "logo": "https://media.api-sports.io/football/teams/794.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 363689,
+        "name": "Rodriguinho",
+        "photo": "https://media.api-sports.io/football/players/363689.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 794,
+        "name": "RB Bragantino",
+        "logo": "https://media.api-sports.io/football/teams/794.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 9944,
+        "name": "Tiago Volpi",
+        "photo": "https://media.api-sports.io/football/players/9944.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 794,
+        "name": "RB Bragantino",
+        "logo": "https://media.api-sports.io/football/teams/794.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 63998,
+        "name": "Camilo Reijers",
+        "photo": "https://media.api-sports.io/football/players/63998.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10384,
+        "name": "Heitor",
+        "photo": "https://media.api-sports.io/football/players/10384.png",
+        "type": "Missing Fixture",
+        "reason": "Hamstring Injury"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 201201,
+        "name": "Mauricio Garcez",
+        "photo": "https://media.api-sports.io/football/players/201201.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 106495,
+        "name": "Rafael Carvalheira",
+        "photo": "https://media.api-sports.io/football/players/106495.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 455091,
+        "name": "Robert Conceicao",
+        "photo": "https://media.api-sports.io/football/players/455091.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 278496,
+        "name": "Vinicius Balieiro",
+        "photo": "https://media.api-sports.io/football/players/278496.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10348,
+        "name": "Yago Felipe",
+        "photo": "https://media.api-sports.io/football/players/10348.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 132,
+        "name": "Chapecoense-sc",
+        "logo": "https://media.api-sports.io/football/teams/132.png"
+      },
+      "fixture": {
+        "id": 1492432,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10067,
+        "name": "Alex Santana",
+        "photo": "https://media.api-sports.io/football/players/10067.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 2426,
+        "name": "A. Carrillo",
+        "photo": "https://media.api-sports.io/football/players/2426.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 667,
+        "name": "M. Depay",
+        "photo": "https://media.api-sports.io/football/players/667.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 915,
+        "name": "Gabriel Paulista",
+        "photo": "https://media.api-sports.io/football/players/915.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 415090,
+        "name": "Kayke",
+        "photo": "https://media.api-sports.io/football/players/415090.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 543,
+        "name": "Z. Labyad",
+        "photo": "https://media.api-sports.io/football/players/543.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 900,
+        "name": "J. Lingard",
+        "photo": "https://media.api-sports.io/football/players/900.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 160436,
+        "name": "Raniele",
+        "photo": "https://media.api-sports.io/football/players/160436.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10177,
+        "name": "Vitinho",
+        "photo": "https://media.api-sports.io/football/players/10177.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 153458,
+        "name": "Negueba",
+        "photo": "https://media.api-sports.io/football/players/153458.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 7848,
+        "name": "Mirassol",
+        "logo": "https://media.api-sports.io/football/teams/7848.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 133183,
+        "name": "Jose Aldo",
+        "photo": "https://media.api-sports.io/football/players/133183.png",
+        "type": "Questionable",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 7848,
+        "name": "Mirassol",
+        "logo": "https://media.api-sports.io/football/teams/7848.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10067,
+        "name": "Alex Santana",
+        "photo": "https://media.api-sports.io/football/players/10067.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 2426,
+        "name": "A. Carrillo",
+        "photo": "https://media.api-sports.io/football/players/2426.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 667,
+        "name": "M. Depay",
+        "photo": "https://media.api-sports.io/football/players/667.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 915,
+        "name": "Gabriel Paulista",
+        "photo": "https://media.api-sports.io/football/players/915.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 415090,
+        "name": "Kayke",
+        "photo": "https://media.api-sports.io/football/players/415090.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 543,
+        "name": "Z. Labyad",
+        "photo": "https://media.api-sports.io/football/players/543.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 900,
+        "name": "J. Lingard",
+        "photo": "https://media.api-sports.io/football/players/900.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 160436,
+        "name": "Raniele",
+        "photo": "https://media.api-sports.io/football/players/160436.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10177,
+        "name": "Vitinho",
+        "photo": "https://media.api-sports.io/football/players/10177.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 131,
+        "name": "Corinthians",
+        "logo": "https://media.api-sports.io/football/teams/131.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 153458,
+        "name": "Negueba",
+        "photo": "https://media.api-sports.io/football/players/153458.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 7848,
+        "name": "Mirassol",
+        "logo": "https://media.api-sports.io/football/teams/7848.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 133183,
+        "name": "Jose Aldo",
+        "photo": "https://media.api-sports.io/football/players/133183.png",
+        "type": "Questionable",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 7848,
+        "name": "Mirassol",
+        "logo": "https://media.api-sports.io/football/teams/7848.png"
+      },
+      "fixture": {
+        "id": 1492433,
+        "timezone": "UTC",
+        "date": "2026-10-30T23:00:00+00:00",
+        "timestamp": 1793401200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 410449,
+        "name": "Lucas Ronier",
+        "photo": "https://media.api-sports.io/football/players/410449.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 147,
+        "name": "Coritiba",
+        "logo": "https://media.api-sports.io/football/teams/147.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 505577,
+        "name": "Lucas Taverna",
+        "photo": "https://media.api-sports.io/football/players/505577.png",
+        "type": "Questionable",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 147,
+        "name": "Coritiba",
+        "logo": "https://media.api-sports.io/football/teams/147.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 9460,
+        "name": "Baralhas",
+        "photo": "https://media.api-sports.io/football/players/9460.png",
+        "type": "Missing Fixture",
+        "reason": "Broken Leg"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 54692,
+        "name": "Camutanga",
+        "photo": "https://media.api-sports.io/football/players/54692.png",
+        "type": "Missing Fixture",
+        "reason": "Broken Leg"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 156942,
+        "name": "Dudu",
+        "photo": "https://media.api-sports.io/football/players/156942.png",
+        "type": "Missing Fixture",
+        "reason": "Back Injury"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 136124,
+        "name": "Edu",
+        "photo": "https://media.api-sports.io/football/players/136124.png",
+        "type": "Missing Fixture",
+        "reason": "Achilles Tendon Injury"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 187920,
+        "name": "Fabiano",
+        "photo": "https://media.api-sports.io/football/players/187920.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 9906,
+        "name": "Luan Candido",
+        "photo": "https://media.api-sports.io/football/players/9906.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10506,
+        "name": "Marinho",
+        "photo": "https://media.api-sports.io/football/players/10506.png",
+        "type": "Missing Fixture",
+        "reason": "Red Card"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 311518,
+        "name": "Nathan Mendes",
+        "photo": "https://media.api-sports.io/football/players/311518.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 67944,
+        "name": "Ramon",
+        "photo": "https://media.api-sports.io/football/players/67944.png",
+        "type": "Missing Fixture",
+        "reason": "Leg Injury"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 127621,
+        "name": "Riccieli",
+        "photo": "https://media.api-sports.io/football/players/127621.png",
+        "type": "Missing Fixture",
+        "reason": "Calf Injury"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 410449,
+        "name": "Lucas Ronier",
+        "photo": "https://media.api-sports.io/football/players/410449.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 147,
+        "name": "Coritiba",
+        "logo": "https://media.api-sports.io/football/teams/147.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 505577,
+        "name": "Lucas Taverna",
+        "photo": "https://media.api-sports.io/football/players/505577.png",
+        "type": "Questionable",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 147,
+        "name": "Coritiba",
+        "logo": "https://media.api-sports.io/football/teams/147.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 9460,
+        "name": "Baralhas",
+        "photo": "https://media.api-sports.io/football/players/9460.png",
+        "type": "Missing Fixture",
+        "reason": "Broken Leg"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 54692,
+        "name": "Camutanga",
+        "photo": "https://media.api-sports.io/football/players/54692.png",
+        "type": "Missing Fixture",
+        "reason": "Broken Leg"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 156942,
+        "name": "Dudu",
+        "photo": "https://media.api-sports.io/football/players/156942.png",
+        "type": "Missing Fixture",
+        "reason": "Back Injury"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 136124,
+        "name": "Edu",
+        "photo": "https://media.api-sports.io/football/players/136124.png",
+        "type": "Missing Fixture",
+        "reason": "Achilles Tendon Injury"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 187920,
+        "name": "Fabiano",
+        "photo": "https://media.api-sports.io/football/players/187920.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 9906,
+        "name": "Luan Candido",
+        "photo": "https://media.api-sports.io/football/players/9906.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10506,
+        "name": "Marinho",
+        "photo": "https://media.api-sports.io/football/players/10506.png",
+        "type": "Missing Fixture",
+        "reason": "Red Card"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 311518,
+        "name": "Nathan Mendes",
+        "photo": "https://media.api-sports.io/football/players/311518.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 67944,
+        "name": "Ramon",
+        "photo": "https://media.api-sports.io/football/players/67944.png",
+        "type": "Missing Fixture",
+        "reason": "Leg Injury"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 127621,
+        "name": "Riccieli",
+        "photo": "https://media.api-sports.io/football/players/127621.png",
+        "type": "Missing Fixture",
+        "reason": "Calf Injury"
+      },
+      "team": {
+        "id": 136,
+        "name": "Vitoria",
+        "logo": "https://media.api-sports.io/football/teams/136.png"
+      },
+      "fixture": {
+        "id": 1492434,
+        "timezone": "UTC",
+        "date": "2026-10-31T19:00:00+00:00",
+        "timestamp": 1793473200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10501,
+        "name": "Alisson",
+        "photo": "https://media.api-sports.io/football/players/10501.png",
+        "type": "Missing Fixture",
+        "reason": "Hip Injury"
+      },
+      "team": {
+        "id": 124,
+        "name": "Fluminense",
+        "logo": "https://media.api-sports.io/football/teams/124.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 297522,
+        "name": "John Kennedy",
+        "photo": "https://media.api-sports.io/football/players/297522.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 124,
+        "name": "Fluminense",
+        "logo": "https://media.api-sports.io/football/teams/124.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 280245,
+        "name": "Martinelli",
+        "photo": "https://media.api-sports.io/football/players/280245.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 124,
+        "name": "Fluminense",
+        "logo": "https://media.api-sports.io/football/teams/124.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 414356,
+        "name": "Matheus Reis",
+        "photo": "https://media.api-sports.io/football/players/414356.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 124,
+        "name": "Fluminense",
+        "logo": "https://media.api-sports.io/football/teams/124.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 13715,
+        "name": "J. Millan",
+        "photo": "https://media.api-sports.io/football/players/13715.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 124,
+        "name": "Fluminense",
+        "logo": "https://media.api-sports.io/football/teams/124.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 306552,
+        "name": "Anthoni",
+        "photo": "https://media.api-sports.io/football/players/306552.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 119,
+        "name": "Internacional",
+        "logo": "https://media.api-sports.io/football/teams/119.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 305819,
+        "name": "Kayky",
+        "photo": "https://media.api-sports.io/football/players/305819.png",
+        "type": "Missing Fixture",
+        "reason": "Ankle Injury"
+      },
+      "team": {
+        "id": 119,
+        "name": "Internacional",
+        "logo": "https://media.api-sports.io/football/teams/119.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 50077,
+        "name": "S. Rochet",
+        "photo": "https://media.api-sports.io/football/players/50077.png",
+        "type": "Missing Fixture",
+        "reason": "Lower Back Injury"
+      },
+      "team": {
+        "id": 119,
+        "name": "Internacional",
+        "logo": "https://media.api-sports.io/football/teams/119.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 2522,
+        "name": "A. Sanabria",
+        "photo": "https://media.api-sports.io/football/players/2522.png",
+        "type": "Missing Fixture",
+        "reason": "Calf Injury"
+      },
+      "team": {
+        "id": 119,
+        "name": "Internacional",
+        "logo": "https://media.api-sports.io/football/teams/119.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10501,
+        "name": "Alisson",
+        "photo": "https://media.api-sports.io/football/players/10501.png",
+        "type": "Missing Fixture",
+        "reason": "Hip Injury"
+      },
+      "team": {
+        "id": 124,
+        "name": "Fluminense",
+        "logo": "https://media.api-sports.io/football/teams/124.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 297522,
+        "name": "John Kennedy",
+        "photo": "https://media.api-sports.io/football/players/297522.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 124,
+        "name": "Fluminense",
+        "logo": "https://media.api-sports.io/football/teams/124.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 280245,
+        "name": "Martinelli",
+        "photo": "https://media.api-sports.io/football/players/280245.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 124,
+        "name": "Fluminense",
+        "logo": "https://media.api-sports.io/football/teams/124.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 414356,
+        "name": "Matheus Reis",
+        "photo": "https://media.api-sports.io/football/players/414356.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 124,
+        "name": "Fluminense",
+        "logo": "https://media.api-sports.io/football/teams/124.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 13715,
+        "name": "J. Millan",
+        "photo": "https://media.api-sports.io/football/players/13715.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 124,
+        "name": "Fluminense",
+        "logo": "https://media.api-sports.io/football/teams/124.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 306552,
+        "name": "Anthoni",
+        "photo": "https://media.api-sports.io/football/players/306552.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 119,
+        "name": "Internacional",
+        "logo": "https://media.api-sports.io/football/teams/119.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 305819,
+        "name": "Kayky",
+        "photo": "https://media.api-sports.io/football/players/305819.png",
+        "type": "Missing Fixture",
+        "reason": "Ankle Injury"
+      },
+      "team": {
+        "id": 119,
+        "name": "Internacional",
+        "logo": "https://media.api-sports.io/football/teams/119.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 50077,
+        "name": "S. Rochet",
+        "photo": "https://media.api-sports.io/football/players/50077.png",
+        "type": "Missing Fixture",
+        "reason": "Lower Back Injury"
+      },
+      "team": {
+        "id": 119,
+        "name": "Internacional",
+        "logo": "https://media.api-sports.io/football/teams/119.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 2522,
+        "name": "A. Sanabria",
+        "photo": "https://media.api-sports.io/football/players/2522.png",
+        "type": "Missing Fixture",
+        "reason": "Calf Injury"
+      },
+      "team": {
+        "id": 119,
+        "name": "Internacional",
+        "logo": "https://media.api-sports.io/football/teams/119.png"
+      },
+      "fixture": {
+        "id": 1492435,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 1494,
+        "name": "J. Cabral",
+        "photo": "https://media.api-sports.io/football/players/1494.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 130,
+        "name": "Gremio",
+        "logo": "https://media.api-sports.io/football/teams/130.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 22167,
+        "name": "Danilo Barbosa",
+        "photo": "https://media.api-sports.io/football/players/22167.png",
+        "type": "Missing Fixture",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 130,
+        "name": "Gremio",
+        "logo": "https://media.api-sports.io/football/teams/130.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 570403,
+        "name": "B. G. Joao Pedro",
+        "photo": "https://media.api-sports.io/football/players/570403.png",
+        "type": "Missing Fixture",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 130,
+        "name": "Gremio",
+        "logo": "https://media.api-sports.io/football/teams/130.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 129882,
+        "name": "J. Nardoni",
+        "photo": "https://media.api-sports.io/football/players/129882.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 130,
+        "name": "Gremio",
+        "logo": "https://media.api-sports.io/football/teams/130.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 405703,
+        "name": "Diego Caito",
+        "photo": "https://media.api-sports.io/football/players/405703.png",
+        "type": "Questionable",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 130,
+        "name": "Gremio",
+        "logo": "https://media.api-sports.io/football/teams/130.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 457420,
+        "name": "Arthur Dias",
+        "photo": "https://media.api-sports.io/football/players/457420.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 58577,
+        "name": "G. Benavidez",
+        "photo": "https://media.api-sports.io/football/players/58577.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 323800,
+        "name": "K. A. Calderon Vargas",
+        "photo": "https://media.api-sports.io/football/players/323800.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 630991,
+        "name": "Claudinho",
+        "photo": "https://media.api-sports.io/football/players/630991.png",
+        "type": "Missing Fixture",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 408987,
+        "name": "Dantas",
+        "photo": "https://media.api-sports.io/football/players/408987.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10305,
+        "name": "Gilberto",
+        "photo": "https://media.api-sports.io/football/players/10305.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10091,
+        "name": "Jadson",
+        "photo": "https://media.api-sports.io/football/players/10091.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 13493,
+        "name": "C. Teran",
+        "photo": "https://media.api-sports.io/football/players/13493.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 631802,
+        "name": "Bruno Baldini",
+        "photo": "https://media.api-sports.io/football/players/631802.png",
+        "type": "Questionable",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 1494,
+        "name": "J. Cabral",
+        "photo": "https://media.api-sports.io/football/players/1494.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 130,
+        "name": "Gremio",
+        "logo": "https://media.api-sports.io/football/teams/130.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 22167,
+        "name": "Danilo Barbosa",
+        "photo": "https://media.api-sports.io/football/players/22167.png",
+        "type": "Missing Fixture",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 130,
+        "name": "Gremio",
+        "logo": "https://media.api-sports.io/football/teams/130.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 570403,
+        "name": "B. G. Joao Pedro",
+        "photo": "https://media.api-sports.io/football/players/570403.png",
+        "type": "Missing Fixture",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 130,
+        "name": "Gremio",
+        "logo": "https://media.api-sports.io/football/teams/130.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 129882,
+        "name": "J. Nardoni",
+        "photo": "https://media.api-sports.io/football/players/129882.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 130,
+        "name": "Gremio",
+        "logo": "https://media.api-sports.io/football/teams/130.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 405703,
+        "name": "Diego Caito",
+        "photo": "https://media.api-sports.io/football/players/405703.png",
+        "type": "Questionable",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 130,
+        "name": "Gremio",
+        "logo": "https://media.api-sports.io/football/teams/130.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 457420,
+        "name": "Arthur Dias",
+        "photo": "https://media.api-sports.io/football/players/457420.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 58577,
+        "name": "G. Benavidez",
+        "photo": "https://media.api-sports.io/football/players/58577.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 323800,
+        "name": "K. A. Calderon Vargas",
+        "photo": "https://media.api-sports.io/football/players/323800.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 630991,
+        "name": "Claudinho",
+        "photo": "https://media.api-sports.io/football/players/630991.png",
+        "type": "Missing Fixture",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 408987,
+        "name": "Dantas",
+        "photo": "https://media.api-sports.io/football/players/408987.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10305,
+        "name": "Gilberto",
+        "photo": "https://media.api-sports.io/football/players/10305.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10091,
+        "name": "Jadson",
+        "photo": "https://media.api-sports.io/football/players/10091.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 13493,
+        "name": "C. Teran",
+        "photo": "https://media.api-sports.io/football/players/13493.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 631802,
+        "name": "Bruno Baldini",
+        "photo": "https://media.api-sports.io/football/players/631802.png",
+        "type": "Questionable",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 134,
+        "name": "Atletico Paranaense",
+        "logo": "https://media.api-sports.io/football/teams/134.png"
+      },
+      "fixture": {
+        "id": 1492436,
+        "timezone": "UTC",
+        "date": "2026-10-30T00:30:00+00:00",
+        "timestamp": 1793320200
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10141,
+        "name": "Gabriel Poveda",
+        "photo": "https://media.api-sports.io/football/players/10141.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 70368,
+        "name": "Joao Lucas",
+        "photo": "https://media.api-sports.io/football/players/70368.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 160101,
+        "name": "Matheus Felipe",
+        "photo": "https://media.api-sports.io/football/players/160101.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 80484,
+        "name": "Mayk",
+        "photo": "https://media.api-sports.io/football/players/80484.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10581,
+        "name": "Yago Pikachu",
+        "photo": "https://media.api-sports.io/football/players/10581.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10114,
+        "name": "Ze Ivaldo",
+        "photo": "https://media.api-sports.io/football/players/10114.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 410843,
+        "name": "J. Barrera",
+        "photo": "https://media.api-sports.io/football/players/410843.png",
+        "type": "Missing Fixture",
+        "reason": "Ankle Injury"
+      },
+      "team": {
+        "id": 120,
+        "name": "Botafogo",
+        "logo": "https://media.api-sports.io/football/teams/120.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 41210,
+        "name": "Kaio Pantaleao",
+        "photo": "https://media.api-sports.io/football/players/41210.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 120,
+        "name": "Botafogo",
+        "logo": "https://media.api-sports.io/football/teams/120.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 455130,
+        "name": "A. Montoro",
+        "photo": "https://media.api-sports.io/football/players/455130.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 120,
+        "name": "Botafogo",
+        "logo": "https://media.api-sports.io/football/teams/120.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 304686,
+        "name": "Arthur Chaves",
+        "photo": "https://media.api-sports.io/football/players/304686.png",
+        "type": "Questionable",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 120,
+        "name": "Botafogo",
+        "logo": "https://media.api-sports.io/football/teams/120.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 275170,
+        "name": "Danilo Santos",
+        "photo": "https://media.api-sports.io/football/players/275170.png",
+        "type": "Questionable",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 120,
+        "name": "Botafogo",
+        "logo": "https://media.api-sports.io/football/teams/120.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 265954,
+        "name": "L. Monzon",
+        "photo": "https://media.api-sports.io/football/players/265954.png",
+        "type": "Questionable",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 120,
+        "name": "Botafogo",
+        "logo": "https://media.api-sports.io/football/teams/120.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10141,
+        "name": "Gabriel Poveda",
+        "photo": "https://media.api-sports.io/football/players/10141.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 70368,
+        "name": "Joao Lucas",
+        "photo": "https://media.api-sports.io/football/players/70368.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 160101,
+        "name": "Matheus Felipe",
+        "photo": "https://media.api-sports.io/football/players/160101.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 80484,
+        "name": "Mayk",
+        "photo": "https://media.api-sports.io/football/players/80484.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10581,
+        "name": "Yago Pikachu",
+        "photo": "https://media.api-sports.io/football/players/10581.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10114,
+        "name": "Ze Ivaldo",
+        "photo": "https://media.api-sports.io/football/players/10114.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 1198,
+        "name": "Remo",
+        "logo": "https://media.api-sports.io/football/teams/1198.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 410843,
+        "name": "J. Barrera",
+        "photo": "https://media.api-sports.io/football/players/410843.png",
+        "type": "Missing Fixture",
+        "reason": "Ankle Injury"
+      },
+      "team": {
+        "id": 120,
+        "name": "Botafogo",
+        "logo": "https://media.api-sports.io/football/teams/120.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 41210,
+        "name": "Kaio Pantaleao",
+        "photo": "https://media.api-sports.io/football/players/41210.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 120,
+        "name": "Botafogo",
+        "logo": "https://media.api-sports.io/football/teams/120.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 455130,
+        "name": "A. Montoro",
+        "photo": "https://media.api-sports.io/football/players/455130.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 120,
+        "name": "Botafogo",
+        "logo": "https://media.api-sports.io/football/teams/120.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 304686,
+        "name": "Arthur Chaves",
+        "photo": "https://media.api-sports.io/football/players/304686.png",
+        "type": "Questionable",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 120,
+        "name": "Botafogo",
+        "logo": "https://media.api-sports.io/football/teams/120.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 275170,
+        "name": "Danilo Santos",
+        "photo": "https://media.api-sports.io/football/players/275170.png",
+        "type": "Questionable",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 120,
+        "name": "Botafogo",
+        "logo": "https://media.api-sports.io/football/teams/120.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 265954,
+        "name": "L. Monzon",
+        "photo": "https://media.api-sports.io/football/players/265954.png",
+        "type": "Questionable",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 120,
+        "name": "Botafogo",
+        "logo": "https://media.api-sports.io/football/teams/120.png"
+      },
+      "fixture": {
+        "id": 1492437,
+        "timezone": "UTC",
+        "date": "2026-10-29T00:30:00+00:00",
+        "timestamp": 1793233800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 150,
+        "name": "Arthur Melo",
+        "photo": "https://media.api-sports.io/football/players/150.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 6637,
+        "name": "G. Escobar",
+        "photo": "https://media.api-sports.io/football/players/6637.png",
+        "type": "Missing Fixture",
+        "reason": "Thigh Injury"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 31007,
+        "name": "Gabriel Brazao",
+        "photo": "https://media.api-sports.io/football/players/31007.png",
+        "type": "Missing Fixture",
+        "reason": "Shoulder Injury"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 9991,
+        "name": "Lucas Verissimo",
+        "photo": "https://media.api-sports.io/football/players/9991.png",
+        "type": "Missing Fixture",
+        "reason": "Thigh Injury"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 276,
+        "name": "Neymar",
+        "photo": "https://media.api-sports.io/football/players/276.png",
+        "type": "Missing Fixture",
+        "reason": "Red Card"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 507379,
+        "name": "Vinicius Lira",
+        "photo": "https://media.api-sports.io/football/players/507379.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10173,
+        "name": "Willian Arao",
+        "photo": "https://media.api-sports.io/football/players/10173.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 311384,
+        "name": "Jefte",
+        "photo": "https://media.api-sports.io/football/players/311384.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 121,
+        "name": "Palmeiras",
+        "logo": "https://media.api-sports.io/football/teams/121.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 987,
+        "name": "Paulinho",
+        "photo": "https://media.api-sports.io/football/players/987.png",
+        "type": "Missing Fixture",
+        "reason": "Calf Injury"
+      },
+      "team": {
+        "id": 121,
+        "name": "Palmeiras",
+        "logo": "https://media.api-sports.io/football/teams/121.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 196298,
+        "name": "R. Sosa",
+        "photo": "https://media.api-sports.io/football/players/196298.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 121,
+        "name": "Palmeiras",
+        "logo": "https://media.api-sports.io/football/teams/121.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 150,
+        "name": "Arthur Melo",
+        "photo": "https://media.api-sports.io/football/players/150.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 6637,
+        "name": "G. Escobar",
+        "photo": "https://media.api-sports.io/football/players/6637.png",
+        "type": "Missing Fixture",
+        "reason": "Thigh Injury"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 31007,
+        "name": "Gabriel Brazao",
+        "photo": "https://media.api-sports.io/football/players/31007.png",
+        "type": "Missing Fixture",
+        "reason": "Shoulder Injury"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 9991,
+        "name": "Lucas Verissimo",
+        "photo": "https://media.api-sports.io/football/players/9991.png",
+        "type": "Missing Fixture",
+        "reason": "Thigh Injury"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 276,
+        "name": "Neymar",
+        "photo": "https://media.api-sports.io/football/players/276.png",
+        "type": "Missing Fixture",
+        "reason": "Red Card"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 507379,
+        "name": "Vinicius Lira",
+        "photo": "https://media.api-sports.io/football/players/507379.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 10173,
+        "name": "Willian Arao",
+        "photo": "https://media.api-sports.io/football/players/10173.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 128,
+        "name": "Santos",
+        "logo": "https://media.api-sports.io/football/teams/128.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 311384,
+        "name": "Jefte",
+        "photo": "https://media.api-sports.io/football/players/311384.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 121,
+        "name": "Palmeiras",
+        "logo": "https://media.api-sports.io/football/teams/121.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 987,
+        "name": "Paulinho",
+        "photo": "https://media.api-sports.io/football/players/987.png",
+        "type": "Missing Fixture",
+        "reason": "Calf Injury"
+      },
+      "team": {
+        "id": 121,
+        "name": "Palmeiras",
+        "logo": "https://media.api-sports.io/football/teams/121.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 196298,
+        "name": "R. Sosa",
+        "photo": "https://media.api-sports.io/football/players/196298.png",
+        "type": "Missing Fixture",
+        "reason": "Muscle Injury"
+      },
+      "team": {
+        "id": 121,
+        "name": "Palmeiras",
+        "logo": "https://media.api-sports.io/football/teams/121.png"
+      },
+      "fixture": {
+        "id": 1492438,
+        "timezone": "UTC",
+        "date": "2026-10-28T22:30:00+00:00",
+        "timestamp": 1793226600
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 404753,
+        "name": "Cauan Barros",
+        "photo": "https://media.api-sports.io/football/players/404753.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 133,
+        "name": "Vasco DA Gama",
+        "logo": "https://media.api-sports.io/football/teams/133.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 13283,
+        "name": "C. Cuesta",
+        "photo": "https://media.api-sports.io/football/players/13283.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 133,
+        "name": "Vasco DA Gama",
+        "logo": "https://media.api-sports.io/football/teams/133.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 280739,
+        "name": "Mateus Carvalho",
+        "photo": "https://media.api-sports.io/football/players/280739.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 133,
+        "name": "Vasco DA Gama",
+        "logo": "https://media.api-sports.io/football/teams/133.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 345748,
+        "name": "A. Gomez",
+        "photo": "https://media.api-sports.io/football/players/345748.png",
+        "type": "Questionable",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 133,
+        "name": "Vasco DA Gama",
+        "logo": "https://media.api-sports.io/football/teams/133.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 5994,
+        "name": "J. Carrascal",
+        "photo": "https://media.api-sports.io/football/players/5994.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 127,
+        "name": "Flamengo",
+        "logo": "https://media.api-sports.io/football/teams/127.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 618,
+        "name": "Danilo",
+        "photo": "https://media.api-sports.io/football/players/618.png",
+        "type": "Missing Fixture",
+        "reason": "Jaw injury"
+      },
+      "team": {
+        "id": 127,
+        "name": "Flamengo",
+        "logo": "https://media.api-sports.io/football/teams/127.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 332654,
+        "name": "Evertton Araujo",
+        "photo": "https://media.api-sports.io/football/players/332654.png",
+        "type": "Missing Fixture",
+        "reason": "Thigh Injury"
+      },
+      "team": {
+        "id": 127,
+        "name": "Flamengo",
+        "logo": "https://media.api-sports.io/football/teams/127.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 404753,
+        "name": "Cauan Barros",
+        "photo": "https://media.api-sports.io/football/players/404753.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 133,
+        "name": "Vasco DA Gama",
+        "logo": "https://media.api-sports.io/football/teams/133.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 13283,
+        "name": "C. Cuesta",
+        "photo": "https://media.api-sports.io/football/players/13283.png",
+        "type": "Missing Fixture",
+        "reason": "Inactive"
+      },
+      "team": {
+        "id": 133,
+        "name": "Vasco DA Gama",
+        "logo": "https://media.api-sports.io/football/teams/133.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 280739,
+        "name": "Mateus Carvalho",
+        "photo": "https://media.api-sports.io/football/players/280739.png",
+        "type": "Missing Fixture",
+        "reason": "Knee Injury"
+      },
+      "team": {
+        "id": 133,
+        "name": "Vasco DA Gama",
+        "logo": "https://media.api-sports.io/football/teams/133.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 345748,
+        "name": "A. Gomez",
+        "photo": "https://media.api-sports.io/football/players/345748.png",
+        "type": "Questionable",
+        "reason": "Injury"
+      },
+      "team": {
+        "id": 133,
+        "name": "Vasco DA Gama",
+        "logo": "https://media.api-sports.io/football/teams/133.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 5994,
+        "name": "J. Carrascal",
+        "photo": "https://media.api-sports.io/football/players/5994.png",
+        "type": "Missing Fixture",
+        "reason": "Yellow Cards"
+      },
+      "team": {
+        "id": 127,
+        "name": "Flamengo",
+        "logo": "https://media.api-sports.io/football/teams/127.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 618,
+        "name": "Danilo",
+        "photo": "https://media.api-sports.io/football/players/618.png",
+        "type": "Missing Fixture",
+        "reason": "Jaw injury"
+      },
+      "team": {
+        "id": 127,
+        "name": "Flamengo",
+        "logo": "https://media.api-sports.io/football/teams/127.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    },
+    {
+      "player": {
+        "id": 332654,
+        "name": "Evertton Araujo",
+        "photo": "https://media.api-sports.io/football/players/332654.png",
+        "type": "Missing Fixture",
+        "reason": "Thigh Injury"
+      },
+      "team": {
+        "id": 127,
+        "name": "Flamengo",
+        "logo": "https://media.api-sports.io/football/teams/127.png"
+      },
+      "fixture": {
+        "id": 1492439,
+        "timezone": "UTC",
+        "date": "2026-10-29T23:00:00+00:00",
+        "timestamp": 1793314800
+      },
+      "league": {
+        "id": 71,
+        "season": 2026,
+        "name": "Serie A",
+        "country": "Brazil",
+        "logo": "https://media.api-sports.io/football/leagues/71.png",
+        "flag": "https://media.api-sports.io/flags/br.svg"
+      }
+    }
+  ]
+}

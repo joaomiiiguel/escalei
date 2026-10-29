@@ -21,7 +21,8 @@
     "seed:mock-live-lineups": "node --env-file=.env scripts/seed-mock-live-lineups.mjs",
     "seed:mock-league": "node --env-file=.env scripts/seed-mock-league.mjs",
     "seed:round-31": "node --env-file=.env scripts/seed-round-31.mjs",
-    "record:round": "node --env-file=.env scripts/record-round-fixtures.mjs"
+    "record:round": "node --env-file=.env scripts/record-round-fixtures.mjs",
+    "record:injuries": "node --env-file=.env scripts/record-injuries.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
