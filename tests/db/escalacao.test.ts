@@ -90,6 +90,29 @@ describe("escalação validada no banco", () => {
     });
   });
 
+  it("recusa lesionados e suspensos, dizendo quem trocar", async () => {
+    await db.query("update jogadores set status = 'LESIONADO', status_motivo = 'Lesão muscular' where id = 19");
+    await db.query("update jogadores set status = 'SUSPENSO', status_motivo = 'Expulso' where id = 1");
+    try {
+      await expect(save(USER_A, openRound, "4-3-3", lineup433())).rejects.toMatchObject({
+        code: "ES422",
+        message: "Troque os jogadores lesionados ou suspensos: J1, J19.",
+      });
+    } finally {
+      await db.query("update jogadores set status = 'PROVAVEL', status_motivo = null where id in (1, 19)");
+    }
+  });
+
+  it("aceita jogador em dúvida", async () => {
+    await db.query("update jogadores set status = 'DUVIDA', status_motivo = 'Inativo' where id = 19");
+    try {
+      const team = await save(USER_A, openRound, "4-3-3", lineup433());
+      expect(team.jogadores).toBe(11);
+    } finally {
+      await db.query("update jogadores set status = 'PROVAVEL', status_motivo = null where id = 19");
+    }
+  });
+
   it("impede salvar sem usuário autenticado", async () => {
     await expect(save("", openRound, "4-3-3", lineup433())).rejects.toMatchObject({ code: "ES401" });
   });
