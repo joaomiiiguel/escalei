@@ -4,6 +4,8 @@
  * Orquestrador das rodadas reais da temporada (JOA-147), executado a cada 2 min:
  * 1. AGENDADA → ABERTA quando `abre_em` passa (inicializa o ranking da rodada).
  * 2. ABERTA → EM_ANDAMENTO quando `trava_em` passa (bloqueia escalações).
+ *    Enquanto a rodada está aberta, atualiza lesionados e suspensos
+ *    (`/injuries`, a cada 6 h e uma vez nas 2 h antes da trava; JOA-163).
  * 3. Jogos já iniciados e não encerrados: status e placar em lotes de até 20
  *    (`/fixtures?ids=`). Fora das janelas de jogo não há consulta à API.
  * 4. Jogos encerrados: pontuação via `score-match`, com pausa crescente entre
@@ -32,6 +34,7 @@ import {
   type FlowFixture as Fixture,
   type FlowGame as Game,
 } from "../_shared/round-flow.ts";
+import { type ApiInjury, buildPlayerStatuses, injuriesSyncDue } from "../_shared/injuries.ts";
 
 type Round = { id: number; numero: number; status: string; abre_em: string | null; trava_em: string; fechamento_simulado_em: string | null };
 
@@ -46,7 +49,7 @@ Deno.serve(async (request) => {
   }
   const db = createClient(url, serviceRoleKey, { auth: { autoRefreshToken: false, persistSession: false } });
   const now = new Date();
-  const summary = { abertas: [] as number[], travadas: [] as number[], encerrados: [] as number[], pendentes: [] as number[], fechadas: [] as number[], cotaReservada: false };
+  const summary = { abertas: [] as number[], travadas: [] as number[], encerrados: [] as number[], pendentes: [] as number[], fechadas: [] as number[], lesoes: null as number | null, cotaReservada: false };
 
   const { data: roundsData, error: roundsError } = await db.from("rodadas")
     .select("id, numero, status, abre_em, trava_em, fechamento_simulado_em")
@@ -72,6 +75,12 @@ Deno.serve(async (request) => {
     }
   }
 
+  const openRound = rounds.find((round) => round.status === "ABERTA");
+  if (openRound) {
+    const result = await syncInjuries(db, { round: openRound, now, apiKey, summary });
+    if (result) return result;
+  }
+
   const { data: maxAttemptsConfig } = await db.from("configuracoes").select("valor").eq("chave", "api_football_max_tentativas_pontuacao").maybeSingle();
   const maxAttempts = Number(maxAttemptsConfig?.valor ?? DEFAULT_MAX_SCORING_ATTEMPTS);
 
@@ -83,6 +92,57 @@ Deno.serve(async (request) => {
 
   return Response.json({ temporada: season, ...summary, pendentes: [...new Set(summary.pendentes)] });
 });
+
+/** Lesionados e suspensos da rodada aberta, quando for a hora. Devolve uma resposta só em caso de erro. */
+async function syncInjuries(
+  db: SupabaseClient,
+  context: { round: Round; now: Date; apiKey: string; summary: { lesoes: number | null; cotaReservada: boolean } },
+): Promise<Response | null> {
+  const { round, now, summary } = context;
+  const referencia = `api-football:rodada-${round.numero}:lesoes`;
+  const lastRun = (onlySuccess: boolean) => {
+    const query = db.from("sync_execucoes").select("iniciado_em").eq("tipo", "LESOES").eq("referencia", referencia);
+    return (onlySuccess ? query.eq("sucesso", true) : query).order("iniciado_em", { ascending: false }).limit(1).maybeSingle();
+  };
+  const [{ data: lastSuccess }, { data: lastAttempt }] = await Promise.all([lastRun(true), lastRun(false)]);
+  const history = { lastSuccessAt: lastSuccess?.iniciado_em ?? null, lastAttemptAt: lastAttempt?.iniciado_em ?? null };
+  if (!injuriesSyncDue(round, history, now)) return null;
+
+  const { data: gamesData, error: gamesError } = await db.from("jogos").select("api_football_id").eq("rodada_id", round.id);
+  if (gamesError) return Response.json({ error: `Não foi possível ler os jogos da rodada ${round.numero}.` }, { status: 500 });
+  const ids = (gamesData ?? []).map((game) => game.api_football_id).filter((id): id is number => Number.isInteger(id));
+  if (!ids.length) return null;
+
+  const execution = await startSyncExecution(db, context.apiKey, "LESOES", referencia).catch(() => null);
+  if (!execution) return Response.json({ error: "Não foi possível registrar a sincronização." }, { status: 500 });
+  let injuries: ApiInjury[] = [];
+  for (const batch of chunk(ids)) {
+    try {
+      const { response, payload } = await execution.client.get(`/injuries?ids=${batch.join("-")}`);
+      const apiErrors = describeApiErrors(payload);
+      if (!response.ok || apiErrors || !Array.isArray(payload.response)) {
+        // Sem a lista completa, não zera ninguém: tenta de novo na próxima passada.
+        await finishSyncExecution(db, execution, `A API-Football não retornou os desfalques (HTTP ${response.status}${apiErrors ? `; ${apiErrors}` : ""}).`);
+        return null;
+      }
+      injuries = injuries.concat(payload.response as ApiInjury[]);
+    } catch (error) {
+      if (!(error instanceof QuotaReservedError) && !(error instanceof ApiAccessError)) throw error;
+      summary.cotaReservada = error instanceof QuotaReservedError;
+      await finishSyncExecution(db, execution, error.message);
+      return null;
+    }
+  }
+
+  const { data: changed, error } = await db.rpc("fn_aplicar_status_jogadores", { p_status: buildPlayerStatuses(injuries) });
+  if (error) {
+    await finishSyncExecution(db, execution, "Não foi possível gravar os desfalques.");
+    return Response.json({ error: "Não foi possível gravar os desfalques." }, { status: 500 });
+  }
+  await finishSyncExecution(db, execution);
+  summary.lesoes = Number(changed ?? 0);
+  return null;
+}
 
 /** Etapas 3 a 6 para uma rodada em andamento. Devolve uma resposta só em caso de erro. */
 async function advanceLiveRound(

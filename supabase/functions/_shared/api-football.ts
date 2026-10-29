@@ -33,7 +33,7 @@ const DAILY_REMAINING_HEADER = "x-ratelimit-requests-remaining";
 /** Idade máxima de uma leitura do cabeçalho de cota para ainda bloquear chamadas. */
 export const REMAINING_READING_MAX_AGE_MINUTES = 10;
 
-export type SyncType = "RODADA" | "JOGO" | "PONTUACAO" | "ORQUESTRADOR" | "CATALOGO" | "CALENDARIO";
+export type SyncType = "RODADA" | "JOGO" | "PONTUACAO" | "ORQUESTRADOR" | "CATALOGO" | "CALENDARIO" | "LESOES";
 
 export class QuotaReservedError extends Error {
   constructor(readonly detail: string) {

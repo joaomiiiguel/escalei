@@ -103,8 +103,8 @@ Escrita **só pelos jobs** (service role). Leitura pública.
 | `media_temporada` | `numeric(5,2)` default 0 | | calculado |
 | `media_ult5` | `numeric(5,2)` default 0 | média dos últimos 5 jogos com minutos > 0 | calculado |
 | `jogos_temporada` | `smallint` default 0 | | calculado |
-| `status` | `status_jogador` default `PROVAVEL` | | `/injuries` (`player.type`: "Missing Fixture" → `LESIONADO`/`SUSPENSO`; "Questionable" → `DUVIDA`) |
-| `status_motivo` | `text` | ex.: "Lesão muscular" | `player.reason` |
+| `status` | `status_jogador` default `PROVAVEL` | | `/injuries?ids=` dos jogos da rodada aberta (JOA-163): "Missing Fixture" com "Red Card"/"Yellow Cards"/"Suspended" → `SUSPENSO`; "Missing Fixture" com lesão → `LESIONADO`; "Questionable" ou motivo "Inactive" → `DUVIDA`; fora da lista → `PROVAVEL`. Gravado por `fn_aplicar_status_jogadores`, a cada 6 h com a rodada aberta e uma vez nas 2 h antes da trava |
+| `status_motivo` | `text` | ex.: "Lesão muscular", "Expulso", "3º amarelo" | `player.reason`, traduzido |
 | `ativo` | `bool` default `true` | `false` quando sai do elenco | job |
 | `api_atualizado_em` | `timestamptz` | | job |
 
