@@ -23,6 +23,7 @@ describe("menu do admin no mobile", () => {
     expect(screen.getByRole("button", { name: "Fechar menu" }).getAttribute("aria-expanded")).toBe("true");
     expect(screen.getByRole("link", { name: "Grupos" }).getAttribute("aria-current")).toBe("page");
     expect(screen.getByRole("link", { name: "Participantes" }).getAttribute("href")).toBe("/admin/participantes");
+    expect(screen.getByRole("link", { name: "Convites" }).getAttribute("href")).toBe("/admin/convites");
     expect(screen.getByText("Miguel")).toBeTruthy();
     expect(screen.getByRole("button", { name: "Sair" })).toBeTruthy();
   });
