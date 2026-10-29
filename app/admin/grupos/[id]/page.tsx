@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowLeft, Crown, UserMinus, UsersRound } from "lucide-react";
 import { notFound } from "next/navigation";
-import { Button } from "@/components/shadcn/button";
+import { SubmitButton } from "@/components/ui/submit-button";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireAdmin } from "@/lib/admin-access";
 import { addGroupInviteEmail, addGroupMember, deactivateGroup, removeGroupMember } from "../../actions";
@@ -99,9 +99,9 @@ export default async function AdminGroupDetail({ params, searchParams }: { param
               <form action={removeGroupMember}>
                 <input type="hidden" name="grupo_id" value={group.id} />
                 <input type="hidden" name="usuario_id" value={member.usuario_id} />
-                <Button type="submit" variant="outline" className="h-8 px-2.5 text-xs">
+                <SubmitButton variant="outline" loadingText={<span className="sr-only">Removendo participante…</span>} className="h-8 px-2.5 text-xs">
                   <UserMinus className="size-3.5" />
-                  <span className="sr-only">Remover participante</span></Button>
+                  <span className="sr-only">Remover participante</span></SubmitButton>
               </form>
             </li>))}
           </ul>
@@ -116,18 +116,18 @@ export default async function AdminGroupDetail({ params, searchParams }: { param
           <label className="grid gap-1.5 text-sm font-bold">E-mail do convidado
             <input name="email" required type="email" autoComplete="email" placeholder="nome@exemplo.com" className="h-10 rounded-md border border-neutral-700 bg-neutral-950 px-3 text-sm font-medium" />
           </label>
-          <Button type="submit" className="h-10">Autorizar e-mail</Button>
+          <SubmitButton loadingText="Autorizando…" className="h-10">Autorizar e-mail</SubmitButton>
         </form>
         {emailInvites?.length ?
           <ul className="mt-4 grid gap-1 text-xs text-muted-foreground">
             {emailInvites.map((invite) => <li key={invite.email}>{invite.email}{invite.aceito_em ? " · entrou" : " · pendente"}</li>)}
           </ul> : null
-        }<h3 className="mt-6 border-t border-neutral-800 pt-4 text-sm font-extrabold">Adicionar perfil existente</h3>{availableProfiles.length > 0 ? <form action={addGroupMember} className="mt-3 grid gap-3"><input type="hidden" name="grupo_id" value={group.id} /><select name="usuario_id" required aria-label="Participante fora do grupo" className="h-10 rounded-md border border-neutral-700 bg-neutral-950 px-3 text-sm font-medium"><option value="">Selecione um participante</option>{availableProfiles.map((profile) => <option value={profile.id} key={profile.id}>{profile.apelido}{profile.telefone ? ` · ${profile.telefone}` : ""}</option>)}</select><Button type="submit" className="h-10">Adicionar ao grupo</Button></form> : null}<dl className="mt-6 grid gap-2 border-t border-neutral-800 pt-4 text-xs">
+        }<h3 className="mt-6 border-t border-neutral-800 pt-4 text-sm font-extrabold">Adicionar perfil existente</h3>{availableProfiles.length > 0 ? <form action={addGroupMember} className="mt-3 grid gap-3"><input type="hidden" name="grupo_id" value={group.id} /><select name="usuario_id" required aria-label="Participante fora do grupo" className="h-10 rounded-md border border-neutral-700 bg-neutral-950 px-3 text-sm font-medium"><option value="">Selecione um participante</option>{availableProfiles.map((profile) => <option value={profile.id} key={profile.id}>{profile.apelido}{profile.telefone ? ` · ${profile.telefone}` : ""}</option>)}</select><SubmitButton loadingText="Adicionando…" className="h-10">Adicionar ao grupo</SubmitButton></form> : null}<dl className="mt-6 grid gap-2 border-t border-neutral-800 pt-4 text-xs">
           <div className="flex justify-between gap-3"><dt className="text-muted-foreground">Código</dt><dd className="font-mono font-bold">{group.codigo_convite}</dd></div><div className="flex justify-between gap-3"><dt className="text-muted-foreground">Tipo</dt><dd className="font-bold">{group.tipo}</dd></div></dl><section className="mt-6 border-t border-neutral-800 pt-4">
           <h3 className="text-sm font-extrabold">Inativar grupo</h3><p className="mt-1 text-xs leading-5 text-muted-foreground">Esta ação bloqueia o acesso dos participantes e deixa todos os convites indisponíveis.</p>
           <form action={deactivateGroup} className="mt-3">
             <input type="hidden" name="grupo_id" value={group.id} />
-            <Button type="submit" variant="secondary" className="h-10 w-full bg-red-600/30 hover:bg-red-600/40 border-0 text-white/60">Inativar grupo</Button>
+            <SubmitButton variant="secondary" loadingText="Inativando…" className="h-10 w-full bg-red-600/30 hover:bg-red-600/40 border-0 text-white/60">Inativar grupo</SubmitButton>
           </form>
         </section>
       </aside>

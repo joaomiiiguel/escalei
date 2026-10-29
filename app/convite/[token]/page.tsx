@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { UsersRound } from "lucide-react";
 import { Button } from "@/components/shadcn/button";
+import { SubmitButton } from "@/components/ui/submit-button";
 import { createClient } from "@/lib/supabase/server";
 import { canUserJoinInvite, getActiveInvite, isInviteToken } from "@/lib/invites";
 import { acceptInvite } from "./actions";
@@ -32,9 +33,9 @@ export default async function InvitePage({ params, searchParams }: { params: Pro
     {user ? (
       <form action={acceptInvite}>
         <input type="hidden" name="token" value={token} />
-        <Button type="submit" className="h-[52px] w-full rounded-[14px] bg-primary text-primary-foreground hover:bg-primary">
+        <SubmitButton loadingText="Entrando no grupo…" className="h-[52px] w-full rounded-[14px] bg-primary text-primary-foreground hover:bg-primary">
           Entrar no grupo
-        </Button>
+        </SubmitButton>
       </form>
     ) : (
       <Link href={`/entrar?convite=${token}`}>
