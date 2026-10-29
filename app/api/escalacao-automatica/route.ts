@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getCurrentRound } from "@/lib/current-round";
 import { pickAutoLineup } from "@/lib/auto-lineup";
 import { isFormation, isRoundEditable, type Position } from "@/lib/lineup-rules";
+import { isUnavailable, parseAvailability } from "@/lib/player-availability";
 import { createClient } from "@/lib/supabase/server";
 
 type Candidate = {
@@ -56,7 +57,7 @@ export async function GET(request: Request) {
     opponentByClubId.set(game.clube_fora_id, game.clube_casa_id);
   }
   const { data: players, error: playersError } = await db.from("jogadores")
-    .select("id, clube_id, nome, nome_exibicao, posicao, preco, media_temporada, media_ult5, jogos_temporada, clubes(nome, sigla, logo_url)")
+    .select("id, clube_id, nome, nome_exibicao, posicao, preco, status, media_temporada, media_ult5, jogos_temporada, clubes(nome, sigla, logo_url)")
     .eq("ativo", true)
     .in("clube_id", clubIds);
   if (playersError) return NextResponse.json({ error: "Mercado indisponível." }, { status: 500 });
@@ -77,7 +78,8 @@ export async function GET(request: Request) {
     asNumber(player.media_ult5) > 0 || asNumber(player.media_temporada) > 0 || asNumber(player.jogos_temporada) > 0,
   );
 
-  const candidates = (players ?? []).map((player) => {
+  // Lesionados e suspensos não podem ser escalados (JOA-164); continuam na média do clube.
+  const candidates = (players ?? []).filter((player) => !isUnavailable(parseAvailability(player.status))).map((player) => {
     const club = Array.isArray(player.clubes) ? player.clubes[0] : player.clubes;
     const recentAverage = asNumber(player.media_ult5);
     const seasonAverage = asNumber(player.media_temporada);

@@ -64,6 +64,13 @@ Sem técnico, sem capitão e sem banco de reservas no MVP.
 - **Pontos:** lançados quando o jogo termina. **Fechamento oficial no dia seguinte ao último jogo**, com uma segunda leitura da API para pegar as correções de scout.
 - **Jogo adiado ou cancelado:** os jogadores daquele jogo pontuam 0 na rodada.
 
+## Status do jogador
+
+- Com a rodada aberta, cada jogador tem um status vindo da API-Football: **Provável**, **Dúvida**, **Lesionado** ou **Suspenso** (por expulsão ou 3º amarelo). Atualiza a cada 6 h e uma vez nas 2 h antes da trava.
+- **Lesionado e Suspenso não podem ser escalados.** O mercado mostra o selo e desabilita o jogador; a escalação automática os ignora; o banco recusa salvar.
+- **Dúvida** pode ser escalado, com aviso.
+- Se um jogador de um time já salvo ficar lesionado ou suspenso, o time continua salvo e nada é removido sozinho. O app pede para trocá-lo até a trava, e qualquer nova alteração exige a troca. Se ele continuar no time na trava, soma 0 se não entrar em campo.
+
 ## Tabela de pontuação (mapeada nos campos da API-Football)
 
 | Scout | Pontos | Posição | Campo |

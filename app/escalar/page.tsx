@@ -4,6 +4,7 @@ import TitleSection from "@/components/ui/title-section";
 import { createClient } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { isRoundEditable, playerRoundStatus } from "@/lib/lineup-rules";
+import { parseAvailability } from "@/lib/player-availability";
 import { getCurrentRound } from "@/lib/current-round";
 import { displayedKickoff } from "@/lib/game-kickoff";
 import { Clock3 } from "lucide-react";
@@ -124,13 +125,13 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
     "id, numero, status, trava_em, fechada_em, simulada",
   );
   const { data: savedTeamData } = round
-    ? await supabase.from("times").select("formacao, times_jogadores(jogadores(id, clube_id, nome, nome_exibicao, posicao, preco, clubes(nome, sigla, logo_url)))").eq("usuario_id", user.id).eq("rodada_id", round.id).maybeSingle()
+    ? await supabase.from("times").select("formacao, times_jogadores(jogadores(id, clube_id, nome, nome_exibicao, posicao, preco, status, status_motivo, clubes(nome, sigla, logo_url)))").eq("usuario_id", user.id).eq("rodada_id", round.id).maybeSingle()
     : { data: null };
   const savedTeam = savedTeamData as unknown as SavedTeam | null;
   const savedPlayers = (savedTeam?.times_jogadores ?? []).flatMap(({ jogadores }) => jogadores ? [jogadores] : []);
   const initialPlayers: LineupPlayer[] = savedPlayers.map((player) => {
     const club = Array.isArray(player.clubes) ? player.clubes[0] : player.clubes;
-    return { id: player.id, name: player.nome_exibicao || player.nome, position: player.posicao, price: Number(player.preco), club: club?.sigla ?? "—", clubName: club?.nome ?? "Clube não disponível", logoUrl: club?.logo_url ?? null };
+    return { id: player.id, name: player.nome_exibicao || player.nome, position: player.posicao, price: Number(player.preco), club: club?.sigla ?? "—", clubName: club?.nome ?? "Clube não disponível", logoUrl: club?.logo_url ?? null, status: parseAvailability(player.status), statusReason: player.status_motivo ?? null };
   });
 
   const playerIds = savedPlayers.map((player) => player.id);
