@@ -9,7 +9,7 @@ export function AdminNav({ className = "mt-8", onNavigate }: { className?: strin
     const links = [
         { href: "/admin/grupos", label: "Grupos" },
         { href: "/admin/participantes", label: "Participantes" },
-        // { href: "/admin/convites", label: "Convites" },
+        { href: "/admin/convites", label: "Convites" },
         // { href: "/admin/configuracoes", label: "Configurações" },
     ];
 
