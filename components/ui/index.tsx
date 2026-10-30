@@ -19,6 +19,8 @@ export * from "./lineup-builder";
 export * from "./saved-lineup";
 export * from "./how-it-works-modal";
 export * from "./lineup-summary";
+export * from "./pass-count";
+export * from "./pass-info";
 export * from "./market-player-card";
 export * from "./match-card";
 export * from "./mobile-status-bar";

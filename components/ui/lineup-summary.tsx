@@ -1,8 +1,12 @@
 import { WandSparkles } from "lucide-react";
+import type { PassStatus } from "@/lib/round-pass";
 import { LoadingContent } from "./loading-content";
+import { PassInfo } from "./pass-info";
 
 type LineupSummaryProps = {
   budget?: number;
+  hasSavedTeam?: boolean;
+  passStatus?: PassStatus | null;
   selectedPlayers?: number;
   isSaving?: boolean;
   isAutoSelecting?: boolean;
@@ -15,7 +19,7 @@ function formatCurrency(value: number) {
   return `C$ ${value.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-export function LineupSummary({ budget = 100, selectedPlayers = 0, isSaving = false, isAutoSelecting = false, onAutoSelect, onSave, saveMessage }: LineupSummaryProps) {
+export function LineupSummary({ budget = 100, hasSavedTeam = false, passStatus, selectedPlayers = 0, isSaving = false, isAutoSelecting = false, onAutoSelect, onSave, saveMessage }: LineupSummaryProps) {
   const remainingSlots = Math.max(0, 11 - selectedPlayers);
   const averagePerSlot = remainingSlots ? budget / remainingSlots : 0;
   const canSave = selectedPlayers === 11 && budget >= 0;
@@ -34,6 +38,8 @@ export function LineupSummary({ budget = 100, selectedPlayers = 0, isSaving = fa
     <div className="grid grid-cols-11 gap-1" role="progressbar" aria-label="Progresso da escalação" aria-valuemin={0} aria-valuemax={11} aria-valuenow={selectedPlayers}>
       {Array.from({ length: 11 }, (_, index) => <span className={`h-1 rounded-full ${index < selectedPlayers ? "bg-primary" : "bg-muted"}`} key={index} />)}
     </div>
+
+    {passStatus && <PassInfo hasSavedTeam={hasSavedTeam} status={passStatus} />}
 
     <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-2">
       <button type="button" onClick={onAutoSelect} disabled={isAutoSelecting || isSaving} aria-busy={isAutoSelecting || undefined} className="flex min-h-9 items-center justify-center gap-2 rounded-xl bg-muted px-4 text-sm font-bold text-foreground disabled:cursor-not-allowed disabled:opacity-50 aria-busy:cursor-wait aria-busy:opacity-75">

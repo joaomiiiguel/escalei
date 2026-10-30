@@ -242,6 +242,36 @@ describe("exigência e consumo do passe de rodada", () => {
     expect(lots.rows).toEqual([{ restantes: 2 }]);
   }, 60_000);
 
+  describe("fn_passe_exigido", () => {
+    const passRequired = (userId: string, roundId: number) => asUser(db, userId, async (tx) => {
+      const result = await tx.query<{ exigido: boolean }>("select fn_passe_exigido($1) as exigido", [roundId]);
+      return result.rows[0].exigido;
+    });
+
+    it("só exige com a chave ligada", async () => {
+      const roundId = await openRound();
+      expect(await passRequired(USER_A, roundId)).toBe(false);
+      await requirePasses();
+      expect(await passRequired(USER_A, roundId)).toBe(true);
+    }, 60_000);
+
+    it("não depende de a pessoa ter passe", async () => {
+      await requirePasses();
+      await clearPasses(USER_A);
+      expect(await passRequired(USER_A, await openRound())).toBe(true);
+    }, 60_000);
+
+    it("não exige de administradores nem em rodada simulada", async () => {
+      await requirePasses();
+      await db.query("insert into administradores (usuario_id, nome) values ($1, 'Admin')", [USER_A]);
+      const roundId = await openRound();
+      expect(await passRequired(USER_A, roundId)).toBe(false);
+
+      await db.query("update rodadas set simulada = true where id = $1", [roundId]);
+      expect(await passRequired(USER_B, roundId)).toBe(false);
+    }, 60_000);
+  });
+
   it("não deixa o cliente consumir, estornar, expirar ou ganhar passes", async () => {
     const calls = [
       "select fn_consumir_passes_rodada(1)",
