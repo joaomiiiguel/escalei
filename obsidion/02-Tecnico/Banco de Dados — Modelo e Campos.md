@@ -255,6 +255,17 @@ O identificador de login e a validação do OTP ficam em `auth.users` (Supabase 
 | `pontos` | `numeric(6,2)` default 0 | copiado de `estatisticas_jogador` quando o jogo do jogador acaba |
 | `pontuado` | `bool` default `false` | alimenta "aguardando" × pontos no chip |
 
+### Passes de rodada (JOA-151)
+
+Dinheiro real, sempre em centavos (`integer`). Não se mistura com o saldo em C$ de `carteiras`. Regras em [[2026-10-27 — Passes de rodada pagos]].
+
+| Tabela | Campos principais | Regra |
+|---|---|---|
+| `produtos_passe` | `codigo` (`AVULSO`, `PACOTE_5`), `nome`, `quantidade`, `preco_centavos`, `ativo` | catálogo; 499 e 1999 |
+| `pedidos` | `usuario_id`, `produto_id`, `valor_centavos`, `status`, `provedor_id` (único), `pago_em`, `nota_emitida_em` | `valor_centavos` é a **foto do preço**; `usuario_id` vira nulo se a conta for excluída |
+| `passes_lotes` | `usuario_id`, `pedido_id` (único), `origem` (`COMPRA`, `CORTESIA`), `quantidade`, `restantes`, `valido_ate_temporada` | um lote por pedido; `restantes` entre 0 e `quantidade` |
+| `passes_movimentacoes` | `usuario_id`, `lote_id`, `rodada_id`, `tipo` (`CREDITO`, `CONSUMO`, `ESTORNO`, `EXPIRACAO`), `quantidade` | **somente inserção**; um `CONSUMO` e um `ESTORNO` por usuário e rodada; `CONSUMO` e `ESTORNO` exigem rodada |
+
 ### `ranking_rodada` (materializado pelo job)
 
 | Campo | Tipo | Regra |
@@ -381,6 +392,7 @@ Chave-valor para ajustes sem deploy: `temporada_atual`, `liga_api_id` (71), `orc
 | `fn_fechar_rodada(rodada_id)` | função | 2ª leitura conferida, ranking final, `status = FECHADA`, abre a próxima |
 | `fn_atualizar_precos(rodada_id)` | função | recalcula médias e preço e grava `historico_precos` para a rodada seguinte |
 | `fn_entrar_liga(codigo)` | RPC | entra na liga pelo código de convite e registra `convidado_por` |
+| `fn_passes_disponiveis()` | RPC | total de passes do usuário autenticado ainda válidos na `temporada_atual` |
 
 ---
 
@@ -395,6 +407,9 @@ Chave-valor para ajustes sem deploy: `temporada_atual`, `liga_api_id` (71), `orc
 | `ligas` | membros | dono edita; criar é aberto |
 | `ligas_membros` | membros da mesma liga | via `fn_entrar_liga`; sair é o próprio |
 | `interesse_pro`, `pesquisas_respostas` | o próprio | o próprio (insert) |
+| `produtos_passe` | pública | service role |
+| `pedidos`, `passes_lotes` | o próprio | service role e funções `security definer` |
+| `passes_movimentacoes` | o próprio | somente inserção por service role e funções `security definer` |
 | `sync_execucoes`, `configuracoes` | service role | service role |
 
 A **chave da API-Football nunca vai para o front**: só os jobs no servidor a usam.
@@ -421,6 +436,8 @@ A **chave da API-Football nunca vai para o front**: só os jobs no servidor a us
 Só **telefone verificado** (em `auth.users` e espelhado em `perfis`), **apelido**, **clube do coração**, **origem** e as respostas de pesquisa. **Sem CPF ou endereço na validação.** A exclusão de conta:
 - apaga `auth.users`, `perfis`, `interesse_pro` e `pesquisas_respostas`;
 - mantém as linhas de ranking das rodadas passadas **anonimizadas** ("Jogador removido"), para a classificação dos outros não mudar.
+
+Os `pedidos` **são mantidos** depois da exclusão, sem vínculo com o usuário, por serem registro fiscal. Lotes e movimentações de passes são apagados.
 
 Quando entrar prêmio, a tabela `perfis` ganha CPF (criptografado) e chave PIX validada contra o CPF. Ver [[Jurídico e Riscos]].
 
