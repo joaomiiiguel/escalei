@@ -3,13 +3,14 @@
 import { useCallback, useMemo, useRef, useState, useTransition } from "react";
 import { saveLineup } from "@/app/escalar/actions";
 import { fitsBudget, remainingBudget, sumPrices } from "@/lib/lineup-rules";
+import type { PassStatus } from "@/lib/round-pass";
 import { LineupFormation, type LineupPlayer } from "./lineup-formation";
 import { LineupSummary } from "./lineup-summary";
 
 type Formation = "4-3-3" | "4-4-2" | "3-5-2";
-type LineupBuilderProps = { budget: number; initialFormation?: Formation; initialPlayers?: LineupPlayer[]; roundId: number };
+type LineupBuilderProps = { budget: number; initialFormation?: Formation; initialPlayers?: LineupPlayer[]; passStatus?: PassStatus | null; roundId: number };
 
-export function LineupBuilder({ budget, initialFormation = "4-3-3", initialPlayers = [], roundId }: LineupBuilderProps) {
+export function LineupBuilder({ budget, initialFormation = "4-3-3", initialPlayers = [], passStatus, roundId }: LineupBuilderProps) {
   const [selectedPlayers, setSelectedPlayers] = useState<LineupPlayer[]>(initialPlayers);
   const [formation, setFormation] = useState<Formation>(initialFormation);
   const [autoPlayers, setAutoPlayers] = useState<LineupPlayer[] | undefined>();
@@ -57,6 +58,6 @@ export function LineupBuilder({ budget, initialFormation = "4-3-3", initialPlaye
 
   return <>
     <LineupFormation autoPlayers={autoPlayers} budget={budget} className="h-[65vh]" formation={formation} initialPlayers={initialPlayers} onFormationChange={handleFormationChange} onSelectedPlayersChange={handleSelectedPlayersChange} />
-    <LineupSummary budget={remainingBudget(budget, [totalCost])} isAutoSelecting={isAutoSelecting} isSaving={isSaving} onAutoSelect={autoSelect} onSave={save} saveMessage={message} selectedPlayers={selectedPlayers.length} />
+    <LineupSummary budget={remainingBudget(budget, [totalCost])} hasSavedTeam={initialPlayers.length > 0} passStatus={passStatus} isAutoSelecting={isAutoSelecting} isSaving={isSaving} onAutoSelect={autoSelect} onSave={save} saveMessage={message} selectedPlayers={selectedPlayers.length} />
   </>;
 }

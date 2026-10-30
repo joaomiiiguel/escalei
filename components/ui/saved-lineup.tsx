@@ -2,14 +2,16 @@ import { CalendarDays, Check, Clock3, LockKeyhole, Pencil, TriangleAlert, Trophy
 import Link from "next/link";
 import { LineupFormation, type LineupPlayer } from "./lineup-formation";
 import { Badge } from "./badge";
+import { PassInfo } from "./pass-info";
 import { availabilityText, isUnavailable } from "@/lib/player-availability";
+import type { PassStatus } from "@/lib/round-pass";
 
 type Formation = "4-3-3" | "4-4-2" | "3-5-2";
 function currency(value: number) {
   return `C$ ${value.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-export function SavedLineup({ budget, formation, players, travaEm }: { budget: number; formation: Formation; players: LineupPlayer[]; travaEm: string }) {
+export function SavedLineup({ budget, formation, passStatus, players, travaEm }: { budget: number; formation: Formation; passStatus?: PassStatus | null; players: LineupPlayer[]; travaEm: string }) {
   const spent = players.reduce((total, player) => total + player.price, 0);
   const unavailable = players.filter((player) => isUnavailable(player.status));
   const lockDate = new Intl.DateTimeFormat("pt-BR", { weekday: "short", hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" }).format(new Date(travaEm));
@@ -35,6 +37,7 @@ export function SavedLineup({ budget, formation, players, travaEm }: { budget: n
       <LockKeyhole className="size-5 shrink-0" />
       <div><p className="text-sm font-extrabold">Você pode alterar até {lockDate}</p><p className="text-[11px] text-primary/75">A escalação trava no apito inicial do primeiro jogo.</p></div>
     </div>
+    {passStatus && <PassInfo hasSavedTeam status={passStatus} />}
     <div className="grid grid-cols-2 gap-2">
       <Link href="/#jogos-da-rodada" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-border bg-card px-3 text-sm font-bold text-foreground"><CalendarDays className="size-4" />Jogos da rodada</Link>
       <Link href="/escalar?editar=1" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-primary px-3 text-sm font-bold !text-secondary"><Pencil className="size-4" />Editar time</Link>

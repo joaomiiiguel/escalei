@@ -394,6 +394,7 @@ Chave-valor para ajustes sem deploy: `temporada_atual`, `liga_api_id` (71), `orc
 | `fn_entrar_liga(codigo)` | RPC | entra na liga pelo código de convite e registra `convidado_por` |
 | `fn_passes_disponiveis()` | RPC | total de passes do usuário autenticado ainda válidos na `temporada_atual` |
 | `fn_passe_libera_rodada(rodada_id)` | RPC | se o usuário pode salvar na rodada: chave desligada, administrador, rodada simulada ou passe válido na temporada da rodada |
+| `fn_passe_exigido(rodada_id)` | RPC | se a rodada exige passe do usuário: chave ligada, não administrador e rodada não simulada; usada pela tela de escalação |
 | `fn_consumir_passes_rodada(rodada_id)` | função | na trava, debita 1 passe por time salvo, do lote que vence antes; expira lotes vencidos; idempotente |
 | `fn_estornar_passes_rodada(rodada_id)` | função | devolve o passe se todos os jogos da rodada foram adiados ou cancelados; idempotente |
 | `fn_expirar_passes()` | função | zera lotes vencidos e registra `EXPIRACAO` |

@@ -1,12 +1,13 @@
 import { redirect } from "next/navigation";
 import { LineupBuilder, Logo, RoundLineup, SavedLineup, type LineupPlayer } from "@/components/ui";
-import TitleSection from "@/components/ui/title-section";
+import { LineupTitle } from "./lineup-title";
 import { createClient } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { isRoundEditable, playerRoundStatus } from "@/lib/lineup-rules";
 import { parseAvailability } from "@/lib/player-availability";
 import { getCurrentRound } from "@/lib/current-round";
 import { displayedKickoff } from "@/lib/game-kickoff";
+import { toPassStatus, type PassStatus } from "@/lib/round-pass";
 import { Clock3 } from "lucide-react";
 import { Suspense } from "react";
 
@@ -15,7 +16,7 @@ import Image from "next/image";
 import DemoLineupPicker from "@/components/page/home/demo-lineup-picker";
 
 /** Apelidos que têm acesso ao modo de demonstração. */
-const DEMO_USERS = new Set(["Joao"]);
+const DEMO_USERS = new Set(["Miguel"]);
 
 function LineupSkeleton() {
   return (
@@ -46,6 +47,7 @@ type LineupBodyProps = {
   initialPlayers: LineupPlayer[];
   roundPlayers: LineupPlayer[];
   lastUpdated: string | null;
+  passStatus: PassStatus | null;
 };
 
 function LineupBody({ 
@@ -56,7 +58,8 @@ function LineupBody({
   balance,
   initialPlayers,
   roundPlayers,
-  lastUpdated 
+  lastUpdated,
+  passStatus
 }: LineupBodyProps) {
   if (!round) {
     return <Message>Não há rodada disponível no momento.</Message>;
@@ -70,6 +73,7 @@ function LineupBody({
         budget={balance}
         initialFormation={savedTeam?.formacao}
         initialPlayers={initialPlayers}
+        passStatus={passStatus}
         roundId={round.id}
       />
     );
@@ -84,6 +88,7 @@ function LineupBody({
       <SavedLineup
         budget={balance}
         formation={savedTeam.formacao}
+        passStatus={passStatus}
         players={initialPlayers}
         travaEm={round.trava_em}
       />
@@ -119,6 +124,7 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
     .eq("usuario_id", user.id)
     .maybeSingle();
   const balance = Number(wallet?.saldo ?? 60);
+  const { data: availablePasses } = await supabase.rpc("fn_passes_disponiveis");
 
   const { data: round } = await getCurrentRound<ActiveRound>(
     supabase,
@@ -185,7 +191,7 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
         <div className="w-full flex items-center justify-center">
           <Logo size="md" />
         </div>
-        <TitleSection title="Meu time" />
+        <LineupTitle passes={availablePasses} title="Meu time" />
         <div className="flex flex-col items-center justify-center border border-primary/50 rounded-xl py-8 gap-2 mt-20">
           <Image src="/icon-erro.png" alt="Time indisponível" width={100} height={100} />
           <p className="text-sm text-primary">Não há rodada disponível no momento.</p>
@@ -195,6 +201,10 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
   }
 
   const canEdit = isRoundEditable(round);
+  const { data: passRequired } = canEdit
+    ? await supabase.rpc("fn_passe_exigido", { p_rodada_id: round.id })
+    : { data: null };
+  const passStatus = toPassStatus(availablePasses, passRequired);
 
   if (!canEdit && !savedTeam) {
     return (
@@ -202,7 +212,7 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
         <div className="w-full flex items-center justify-center">
           <Logo size="md" />
         </div>
-        <TitleSection title="Meu time" />
+        <LineupTitle passes={availablePasses} title="Meu time" />
         <div className="flex flex-col items-center justify-center border border-primary/50 rounded-xl py-8 gap-2 mt-20">
           <Image src="/icon-erro.png" alt="Time indisponível" width={100} height={100} />
           <p className="text-sm text-primary">Não é possível editar o time nesta rodada.</p>
@@ -216,7 +226,7 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
       <div className="w-full flex items-center justify-center">
         <Logo size="md" />
       </div>
-      <TitleSection title={round && canEdit ? "Montar time" : "Meu time"} />
+      <LineupTitle passExempt={passRequired === false} passes={availablePasses} title={round && canEdit ? "Montar time" : "Meu time"} />
       <LineupBody
         round={round}
         savedTeam={savedTeam}
@@ -226,6 +236,7 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
         initialPlayers={initialPlayers}
         roundPlayers={roundPlayers}
         lastUpdated={lastUpdatedIso}
+        passStatus={passStatus}
       />
     </main>)
 }

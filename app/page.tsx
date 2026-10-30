@@ -17,7 +17,7 @@ import { TrackEvent } from "@/components/analytics/track-event";
 import { hoursSince } from "@/lib/analytics/events";
 
 /** Apelidos que têm acesso ao modo de demonstração. */
-const DEMO_USERS = new Set(["Joao"]);
+const DEMO_USERS = new Set(["Miguel"]);
 
 type ProximaRodada = Pick<Rodada, "numero" | "temporada" | "abre_em">;
 
