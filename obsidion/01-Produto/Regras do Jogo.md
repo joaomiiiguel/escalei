@@ -54,6 +54,8 @@ Sem técnico, sem capitão e sem banco de reservas no MVP.
 - Usuário novo ganha **2 passes de cortesia** ao concluir o onboarding.
 - Rodada cancelada por inteiro devolve o passe. Administradores são isentos.
 - Sem passe, o mercado fica aberto para consulta e a rodada soma 0 no ranking.
+- Quem salvou o time e ficou sem passe válido até a trava (por exemplo, por reembolso) joga a rodada sem débito.
+- Só vale com `passes_obrigatorios = true` em `configuracoes`. A chave nasce desligada e deve ser ligada quando a compra por PIX estiver no ar (JOA-153 e JOA-154).
 
 ## Trava e status
 

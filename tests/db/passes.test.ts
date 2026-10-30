@@ -60,9 +60,10 @@ describe("passes de rodada", () => {
     await db.query("insert into passes_movimentacoes (usuario_id, lote_id, tipo, quantidade) values ($1, $2, 'CREDITO', 5)", [USER_A, lot]);
 
     for (const table of ["pedidos", "passes_lotes", "passes_movimentacoes"]) {
-      const own = await asUser(db, USER_A, (tx) => tx.query(`select 1 from ${table}`));
-      const other = await asUser(db, USER_B, (tx) => tx.query(`select 1 from ${table}`));
+      const own = await asUser(db, USER_A, (tx) => tx.query<{ usuario_id: string }>(`select usuario_id from ${table}`));
+      const other = await asUser(db, USER_B, (tx) => tx.query<{ usuario_id: string }>(`select usuario_id from ${table} where usuario_id = $1`, [USER_A]));
       expect(own.rows.length).toBeGreaterThan(0);
+      expect(own.rows.every((row) => row.usuario_id === USER_A)).toBe(true);
       expect(other.rows).toHaveLength(0);
     }
     expect(order.rows).toHaveLength(1);
@@ -123,6 +124,7 @@ describe("passes de rodada", () => {
   it("soma só os passes do usuário ainda válidos na temporada atual", async () => {
     const user = "00000000-0000-4000-8000-00000000000c";
     await seedUser(db, user, "usuario_c");
+    await db.query("update passes_lotes set restantes = 0 where usuario_id = $1", [user]);
     expect(await available(db, user)).toBe(0);
     await seedLot(db, user, 2, 2026);
     await seedLot(db, user, 3, 2027);

@@ -133,6 +133,11 @@ async function tick(now: Date) {
   )).rows;
   for (const round of rounds) {
     for (const next of dueRoundTransitions(round, now)) {
+      if (next === "EM_ANDAMENTO") {
+        // O relógio do teste é simulado, mas a trava do consumo compara com o `now()` real do banco.
+        await db.query("update rodadas set trava_em = least(trava_em, now()) where id = $1", [round.id]);
+        await db.query("select fn_consumir_passes_rodada($1)", [round.id]);
+      }
       await updateRow("rodadas", round.id, { status: next });
       if (next === "ABERTA") await db.query("select fn_inicializar_ranking_rodada($1)", [round.id]);
       round.status = next;
@@ -163,6 +168,7 @@ async function tick(now: Date) {
     if ((await loadGames(round.id)).some((game) => !game.conferido_em)) continue;
     await db.query("select fn_atualizar_precos($1)", [round.id]);
     await db.query("select fn_creditar_saldos_rodada($1)", [round.id]);
+    await db.query("select fn_estornar_passes_rodada($1)", [round.id]);
     await updateRow("rodadas", round.id, { status: "FECHADA", fechada_em: now.toISOString() });
   }
 }

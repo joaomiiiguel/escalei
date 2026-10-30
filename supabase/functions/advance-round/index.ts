@@ -3,7 +3,8 @@
  *
  * Orquestrador das rodadas reais da temporada (JOA-147), executado a cada 2 min:
  * 1. AGENDADA → ABERTA quando `abre_em` passa (inicializa o ranking da rodada).
- * 2. ABERTA → EM_ANDAMENTO quando `trava_em` passa (bloqueia escalações).
+ * 2. ABERTA → EM_ANDAMENTO quando `trava_em` passa (bloqueia escalações e
+ *    consome os passes de rodada; JOA-152).
  *    Enquanto a rodada está aberta, atualiza lesionados e suspensos
  *    (`/injuries`, a cada 6 h e uma vez nas 2 h antes da trava; JOA-163).
  * 3. Jogos já iniciados e não encerrados: status e placar em lotes de até 20
@@ -14,7 +15,7 @@
  *    jogo deixa de bloquear o fechamento.
  * 6. Com todos os jogos resolvidos, agenda a conferência para 1 h depois do
  *    último jogo pontuado; após a segunda leitura, atualiza preços, credita
- *    saldos e fecha a rodada. A próxima rodada abre pelo próprio `abre_em`.
+ *    saldos, estorna os passes se a rodada foi cancelada por inteiro e a fecha. A próxima rodada abre pelo próprio `abre_em`.
  *
  * Trigger: cron a cada 2 min e POST manual.
  * Env obrigatórias: API_FOOTBALL_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY,
@@ -67,6 +68,9 @@ Deno.serve(async (request) => {
         if (rankingError) return Response.json({ error: `Não foi possível inicializar o ranking da rodada ${round.numero}.` }, { status: 500 });
         summary.abertas.push(round.numero);
       } else {
+        // Antes do status: `trava_em` já bloqueia o time, e uma falha aqui é refeita na próxima passada.
+        const { error: passesError } = await db.rpc("fn_consumir_passes_rodada", { p_rodada_id: round.id });
+        if (passesError) return Response.json({ error: `Não foi possível consumir os passes da rodada ${round.numero}.` }, { status: 500 });
         const { error } = await db.from("rodadas").update({ status: "EM_ANDAMENTO" }).eq("id", round.id).eq("status", "ABERTA");
         if (error) return Response.json({ error: `Não foi possível travar a rodada ${round.numero}.` }, { status: 500 });
         summary.travadas.push(round.numero);
@@ -259,6 +263,8 @@ async function advanceLiveRound(
   if (priceError) return Response.json({ error: "A conferência foi concluída, mas não foi possível atualizar os preços." }, { status: 500 });
   const { error: balanceError } = await db.rpc("fn_creditar_saldos_rodada", { p_rodada_id: round.id });
   if (balanceError) return Response.json({ error: "A conferência foi concluída, mas não foi possível creditar os saldos." }, { status: 500 });
+  const { error: refundError } = await db.rpc("fn_estornar_passes_rodada", { p_rodada_id: round.id });
+  if (refundError) return Response.json({ error: "A conferência foi concluída, mas não foi possível estornar os passes." }, { status: 500 });
   const { error: closeError } = await db.from("rodadas").update({ status: "FECHADA", fechada_em: nowIso }).eq("id", round.id);
   if (closeError) return Response.json({ error: "Não foi possível fechar a rodada." }, { status: 500 });
   summary.fechadas.push(round.numero);

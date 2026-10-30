@@ -37,6 +37,10 @@ O Brasileirão tem 38 rodadas em cerca de 8 a 9 meses: a média é de 4 a 5 por 
 | Nota fiscal | Emitida **manualmente** por enquanto, com controle no painel admin. |
 | Prêmio | **Nenhum.** O valor arrecadado nunca forma nem financia prêmio (art. 49, parágrafo único, III, da Lei 14.790/2023). |
 
+## Ativação
+
+A exigência do passe fica atrás da chave `passes_obrigatorios` em `configuracoes`, que nasce desligada (JOA-152). Com ela desligada, salvar não exige passe e a trava não consome nada; quem tinha conta recebeu as 2 cortesias, que ficam guardadas. Ligar só depois que a compra por PIX estiver no ar, senão ninguém consegue repor passes.
+
 ## Pendências
 
 - [ ] Escolher o provedor PIX com cobrança dinâmica e webhook (conta PF ou CNPJ, taxa por transação).
