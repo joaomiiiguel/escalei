@@ -8,6 +8,11 @@ export function isInviteCode(value: string | null | undefined) {
   return Boolean(value && /^[A-HJ-NP-Z2-9]{8}$/.test(value));
 }
 
+/** Convite utilizável: grupo não arquivado e dentro da validade. */
+export function isInviteOpen(league: { arquivada_em: string | null; convite_expira_em: string | null }) {
+  return !league.arquivada_em && (!league.convite_expira_em || new Date(league.convite_expira_em) > new Date());
+}
+
 export async function getInviteTokenByCode(code: string) {
   if (!isInviteCode(code)) return null;
   const admin = createAdminClient();
@@ -15,7 +20,7 @@ export async function getInviteTokenByCode(code: string) {
     .select("token_convite, arquivada_em, convite_expira_em")
     .eq("codigo_convite", code)
     .maybeSingle();
-  if (!league || league.arquivada_em || (league.convite_expira_em && new Date(league.convite_expira_em) <= new Date())) return null;
+  if (!league || !isInviteOpen(league)) return null;
   return league.token_convite;
 }
 
@@ -29,7 +34,7 @@ export async function getActiveInvite(token: string) {
     .eq("token_convite", token)
     .maybeSingle();
 
-  if (!league || league.arquivada_em || (league.convite_expira_em && new Date(league.convite_expira_em) <= new Date())) {
+  if (!league || !isInviteOpen(league)) {
     return false;
   }
 
