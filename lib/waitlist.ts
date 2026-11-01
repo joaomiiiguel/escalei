@@ -36,8 +36,14 @@ export function formatWhatsapp(digits: string) {
 }
 
 /** Link para abrir conversa no WhatsApp com o DDI do Brasil. */
-export function whatsappLink(digits: string) {
-  return `https://wa.me/55${digits}`;
+export function whatsappLink(digits: string, message?: string) {
+  const link = `https://wa.me/55${digits}`;
+  return message ? `${link}?text=${encodeURIComponent(message)}` : link;
+}
+
+/** Mensagem pronta para o admin enviar: o convite só vale para o e-mail autorizado. */
+export function waitlistInviteMessage({ nome, grupo, email, link }: { nome: string; grupo: string; email: string; link: string }) {
+  return `Oi, ${nome}! Sua vaga no beta do Escalou foi liberada no grupo ${grupo}. Entre por este link usando o e-mail ${email}: ${link}`;
 }
 
 const WEEK_MS = 7 * 24 * 60 * 60 * 1000;
