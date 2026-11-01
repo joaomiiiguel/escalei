@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { requireAdmin } from "@/lib/admin-access";
+import { isInviteOpen, normalizeEmail } from "@/lib/invites";
 
 const INVITE_ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -114,6 +115,63 @@ export async function deactivateGroup(formData: FormData) {
     .is("arquivada_em", null);
 
   redirect(`/admin/grupos${error ? "?erro=grupo" : "?inativado=1"}`);
+}
+
+function parseSignupId(formData: FormData) {
+  const id = Number(formData.get("inscrito_id"));
+  return Number.isSafeInteger(id) && id > 0 ? id : null;
+}
+
+export async function acceptWaitlistSignup(formData: FormData) {
+  const signupId = parseSignupId(formData);
+  const groupId = String(formData.get("grupo_id") ?? "");
+  if (!signupId || !UUID_PATTERN.test(groupId)) redirect("/admin/convites?erro=aceitar");
+
+  const { user } = await requireAdmin();
+  const admin = createAdminClient();
+  const [{ data: signup }, { data: group }] = await Promise.all([
+    admin.from("lista_espera").select("email").eq("id", signupId).maybeSingle(),
+    admin.from("ligas").select("id, arquivada_em, convite_expira_em").eq("id", groupId).maybeSingle(),
+  ]);
+  if (!signup || !group || !isInviteOpen(group)) redirect("/admin/convites?erro=aceitar");
+
+  // Autoriza antes de registrar o aceite: se a segunda escrita falhar, repetir é seguro.
+  const { error: inviteError } = await admin.from("ligas_convites_email").upsert({
+    liga_id: groupId,
+    email: normalizeEmail(signup.email),
+    convidado_por: user.id,
+  }, { onConflict: "liga_id,email", ignoreDuplicates: true });
+  if (inviteError) redirect("/admin/convites?erro=aceitar");
+
+  const { error } = await admin
+    .from("lista_espera")
+    .update({ liga_id: groupId, aceito_em: new Date().toISOString(), aceito_por: user.id })
+    .eq("id", signupId);
+  redirect(`/admin/convites${error ? "?erro=aceitar" : "?aceito=1"}`);
+}
+
+export async function deleteWaitlistSignup(formData: FormData) {
+  const signupId = parseSignupId(formData);
+  if (!signupId) redirect("/admin/convites?erro=excluir");
+
+  await requireAdmin();
+  const admin = createAdminClient();
+  const { data: signup } = await admin.from("lista_espera").select("email, liga_id").eq("id", signupId).maybeSingle();
+  if (!signup) redirect("/admin/convites?erro=excluir");
+
+  // Revoga só a autorização ainda não usada: quem já entrou continua no grupo.
+  if (signup.liga_id) {
+    const { error: inviteError } = await admin
+      .from("ligas_convites_email")
+      .delete()
+      .eq("liga_id", signup.liga_id)
+      .eq("email", normalizeEmail(signup.email))
+      .is("aceito_em", null);
+    if (inviteError) redirect("/admin/convites?erro=excluir");
+  }
+
+  const { error } = await admin.from("lista_espera").delete().eq("id", signupId);
+  redirect(`/admin/convites${error ? "?erro=excluir" : "?excluido=1"}`);
 }
 
 export async function signOut() {
