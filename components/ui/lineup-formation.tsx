@@ -6,9 +6,11 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { ButtonGroup } from "./button-group";
 import { Button } from "./button";
 import { Input } from "./input";
+import { PlayerRoleTag } from "./player-role-tag";
 import { TeamLogo } from "./team-logo";
 import { fitsBudget, remainingBudget, sumPrices } from "@/lib/lineup-rules";
 import { availabilityText, isUnavailable, type PlayerAvailability } from "@/lib/player-availability";
+import type { PlayerRole } from "@/lib/player-role";
 
 
 type Formation = "4-3-3" | "4-4-2" | "3-5-2";
@@ -29,6 +31,8 @@ export type LineupPlayer = {
   /** Status para a rodada aberta; lesionado e suspenso não podem ser escalados (JOA-164). */
   status?: PlayerAvailability;
   statusReason?: string | null;
+  /** Titular ou reserva no último jogo do clube; `null` sem dados (JOA-170). */
+  lastGameRole?: PlayerRole | null;
 };
 
 type LineupFormationProps = {
@@ -182,7 +186,7 @@ function PlayerPickerSheet({ maxAvailablePrice, onClose, onSelect, position, sel
           </div>
         </div>
         <div className="min-h-0 overflow-y-auto overscroll-contain border-t border-border px-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))]">
-          {isLoading ? <PlayerListSkeleton /> : hasError ? <p className="py-10 text-center text-sm text-muted-foreground">Não foi possível carregar os jogadores. Feche e tente novamente.</p> : visiblePlayers.length === 0 ? <div className="py-12 text-center"><Search className="mx-auto mb-3 size-8 text-muted-foreground" aria-hidden="true" /><p className="text-sm font-bold text-foreground">Nenhum jogador encontrado</p><p className="mt-1 text-xs text-muted-foreground">Tente outro nome ou clube.</p></div> : <ul className="divide-y divide-border">{visiblePlayers.map((player) => { const isSelected = selectedPlayerIds.has(player.id); const isOverBudget = !fitsBudget(player.price, maxAvailablePrice); const isOut = isUnavailable(player.status); const statusText = availabilityText(player.status, player.statusReason); const isDisabled = isSelected || isOverBudget || isOut; return <li key={player.id}><button type="button" disabled={isDisabled} onClick={() => onSelect(player)} className="flex w-full items-center justify-between gap-3 py-3 text-left outline-none transition-colors hover:bg-muted/40 focus-visible:bg-muted/40 disabled:cursor-not-allowed disabled:opacity-40"><TeamLogo className="size-9 shrink-0 rounded-full" logoUrl={player.logoUrl} nome={player.clubName} sigla={player.club} /><div className="min-w-0 flex-1"><p className="truncate text-sm font-bold text-foreground">{player.name}</p><p className="mt-0.5 text-xs font-medium text-muted-foreground">{isSelected ? "Já escalado" : isOut ? statusText : isOverBudget ? "Fora do orçamento" : `${player.club} · ${player.position}`}</p>{statusText && !isSelected && <span className={`mt-1 inline-block rounded-full px-2 py-0.5 text-[10px] font-bold ${isOut ? "bg-destructive text-destructive-foreground" : "bg-warning/20 text-warning"}`}>{isOut ? "Não pode ser escalado" : statusText}</span>}</div><strong className="shrink-0 text-sm text-primary">C$ {player.price.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</strong></button></li>; })}</ul>}
+          {isLoading ? <PlayerListSkeleton /> : hasError ? <p className="py-10 text-center text-sm text-muted-foreground">Não foi possível carregar os jogadores. Feche e tente novamente.</p> : visiblePlayers.length === 0 ? <div className="py-12 text-center"><Search className="mx-auto mb-3 size-8 text-muted-foreground" aria-hidden="true" /><p className="text-sm font-bold text-foreground">Nenhum jogador encontrado</p><p className="mt-1 text-xs text-muted-foreground">Tente outro nome ou clube.</p></div> : <ul className="divide-y divide-border">{visiblePlayers.map((player) => { const isSelected = selectedPlayerIds.has(player.id); const isOverBudget = !fitsBudget(player.price, maxAvailablePrice); const isOut = isUnavailable(player.status); const statusText = availabilityText(player.status, player.statusReason); const isDisabled = isSelected || isOverBudget || isOut; return <li key={player.id}><button type="button" disabled={isDisabled} onClick={() => onSelect(player)} className="flex w-full items-center justify-between gap-3 py-3 text-left outline-none transition-colors hover:bg-muted/40 focus-visible:bg-muted/40 disabled:cursor-not-allowed disabled:opacity-40"><TeamLogo className="size-9 shrink-0 rounded-full" logoUrl={player.logoUrl} nome={player.clubName} sigla={player.club} /><div className="min-w-0 flex-1"><p className="truncate text-sm font-bold text-foreground">{player.name}</p><p className="mt-0.5 text-xs font-medium text-muted-foreground">{isSelected ? "Já escalado" : isOut ? statusText : isOverBudget ? "Fora do orçamento" : `${player.club} · ${player.position}`}</p><div className="mt-1 flex flex-wrap gap-1 empty:hidden">{!isOut && <PlayerRoleTag role={player.lastGameRole} />}{statusText && !isSelected && <span className={`inline-block rounded-full px-2 py-0.5 text-[10px] font-bold ${isOut ? "bg-destructive text-destructive-foreground" : "bg-warning/20 text-warning"}`}>{isOut ? "Não pode ser escalado" : statusText}</span>}</div></div><strong className="shrink-0 text-sm text-primary">C$ {player.price.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}</strong></button></li>; })}</ul>}
         </div>
       </section>
     </div>

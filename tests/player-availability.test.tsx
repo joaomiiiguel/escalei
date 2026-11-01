@@ -61,6 +61,34 @@ describe("mercado", () => {
   });
 });
 
+describe("tag de titular ou reserva", () => {
+  it("mostra o papel no último jogo, sem competir com lesionado ou suspenso", async () => {
+    const players = [
+      player(31, "ATA", { lastGameRole: "TITULAR" }),
+      player(32, "ATA", { lastGameRole: "RESERVA", status: "DUVIDA", statusReason: "Inativo" }),
+      player(33, "ATA", { lastGameRole: null }),
+      player(34, "ATA"),
+      player(35, "ATA", { lastGameRole: "TITULAR", status: "LESIONADO", statusReason: "Lesão muscular" }),
+      player(36, "ATA", { lastGameRole: "RESERVA", status: "SUSPENSO", statusReason: "Expulso" }),
+    ];
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true, json: async () => ({ players }) }));
+    render(<LineupFormation formation="4-3-3" />);
+    await act(async () => { fireEvent.click(screen.getAllByRole("button", { name: /ATA/ })[0]); });
+
+    const dialog = await screen.findByRole("dialog", { name: "Mercado" });
+    const row = (name: string) => within(dialog).getByText(name).closest("button")!.textContent;
+    expect(row("Jogador 31")).toContain("Titular no último jogo");
+    expect(row("Jogador 32")).toContain("Reserva no último jogo");
+    expect(row("Jogador 32")).toContain("Dúvida · Inativo");
+    expect(row("Jogador 33")).toContain("Sem dados do último jogo");
+    expect(row("Jogador 34")).toContain("Sem dados do último jogo");
+    for (const name of ["Jogador 35", "Jogador 36"]) {
+      expect(row(name)).toContain("Não pode ser escalado");
+      expect(row(name)).not.toContain("último jogo");
+    }
+  });
+});
+
 describe("time salvo", () => {
   it("avisa para trocar o jogador que ficou indisponível", () => {
     render(<SavedLineup budget={60} formation="4-3-3" players={team({ 9: { status: "LESIONADO", statusReason: "Lesão no joelho" } })} travaEm="2026-11-02T22:00:00Z" />);
