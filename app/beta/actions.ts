@@ -14,6 +14,7 @@ export async function joinWaitlist(input: WaitlistValues): Promise<WaitlistResul
     whatsapp: String(input?.whatsapp ?? ""),
     email: String(input?.email ?? ""),
     consent: input?.consent === true,
+    source: String(input?.source ?? ""),
   };
   const errors = validateWaitlist(values);
   if (Object.keys(errors).length > 0) return { ok: false, errors };

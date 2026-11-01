@@ -145,6 +145,19 @@ describe("formulário da lista de espera", () => {
     expect(await screen.findByRole("heading", { name: "Você está na lista!" })).toBeInTheDocument();
   });
 
+  it("envia o utm_source do link junto com o cadastro", async () => {
+    joinWaitlist.mockResolvedValue({ ok: true });
+    window.history.pushState({}, "", "/beta?utm_source=instagram&utm_medium=bio#lista-de-espera");
+    render(<WaitlistForm />);
+
+    fill();
+    fireEvent.click(screen.getByRole("button", { name: "Entrar na lista de espera" }));
+
+    await screen.findByRole("heading", { name: "Você está na lista!" });
+    expect(joinWaitlist).toHaveBeenCalledWith(expect.objectContaining({ email: "ana@exemplo.com", source: "instagram" }));
+    window.history.pushState({}, "", "/");
+  });
+
   it("explica a falha do servidor e mantém o formulário", async () => {
     joinWaitlist.mockResolvedValue({ ok: false, message: "Não foi possível entrar na lista agora." });
     render(<WaitlistForm />);

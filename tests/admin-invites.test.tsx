@@ -25,9 +25,9 @@ import AdminInvites from "@/app/admin/convites/page";
 const GROUP = "11111111-1111-4111-8111-111111111111";
 const ARCHIVED_GROUP = "22222222-2222-4222-8222-222222222222";
 const signups = [
-  { id: 3, nome: "Bia", whatsapp: "11987654321", email: "bia@exemplo.com", criado_em: new Date().toISOString(), liga_id: null, aceito_em: null },
-  { id: 2, nome: "Caio", whatsapp: "8533334444", email: "caio@exemplo.com", criado_em: "2026-01-10T15:30:00Z", liga_id: GROUP, aceito_em: "2026-01-11T15:30:00Z" },
-  { id: 1, nome: "Duda", whatsapp: "21987654321", email: "duda@exemplo.com", criado_em: "2026-01-09T15:30:00Z", liga_id: ARCHIVED_GROUP, aceito_em: "2026-01-11T15:30:00Z" },
+  { id: 3, nome: "Bia", whatsapp: "11987654321", email: "bia@exemplo.com", origem: "instagram", criado_em: new Date().toISOString(), liga_id: null, aceito_em: null },
+  { id: 2, nome: "Caio", whatsapp: "8533334444", email: "caio@exemplo.com", origem: "beta", criado_em: "2026-01-10T15:30:00Z", liga_id: GROUP, aceito_em: "2026-01-11T15:30:00Z" },
+  { id: 1, nome: "Duda", whatsapp: "21987654321", email: "duda@exemplo.com", origem: "beta", criado_em: "2026-01-09T15:30:00Z", liga_id: ARCHIVED_GROUP, aceito_em: "2026-01-11T15:30:00Z" },
 ];
 const groups = [
   { id: GROUP, nome: "Resenha", token_convite: "token-do-grupo", arquivada_em: null, convite_expira_em: null },
@@ -91,6 +91,13 @@ describe("tela admin de convites", () => {
     expect(screen.getAllByText("Pendentes")[0].nextElementSibling).toHaveTextContent("2");
     expect(screen.getAllByText("Aceitos")[0].nextElementSibling).toHaveTextContent("1");
     expect(screen.getByText("Últimos 7 dias").nextElementSibling).toHaveTextContent("1");
+  });
+
+  it("mostra a origem de cada inscrição e o total por origem", async () => {
+    await renderPage();
+    expect(screen.getByText("Inscrições por origem: Direto 2 · instagram 1")).toBeInTheDocument();
+    expect(screen.getByText(/Origem: instagram/)).toBeInTheDocument();
+    expect(screen.getAllByText(/Origem: Direto/)).toHaveLength(2);
   });
 
   it("oferece só grupos que recebem convites e pede grupo para aceitar", async () => {

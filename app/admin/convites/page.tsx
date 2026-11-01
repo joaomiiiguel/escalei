@@ -5,7 +5,7 @@ import { SubmitButton } from "@/components/ui/submit-button";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireAdmin } from "@/lib/admin-access";
 import { isInviteOpen } from "@/lib/invites";
-import { countRecentSignups, formatWhatsapp, waitlistInviteMessage, whatsappLink } from "@/lib/waitlist";
+import { countRecentSignups, countSignupsBySource, formatWaitlistSource, formatWhatsapp, waitlistInviteMessage, whatsappLink } from "@/lib/waitlist";
 import { acceptWaitlistSignup } from "../actions";
 import { DeleteSignupForm } from "./delete-signup-form";
 
@@ -14,6 +14,7 @@ type WaitlistSignup = {
     nome: string;
     whatsapp: string;
     email: string;
+    origem: string;
     criado_em: string;
     liga_id: string | null;
     aceito_em: string | null;
@@ -40,7 +41,7 @@ function SignupContact({ signup }: { signup: WaitlistSignup }) {
             <a href={whatsappLink(signup.whatsapp)} target="_blank" rel="noopener noreferrer" title="Abrir conversa no WhatsApp" className="text-primary underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">{formatWhatsapp(signup.whatsapp)}</a>
             <a href={`mailto:${signup.email}`} className="break-all text-muted-foreground underline-offset-2 hover:text-foreground hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring">{signup.email}</a>
         </p>
-        <p className="m-0 mt-1 text-xs text-muted-foreground">Inscrição em <time dateTime={signup.criado_em}>{signupDate.format(new Date(signup.criado_em))}</time></p>
+        <p className="m-0 mt-1 text-xs text-muted-foreground">Inscrição em <time dateTime={signup.criado_em}>{signupDate.format(new Date(signup.criado_em))}</time> · Origem: {formatWaitlistSource(signup.origem)}</p>
     </div>;
 }
 
@@ -52,7 +53,7 @@ export default async function AdminInvites({ searchParams }: { searchParams: Pro
     const [{ data, error }, { data: groupsData, error: groupsError }] = await Promise.all([
         admin
             .from("lista_espera")
-            .select("id, nome, whatsapp, email, criado_em, liga_id, aceito_em")
+            .select("id, nome, whatsapp, email, origem, criado_em, liga_id, aceito_em")
             .order("criado_em", { ascending: false }),
         admin
             .from("ligas")
@@ -97,6 +98,8 @@ export default async function AdminInvites({ searchParams }: { searchParams: Pro
                 <strong className="text-3xl">{countRecentSignups(signups)}</strong>
             </article>
         </section>
+
+        {signups.length > 0 && <p className="mt-3 text-sm text-muted-foreground">Inscrições por origem: {countSignupsBySource(signups).map(([origem, total]) => `${formatWaitlistSource(origem)} ${total}`).join(" · ")}</p>}
 
         <section className="mt-6" aria-labelledby="pendentes-titulo">
             <h2 id="pendentes-titulo" className="text-lg font-extrabold">Pendentes</h2>

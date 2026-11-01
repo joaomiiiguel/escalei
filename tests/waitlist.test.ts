@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { toWaitlistEntry, validateWaitlist } from "@/lib/waitlist";
+import { normalizeWaitlistSource, toWaitlistEntry, validateWaitlist } from "@/lib/waitlist";
 
 const insert = vi.fn();
 vi.mock("@/lib/supabase/admin", () => ({
@@ -23,7 +23,16 @@ describe("validação da lista de espera", () => {
   });
 
   it("normaliza nome, WhatsApp e e-mail para gravação", () => {
-    expect(toWaitlistEntry(valid)).toEqual({ nome: "Ana Souza", whatsapp: "11987654321", email: "ana@exemplo.com" });
+    expect(toWaitlistEntry(valid)).toEqual({ nome: "Ana Souza", whatsapp: "11987654321", email: "ana@exemplo.com", origem: "beta" });
+  });
+
+  it("normaliza a origem e trata valor inválido como acesso direto", () => {
+    expect(normalizeWaitlistSource(" Instagram ")).toBe("instagram");
+    expect(normalizeWaitlistSource("ig_stories-1")).toBe("ig_stories-1");
+    expect(normalizeWaitlistSource(undefined)).toBe("beta");
+    expect(normalizeWaitlistSource("")).toBe("beta");
+    expect(normalizeWaitlistSource("<script>")).toBe("beta");
+    expect(normalizeWaitlistSource("a".repeat(41))).toBe("beta");
   });
 });
 
@@ -34,7 +43,14 @@ describe("joinWaitlist", () => {
     insert.mockResolvedValue({ error: null });
     const { joinWaitlist } = await import("@/app/beta/actions");
     await expect(joinWaitlist(valid)).resolves.toEqual({ ok: true });
-    expect(insert).toHaveBeenCalledWith({ nome: "Ana Souza", whatsapp: "11987654321", email: "ana@exemplo.com" });
+    expect(insert).toHaveBeenCalledWith({ nome: "Ana Souza", whatsapp: "11987654321", email: "ana@exemplo.com", origem: "beta" });
+  });
+
+  it("grava a origem recebida já normalizada", async () => {
+    insert.mockResolvedValue({ error: null });
+    const { joinWaitlist } = await import("@/app/beta/actions");
+    await joinWaitlist({ ...valid, source: "Instagram" });
+    expect(insert).toHaveBeenCalledWith(expect.objectContaining({ origem: "instagram" }));
   });
 
   it("valida no servidor e não grava dados inválidos", async () => {

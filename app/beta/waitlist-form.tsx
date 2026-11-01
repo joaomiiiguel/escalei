@@ -26,7 +26,8 @@ export function WaitlistForm() {
     if (Object.keys(nextErrors).length > 0) return;
 
     setStatus("loading");
-    const result: WaitlistResult = await joinWaitlist(values).catch((): WaitlistResult => ({ ok: false, message: "Não foi possível entrar na lista agora. Tente novamente em instantes." }));
+    const source = new URLSearchParams(window.location.search).get("utm_source") ?? undefined;
+    const result: WaitlistResult = await joinWaitlist({ ...values, source }).catch((): WaitlistResult => ({ ok: false, message: "Não foi possível entrar na lista agora. Tente novamente em instantes." }));
     if (result.ok) {
       setStatus("success");
       return;
