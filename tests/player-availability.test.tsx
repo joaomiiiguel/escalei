@@ -89,6 +89,29 @@ describe("tag de titular ou reserva", () => {
   });
 });
 
+describe("ordem do mercado", () => {
+  it("lista titulares, reservas, sem dados e indisponíveis, com o preço dentro de cada grupo", async () => {
+    const players = [
+      player(41, "ATA", { lastGameRole: "TITULAR", status: "SUSPENSO", price: 1 }),
+      player(42, "ATA", { lastGameRole: null, price: 2 }),
+      player(43, "ATA", { lastGameRole: "RESERVA", price: 3 }),
+      player(44, "ATA", { lastGameRole: "TITULAR", price: 9 }),
+      player(45, "ATA", { lastGameRole: "RESERVA", status: "LESIONADO", price: 4 }),
+      player(46, "ATA", { lastGameRole: "TITULAR", status: "DUVIDA", price: 5 }),
+    ];
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue({ ok: true, json: async () => ({ players }) }));
+    render(<LineupFormation budget={60} formation="4-3-3" />);
+    await act(async () => { fireEvent.click(screen.getAllByRole("button", { name: /ATA/ })[0]); });
+
+    const dialog = await screen.findByRole("dialog", { name: "Mercado" });
+    const order = () => within(dialog).getAllByText(/^Jogador \d+$/).map((item) => item.textContent);
+    expect(order()).toEqual(["Jogador 46", "Jogador 44", "Jogador 43", "Jogador 42", "Jogador 41", "Jogador 45"]);
+
+    fireEvent.click(within(dialog).getByRole("button", { name: "Ordenar preço decrescente" }));
+    expect(order()).toEqual(["Jogador 44", "Jogador 46", "Jogador 43", "Jogador 42", "Jogador 45", "Jogador 41"]);
+  });
+});
+
 describe("time salvo", () => {
   it("avisa para trocar o jogador que ficou indisponível", () => {
     render(<SavedLineup budget={60} formation="4-3-3" players={team({ 9: { status: "LESIONADO", statusReason: "Lesão no joelho" } })} travaEm="2026-11-02T22:00:00Z" />);

@@ -23,6 +23,12 @@ export function playerRoleLabel(role: PlayerRole | null | undefined): string {
 }
 
 
+/** Ordem no mercado: titulares, reservas, sem dados e, por último, quem não pode ser escalado. */
+export function marketRank(role: PlayerRole | null | undefined, unavailable: boolean): number {
+  if (unavailable) return 3;
+  return role === "TITULAR" ? 0 : role === "RESERVA" ? 1 : 2;
+}
+
 /** Último jogo de cada clube; `games` vem do mais recente para o mais antigo. */
 export function lastGameByClub(games: FinishedGame[]): Map<number, number> {
   const lastGames = new Map<number, number>();
