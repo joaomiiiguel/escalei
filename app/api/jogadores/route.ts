@@ -1,8 +1,27 @@
 import { NextResponse } from "next/server";
 import { parseAvailability } from "@/lib/player-availability";
+import { LAST_GAMES_WINDOW, lastGameByClub, lastGameRoles } from "@/lib/player-role";
 import { createClient } from "@/lib/supabase/server";
 
 const positions = ["GOL", "DEF", "MEI", "ATA"] as const;
+
+/** Sem leitura dos jogos, o mercado continua funcionando e mostra "sem dados". */
+async function loadLastGameRoles(supabase: Awaited<ReturnType<typeof createClient>>) {
+  const { data: games } = await supabase
+    .from("jogos")
+    .select("id, clube_casa_id, clube_fora_id")
+    .eq("status", "ENCERRADO")
+    .order("inicio_em", { ascending: false })
+    .limit(LAST_GAMES_WINDOW);
+  const lastGames = lastGameByClub(games ?? []);
+  if (lastGames.size === 0) return lastGameRoles(lastGames, []);
+
+  const { data: stats } = await supabase
+    .from("estatisticas_jogador")
+    .select("jogo_id, jogador_id, clube_id, substituto")
+    .in("jogo_id", [...new Set(lastGames.values())]);
+  return lastGameRoles(lastGames, stats ?? []);
+}
 
 export async function GET(request: Request) {
   const position = new URL(request.url).searchParams.get("posicao");
@@ -11,13 +30,16 @@ export async function GET(request: Request) {
   }
 
   const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("jogadores")
-    .select("id, nome, nome_exibicao, posicao, preco, status, status_motivo, clubes(nome, sigla, logo_url)")
-    .eq("ativo", true)
-    .eq("posicao", position)
-    .order("nome_exibicao")
-    .limit(300);
+  const [{ data, error }, roles] = await Promise.all([
+    supabase
+      .from("jogadores")
+      .select("id, clube_id, nome, nome_exibicao, posicao, preco, status, status_motivo, clubes(nome, sigla, logo_url)")
+      .eq("ativo", true)
+      .eq("posicao", position)
+      .order("nome_exibicao")
+      .limit(300),
+    loadLastGameRoles(supabase),
+  ]);
 
   if (error) {
     return NextResponse.json({ error: "Não foi possível carregar os jogadores." }, { status: 500 });
@@ -37,6 +59,7 @@ export async function GET(request: Request) {
       price: Number(player.preco),
       status: parseAvailability(player.status),
       statusReason: player.status_motivo ?? null,
+      lastGameRole: roles.get(player.clube_id)?.get(player.id) ?? null,
     };
   });
 

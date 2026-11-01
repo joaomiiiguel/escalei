@@ -61,6 +61,8 @@ curl -s "https://v3.football.api-sports.io/fixtures/players?fixture=ID_DO_JOGO" 
 
 **Verificar plano e temporada:** `npm run check:api -- 2026`. O `/status` não consome cota; o resto gasta no máximo 3 requisições. Mostra o plano, o uso do dia, a cobertura declarada da Série A na temporada e se o último jogo encerrado tem scouts de jogadores.
 
+**`games.substitute` não é confiável (JOA-170):** nas respostas reais da rodada 32, 7 de 10 jogos trazem `false` para os 23 relacionados. `buildScouts` reconstrói `substituto` com os dados que já lê: entrou por evento `subst` (`assist` é quem entra, `player` é quem sai) ou ficou com 0 minutos. O mercado mostra "Sem dados do último jogo" quando o clube não tem entre 1 e 11 titulares no jogo, o que cobre as linhas gravadas antes dessa correção.
+
 ---
 
 *Criado em 28/09/2026.*

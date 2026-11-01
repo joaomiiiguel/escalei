@@ -3,6 +3,8 @@ import { buildScouts, type ApiEvent, type ApiPlayerGroup } from "@/supabase/func
 import players from "./fixtures/api-football/fixture-1001-players.json";
 import events from "./fixtures/api-football/fixture-1001-events.json";
 import palmeirasBragantino from "./fixtures/api-football/2026/rodada-32/fixture-1492426-players.json";
+import fluminenseAtletico from "./fixtures/api-football/2026/rodada-32/fixture-1492420-players.json";
+import fluminenseAtleticoEvents from "./fixtures/api-football/2026/rodada-32/fixture-1492420-events.json";
 
 /** Ids locais dos jogadores das fixtures (o 9999 fica fora do catálogo de propósito). */
 const LOCAL_PLAYER_IDS = new Map([[9001, 101], [9002, 102], [9003, 103], [9004, 104], [9005, 105], [9006, 106]]);
@@ -49,6 +51,27 @@ describe("scouts a partir da API-Football", () => {
 
   it("converte valores nulos em zero", () => {
     expect(byPlayer(103)).toMatchObject({ minutos: 30, gols: 0, desarmes: 0, amarelos: 0, defesas: 0, nota_api: null, substituto: true });
+  });
+
+  it("reconstrói titulares quando a API marca os 23 relacionados como não substitutos", () => {
+    const groups = fluminenseAtletico.response as unknown as ApiPlayerGroup[];
+    expect(groups[1].players.every((player) => player.statistics[0].games?.substitute === false)).toBe(true);
+    const apiIds = groups.flatMap((group) => group.players.map((player) => player.player.id)).filter((id) => id > 0);
+    const rows = buildScouts({
+      jogo: GAME,
+      playerGroups: groups,
+      events: fluminenseAtleticoEvents.response as ApiEvent[],
+      jogadorIdByApiId: new Map(apiIds.map((id) => [id, id])),
+      clubeIdByApiId: new Map(groups.map((group, index) => [group.team.id, index + 1])),
+      conferencia: false,
+      lidoEm: "2026-10-25T21:00:00.000Z",
+    });
+    const starters = (clubId: number) => rows.filter((row) => row.clube_id === clubId && !row.substituto);
+    expect(starters(1)).toHaveLength(11);
+    expect(starters(2)).toHaveLength(11);
+    expect(rows.find((row) => row.jogador_id === 12705)).toMatchObject({ substituto: false, minutos: 85 });
+    expect(rows.find((row) => row.jogador_id === 502726)).toMatchObject({ substituto: true, minutos: 25 });
+    expect(rows.find((row) => row.jogador_id === 259)).toMatchObject({ substituto: true, minutos: 0 });
   });
 
   it("lê gols, cartões, finalizações e defesas", () => {

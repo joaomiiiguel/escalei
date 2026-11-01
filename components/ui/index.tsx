@@ -27,6 +27,7 @@ export * from "./mobile-status-bar";
 export * from "./player-shirt";
 export * from "./player-status";
 export * from "./ranking-row";
+export * from "./player-role-tag";
 export * from "./round-badge";
 export * from "./round-recap-card";
 export * from "./segmented-tabs";
