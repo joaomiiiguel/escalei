@@ -156,7 +156,7 @@ Uma linha por jogador que **entrou em campo** num jogo.
 | `clube_id` | `int` FK → `clubes` | `team.id` |
 | `minutos` | `smallint` | `games.minutes` |
 | `posicao_jogo` | `char(1)` | `games.position` (G/D/M/F) |
-| `substituto` | `bool` | `games.substitute` |
+| `substituto` | `bool` | `games.substitute`, ou entrou por evento `subst`, ou 0 minutos (a API costuma marcar todos como `false`) |
 | `nota_api` | `numeric(3,1)` | `games.rating` (só exibição) |
 | `gols` | `smallint` default 0 | `goals.total` |
 | `assistencias` | `smallint` default 0 | `goals.assists` |

@@ -6,6 +6,9 @@
  * - Gols contra vêm dos eventos (`Goal` / `Own Goal`).
  * - Clean sheet (`sem_sofrer_gol`) exige 60 minutos ou mais em campo e o
  *   adversário sem gols; a tabela de pontuação só o premia para GOL e DEF.
+ * - `substituto` não confia só em `games.substitute`: em boa parte dos jogos a
+ *   API marca os relacionados todos como `false`. Quem entrou por um evento
+ *   `subst` ou não jogou também é reserva.
  *
  * Este módulo não usa globais do Deno para poder ser testado com Vitest.
  */
@@ -26,7 +29,8 @@ export type ApiPlayerStatistic = {
 };
 
 export type ApiPlayerGroup = { team: { id: number }; players: ApiPlayerStatistic[] };
-export type ApiEvent = { type?: string; detail?: string; player?: { id?: number | null } };
+/** Em `subst`, `player` é quem sai e `assist` é quem entra. */
+export type ApiEvent = { type?: string; detail?: string; player?: { id?: number | null }; assist?: { id?: number | null } };
 
 export type ScoredGame = {
   id: number;
@@ -62,6 +66,7 @@ export function buildScouts({ jogo, playerGroups, events, jogadorIdByApiId, club
       ownGoalsByPlayerApiId.set(event.player.id, (ownGoalsByPlayerApiId.get(event.player.id) ?? 0) + 1);
     }
   }
+  const cameOnApiIds = new Set(events.flatMap((event) => event.type === "subst" && event.assist?.id ? [event.assist.id] : []));
 
   // A API às vezes devolve um dos times do jogo com outro id em /fixtures/players
   // (ex.: Chapecoense como 22722, sem nome, em vez de 132). Se só um time ficou
@@ -90,7 +95,7 @@ export function buildScouts({ jogo, playerGroups, events, jogadorIdByApiId, club
       clube_id: localClubId,
       minutos: minutes,
       posicao_jogo: gamePosition(stat.games?.position),
-      substituto: stat.games?.substitute === true,
+      substituto: stat.games?.substitute === true || minutes === 0 || cameOnApiIds.has(player.player.id),
       nota_api: stat.games?.rating ? Number(stat.games.rating) : null,
       gols: numberOrZero(stat.goals?.total),
       assistencias: numberOrZero(stat.goals?.assists),
