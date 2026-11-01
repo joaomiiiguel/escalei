@@ -73,13 +73,13 @@
 ## Channels
 - **Active platforms:** Instagram (início). WhatsApp é o canal de grupo e convite, não de divulgação em massa.
 - **Posting cadence (if known):** Proposta: 3 posts por semana + Stories nos momentos da rodada. Ajustar à capacidade real.
-- **Handles / links:** Handle a definir, ver [[Instagram — Perfil e Lançamento]]. Link: `/beta` no domínio de produção.
+- **Handles / links:** Instagram `@jogue.escalou`. Site `jogueescalou.com.br`, escrito `JogueEscalou.com.br` em posts e imagens. Link principal: `/beta`.
 - **Languages / markets:** Português do Brasil; Brasil.
 
 ## Operational defaults (tool skills read these)
 - **AI & synthetic media policy:** Liberado, sem regra própria além do que a plataforma e a lei exigirem. As Guardrails continuam valendo: IA não pode gerar rosto, voz ou imagem reconhecível de jogador, técnico ou pessoa real, nem escudo.
 - **Accessibility defaults:** Texto alternativo em toda imagem. Legenda sempre ativa em vídeo. Texto curto e com alto contraste sobre o fundo.
-- **Visual identity:** Sem kit formal ainda. Pontos de partida: logos em `public/LogoEscudo.png` e `public/LogoH.png`; verde-lima `#C5F920`, gramado `#0D4A32` e `#06261A`, giz `#F3F7E8`; Sofia Sans e Sofia Sans Extra Condensed em caixa alta. Formalizar em `design-and-templates`.
+- **Visual identity:** Sistema "Prancheta de giz", com modelos no [Kit Visual Instagram Escalou](https://claude.ai/artifact/SETy6RvKyppp6KtZyTvevG). Verde-lima `#C5F920`, gramado `#0D4A32` e `#06261A`, giz `#F3F7E8`; títulos em Sofia Sans Extra Condensed Black, caixa alta; apoio em Sofia Sans. Logos em `public/`.
 
 ## Guardrails
 - **Banned words/topics:**
@@ -95,7 +95,7 @@
   - "Brasileirão" apenas de forma descritiva, sem sugerir oficialidade.
   - Música em tendência só com licença para uso comercial.
 - **Conflito com o emprego (prioridade):**
-  - Perfil só de marca: sem rosto, nome ou biografia do fundador até revisar o contrato de trabalho.
+  - Perfil só de marca: sem rosto, nome ou biografia do fundador. Contrato revisado pelo autor em 01/11/2026; mudar isso exige nova decisão.
   - Sem divulgar a colegas, nos canais ou no horário da empresa.
   - Conta criada com e-mail do projeto, sem sincronizar contatos do celular.
 - **Competitor rules:** Não citar concorrentes pelo nome em peças.

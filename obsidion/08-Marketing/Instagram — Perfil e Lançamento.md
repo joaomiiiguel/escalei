@@ -15,10 +15,10 @@
 
 | Campo | Conteúdo |
 |---|---|
-| **@** | `@escaloufantasy` (1ª opção) · `@joguescalou` · `@escalou.fantasy`. Disponibilidade não verificada |
+| **@** | `@jogue.escalou` |
 | **Nome** | `Escalou \| Fantasy Brasileirão` |
-| **Foto** | `public/LogoEscudo.png` centralizado sobre `#06261A`, com folga para o corte circular |
-| **Link 1** | `<domínio de produção>/beta?utm_source=instagram&utm_medium=bio` com o título "Entrar no beta" |
+| **Foto** | `public/icons/icon-512.png`: escudo sobre fundo preto, com folga para o corte circular |
+| **Link 1** | `https://jogueescalou.com.br/beta?utm_source=instagram&utm_medium=bio` com o título "Entrar no beta" |
 | **Botões** | Sem botão de WhatsApp ou e-mail público por enquanto; o funil é um só |
 
 **Bio:**
@@ -79,7 +79,7 @@ Sem jogos na semana, entra conteúdo de "Como joga" ou "Resenha da turma".
 | 8 | Mercado e rodada | Carrossel | Craque caro ou ATA barato? |
 | 9 | Convite | Reel | Monte seu grupo antes da próxima rodada |
 
-Os três primeiros viram os posts fixados.
+Os três primeiros viram os posts fixados. Roteiros, legendas e textos alternativos em [[Primeiros 9 posts]].
 
 ## O que acompanhar
 
@@ -87,10 +87,12 @@ Visitas ao perfil, cliques no link, compartilhamentos e entradas na lista de esp
 
 ## Pendências
 
-- [ ] Escolher e confirmar o @ disponível.
-- [ ] Preencher o domínio de produção no link.
-- [ ] Revisar o contrato de trabalho ([[Jurídico e Riscos]]).
-- [ ] Criar o kit visual dos posts.
+- [x] Escolher e confirmar o @ disponível: `@jogue.escalou`.
+- [x] Preencher o domínio de produção no link: `jogueescalou.com.br`.
+- [ ] Publicar o domínio na produção e testar o link da bio, o login e os convites.
+- [x] Revisar o contrato de trabalho ([[Jurídico e Riscos]]).
+- [x] Criar o kit visual dos posts: [Kit Visual Instagram Escalou](https://claude.ai/artifact/SETy6RvKyppp6KtZyTvevG).
+- [ ] Conseguir o logo em vetor ou alta resolução. Os arquivos atuais têm no máximo 512 px.
 - [ ] Trocar a bio e o fixado 3 quando `passes_obrigatorios` for ligada.
 
 ---

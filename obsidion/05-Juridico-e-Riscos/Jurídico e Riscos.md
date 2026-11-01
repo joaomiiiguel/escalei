@@ -18,7 +18,7 @@ tags:
 ## 1. Conflito com o emprego (prioridade 1)
 
 O autor trabalha numa empresa de apostas esportivas, e fantasy de futebol é mercado vizinho.
-- [ ] Ler o contrato: **exclusividade, não-concorrência, cessão de propriedade intelectual**.
+- [x] Ler o contrato: **exclusividade, não-concorrência, cessão de propriedade intelectual**. Revisado pelo autor em 01/11/2026.
 - [ ] Nada da empresa no projeto: **código, infra, contas, dados, horário de trabalho**.
 - [ ] Não recrutar usuários pelos canais nem pelos colegas da empresa.
 - [ ] Avaliar contar para a empresa (transparência protege, e ela pode virar parceira ou compradora).
