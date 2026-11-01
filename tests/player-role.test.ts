@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { lastGameByClub, lastGameRoles, NO_ROLE_LABEL, playerRoleLabel } from "@/lib/player-role";
+import { lastGameByClub, lastGameRoles, marketRank, NO_ROLE_LABEL, playerRoleLabel } from "@/lib/player-role";
 
 const createClient = vi.hoisted(() => vi.fn());
 vi.mock("@/lib/supabase/server", () => ({ createClient }));
@@ -52,6 +52,13 @@ describe("titular ou reserva", () => {
     expect(playerRoleLabel("TITULAR")).toBe("Titular no último jogo");
     expect(playerRoleLabel("RESERVA")).toBe("Reserva no último jogo");
     expect(playerRoleLabel(null)).toBe(NO_ROLE_LABEL);
+  });
+});
+
+describe("ordem no mercado", () => {
+  it("indisponível fica por último mesmo tendo sido titular", () => {
+    expect([marketRank("TITULAR", false), marketRank("RESERVA", false), marketRank(null, false), marketRank("TITULAR", true)]).toEqual([0, 1, 2, 3]);
+    expect(marketRank(undefined, false)).toBe(2);
   });
 });
 

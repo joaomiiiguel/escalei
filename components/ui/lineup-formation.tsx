@@ -10,7 +10,7 @@ import { PlayerRoleTag } from "./player-role-tag";
 import { TeamLogo } from "./team-logo";
 import { fitsBudget, remainingBudget, sumPrices } from "@/lib/lineup-rules";
 import { availabilityText, isUnavailable, type PlayerAvailability } from "@/lib/player-availability";
-import type { PlayerRole } from "@/lib/player-role";
+import { marketRank, type PlayerRole } from "@/lib/player-role";
 
 
 type Formation = "4-3-3" | "4-4-2" | "3-5-2";
@@ -129,7 +129,7 @@ function PlayerPickerSheet({ maxAvailablePrice, onClose, onSelect, position, sel
     .filter((player) => `${player.name} ${player.club}`.toLocaleLowerCase("pt-BR").includes(normalizedSearch))
     .filter((player) => clubFilter === "todos" || player.club === clubFilter)
     .filter((player) => player.price <= maxPrice)
-    .sort((first, second) => priceOrder === "asc" ? first.price - second.price : second.price - first.price);
+    .sort((first, second) => marketRank(first.lastGameRole, isUnavailable(first.status)) - marketRank(second.lastGameRole, isUnavailable(second.status)) || (priceOrder === "asc" ? first.price - second.price : second.price - first.price));
   const hasActiveFilters = clubFilter !== "todos" || maxPrice !== 20 || priceOrder !== "asc";
 
   function clearFilters() {
