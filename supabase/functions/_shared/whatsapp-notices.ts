@@ -13,11 +13,15 @@ export function pushCutoff(now: Date): string {
 
 const MARKET_OPEN = new Set(["MERCADO_ABERTO", "FALTA_1H"]);
 
-/** A `tag` faz o aparelho substituir, e não duplicar, um aviso reenviado. */
+/**
+ * A primeira frase vira o título: o iPhone já mostra "from Escalou" abaixo dele.
+ * A `tag` faz o aparelho substituir, e não duplicar, um aviso reenviado.
+ */
 export function pushPayload(notice: PendingNotice): string {
+  const titleEnd = notice.mensagem.indexOf("!") + 1;
   return JSON.stringify({
-    title: "Escalou",
-    body: notice.mensagem,
+    title: titleEnd ? notice.mensagem.slice(0, titleEnd) : "Escalou",
+    body: notice.mensagem.slice(titleEnd).trim(),
     tag: `aviso-rodada-${notice.id}`,
     url: MARKET_OPEN.has(notice.tipo) ? "/escalar" : "/",
   });

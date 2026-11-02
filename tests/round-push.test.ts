@@ -42,12 +42,16 @@ describe("inscrição de push", () => {
 });
 
 describe("push da notify-whatsapp", () => {
-  const notice = { id: 7, tipo: "FALTA_1H", mensagem: "⏰ Falta 1 hora!" };
+  const notice = { id: 7, tipo: "FALTA_1H", mensagem: "⏰ Falta 1 hora! O mercado fecha às 19h00.\nAinda dá tempo." };
 
   it("manda o usuário para escalar enquanto o mercado está aberto e para a home depois", () => {
     const urlFor = (tipo: string) => JSON.parse(pushPayload({ ...notice, tipo })).url;
-    expect(JSON.parse(pushPayload(notice))).toEqual({ title: "Escalou", body: "⏰ Falta 1 hora!", tag: "aviso-rodada-7", url: "/escalar" });
+    expect(JSON.parse(pushPayload(notice))).toEqual({ title: "⏰ Falta 1 hora!", body: "O mercado fecha às 19h00.\nAinda dá tempo.", tag: "aviso-rodada-7", url: "/escalar" });
     expect(["MERCADO_ABERTO", "FALTA_1H", "MERCADO_FECHADO", "RODADA_ENCERRADA"].map(urlFor)).toEqual(["/escalar", "/escalar", "/", "/"]);
+  });
+
+  it("usa o nome do app como título quando o aviso não tem primeira frase", () => {
+    expect(JSON.parse(pushPayload({ ...notice, mensagem: "Sem exclamação" }))).toMatchObject({ title: "Escalou", body: "Sem exclamação" });
   });
 
   it("só tenta notificar avisos da última hora", () => {
