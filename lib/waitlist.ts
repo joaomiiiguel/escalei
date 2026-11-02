@@ -1,6 +1,15 @@
-export type WaitlistValues = { name: string; whatsapp: string; email: string; consent: boolean };
+export type WaitlistValues = { name: string; whatsapp: string; email: string; consent: boolean; source?: string };
 export type WaitlistErrors = Partial<Record<keyof WaitlistValues, string>>;
-export type WaitlistEntry = { nome: string; whatsapp: string; email: string };
+export type WaitlistEntry = { nome: string; whatsapp: string; email: string; origem: string };
+
+/** Valor padrão de `lista_espera.origem`: cadastro sem `utm_source` no link. */
+const DIRECT_SOURCE = "beta";
+
+/** A origem vem da URL pública: fora do formato esperado, conta como acesso direto. */
+export function normalizeWaitlistSource(source?: string) {
+  const value = source?.trim().toLowerCase() ?? "";
+  return /^[a-z0-9_-]{1,40}$/.test(value) ? value : DIRECT_SOURCE;
+}
 
 export function onlyDigits(value: string) {
   return value.replace(/\D/g, "");
@@ -26,7 +35,20 @@ export function toWaitlistEntry(values: WaitlistValues): WaitlistEntry {
     nome: values.name.trim().replace(/\s+/g, " "),
     whatsapp: onlyDigits(values.whatsapp),
     email: values.email.trim().toLowerCase(),
+    origem: normalizeWaitlistSource(values.source),
   };
+}
+
+/** Nome da origem no admin. */
+export function formatWaitlistSource(source: string) {
+  return source === DIRECT_SOURCE ? "Direto" : source;
+}
+
+/** Conta as inscrições por origem, da maior para a menor. */
+export function countSignupsBySource(entries: { origem: string }[]) {
+  const counts = new Map<string, number>();
+  for (const { origem } of entries) counts.set(origem, (counts.get(origem) ?? 0) + 1);
+  return [...counts].sort(([, a], [, b]) => b - a);
 }
 
 /** Formata o WhatsApp gravado só com dígitos: "(11) 98765-4321". */
