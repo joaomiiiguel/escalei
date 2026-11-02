@@ -417,6 +417,7 @@ Chave-valor para ajustes sem deploy: `temporada_atual`, `liga_api_id` (71), `orc
 | `pedidos`, `passes_lotes` | o próprio | service role e funções `security definer` |
 | `passes_movimentacoes` | o próprio | somente inserção por service role e funções `security definer` |
 | `sync_execucoes`, `configuracoes` | service role | service role |
+| `avisos_whatsapp`, `push_inscricoes` | service role | service role e funções `security definer` |
 
 A **chave da API-Football nunca vai para o front**: só os jobs no servidor a usam.
 

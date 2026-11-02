@@ -81,7 +81,6 @@ tags:
 
 ### Depois da validação (só se passar)
 - [ ] Parcial ao vivo (API Pro)
-- [ ] Push notifications
 - [ ] Prêmio: CNPJ, antifraude, pagamento de prêmio, IR (independente da receita dos passes)
 - [ ] Patrocínio da rodada
 - [ ] PRO de verdade
