@@ -5,6 +5,7 @@
     "jsx": "react-jsx"
   },
   "imports": {
-    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2"
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2",
+    "web-push": "npm:web-push@3.6.7"
   }
 }

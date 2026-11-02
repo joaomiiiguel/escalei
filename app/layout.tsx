@@ -2,6 +2,7 @@ import { Navbar } from "@/components/ui/navbar";
 import { createClient } from "@/lib/supabase/server";
 import { getCurrentRound } from "@/lib/current-round";
 import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
+import { PushInvite } from "@/components/pwa/push-invite";
 import { PwaSetup } from "@/components/pwa/pwa-setup";
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
@@ -48,6 +49,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
             <body className="min-h-screen overflow-x-clip">
                 <AnalyticsProvider userId={user?.id ?? null} />
                 <PwaSetup />
+                {user && <PushInvite vapidPublicKey={process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY} />}
                 {children}
                 <Navbar hasCurrentTeam={hasCurrentTeam} isRoundInProgress={isRoundInProgress} />
             </body>

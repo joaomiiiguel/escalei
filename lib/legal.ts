@@ -6,7 +6,7 @@ import { FORMATIONS } from "@/lib/lineup-rules";
  * o onboarding grava a versão aceita em `perfis.termos_versao`.
  */
 export const TERMOS_VERSAO = "v2";
-export const LEGAL_ATUALIZADO_EM = "27/10/2026";
+export const LEGAL_ATUALIZADO_EM = "02/11/2026";
 
 export type LegalSection = { titulo: string; paragrafos: string[] };
 
@@ -91,6 +91,7 @@ export const PRIVACIDADE: LegalDocument = {
         "Perfil: apelido, clube do coração (opcional) e WhatsApp, quando informado no convite ou no perfil.",
         "Jogo: escalações, pontuações, grupos de que você participa e posições nos rankings.",
         "Lista de espera: nome ou apelido, WhatsApp e e-mail informados no formulário.",
+        "Notificações: a notificação da rodada vem ligada e, depois que você permite no aparelho, guardamos o endereço de entrega gerado pelo seu navegador. Você pode desligar no perfil.",
       ],
     },
     {
@@ -104,7 +105,7 @@ export const PRIVACIDADE: LegalDocument = {
       titulo: "Quem vê seus dados",
       paragrafos: [
         "Os membros dos seus grupos veem seu apelido, a sigla do seu clube do coração e sua pontuação nos rankings. E-mail e WhatsApp não são exibidos para outros participantes.",
-        "Usamos serviços que tratam dados em nosso nome: Supabase (autenticação e banco de dados), Google (login, quando você escolhe essa opção) e PostHog (métricas de uso).",
+        "Usamos serviços que tratam dados em nosso nome: Supabase (autenticação e banco de dados), Google (login, quando você escolhe essa opção), PostHog (métricas de uso) e o serviço de notificações do seu aparelho (Apple, Google, Mozilla ou Microsoft), quando você ativa os avisos.",
         "Não vendemos dados pessoais e não os compartilhamos para ofertas de apostas ou jogos de azar.",
       ],
     },

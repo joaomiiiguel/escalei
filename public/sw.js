@@ -31,3 +31,19 @@ self.addEventListener("fetch", (event) => {
     event.respondWith(caches.match(request).then((cached) => cached ?? fetch(request)));
   }
 });
+
+self.addEventListener("push", (event) => {
+  const { title, body, tag, url } = event.data.json();
+  event.waitUntil(self.registration.showNotification(title, { body, tag, icon: "/icons/icon-192.png", data: { url } }));
+});
+
+self.addEventListener("notificationclick", (event) => {
+  event.notification.close();
+  const url = event.notification.data?.url ?? "/";
+  event.waitUntil(
+    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((windows) => {
+      const open = windows.find((client) => new URL(client.url).pathname === url);
+      return open ? open.focus() : self.clients.openWindow(url);
+    }),
+  );
+});
