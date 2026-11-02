@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { parsePushSubscription } from "@/lib/pwa";
 import { createClient } from "@/lib/supabase/server";
 
 export async function signOut() {
@@ -27,6 +28,34 @@ export async function updatePreferences(formData: FormData) {
   if (error) redirect("/perfil?erro=preferencias");
   revalidatePath("/perfil");
   redirect("/perfil?atualizado=1");
+}
+
+export async function savePushSubscription(value: unknown) {
+  const subscription = parsePushSubscription(value);
+  if (!subscription) {
+    console.error("Inscrição de push recusada na validação");
+    return false;
+  }
+
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return false;
+
+  // `push_inscricoes` só é acessível pela service_role; o dono vem da sessão, nunca do cliente.
+  const { error } = await createAdminClient()
+    .from("push_inscricoes")
+    .upsert({ ...subscription, usuario_id: user.id }, { onConflict: "endpoint" });
+  if (error) console.error("Falha ao salvar a inscrição de push", error.code, error.message);
+  return !error;
+}
+
+export async function removePushSubscription(endpoint: string) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return false;
+
+  const { error } = await createAdminClient().from("push_inscricoes").delete().eq("endpoint", endpoint).eq("usuario_id", user.id);
+  return !error;
 }
 
 function normalizeWhatsapp(value: string) {

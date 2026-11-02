@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { PushToggle } from "@/components/pwa/push-toggle";
 import { TeamLogo } from "@/components/ui/team-logo";
 import { createClient } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
@@ -79,7 +80,7 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
   const [{ data: profile }, { data: teams }, { count: leaguesCount }] = await Promise.all([
     supabase
       .from("perfis")
-      .select("apelido, email, telefone, tema, notificacoes_email, termos_aceitos_em, termos_versao, clube_coracao_id")
+      .select("apelido, email, telefone, tema, termos_aceitos_em, termos_versao, clube_coracao_id")
       .eq("id", user.id)
       .maybeSingle(),
     supabase.from("times").select("pontos").eq("usuario_id", user.id),
@@ -148,8 +149,7 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
       <div className="grid gap-[18px]">
         <form action={updatePreferences} className="m-0 grid gap-2">
           <Section title="PREFERÊNCIAS">
-            <ToggleRow icon={Bell} label="Resumo da rodada por whats" defaultChecked={profile.notificacoes_email} disabled />
-            <ToggleRow icon={Bell} label="Avisar antes da trava" defaultChecked disabled />
+            <PushToggle description="Avisamos neste aparelho quando o mercado abrir, 1 hora antes de fechar, quando fechar e quando a rodada terminar." vapidPublicKey={process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY} />
             <ToggleRow icon={Users} label="Novidades das minhas ligas" disabled />
           </Section>
           <NativeSubmitButton loadingText="Salvando…" className="h-10 rounded-xl border border-border bg-primary/70 px-4 text-sm font-bold text-card transition hover:bg-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring active:bg-primary disabled:cursor-wait disabled:opacity-75">Salvar preferências</NativeSubmitButton>
