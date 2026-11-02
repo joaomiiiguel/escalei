@@ -33,7 +33,7 @@ Sem apostas e sem prêmio. Beta gratuito 👇
 
 1. **O que é:** "VOCÊ JÁ VIVE FUTEBOL. AGORA ENTRE EM CAMPO."
 2. **Como funciona:** monte o time → feche antes da trava → viva a rodada.
-3. **Tira-dúvidas:** "NÃO É SOBRE GANHAR DINHEIRO. É SOBRE GANHAR DO SEU GRUPO.", com o beta gratuito e o preço dos passes depois.
+3. **Tira-dúvidas:** "NÃO É SOBRE GANHAR DINHEIRO. É SOBRE GANHAR DO SEU GRUPO.", com o beta gratuito e o aviso de passe depois, sem valores até os termos cobrirem os passes.
 
 ## Destaques
 
@@ -89,7 +89,8 @@ Visitas ao perfil, cliques no link, compartilhamentos e entradas na lista de esp
 
 - [x] Escolher e confirmar o @ disponível: `@jogue.escalou`.
 - [x] Preencher o domínio de produção no link: `jogueescalou.com.br`.
-- [ ] Publicar o domínio na produção e testar o link da bio, o login e os convites.
+- [x] Publicar o domínio na produção: o link da bio respondeu em 01/11/2026.
+- [ ] Testar o login e os convites no domínio novo.
 - [x] Revisar o contrato de trabalho ([[Jurídico e Riscos]]).
 - [x] Criar o kit visual dos posts: [Kit Visual Instagram Escalou](https://claude.ai/artifact/SETy6RvKyppp6KtZyTvevG).
 - [ ] Conseguir o logo em vetor ou alta resolução. Os arquivos atuais têm no máximo 512 px.

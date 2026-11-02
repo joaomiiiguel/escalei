@@ -16,22 +16,20 @@ Ritmo de 3 posts por semana, por 3 semanas. Só começar depois que o link da bi
 
 ### 1. Reel · Você já vive futebol
 
-**Arte:** "Post 1 · Capa do Reel" no kit.
+**Publicado:** [ver Reel](https://www.instagram.com/jogue.escalou/reel/DfNNQxxplke/).
 
-| Tempo | Texto na tela |
-|---|---|
-| 0–2 s | VOCÊ JÁ VIVE FUTEBOL. |
-| 2–5 s | Discute escalação no grupo. |
-| 5–8 s | Tem opinião sobre o time de todo mundo. |
-| 8–11 s | Só falta provar. |
-| 11–14 s | AGORA ENTRE EM CAMPO. + logo |
+**Arquivos:** [vídeo](reels/post-1/reel-post-1-entre-em-campo.mp4) e [capa](reels/post-1/capa-post-1.png), que é a "Post 1 · Capa do Reel (A, escolhida)" do kit.
+
+**Áudio:** publicar com o som original do vídeo. A pesquisa de 01/11/2026 não confirmou nenhum som em alta como liberado para conta comercial.
+
+**Roteiro:** [[Roteiros dos Reels]].
 
 **Legenda:**
 
 ```text
-Você já discute escalação toda rodada. Agora tem ranking pra provar quem manja.
+Fantasy do Brasileirão pra quem discute escalação toda rodada.
 
-O Escalou é um fantasy do Brasileirão pra disputar com a sua turma em grupos privados. Sem apostas e sem prêmio em dinheiro.
+Monte o time, dispute com a sua turma em grupo privado e deixe o ranking dizer quem manja. Sem apostas e sem prêmio em dinheiro.
 
 Beta gratuito. Depois dele, escalar exige um passe de rodada.
 
@@ -40,11 +38,13 @@ Segue aqui pra ver o beta abrir ⚽
 #fantasyfutebol #brasileirão #futebol #escalação
 ```
 
-**Texto alternativo:** Capa em fundo verde com linhas de campo e a frase "Você já vive futebol. Agora entre em campo."
+**Texto alternativo:** Capa em fundo verde com um time desenhado a giz, um círculo verde-lima escrito "Você" no ataque e a frase "Você já vive futebol. Entre em campo."
 
 ### 2. Carrossel · Como funciona em 3 passos
 
-**Arte:** "Post 2 · 1/5" a "5/5" no kit.
+**Publicado em 01/11/2026:** [ver post](https://www.instagram.com/jogue.escalou/p/DfNQc7HlQw6/).
+
+**Arquivos:** `carrosseis/post-2/`, na ordem de `post-2-1.png` a `post-2-5.png`.
 
 **Legenda:**
 
@@ -62,7 +62,9 @@ Sem apostas e sem prêmio em dinheiro. Beta gratuito; depois dele, escalar exige
 
 ### 3. Carrossel · Não é sobre ganhar dinheiro
 
-**Arte:** "Post 3 · 1/5" a "5/5" no kit.
+**Publicado em 01/11/2026:** [ver post](https://www.instagram.com/jogue.escalou/p/DfNRMC0FdQ6/).
+
+**Arquivos:** `carrosseis/post-3/`, na ordem de `post-3-1.png` a `post-3-5.png`.
 
 **Legenda:**
 
@@ -76,7 +78,7 @@ Entra na lista de espera do beta. Link na bio 👆
 #fantasyfutebol #brasileirão #futebol #resenha
 ```
 
-**Texto alternativo:** Carrossel que explica que o Escalou não tem apostas nem prêmio em dinheiro, que o beta é gratuito e quanto custa o passe de rodada depois dele.
+**Texto alternativo:** Carrossel que explica que o Escalou não tem apostas nem prêmio em dinheiro, que o beta é gratuito e que, depois dele, escalar exige um passe de rodada.
 
 ## Semana 2
 
@@ -84,24 +86,21 @@ Entra na lista de espera do beta. Link na bio 👆
 
 **Arte:** "Reel · Capa" no kit, como está.
 
-| Tempo | Texto na tela |
-|---|---|
-| 0–2 s | TODO GRUPO TEM ESSE AMIGO |
-| 2–5 s | O que fecha o time 1 minuto antes da trava. |
-| 5–8 s | O que gasta tudo no ataque e fica sem zagueiro. |
-| 8–11 s | O que escala só jogador do próprio time. |
-| 11–14 s | O que esqueceu da trava e culpa o app. |
-| 14–16 s | Manda pra ele. + logo |
+**Roteiro:** [[Roteiros dos Reels]].
 
 **Legenda:**
 
 ```text
-Tem um desses no seu grupo. Se não tem, é você 😅
+Se no seu grupo não tem esse amigo, talvez seja você 😅
+
+No fantasy do Brasileirão, a zoeira começa antes da bola rolar.
 
 Marca ele aqui.
 
 #fantasyfutebol #brasileirão #futebol #resenha
 ```
+
+**Abertura alternativa:** "Você leu e já lembrou de alguém."
 
 **Texto alternativo:** Capa em fundo verde com a frase "Todo grupo tem esse amigo".
 
@@ -122,12 +121,16 @@ Marca ele aqui.
 ```text
 Onze jogadores, C$ 60 e nenhuma desculpa.
 
-Quem você escolhe primeiro? Comenta a posição.
+A conta é fácil: cerca de C$ 5,45 por jogador. Difícil é decidir onde gastar primeiro.
+
+Comenta a posição: GOL, DEF, MEI ou ATA?
 
 C$ é a moeda do jogo, não é dinheiro.
 
 #fantasyfutebol #brasileirão #futebol #escalação
 ```
+
+**Abertura alternativa:** "Seu saldo não dá pra escalar todo mundo que você queria."
 
 **Texto alternativo:** Carrossel sobre como dividir o saldo inicial de C$ 60 entre 11 jogadores.
 
@@ -138,12 +141,16 @@ C$ é a moeda do jogo, não é dinheiro.
 **Legenda:**
 
 ```text
-Ele tem opinião sobre tudo, menos sobre o horário da trava.
+Opinião sobre o time de todo mundo ele tem. O horário da trava, nunca ⏰
 
-Marca ele antes que seja tarde ⏰
+A escalação fecha 1 hora antes do primeiro jogo da rodada.
+
+Marca ele antes que seja tarde.
 
 #fantasyfutebol #brasileirão #futebol #resenha
 ```
+
+**Abertura alternativa:** "Todo grupo tem quem só lembra do time depois da trava."
 
 **Texto alternativo:** Arte em fundo verde escuro com a frase "Marca aquele que nunca lembra da trava."
 
@@ -151,27 +158,23 @@ Marca ele antes que seja tarde ⏰
 
 ### 7. Reel · Qual é a sua formação?
 
-**Arte:** "Reel · Capa" com "4-3-3, 4-4-2 ou 3-5-2: qual é a sua?"
+**Arte:** "Post 7 · Capa do Reel" no kit.
 
-| Tempo | Texto na tela |
-|---|---|
-| 0–2 s | 4-3-3, 4-4-2 OU 3-5-2? |
-| 2–5 s | 4-3-3: 4 DEF, 3 MEI, 3 ATA. |
-| 5–8 s | 4-4-2: 4 DEF, 4 MEI, 2 ATA. |
-| 8–11 s | 3-5-2: 3 DEF, 5 MEI, 2 ATA. |
-| 11–14 s | Qual é a sua? + logo |
-
-Cada formação aparece desenhada a giz no campo.
+**Roteiro:** [[Roteiros dos Reels]].
 
 **Legenda:**
 
 ```text
-São 3 formações e uma discussão que nunca acaba.
+4-3-3, 4-4-2 ou 3-5-2: essa discussão nunca acaba no grupo.
 
-Comenta a sua e manda pra quem escala diferente ⚽
+No Escalou, você escolhe uma delas a cada rodada.
+
+Comenta a sua ⚽
 
 #fantasyfutebol #brasileirão #futebol #escalação
 ```
+
+**Abertura alternativa:** "Sua formação diz muito sobre você."
 
 **Texto alternativo:** Capa em fundo verde com a pergunta "4-3-3, 4-4-2 ou 3-5-2: qual é a sua?"
 
@@ -189,40 +192,40 @@ Comenta a sua e manda pra quem escala diferente ⚽
 **Legenda:**
 
 ```text
-Todo mercado tem esse dilema.
+Todo mercado tem esse dilema: pagar pelo craque ou achar o barato que joga.
 
-A ou B? Comenta e defende a sua escolha.
+Comenta A ou B e defende a sua escolha.
 
 Preços de exemplo. C$ é a moeda do jogo, não é dinheiro.
 
 #fantasyfutebol #brasileirão #futebol #escalação
 ```
 
+**Abertura alternativa:** "C$ 14 no craque ou C$ 4 no achado?"
+
 **Texto alternativo:** Comparação entre dois atacantes genéricos, sem nome ou clube, com preços de exemplo de C$ 14 e C$ 4.
 
 ### 9. Reel · Monte seu grupo antes da próxima rodada
 
-**Arte:** "Reel · Capa" com "Monte seu grupo antes da próxima rodada". Se a temporada 2026 já tiver acabado, trocar por "Monte seu grupo antes de 2027".
+**Arte:** "Post 9 · Capa do Reel" no kit. Se a temporada 2026 já tiver acabado, trocar por "Monte seu grupo antes de 2027".
 
-| Tempo | Texto na tela |
-|---|---|
-| 0–2 s | SUA TURMA JÁ DISCUTE. |
-| 2–5 s | Falta o ranking. |
-| 5–8 s | 1. Entra na lista de espera. |
-| 8–11 s | 2. Recebe o convite do beta. |
-| 11–14 s | 3. Chama a turma. + logo |
+**Roteiro:** [[Roteiros dos Reels]].
 
 **Legenda:**
 
 ```text
 Discussão de grupo merece placar.
 
-Entra na lista de espera do beta e chama a turma. Link na bio 👆
+No Escalou, o ranking do seu grupo privado diz quem manja, rodada após rodada.
+
+Entra na lista de espera do beta. Link na bio 👆
 
 Sem apostas e sem prêmio em dinheiro. Beta gratuito; depois dele, escalar exige um passe de rodada.
 
 #fantasyfutebol #brasileirão #futebol #resenha
 ```
+
+**Abertura alternativa:** "Quem do seu grupo realmente manja? Agora dá pra provar."
 
 **Texto alternativo:** Capa em fundo verde com a frase "Monte seu grupo antes da próxima rodada".
 
