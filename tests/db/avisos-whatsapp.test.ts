@@ -26,9 +26,9 @@ describe("avisos do grupo do WhatsApp", () => {
     }
 
     expect(await notices(db)).toEqual([
-      { tipo: "MERCADO_ABERTO", mensagem: "🟢 Mercado aberto! A rodada 12 do Escalou já começou a valer.\nEscale seu time até 08/11 às 16h00." },
-      { tipo: "MERCADO_FECHADO", mensagem: "🔒 Mercado fechado! As escalações da rodada 12 estão travadas.\nAgora é acompanhar os jogos e os pontos." },
-      { tipo: "RODADA_ENCERRADA", mensagem: "🏁 Rodada 12 encerrada! Pontos conferidos e ranking atualizado.\nVeja como ficou o seu grupo." },
+      { tipo: "MERCADO_ABERTO", mensagem: "🟢 Acorda, cabeça de bagre! O mercado da rodada 12 abriu.\nEscala até 08/11 às 16h00, ou vai culpar o juiz de novo?" },
+      { tipo: "MERCADO_FECHADO", mensagem: "🔒 Já era, parceiro! As escalações da rodada 12 travaram.\nSe deixou aquele perna de pau no time, agora é rezar." },
+      { tipo: "RODADA_ENCERRADA", mensagem: "🏁 Acabou a rodada 12, professor! Os pontos saíram e o ranking não perdoa.\nVai lá ver quem passou vergonha no grupo." },
     ]);
   }, 60_000);
 
@@ -61,7 +61,7 @@ describe("avisos do grupo do WhatsApp", () => {
     expect([first.rows[0].total, second.rows[0].total]).toEqual([1, 0]);
     const [notice] = await notices(db);
     expect(notice.tipo).toBe("FALTA_1H");
-    expect(notice.mensagem).toMatch(/^⏰ Falta 1 hora! O mercado da rodada 1 fecha às \d{2}h\d{2}\./);
+    expect(notice.mensagem).toMatch(/^⏰ Falta 1 hora, craque de várzea! O mercado da rodada 1 fecha às \d{2}h\d{2}\./);
   }, 60_000);
 
   it("fica fora do alcance dos usuários e agenda o envio a cada 2 minutos", async () => {
