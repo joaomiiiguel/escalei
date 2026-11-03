@@ -79,7 +79,7 @@ obsidion/                 Especificação, decisões, regras e planejamento
 - Salve escalações pela função `fn_salvar_escalacao`, que valida trava, formação e saldo no banco.
 - Uma escalação é única por usuário e rodada.
 - Salvar exige passe de rodada válido; o passe é consumido na trava e vale para todos os grupos. Não confunda passe (dinheiro real, em centavos) com o saldo em C$.
-- Não permita salvar ou alterar o time depois da trava da rodada.
+- Não permita alterar o time depois da trava da rodada. A única exceção é a escalação tardia: quem não salvou pode criar o time enquanto menos de 50% dos jogos começou, só com jogadores de clubes que ainda não entraram em campo (`fn_escalacao_tardia_aberta`).
 - Use as regras e a tabela de pontuação de `obsidion/Regras do Jogo.md` como fonte de verdade antes de implementar cálculos.
 
 ## API-Football

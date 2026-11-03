@@ -81,6 +81,33 @@ export function isRoundEditable(round: { status: StatusRodada; trava_em: string 
   return round?.status === "ABERTA" && now.getTime() < new Date(round.trava_em).getTime();
 }
 
+type LateLineupGame = { clube_casa_id: number; clube_fora_id: number; inicio_em: string; inicio_simulado_em?: string | null; status: string };
+
+/** Jogo em andamento, encerrado ou com o horário de início já passado (o status da API pode chegar atrasado). */
+export function hasGameStarted(game: LateLineupGame, now = new Date()): boolean {
+  if (game.status === "EM_ANDAMENTO" || game.status === "ENCERRADO") return true;
+  return game.status === "A_JOGAR" && new Date(game.inicio_simulado_em ?? game.inicio_em).getTime() <= now.getTime();
+}
+
+/**
+ * Escalação tardia: depois da trava, quem ainda não tem time pode escalar enquanto
+ * menos da metade dos jogos da rodada começou. Espelha `fn_escalacao_tardia_aberta`.
+ */
+export function isLateLineupOpen(
+  round: { status: StatusRodada; trava_em: string } | null | undefined,
+  games: LateLineupGame[],
+  now = new Date(),
+): boolean {
+  if (!round || (round.status !== "ABERTA" && round.status !== "EM_ANDAMENTO")) return false;
+  if (now.getTime() < new Date(round.trava_em).getTime() || games.length === 0) return false;
+  return games.filter((game) => hasGameStarted(game, now)).length * 2 < games.length;
+}
+
+/** Clubes cujo jogo na rodada já começou: seus jogadores ficam fora da escalação tardia. */
+export function startedClubIds(games: LateLineupGame[], now = new Date()): Set<number> {
+  return new Set(games.filter((game) => hasGameStarted(game, now)).flatMap((game) => [game.clube_casa_id, game.clube_fora_id]));
+}
+
 /** Situação do jogo de um escalado na rodada, a partir do status do jogo. */
 export function playerRoundStatus(gameStatus: string | null | undefined): PlayerRoundStatus {
   if (gameStatus === "ENCERRADO" || gameStatus === "EM_ANDAMENTO" || gameStatus === "A_JOGAR") return gameStatus;

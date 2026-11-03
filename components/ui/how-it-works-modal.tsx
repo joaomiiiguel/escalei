@@ -72,7 +72,7 @@ export function HowItWorksModal() {
                 <ShieldCheck className="size-6 shrink-0 text-primary" />
                 <div>
                   <h4 className="font-bold text-foreground">A trava</h4>
-                  <p className="mt-0.5 text-xs leading-4 text-muted-foreground">A escalação fecha 1 hora antes do primeiro jogo da rodada. Depois disso não dá para mudar.</p>
+                  <p className="mt-0.5 text-xs leading-4 text-muted-foreground">A escalação fecha 1 hora antes do primeiro jogo da rodada. Depois disso não dá para mudar. Esqueceu? Até metade dos jogos começar, ainda dá para escalar com jogadores de times que não entraram em campo.</p>
                 </div>
               </div>
               <div className="flex gap-3 rounded-xl bg-card p-3 items-center">

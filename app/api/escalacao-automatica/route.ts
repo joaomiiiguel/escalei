@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getCurrentRound } from "@/lib/current-round";
 import { pickAutoLineup } from "@/lib/auto-lineup";
 import { isFormation, isRoundEditable, type Position } from "@/lib/lineup-rules";
+import { getLateLineupState } from "@/lib/late-lineup";
 import { isUnavailable, parseAvailability } from "@/lib/player-availability";
 import { createClient } from "@/lib/supabase/server";
 
@@ -40,13 +41,19 @@ export async function GET(request: Request) {
     id: number; numero: number; status: "AGENDADA" | "ABERTA" | "EM_ANDAMENTO" | "FECHADA"; trava_em: string;
   }>(db, "id, numero, status, trava_em");
   if (roundError || !round) return NextResponse.json({ error: "Rodada indisponível." }, { status: 404 });
-  if (!isRoundEditable(round)) {
+  const lateLineup = await getLateLineupState(db, round);
+  if (lateLineup.open) {
+    const { data: savedTeam } = await db.from("times").select("id").eq("usuario_id", user.id).eq("rodada_id", round.id).maybeSingle();
+    if (savedTeam) return NextResponse.json({ error: "Seu time já está travado nesta rodada." }, { status: 409 });
+  } else if (!isRoundEditable(round)) {
     return NextResponse.json({ error: "A escalação automática está disponível somente enquanto o mercado estiver aberto." }, { status: 409 });
   }
 
-  const { data: games, error: gamesError } = await db.from("jogos")
+  const { data: allGames, error: gamesError } = await db.from("jogos")
     .select("clube_casa_id, clube_fora_id")
     .eq("rodada_id", round.id);
+  // Na escalação tardia, só entram clubes cujo jogo ainda não começou.
+  const games = allGames?.filter((game) => !lateLineup.startedClubIds.has(game.clube_casa_id));
   if (gamesError || !games?.length) return NextResponse.json({ error: "Jogos da rodada indisponíveis." }, { status: 404 });
 
   const homeClubIds = new Set(games.map((game) => game.clube_casa_id));

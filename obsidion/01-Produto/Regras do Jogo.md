@@ -49,7 +49,7 @@ Sem técnico, sem capitão e sem banco de reservas no MVP.
 - Para salvar uma escalação, o usuário precisa de um **passe de rodada** (R$ 4,99 avulso ou R$ 19,99 o pacote com 5, pago por PIX). Ver [[2026-10-27 — Passes de rodada pagos]].
 - O passe é **dinheiro real** e não se mistura com o saldo em C$, que é a moeda do jogo.
 - Um passe vale para **uma rodada** e para **todos os grupos** do usuário.
-- É consumido na **trava** da rodada. Editar o time várias vezes antes da trava gasta um passe só.
+- É consumido na **trava** da rodada. Editar o time várias vezes antes da trava gasta um passe só. Na escalação tardia, é consumido no próprio salvamento.
 - Validade: temporada da compra e a seguinte; usa primeiro o que vence antes.
 - Usuário novo ganha **2 passes de cortesia** ao concluir o onboarding.
 - Rodada cancelada por inteiro devolve o passe. Administradores são isentos.
@@ -59,7 +59,8 @@ Sem técnico, sem capitão e sem banco de reservas no MVP.
 
 ## Trava e status
 
-- A escalação **trava uma hora antes do primeiro jogo da rodada**. Depois disso, ninguém edita até a próxima rodada abrir.
+- A escalação **trava uma hora antes do primeiro jogo da rodada**. Depois disso, quem já salvou o time não edita até a próxima rodada abrir.
+- **Escalação tardia:** quem não salvou até a trava ainda pode escalar enquanto **menos de 50% dos jogos da rodada** tiver começado (em andamento, encerrado ou com o horário de início já passado). Só entram jogadores de clubes cujo jogo ainda não começou. O time salvo na janela tardia também não pode ser alterado. A validação fica em `fn_salvar_escalacao` (`fn_escalacao_tardia_aberta`).
 - A próxima rodada abre à **00h do dia seguinte ao último jogo** da rodada anterior, no horário de Fortaleza.
 - **Rodada:** Aberta → Em andamento (x de 10 jogos encerrados) → Fechada.
 - **Jogo:** A jogar → Em andamento → Encerrado (pontuado).

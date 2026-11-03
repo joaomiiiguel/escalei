@@ -1,10 +1,12 @@
 import formatDateTime, { formatKickoffTime } from "@/lib/formatDate";
 import { displayedKickoff } from "@/lib/game-kickoff";
+import { isLateLineupOpen } from "@/lib/lineup-rules";
 import { Clube, EstatisticaDaRodada, Jogo, Rodada, TimeDaRodada } from "@/lib/types";
 import { Clock3, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
-function teamPresentation(hasTeam: boolean, round: Rodada, now: Date) {
+function teamPresentation(hasTeam: boolean, round: Rodada, now: Date, lateLineup: boolean) {
+    if (lateLineup) return { title: "Ainda dá tempo de escalar", description: "A rodada travou, mas menos da metade dos jogos começou. Escale com jogadores de times que ainda não entraram em campo.", cta: "Escalar agora" };
     const canEdit = round.status === "ABERTA" && now < new Date(round.trava_em);
     if (!hasTeam && canEdit) return { title: "Você ainda não escalou", description: "Monte sua equipe para disputar esta rodada.", cta: "Montar meu time" };
     if (hasTeam && canEdit) return { title: "Seu time está escalado", description: `Você pode editar até ${formatDateTime(round.trava_em)}.`, cta: "Ver escalação" };
@@ -15,7 +17,8 @@ function teamPresentation(hasTeam: boolean, round: Rodada, now: Date) {
 
 const RoundViewCTA = ({ team, round, now, games, clubsById, teamStats }: { team: TimeDaRodada | null; round: Rodada | null; now: Date, games: Jogo[], clubsById: Map<number, Clube>, teamStats: EstatisticaDaRodada[] }) => {
 
-    const presentation = teamPresentation(Boolean(team), round!, now);
+    const lateLineup = !team && isLateLineupOpen(round, games, now);
+    const presentation = teamPresentation(Boolean(team), round!, now, lateLineup);
     const isUnselected = !team && round?.status === "ABERTA" && now < new Date(round?.trava_em);
     const liveGames = games.filter((game) => game.status === "EM_ANDAMENTO");
     const pendingGames = games.filter((game) => game.status === "A_JOGAR");
@@ -34,7 +37,7 @@ const RoundViewCTA = ({ team, round, now, games, clubsById, teamStats }: { team:
                 <p className="text-sm font-extrabold tracking-[0.12em] text-white">MEU TIME</p>
                 {team?.formacao && <span className="rounded-lg border border-primary/40 px-3 py-1 text-xs font-extrabold text-foreground">{team.formacao}</span>}
             </div>
-            {round?.status === "EM_ANDAMENTO" || round?.status === "FECHADA" ?
+            {(round?.status === "EM_ANDAMENTO" || round?.status === "FECHADA") && !lateLineup ?
                 <div className="py-2">
                     <div className="grid grid-cols-3 gap-2">
                         <div className="rounded-xl bg-primary/20 px-2 py-3 text-center">
@@ -65,7 +68,7 @@ const RoundViewCTA = ({ team, round, now, games, clubsById, teamStats }: { team:
                         <p className="mt-0.5 text-[13px] leading-[18px] text-muted-foreground">{isUnselected ? "Monte 11 jogadores dentro do seu saldo. Leva uns 3 minutos — ou use a escalação automática." : presentation.description}</p>
                     </div>
                 </div>}
-            {team && presentation.cta && round?.status !== "EM_ANDAMENTO" && <Link href="/escalar" className="mt-4 inline-flex min-h-9 w-full items-center justify-center rounded-xl bg-primary/80 px-4 text-sm font-bold text-secondary outline-none transition active:bg-primary focus-visible:ring-2 focus-visible:ring-ring uppercase">{presentation.cta}</Link>}
+            {presentation.cta && (lateLineup || (team && round?.status !== "EM_ANDAMENTO")) && <Link href="/escalar" className="mt-4 inline-flex min-h-9 w-full items-center justify-center rounded-xl bg-primary/80 px-4 text-sm font-bold text-secondary outline-none transition active:bg-primary focus-visible:ring-2 focus-visible:ring-ring uppercase">{presentation.cta}</Link>}
         </section>)
 
 };
