@@ -29,7 +29,7 @@ Ritmo de 3 posts por semana, por 3 semanas. Só começar depois que o link da bi
 ```text
 Fantasy do Brasileirão pra quem discute escalação toda rodada.
 
-Monte o time, dispute com a sua turma em grupo privado e deixe o ranking dizer quem manja. Sem apostas e sem prêmio em dinheiro.
+Monte o time, dispute com a sua turma em grupo privado e deixe o ranking dizer quem escala melhor. Sem apostas e sem prêmio em dinheiro.
 
 Beta gratuito. Depois dele, escalar exige um passe de rodada.
 
@@ -71,7 +71,7 @@ Sem apostas e sem prêmio em dinheiro. Beta gratuito; depois dele, escalar exige
 ```text
 O que está em jogo é a resenha da segunda-feira.
 
-Aqui você disputa com quem conhece, em grupo privado. Sem odds, sem prêmio em dinheiro. Só o ranking dizendo quem manja.
+Aqui você disputa com quem conhece, em grupo privado. Sem odds, sem prêmio em dinheiro. Só o ranking dizendo quem escala melhor.
 
 Entra na lista de espera do beta. Link na bio 👆
 
@@ -216,7 +216,7 @@ Preços de exemplo. C$ é a moeda do jogo, não é dinheiro.
 ```text
 Discussão de grupo merece placar.
 
-No Escalou, o ranking do seu grupo privado diz quem manja, rodada após rodada.
+No Escalou, o ranking do seu grupo privado diz quem escala melhor, rodada após rodada.
 
 Entra na lista de espera do beta. Link na bio 👆
 
@@ -225,7 +225,7 @@ Sem apostas e sem prêmio em dinheiro. Beta gratuito; depois dele, escalar exige
 #fantasyfutebol #brasileirão #futebol #resenha
 ```
 
-**Abertura alternativa:** "Quem do seu grupo realmente manja? Agora dá pra provar."
+**Abertura alternativa:** "Quem do seu grupo escala melhor? Agora dá pra provar."
 
 **Texto alternativo:** Capa em fundo verde com a frase "Monte seu grupo antes da próxima rodada".
 

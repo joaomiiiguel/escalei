@@ -16,7 +16,7 @@
 - **Point of view:**
   1. Ganhar do seu grupo vale mais do que ganhar dinheiro.
   2. Futebol fica melhor com resenha do que com odds.
-  3. Opinião sobre escalação todo mundo tem; o ranking mostra quem manja.
+  3. Opinião sobre escalação todo mundo tem; o ranking mostra quem escala melhor.
 - **Won't say:** Que aposta é errada ou que apostadores são otários (é contraste de produto, não sermão). Que o Escalou é "o novo" ou "melhor que" outro fantasy.
 
 ## Audience
@@ -35,7 +35,7 @@
 - **Sophistication:** Alto em futebol; quer regras rápidas, sem aula.
 
 - **Buyer vs follower note:** Quem segue pode ser o Segmento 2, mas quem traz gente é o capitão. Conteúdo com convite ao grupo sempre fala com o capitão.
-- **Transformation:** A turma discute escalação sem placar → existe um ranking que prova quem manja, toda rodada.
+- **Transformation:** A turma discute escalação sem placar → existe um ranking que prova quem escala melhor, toda rodada.
 
 ## Voice
 - **Dimensions:** Formality 1/5 · Warmth 4/5 · Authority 2/5 · Energy 4/5 · Humor 4/5 · Polish 2/5
@@ -44,8 +44,8 @@
   - Amigo da resenha, nunca locutor de bet.
   - Confiantes nas regras, nunca arrogantes.
   - Curtos e diretos, nunca enrolados.
-- **Words we use:** escalar, escalação, trava, rodada, mercado, saldo, reforço, turma, grupo, resenha, manja, zoeira, passe de rodada, "pontos no apito final". Escrevemos "grupo", não "liga", e "pra" na legenda.
-- **Words we ban:** apostar, aposta certa, palpite, odd, bilhete, banca, green, red, cashout, sorte, lucro, investir, retorno, ganhe dinheiro, prêmio (exceto para dizer que não existe), garantido, revolucionário, o melhor app, "crédito" para o passe.
+- **Words we use:** escalar, escalação, trava, rodada, mercado, saldo, reforço, turma, grupo, resenha, zoeira, passe de rodada, "pontos no apito final". Escrevemos "grupo", não "liga", e "pra" na legenda.
+- **Words we ban:** apostar, aposta certa, palpite, odd, bilhete, banca, green, red, cashout, sorte, lucro, investir, retorno, ganhe dinheiro, prêmio (exceto para dizer que não existe), garantido, revolucionário, o melhor app, "crédito" para o passe, "manja" (tem duplo sentido).
 - **How we handle hard things:**
   - Pontuação atrasada ou bug: assume, explica em uma frase, diz quando volta. Sem piada.
   - Preço: fala o valor. "R$ 4,99 a rodada ou R$ 19,99 o pacote com 5, pago por PIX."

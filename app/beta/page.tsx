@@ -238,7 +238,7 @@ function Hero() {
           <span className={`block bg-gradient-to-r from-[#e4ff66] to-[#4fe08a] bg-clip-text text-transparent motion-safe:delay-200 ${enter}`}>Agora entre em campo.</span>
         </h1>
         <p className={`mt-6 max-w-xl text-xl leading-snug text-(--giz) sm:text-2xl motion-safe:delay-500 ${enter}`}>
-          O Escalou é uma nova aventura no Brasileirão: monte seu time, desafie a sua turma e descubra quem realmente manja.
+          O Escalou é uma nova aventura no Brasileirão: monte seu time, desafie a sua turma e descubra quem escala melhor.
         </p>
         <div className={`motion-safe:delay-700 ${enter}`}>
           <a href="#lista-de-espera" className={`${primaryCta} mt-7 min-h-14 w-full px-8 text-lg sm:w-auto`}>

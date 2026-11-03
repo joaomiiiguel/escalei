@@ -75,9 +75,9 @@ Descarte qualquer clipe com rosto reconhecível, escudo, camisa de clube, patroc
 
 1. Você discute escalação toda rodada?
 2. Seu time tem uma vaga aberta.
-3. Todo mundo no grupo acha que manja.
+3. Todo mundo no grupo acha que escala melhor.
 4. Opinião sobre escalação todo mundo tem.
-5. Quem do seu grupo realmente manja?
+5. Quem do seu grupo escala melhor?
 
 **Quem manda para quem:** o torcedor que discute escalação manda para a turma do grupo.
 

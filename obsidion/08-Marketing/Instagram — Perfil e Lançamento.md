@@ -25,7 +25,7 @@
 
 ```text
 Fantasy do Brasileirão pra disputar com a sua turma.
-Monte o time e prove quem realmente manja.
+Monte o time e prove quem escala melhor.
 Sem apostas e sem prêmio. Beta gratuito 👇
 ```
 
@@ -64,6 +64,8 @@ Sem apostas e sem prêmio. Beta gratuito 👇
 | Fechamento | Post | Melhor e pior momento da turma, com autorização |
 
 Sem jogos na semana, entra conteúdo de "Como joga" ou "Resenha da turma".
+
+**Story de convite para o beta:** [story-convite-beta.png](stories/story-convite-beta.png), com a figurinha de link no espaço abaixo de "Toca no link e entra". Link: `https://jogueescalou.com.br/beta?utm_source=instagram&utm_medium=story`. Depois de publicar, salvar no destaque "Comece aqui".
 
 ## Primeiros 9 posts
 
