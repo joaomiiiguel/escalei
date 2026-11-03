@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 import { parsePushSubscription, vapidKeyToBytes } from "@/lib/pwa";
-import { isExpiredSubscription, pushCutoff, pushPayload } from "../supabase/functions/_shared/whatsapp-notices";
+import { isExpiredSubscription, noticeRecipients, pushCutoff, pushPayload } from "../supabase/functions/_shared/whatsapp-notices";
 
 describe("chave do push", () => {
   it("converte a chave VAPID de base64url para bytes", () => {
@@ -67,5 +67,28 @@ describe("push da notify-whatsapp", () => {
     const worker = readFileSync(path.resolve(__dirname, "../public/sw.js"), "utf8");
     expect(worker).toContain('addEventListener("push"');
     expect(worker).toContain('addEventListener("notificationclick"');
+  });
+});
+
+describe("público do aviso", () => {
+  const subscriptions = [
+    { endpoint: "a", usuario_id: "com-time" },
+    { endpoint: "b", usuario_id: "sem-time" },
+  ];
+  const withTeam = new Set(["com-time"]);
+
+  it("manda para todos quando o público não é restrito", () => {
+    expect(noticeRecipients({}, subscriptions, withTeam)).toEqual(subscriptions);
+    expect(noticeRecipients({ publico: "TODOS" }, subscriptions, withTeam)).toEqual(subscriptions);
+  });
+
+  it("separa quem escalou de quem não escalou", () => {
+    expect(noticeRecipients({ publico: "COM_TIME" }, subscriptions, withTeam).map((item) => item.endpoint)).toEqual(["a"]);
+    expect(noticeRecipients({ publico: "SEM_TIME" }, subscriptions, withTeam).map((item) => item.endpoint)).toEqual(["b"]);
+  });
+
+  it("leva o aviso de escalação tardia para a tela de escalar", () => {
+    const payload = JSON.parse(pushPayload({ id: 9, tipo: "ESCALACAO_TARDIA", mensagem: "⚽ Ainda dá tempo, esquecido! Escale." }));
+    expect(payload).toMatchObject({ title: "⚽ Ainda dá tempo, esquecido!", url: "/escalar" });
   });
 });

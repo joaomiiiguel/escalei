@@ -64,6 +64,56 @@ describe("avisos do grupo do WhatsApp", () => {
     expect(notice.mensagem).toMatch(/^⏰ Falta 1 hora, craque de várzea! O mercado da rodada 1 fecha às \d{2}h\d{2}\./);
   }, 60_000);
 
+  it("manda o push de mercado fechado só para quem escalou", async () => {
+    const db = await createMigratedDatabase();
+    const id = await createRound(db, { status: "ABERTA" });
+    await db.query("update rodadas set status = 'EM_ANDAMENTO' where id = $1", [id]);
+    const { rows } = await db.query<{ tipo: string; publico: string }>("select tipo, publico from avisos_whatsapp");
+    expect(rows).toEqual([{ tipo: "MERCADO_FECHADO", publico: "COM_TIME" }]);
+  }, 60_000);
+
+  describe("escalação tardia", () => {
+    /** Quatro jogos em 2099: a janela fecha no início do segundo (metade da rodada), 08/11 às 18h00 de Brasília. */
+    async function lockedRoundWithGames(db: Db, { simulada = false } = {}) {
+      await db.exec("insert into clubes (id, nome, sigla) select n, 'Clube ' || n, 'C' || lpad(n::text, 2, '0') from generate_series(1, 8) as n on conflict do nothing");
+      const id = await createRound(db, { numero: 7, status: "EM_ANDAMENTO", trava: new Date(Date.now() - 60_000).toISOString(), simulada });
+      const kickoffs = ["2099-11-08T19:00:00Z", "2099-11-08T21:00:00Z", "2099-11-08T23:00:00Z", "2099-11-09T01:00:00Z"];
+      for (const [index, kickoff] of kickoffs.entries()) {
+        await db.query(
+          "insert into jogos (id, rodada_id, clube_casa_id, clube_fora_id, inicio_em, status) values ($1, $2, $3, $4, $5, 'A_JOGAR')",
+          [id * 10 + index, id, index * 2 + 1, index * 2 + 2, kickoff],
+        );
+      }
+      return id;
+    }
+
+    const enqueue = async (db: Db) => (await db.query<{ total: number }>("select fn_enfileirar_aviso_fechamento() as total")).rows[0].total;
+
+    it("avisa uma vez quem não escalou, com o horário-limite da janela", async () => {
+      const db = await createMigratedDatabase();
+      await lockedRoundWithGames(db);
+
+      expect([await enqueue(db), await enqueue(db)]).toEqual([1, 0]);
+      const { rows } = await db.query<{ tipo: string; mensagem: string; publico: string }>("select tipo, mensagem, publico from avisos_whatsapp");
+      expect(rows).toEqual([{
+        tipo: "ESCALACAO_TARDIA",
+        publico: "SEM_TIME",
+        mensagem: "⚽ Ainda dá tempo, esquecido! A rodada 7 travou, mas você pode escalar até 08/11 às 18h00.\nSó vale jogador de time que ainda não entrou em campo.",
+      }]);
+    }, 60_000);
+
+    it("não avisa com metade dos jogos iniciada nem em rodada simulada", async () => {
+      const db = await createMigratedDatabase();
+      const id = await lockedRoundWithGames(db);
+      await db.query("update jogos set status = 'EM_ANDAMENTO' where rodada_id = $1 and id in ($2, $3)", [id, id * 10, id * 10 + 1]);
+      expect(await enqueue(db)).toBe(0);
+
+      const simulatedDb = await createMigratedDatabase();
+      await lockedRoundWithGames(simulatedDb, { simulada: true });
+      expect(await enqueue(simulatedDb)).toBe(0);
+    }, 60_000);
+  });
+
   it("fica fora do alcance dos usuários e agenda o envio a cada 2 minutos", async () => {
     const db = await createMigratedDatabase();
     for (const statement of ["select * from avisos_whatsapp", "select * from push_inscricoes", "select fn_enfileirar_aviso_fechamento()"]) {
