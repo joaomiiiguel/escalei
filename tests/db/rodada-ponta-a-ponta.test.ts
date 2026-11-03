@@ -269,10 +269,11 @@ describe(`rodada ${ROUND} de ${SEASON} de ponta a ponta, com respostas reais da 
     expect(teamsSaved.rows.map((row) => [row.usuario_id, num(row.custo)])).toEqual([[ANA, 55], [BIA, 55]]);
   });
 
-  it("trava no horário e recusa escalações depois disso", async () => {
+  it("trava no horário e recusa alterar o time depois disso", async () => {
     await tick(simulated(atReal(round32.trava_em)));
     expect((await db.query("select status from rodadas where id = $1", [roundIds.get(ROUND)])).rows[0]).toEqual({ status: "EM_ANDAMENTO" });
-    await expect(saveLineup(CAIO, anaLineup)).rejects.toMatchObject({ code: "ES423" });
+    // Quem não escalou ainda pode entrar na janela tardia; quem já escalou fica travado.
+    await expect(saveLineup(ANA, anaLineup)).rejects.toMatchObject({ code: "ES423", message: "Seu time já está travado nesta rodada." });
     expect(apiCalls).toHaveLength(0);
   });
 

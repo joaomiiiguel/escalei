@@ -1,7 +1,10 @@
 import { NextResponse } from "next/server";
+import { getCurrentRound } from "@/lib/current-round";
+import { getLateLineupState } from "@/lib/late-lineup";
 import { parseAvailability } from "@/lib/player-availability";
 import { LAST_GAMES_WINDOW, lastGameByClub, lastGameRoles } from "@/lib/player-role";
 import { createClient } from "@/lib/supabase/server";
+import type { StatusRodada } from "@/lib/types";
 
 const positions = ["GOL", "DEF", "MEI", "ATA"] as const;
 
@@ -30,7 +33,7 @@ export async function GET(request: Request) {
   }
 
   const supabase = await createClient();
-  const [{ data, error }, roles] = await Promise.all([
+  const [{ data, error }, roles, lateLineup] = await Promise.all([
     supabase
       .from("jogadores")
       .select("id, clube_id, nome, nome_exibicao, posicao, preco, status, status_motivo, clubes(nome, sigla, logo_url)")
@@ -39,13 +42,16 @@ export async function GET(request: Request) {
       .order("nome_exibicao")
       .limit(300),
     loadLastGameRoles(supabase),
+    getCurrentRound<{ id: number; numero: number; status: StatusRodada; trava_em: string }>(supabase, "id, numero, status, trava_em")
+      .then(({ data: round }) => getLateLineupState(supabase, round)),
   ]);
 
   if (error) {
     return NextResponse.json({ error: "Não foi possível carregar os jogadores." }, { status: 500 });
   }
 
-  const players = (data ?? []).map((player) => {
+  // Na escalação tardia, jogadores de times que já entraram em campo saem do mercado.
+  const players = (data ?? []).filter((player) => !lateLineup.startedClubIds.has(player.clube_id)).map((player) => {
     const clubes = player.clubes as unknown as { nome: string; sigla: string; logo_url: string | null } | { nome: string; sigla: string; logo_url: string | null }[] | null;
     const clube = Array.isArray(clubes) ? clubes[0] : clubes;
 

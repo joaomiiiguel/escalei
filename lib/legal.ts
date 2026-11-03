@@ -6,7 +6,7 @@ import { FORMATIONS } from "@/lib/lineup-rules";
  * o onboarding grava a versão aceita em `perfis.termos_versao`.
  */
 export const TERMOS_VERSAO = "v2";
-export const LEGAL_ATUALIZADO_EM = "02/11/2026";
+export const LEGAL_ATUALIZADO_EM = "03/11/2026";
 
 export type LegalSection = { titulo: string; paragrafos: string[] };
 
@@ -161,7 +161,8 @@ export const REGULAMENTO: LegalDocument = {
     {
       titulo: "Trava da rodada",
       paragrafos: [
-        "A escalação trava uma hora antes do primeiro jogo da rodada. Depois disso, ninguém altera o time até a próxima rodada abrir.",
+        "A escalação trava uma hora antes do primeiro jogo da rodada. Depois disso, quem já escalou não altera mais o time até a próxima rodada abrir.",
+        "Quem ainda não escalou pode montar o time depois da trava enquanto menos da metade dos jogos da rodada tiver começado, usando só jogadores de clubes que ainda não entraram em campo. O time salvo assim também não pode ser alterado.",
         "Quem não escalar soma 0 ponto na rodada.",
       ],
     },

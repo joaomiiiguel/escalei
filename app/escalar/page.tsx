@@ -6,6 +6,7 @@ import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { isRoundEditable, playerRoundStatus } from "@/lib/lineup-rules";
 import { parseAvailability } from "@/lib/player-availability";
 import { getCurrentRound } from "@/lib/current-round";
+import { getLateLineupState } from "@/lib/late-lineup";
 import { displayedKickoff } from "@/lib/game-kickoff";
 import { toPassStatus, type PassStatus } from "@/lib/round-pass";
 import { Clock3 } from "lucide-react";
@@ -48,6 +49,7 @@ type LineupBodyProps = {
   roundPlayers: LineupPlayer[];
   lastUpdated: string | null;
   passStatus: PassStatus | null;
+  lateLineup: boolean;
 };
 
 function LineupBody({ 
@@ -59,7 +61,8 @@ function LineupBody({
   initialPlayers,
   roundPlayers,
   lastUpdated,
-  passStatus
+  passStatus,
+  lateLineup
 }: LineupBodyProps) {
   if (!round) {
     return <Message>Não há rodada disponível no momento.</Message>;
@@ -69,13 +72,21 @@ function LineupBody({
 
   if (isEditing) {
     return (
-      <LineupBuilder
-        budget={balance}
-        initialFormation={savedTeam?.formacao}
-        initialPlayers={initialPlayers}
-        passStatus={passStatus}
-        roundId={round.id}
-      />
+      <>
+        {lateLineup && (
+          <p className="flex items-start gap-2 rounded-xl border border-primary/40 bg-primary/10 p-3 text-xs leading-[18px] text-foreground">
+            <Clock3 className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
+            A rodada já travou, mas ainda dá tempo: escale só com jogadores de times que não entraram em campo. Depois de salvar, o time não pode ser alterado.
+          </p>
+        )}
+        <LineupBuilder
+          budget={balance}
+          initialFormation={savedTeam?.formacao}
+          initialPlayers={initialPlayers}
+          passStatus={passStatus}
+          roundId={round.id}
+        />
+      </>
     );
   }
 
@@ -200,7 +211,9 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
     );
   }
 
-  const canEdit = isRoundEditable(round);
+  // Depois da trava, quem não salvou pode escalar enquanto menos da metade dos jogos começou.
+  const lateLineup = !savedTeam && (await getLateLineupState(supabase, round)).open;
+  const canEdit = isRoundEditable(round) || lateLineup;
   const { data: passRequired } = canEdit
     ? await supabase.rpc("fn_passe_exigido", { p_rodada_id: round.id })
     : { data: null };
@@ -237,6 +250,7 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
         roundPlayers={roundPlayers}
         lastUpdated={lastUpdatedIso}
         passStatus={passStatus}
+        lateLineup={lateLineup}
       />
     </main>)
 }
