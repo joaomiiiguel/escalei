@@ -13,4 +13,11 @@ A opção **Notificação da rodada**, em `/perfil`, vem ligada por padrão em c
 - Os avisos ficam em `avisos_whatsapp` e as inscrições, em `push_inscricoes`.
 - A Edge Function `notify-whatsapp` roda a cada 2 minutos.
 - Um push que não sai em até 1 hora é descartado.
+- Cada aviso tem um público (`publico`): todos, só quem tem time na rodada ou só quem não tem.
+
+## Escalação tardia (03/11/2026)
+
+- Logo depois da trava, enquanto a escalação tardia estiver aberta, quem **não escalou** recebe "Ainda dá tempo, esquecido!" com o horário-limite previsto: o início do jogo que completa metade da rodada (`fn_limite_escalacao_tardia`). O toque abre `/escalar`.
+- O aviso de mercado fechado passa a ir só para quem escalou, para ninguém receber "já era" e "ainda dá tempo" ao mesmo tempo.
+- Se todos já escalaram, o aviso é marcado como enviado sem push.
 - No iPhone, o push só funciona com o Escalou instalado na tela de início.
