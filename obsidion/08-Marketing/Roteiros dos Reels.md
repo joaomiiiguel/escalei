@@ -53,6 +53,12 @@ Cada prompt gera um clipe de até 8 segundos. Use-os em Veo, Kling ou outro gera
 8-second vertical 9:16 video. Smartphone lying face down on a wooden table, vibrating repeatedly with incoming notifications, static close-up, warm evening light, realistic phone-clip look. Screen never visible. No people, no text, no logos.
 ```
 
+**Foto E · Técnico de sofá** (para o modelo "Direção 2 · técnico de sofá")
+
+```text
+Vertical 4:5 photo. A generic Brazilian football fan in his 30s, plain dark hoodie with no logos, standing on a floodlit empty stadium pitch at night, pointing confidently forward, cinematic rim light, shallow depth of field, room above his head for chalk doodles. Fictional person, no resemblance to any real player or coach. No text, no logos, no crests, no club colors, no sponsor marks.
+```
+
 Descarte qualquer clipe com rosto reconhecível, escudo, camisa de clube, patrocinador ou letra na imagem.
 
 ## Reel 1 · Entre em campo
@@ -85,6 +91,8 @@ Descarte qualquer clipe com rosto reconhecível, escudo, camisa de clube, patroc
 
 **Objetivo:** envios e marcações. **Duração:** 18 s. **Capa:** "Reel · Capa" no kit.
 
+**Vídeo pronto:** [reel-post-4-esse-amigo.mp4](reels/post-4/reel-post-4-esse-amigo.mp4). Animação a giz sem locução e sem clipes de IA: celular vibrando, relógio, flechas para o ataque, três camisas iguais e o X sobre o celular. Fonte em `reels/post-4/fonte/`. A tabela abaixo segue como roteiro para uma versão com locução.
+
 | Tempo | Fundo | Texto na tela | Locução | Som |
 |---|---|---|---|---|
 | 0–3 s | Clipe D | TODO GRUPO TEM **ESSE AMIGO** | Todo grupo tem esse amigo. | Música entra, celular vibrando |
@@ -100,6 +108,8 @@ Descarte qualquer clipe com rosto reconhecível, escudo, camisa de clube, patroc
 
 **Objetivo:** comentários e salvamentos. **Duração:** 16 s. **Capa:** "Post 7 · Capa do Reel" no kit.
 
+**Vídeo pronto:** [reel-post-7-formacao.mp4](reels/post-7/reel-post-7-formacao.mp4). Os 11 círculos deslizam de uma formação para a outra, com a linha que muda em lima. Sem locução. Fonte em `reels/post-7/fonte/`.
+
 Monte os campos no editor, com círculos e linhas do kit, sem IA. Geradores erram a quantidade de jogadores. Cada campo tem 11 círculos: 1 GOL na base e as linhas acima.
 
 | Tempo | Fundo | Texto na tela | Locução | Som |
@@ -114,7 +124,9 @@ Monte os campos no editor, com círculos e linhas do kit, sem IA. Geradores erra
 
 ## Reel 9 · Monte seu grupo
 
-**Objetivo:** cadastro na lista de espera. **Duração:** 16 s. **Capa:** "Post 9 · Capa do Reel" no kit. Se a temporada 2026 tiver acabado, troque a capa e a última cena por "antes de 2027".
+**Objetivo:** cadastro na lista de espera. **Duração:** 16 s. **Capa:** "Post 9 · Capa do Reel" no kit.
+
+**Vídeo pronto:** [reel-post-9-monte-seu-grupo.mp4](reels/post-9/reel-post-9-monte-seu-grupo.mp4). Celular com mensagens, pódio a giz e os 3 passos em números grandes. Sem locução. Fonte em `reels/post-9/fonte/`. Se a temporada 2026 tiver acabado, troque a capa e a última cena por "antes de 2027".
 
 | Tempo | Fundo | Texto na tela | Locução | Som |
 |---|---|---|---|---|

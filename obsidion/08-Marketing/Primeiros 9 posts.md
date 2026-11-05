@@ -10,6 +10,7 @@ Ritmo de 3 posts por semana, por 3 semanas. Só começar depois que o link da bi
 - Áudio só com licença para uso comercial.
 - Gravação de tela só sem nome ou foto de jogador. O mercado do app mostra nomes, então não pode aparecer.
 - Pedido direto de cadastro só nos posts 3 e 9. Os demais pedem para seguir, salvar, marcar ou comentar.
+- Reels 4, 7 e 9 seguem o Reel 1: animação a giz, sem locução e sem clipe de IA, com som original sintetizado. Fonte em `reels/post-N/fonte/`.
 - Passe aparece só como informação. Não falar em comprar enquanto os termos não tiverem preço, validade e arrependimento de 7 dias.
 
 ## Semana 1
@@ -84,7 +85,7 @@ Entra na lista de espera do beta. Link na bio 👆
 
 ### 4. Reel · Todo grupo tem esse amigo
 
-**Arte:** "Reel · Capa" no kit, como está.
+**Arquivos:** [vídeo](reels/post-4/reel-post-4-esse-amigo.mp4) e [capa](reels/post-4/capa-post-4.png), que é a "Reel · Capa" do kit.
 
 **Roteiro:** [[Roteiros dos Reels]].
 
@@ -104,22 +105,22 @@ Marca ele aqui.
 
 **Texto alternativo:** Capa em fundo verde com a frase "Todo grupo tem esse amigo".
 
-### 5. Carrossel · C$ 60 no bolso
+### 5. Carrossel · Onze jogadores, C$ 60, zero desculpa
 
-**Arte:** modelos de carrossel.
+**Arquivos:** `carrosseis/post-5/`, na ordem de `post-5-1.png` a `post-5-5.png`. Visual da Direção 2 do kit: cartas de posição com brilho verde.
 
 | Card | Título | Texto |
 |---|---|---|
-| 1/5 | C$ 60 no bolso. Onde você gasta primeiro? | |
-| 2/5 | A conta | C$ 60 para 11 jogadores dá cerca de C$ 5,45 por jogador. |
-| 3/5 | Ataque caro | Você gasta na frente e sobra pouco para a defesa. |
-| 4/5 | Time equilibrado | Ninguém caro demais, ninguém só para fechar o elenco. |
-| 5/5 | Qual é a sua? | Comenta: GOL, DEF, MEI ou ATA? |
+| 1/5 | Onze jogadores, C$ 60, zero desculpa. | |
+| 2/5 | A conta | C$ 60 para 11 jogadores dá cerca de C$ 5,45 por jogador. C$ é a moeda do jogo, não é dinheiro. |
+| 3/5 | Ataque caro | Você gasta tudo na frente e sobra troco pra defesa. O placar até sai. Só não sai do lado certo. |
+| 4/5 | Time equilibrado | Ninguém caro demais, ninguém só pra fechar o elenco. Menos manchete, mais ponto em todas as posições. |
+| 5/5 | Onde vai o primeiro C$? | Comenta a posição: GOL, DEF, MEI ou ATA. |
 
 **Legenda:**
 
 ```text
-Onze jogadores, C$ 60 e nenhuma desculpa.
+Onze jogadores, C$ 60 e zero desculpa.
 
 A conta é fácil: cerca de C$ 5,45 por jogador. Difícil é decidir onde gastar primeiro.
 
@@ -130,13 +131,11 @@ C$ é a moeda do jogo, não é dinheiro.
 #fantasyfutebol #brasileirão #futebol #escalação
 ```
 
-**Abertura alternativa:** "Seu saldo não dá pra escalar todo mundo que você queria."
-
 **Texto alternativo:** Carrossel sobre como dividir o saldo inicial de C$ 60 entre 11 jogadores.
 
-### 6. Imagem · Marca aquele que nunca lembra da trava
+### 6. Imagem · Marca quem nunca lembra da trava
 
-**Arte:** "Feed · Manchete" com a frase "Marca aquele que nunca lembra da trava." e o rodapé "A trava é 1 hora antes do primeiro jogo."
+**Arquivo:** [imagens/post-6-trava.png](imagens/post-6-trava.png), com a frase "Marca quem nunca lembra da trava." e o rodapé "A trava é 1 hora antes do primeiro jogo."
 
 **Legenda:**
 
@@ -150,15 +149,13 @@ Marca ele antes que seja tarde.
 #fantasyfutebol #brasileirão #futebol #resenha
 ```
 
-**Abertura alternativa:** "Todo grupo tem quem só lembra do time depois da trava."
-
-**Texto alternativo:** Arte em fundo verde escuro com a frase "Marca aquele que nunca lembra da trava."
+**Texto alternativo:** Arte em fundo verde escuro com a frase "Marca quem nunca lembra da trava." e o aviso de que a trava é 1 hora antes do primeiro jogo.
 
 ## Semana 3
 
 ### 7. Reel · Qual é a sua formação?
 
-**Arte:** "Post 7 · Capa do Reel" no kit.
+**Arquivos:** [vídeo](reels/post-7/reel-post-7-formacao.mp4) e [capa](reels/post-7/capa-post-7.png), que é a "Post 7 · Capa do Reel" do kit.
 
 **Roteiro:** [[Roteiros dos Reels]].
 
@@ -178,21 +175,21 @@ Comenta a sua ⚽
 
 **Texto alternativo:** Capa em fundo verde com a pergunta "4-3-3, 4-4-2 ou 3-5-2: qual é a sua?"
 
-### 8. Carrossel · Craque caro ou ATA barato?
+### 8. Carrossel · Pagar pelo nome ou achar quem joga?
 
-**Arte:** "Feed · Dilema de mercado" como capa, mantendo o aviso "Preços de exemplo", e modelos de carrossel.
+**Arquivos:** `carrosseis/post-8/`, na ordem de `post-8-1.png` a `post-8-4.png`. Visual da Direção 2: carta A contra carta B. A capa mantém o aviso "Preços de exemplo".
 
 | Card | Título | Texto |
 |---|---|---|
-| 1/4 | Craque caro ou ATA barato? | Opção A: ATA de C$ 14. Opção B: ATA de C$ 4. |
-| 2/4 | Opção A | Você paga pelo nome e sobra menos para o resto do time. |
-| 3/4 | Opção B | Você guarda saldo, mas precisa achar quem joga. |
-| 4/4 | E você? | Comenta A ou B. |
+| 1/4 | Pagar pelo nome ou achar quem joga? | Carta A, camisa 9 de C$ 14, contra carta B, camisa 29 de C$ 4. |
+| 2/4 | A · O nome da rodada | C$ 14 no craque. Você paga pelo nome e sobra menos pro resto do time. Se ele não marcar, a resenha é sua. |
+| 3/4 | B · O achado do mercado | C$ 4 no ATA barato. Sobra saldo, mas você precisa achar quem joga. Se ele marcar, ninguém te aguenta. |
+| 4/4 | E você? A ou B? | Comenta e defende a sua escolha. |
 
 **Legenda:**
 
 ```text
-Todo mercado tem esse dilema: pagar pelo craque ou achar o barato que joga.
+Pagar pelo nome ou achar quem joga? Todo mercado tem esse dilema.
 
 Comenta A ou B e defende a sua escolha.
 
@@ -201,13 +198,11 @@ Preços de exemplo. C$ é a moeda do jogo, não é dinheiro.
 #fantasyfutebol #brasileirão #futebol #escalação
 ```
 
-**Abertura alternativa:** "C$ 14 no craque ou C$ 4 no achado?"
-
 **Texto alternativo:** Comparação entre dois atacantes genéricos, sem nome ou clube, com preços de exemplo de C$ 14 e C$ 4.
 
 ### 9. Reel · Monte seu grupo antes da próxima rodada
 
-**Arte:** "Post 9 · Capa do Reel" no kit. Se a temporada 2026 já tiver acabado, trocar por "Monte seu grupo antes de 2027".
+**Arquivos:** [vídeo](reels/post-9/reel-post-9-monte-seu-grupo.mp4) e [capa](reels/post-9/capa-post-9.png), que é a "Post 9 · Capa do Reel" do kit. Se a temporada 2026 já tiver acabado, trocar a capa e a última cena por "Monte seu grupo antes de 2027".
 
 **Roteiro:** [[Roteiros dos Reels]].
 

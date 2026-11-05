@@ -79,7 +79,7 @@
 ## Operational defaults (tool skills read these)
 - **AI & synthetic media policy:** Liberado, sem regra própria além do que a plataforma e a lei exigirem. As Guardrails continuam valendo: IA não pode gerar rosto, voz ou imagem reconhecível de jogador, técnico ou pessoa real, nem escudo.
 - **Accessibility defaults:** Texto alternativo em toda imagem. Legenda sempre ativa em vídeo. Texto curto e com alto contraste sobre o fundo.
-- **Visual identity:** Sistema "Prancheta de giz", com modelos no [Kit Visual Instagram Escalou](https://claude.ai/artifact/SETy6RvKyppp6KtZyTvevG). Verde-lima `#C5F920`, gramado `#0D4A32` e `#06261A`, giz `#F3F7E8`; títulos em Sofia Sans Extra Condensed Black, caixa alta; apoio em Sofia Sans. Logos em `public/`.
+- **Visual identity:** Sistema "Prancheta de giz", com modelos no [Kit Visual Instagram Escalou](https://claude.ai/artifact/SETy6RvKyppp6KtZyTvevG). Verde-lima `#C5F920`, gramado `#0D4A32` e `#06261A`, giz `#F3F7E8`; títulos em Sofia Sans Extra Condensed Black, caixa alta; apoio em Sofia Sans. Logos em `public/`. **Direção 2 (04/11/2026):** peças de mais impacto com celular inclinado mostrando a tela de escalação, cartas de posição flutuando com brilho verde e foto de pessoa genérica gerada por IA cercada de rabiscos a giz. Modelos e regras no quadro "Direção 2" do kit. Nada de cifrão, moeda de ouro, bônus ou "#1".
 
 ## Guardrails
 - **Banned words/topics:**
