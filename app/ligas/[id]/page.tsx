@@ -1,17 +1,19 @@
 import Link from "next/link";
-import { ArrowLeft, Users } from "lucide-react";
+import { ChevronLeft, Users } from "lucide-react";
 import { notFound, redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient, getCurrentUser } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
-import { buildChampionshipRanking, positionChange, rankByPoints, type ChampionshipRowInput } from "@/lib/league-ranking";
+import { buildChampionshipRanking, leaderGapText, positionChange, rankByPoints, type ChampionshipRowInput } from "@/lib/league-ranking";
 import { getAdministratorIds, withoutAdministrators } from "@/lib/league-members";
 import { RoundSelector } from "./round-selector";
-import { RankingViewTabs, type RankingView } from "./ranking-view-tabs";
+import { type RankingView } from "./ranking-view-tabs";
+import { LeagueHero } from "./league-hero";
 import { TrackEvent } from "@/components/analytics/track-event";
-import { PositionChangeIndicator } from "./position-change";
+import { StandingsTable } from "./standings-table";
 import { Logo } from "@/components/ui/logo";
+import { quietPanel, scoreboard } from "@/components/ui/scoreboard";
 
 type League = { id: string; nome: string; icone: string | null; tipo: "ABERTA" | "CONVITE"; temporada: number; token_convite: string; arquivada_em: string | null };
 type Membership = { entrou_em: string; ligas: League | League[] | null };
@@ -23,14 +25,6 @@ type Stat = { jogador_id: number; pontos: number };
 
 function first<T>(value: T | T[] | null) {
   return Array.isArray(value) ? value[0] ?? null : value;
-}
-
-function initials(value: string) {
-  return value.split(/[.\s_-]+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join("").toLocaleUpperCase("pt-BR") || "—";
-}
-
-function points(value: number) {
-  return value.toLocaleString("pt-BR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 }
 
 export default async function LeagueDetailPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ rodada?: string; visao?: string }> }) {
@@ -124,66 +118,59 @@ export default async function LeagueDetailPage({ params, searchParams }: { param
     ? new Map((previousChampionshipData as ChampionshipRowInput[]).map((row) => [row.usuario_id, row.posicao]))
     : null;
   const championship = buildChampionshipRanking((championshipData ?? []) as ChampionshipRowInput[], user.id);
+  const clubByMember = new Map(members.map((member) => [member.usuario_id, first(member.profile.clubes)?.sigla ?? null]));
   const roundCurrentMember = ranking.find((member) => member.isCurrentUser);
   const roundLeader = ranking[0];
   const displayed = view === "campeonato"
     ? {
-      rows: championship.ranking.map((member) => ({ ...member, detail: `${member.rounds} ${member.rounds === 1 ? "rodada" : "rodadas"}`, change: positionChange(member.position, previousChampionshipPositions?.get(member.usuario_id)) })),
+      rows: championship.ranking.map((member) => ({ ...member, club: clubByMember.get(member.usuario_id) ?? null, detail: `${member.rounds} ${member.rounds === 1 ? "rodada" : "rodadas"}`, change: positionChange(member.position, previousChampionshipPositions?.get(member.usuario_id)) })),
       currentMember: championship.currentMember,
       differenceToLeader: championship.differenceToLeader,
     }
     : {
-      rows: ranking.map((member) => ({ usuario_id: member.usuario_id, apelido: member.profile.apelido, points: member.points, position: member.position, isCurrentUser: member.isCurrentUser, detail: null as string | null, change: positionChange(member.position, previousRoundPositions?.get(member.usuario_id)) })),
+      rows: ranking.map((member) => ({ usuario_id: member.usuario_id, apelido: member.profile.apelido, club: first(member.profile.clubes)?.sigla ?? null, points: member.points, position: member.position, isCurrentUser: member.isCurrentUser, detail: null as string | null, change: positionChange(member.position, previousRoundPositions?.get(member.usuario_id)) })),
       currentMember: roundCurrentMember,
       differenceToLeader: roundCurrentMember && roundLeader ? Math.max(0, roundLeader.points - roundCurrentMember.points) : null,
     };
   const { currentMember, differenceToLeader } = displayed;
   const joinedDate = new Intl.DateTimeFormat("pt-BR", { month: "short", year: "numeric", timeZone: "America/Sao_Paulo" }).format(new Date(membership.entrou_em));
 
-  return <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-3.5 px-5 pt-1 pb-40 text-foreground">
-    {/* <header className="flex h-12 items-center gap-2.5"><Link href="/ligas?lista=1" className="grid size-9 place-items-center rounded-full bg-card text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-label="Voltar para ligas"><ArrowLeft className="size-[18px]" /></Link><h1 className="min-w-0 flex-1 truncate text-2xl font-extrabold tracking-tight">Ligas</h1></header> */}
-    <div className="w-full flex items-center justify-center">
-      <Logo size="md" />
-    </div>
-    <section className="flex items-center gap-3.5" aria-labelledby="league-name">
-      <span className="grid size-14 shrink-0 place-items-center rounded-2xl bg-primary/30 text-[28px]">{league.icone || "⚽"}</span>
-      <div className="min-w-0">
-        <h2 id="league-name" className="truncate text-[22px] font-extrabold tracking-tight">{league.nome}</h2>
-        <p className="mt-1 text-xs text-muted-foreground">{members.length} {members.length === 1 ? "membro" : "membros"} · {league.tipo === "CONVITE" ? "por convite" : "aberta"} · entrou em {joinedDate}</p>
-      </div>
-    </section>
+  const leaders = displayed.rows.filter((row) => row.position === 1).length;
+  const scope = view === "campeonato" ? `no campeonato ${season}` : round ? `na rodada ${round.numero}` : "na liga";
+  const rankingTitle = view === "campeonato" ? `Campeonato ${season}` : round ? `Rodada ${round.numero}` : "Classificação";
 
-    <RankingViewTabs leagueId={league.id} active={view} />
+  return <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-4 px-4 pt-4 pb-40 font-(family-name:--font-body) text-giz antialiased">
+    <header className="flex items-center justify-between gap-3 pr-12">
+      <Logo size="sm" href="/inicio" priority alt="Escalou, início" />
+      <Link href="/ligas?lista=1" className="inline-flex min-h-11 items-center gap-1 text-[15px] font-bold text-giz/75 outline-none hover:text-giz focus-visible:ring-2 focus-visible:ring-giz"><ChevronLeft className="size-4" aria-hidden="true" />Minhas ligas</Link>
+    </header>
+
+    <LeagueHero
+      leagueId={league.id}
+      name={league.nome}
+      icon={league.icone}
+      meta={`${members.length} ${members.length === 1 ? "membro" : "membros"}, ${league.tipo === "CONVITE" ? "por convite" : "aberta"}. Você entrou em ${joinedDate}.`}
+      view={view}
+      position={currentMember?.position ?? null}
+      total={displayed.rows.length}
+      scope={scope}
+      gap={leaderGapText({ position: currentMember?.position ?? null, differenceToLeader, leaders })}
+      points={currentMember?.points ?? null}
+    />
     <TrackEvent key={view} event="ranking_visto" properties={{ aba: view }} />
 
-    <section className="grid grid-cols-3 gap-4" aria-label={view === "campeonato" ? "Seu desempenho no campeonato" : "Seu desempenho na rodada"}>
-      <div className="rounded-xl bg-secondary px-3 py-2.5 text-center"><strong className="block text-3xl font-mono text-primary font-extrabold leading-tight">{currentMember ? `${currentMember.position}º` : "—"}</strong><span className="text-[11px] font-mono text-white">sua posição</span></div>
-      <div className="rounded-xl bg-secondary px-3 py-2.5 text-center"><strong className="block text-3xl font-mono text-primary font-extrabold leading-tight">{currentMember ? points(currentMember.points) : "—"}</strong><span className="text-[11px] font-mono text-white">seus pontos</span></div>
-      <div className="rounded-xl bg-secondary px-3 py-2.5 text-center"><strong className="block text-3xl font-mono text-primary font-extrabold leading-tight">{differenceToLeader === null ? "—" : differenceToLeader === 0 ? "—" : `−${points(differenceToLeader)}`}</strong><span className="text-[11px] font-mono text-white">para o 1º</span></div>
-    </section>
+    {members.length === 1 && <p className="flex gap-3 rounded-[14px] border border-warning/40 bg-warning/10 p-3.5 text-[15px] leading-snug text-warning"><Users className="mt-0.5 size-5 shrink-0" aria-hidden="true" />Convide pelo menos 3 amigos. Sozinho você é sempre o primeiro, e isso não tem graça.</p>}
 
-    {members.length === 1 && <section className="flex gap-2 rounded-xl bg-warning/12 p-3 text-xs leading-[1.4] text-warning"><Users className="size-4 shrink-0" aria-hidden="true" />Convide pelo menos 3 amigos. Sozinho você é sempre o primeiro — e isso não tem graça.</section>}
-
-    <section className="grid gap-1" aria-labelledby="ranking-title">
-      <div className="mb-1 flex items-center justify-between gap-3">
-        <h2 id="ranking-title" className="text-[17px] font-extrabold">{view === "campeonato" ? `Ranking do Campeonato ${season}` : round ? `Ranking da Rodada ${String(round.numero).padStart(2, "0")}` : "Ranking da liga"}</h2>
+    <section className={`${quietPanel} px-4 pb-4 pt-4`} aria-labelledby="ranking-title">
+      <div className="mb-2 flex items-center justify-between gap-3">
+        <h2 id="ranking-title" className={`${scoreboard} text-[26px] uppercase leading-none`}>{rankingTitle}</h2>
         {view === "rodada" && round && availableRounds.length > 0 && <RoundSelector leagueId={league.id} selectedRoundId={round.id} options={availableRounds.map((candidate) => ({ id: candidate.id, numero: candidate.numero, isCurrent: candidate.id === currentRound?.id }))} />}
       </div>
-      <div className="my-2 flex items-center justify-between gap-3 opacity-60">
-        <p className="w-[76px] text-xs font-extrabold font-mono">POS</p>
-        <p className="flex-1 text-xs font-extrabold">NOME</p>
-        <p className="w-10 text-xs font-extrabold font-mono">PTS</p>
-      </div>
-      {view === "campeonato" && championshipError && <p role="alert" className="rounded-xl bg-destructive/20 p-3 text-sm font-semibold text-destructive-foreground">Não foi possível carregar o ranking do campeonato. Tente novamente em instantes.</p>}
-      {view === "campeonato" && !championshipError && <p className="text-xs text-muted-foreground">Soma dos pontos de todas as rodadas já travadas da temporada. Empate: mais gols dos escalados.</p>}
-      {displayed.rows.map((member) => {
-        return <article key={member.usuario_id} className={`flex h-[60px] items-center gap-3 rounded-xl px-3 backdrop-blur-sm ${member.isCurrentUser ? "border border-primary bg-primary/15" : "bg-primary/10"}`}>
-          <strong className="w-8 text-[15px] font-extrabold text-foreground">{member.position}º</strong>
-          <PositionChangeIndicator change={member.change} />
-          <span className="min-w-0 flex-1"><strong className="block truncate">{member.apelido}{member.isCurrentUser ? " (você)" : ""}</strong>{member.detail && <span className="block text-xs text-muted-foreground">{member.detail}</span>}</span>
-          <span className="grid justify-items-end gap-0.5"><strong className="font-mono text-[15px]">{points(member.points)}</strong></span>
-        </article>;
-      })}
+      {view === "campeonato" && championshipError && <p role="alert" className="rounded-[14px] bg-destructive/40 p-3 text-sm font-semibold text-destructive-foreground">Não foi possível carregar o ranking do campeonato. Tente de novo em instantes.</p>}
+      {view === "campeonato" && !championshipError && <p className="mb-1 text-sm text-giz/65">Soma das rodadas já travadas da temporada. No empate, vence quem tiver mais gols dos escalados.</p>}
+      {displayed.rows.length === 0
+        ? <p className="py-4 text-[15px] text-giz/70">Ninguém pontuou ainda. A tabela aparece quando a primeira rodada travar.</p>
+        : <StandingsTable rows={displayed.rows} label={`Classificação, ${rankingTitle}`} />}
     </section>
   </main>;
 }

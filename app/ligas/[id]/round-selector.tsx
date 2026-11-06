@@ -18,7 +18,7 @@ export function RoundSelector({ leagueId, options, selectedRoundId }: { leagueId
       router.push(selected?.isCurrent ? `/ligas/${leagueId}` : `/ligas/${leagueId}?rodada=${value}`);
     });
   }}>
-    <SelectTrigger size="sm" aria-label="Selecionar rodada do ranking" className="border border-primary/90 px-4 py-2 bg-secondary text-primary/70 disabled:opacity-70" disabled={isPending} aria-busy={isPending || undefined}>
+    <SelectTrigger size="sm" aria-label="Selecionar rodada do ranking" className="h-10 rounded-full border border-giz/25 bg-transparent px-4 text-sm font-bold text-giz disabled:opacity-70" disabled={isPending} aria-busy={isPending || undefined}>
       <span>{isPending ? "Carregando..." : `Rodada ${String(selectedRound?.numero ?? "").padStart(2, "0")}`}</span>
     </SelectTrigger>
     <SelectContent align="end">

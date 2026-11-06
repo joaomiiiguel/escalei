@@ -1,7 +1,4 @@
-import { Sofia_Sans, Sofia_Sans_Extra_Condensed } from "next/font/google";
-
-export const display = Sofia_Sans_Extra_Condensed({ subsets: ["latin"], weight: ["800", "900"], variable: "--font-display" });
-export const body = Sofia_Sans({ subsets: ["latin"], variable: "--font-body" });
+export { body, display } from "@/app/fonts";
 
 // Classes compartilhadas pelas páginas públicas (Home e Beta).
 export const displayType = "font-(family-name:--font-display) font-black uppercase";

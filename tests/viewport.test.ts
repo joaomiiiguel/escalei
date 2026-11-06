@@ -16,6 +16,7 @@ describe("viewport no celular (JOA-161)", () => {
   it("corta o vazamento horizontal na raiz sem transformar o body em contêiner de rolagem", () => {
     const layout = readFileSync(path.resolve(__dirname, "../app/layout.tsx"), "utf8");
     expect(layout).toMatch(/<html[^>]*className="[^"]*\boverflow-x-hidden\b/);
-    expect(layout).toMatch(/<body[^>]*className="[^"]*\boverflow-x-clip\b/);
+    // O body também recebe as variáveis das fontes, então o className é um template.
+    expect(layout).toMatch(/<body[^>]*className=\{?[`"][^`"]*\boverflow-x-clip\b/);
   });
 });

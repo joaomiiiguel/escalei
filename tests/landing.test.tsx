@@ -8,10 +8,6 @@ import { Navbar } from "@/components/ui/navbar";
 
 let pathname = "/";
 vi.mock("next/navigation", () => ({ redirect: vi.fn(), usePathname: () => pathname }));
-vi.mock("next/font/google", () => {
-  const font = () => ({ className: "", variable: "" });
-  return { Sofia_Sans: font, Sofia_Sans_Extra_Condensed: font };
-});
 vi.mock("lucide-react", () => {
   const icons = ["ArrowRight", "Check", "House", "Info", "Loader2", "Lock", "MessageCircle", "Plus", "Shirt", "Trophy", "UserRound", "Whistle", "X", "CircleHelp"];
   return Object.fromEntries(icons.map((icon) => [icon, () => null]));

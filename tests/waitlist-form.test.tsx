@@ -4,10 +4,6 @@ import { WaitlistForm } from "@/app/_landing/waitlist-form";
 
 const joinWaitlist = vi.fn();
 vi.mock("@/app/actions", () => ({ joinWaitlist: (...args: unknown[]) => joinWaitlist(...args) }));
-vi.mock("next/font/google", () => {
-  const font = () => ({ className: "", variable: "" });
-  return { Sofia_Sans: font, Sofia_Sans_Extra_Condensed: font };
-});
 vi.mock("lucide-react", () => {
   const icons = ["ArrowRight", "Check", "Info", "Loader2", "Lock", "MessageCircle", "Plus", "Whistle"];
   return Object.fromEntries(icons.map((icon) => [icon, () => null]));

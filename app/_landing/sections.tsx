@@ -75,7 +75,7 @@ export function LandingShell({ id, children }: { id?: string; children: React.Re
   return (
     <div
       id={id}
-      className={`${display.variable} ${body.variable} relative overflow-x-clip bg-background font-(family-name:--font-body) text-base leading-[1.45] text-(--giz) antialiased motion-safe:[html:has(&)]:scroll-smooth md:text-lg [--giz:#f3f7e8] [--gramado:#0d4a32] [--gramado-escuro:#06261a]`}
+      className={`${display.variable} ${body.variable} relative overflow-x-clip bg-background font-(family-name:--font-body) text-base leading-[1.45] text-(--giz) antialiased motion-safe:[html:has(&)]:scroll-smooth md:text-lg [--giz:var(--color-giz)] [--gramado:var(--color-gramado)] [--gramado-escuro:var(--color-gramado-escuro)]`}
     >
       <ChalkFilter />
       {children}

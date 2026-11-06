@@ -10,9 +10,9 @@ function label(change: PositionChange) {
 /** Indicador ▲/▼ da variação de posição no ranking em relação à rodada anterior. */
 export function PositionChangeIndicator({ change }: { change: PositionChange | null }) {
   if (!change) return <span className="w-8" aria-hidden="true" />;
-  const tone = change.direction === "up" ? "text-success" : change.direction === "down" ? "text-red-400" : "text-muted-foreground";
+  const tone = change.direction === "up" ? "text-success" : change.direction === "down" ? "text-red-400" : "text-giz/45";
   const Icon = change.direction === "up" ? ChevronUp : change.direction === "down" ? ChevronDown : Minus;
-  return <span className={`flex w-8 items-center justify-center gap-0.5 text-xs font-extrabold font-mono ${tone}`} title={label(change)}>
+  return <span className={`flex w-8 items-center justify-center gap-0.5 text-[13px] font-extrabold tabular-nums ${tone}`} title={label(change)}>
     <Icon className="size-3.5" aria-hidden="true" />
     {change.places > 0 && <span aria-hidden="true">{change.places}</span>}
     <span className="sr-only">{label(change)}</span>

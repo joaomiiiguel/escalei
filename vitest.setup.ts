@@ -31,7 +31,7 @@ const createIconMock = (name: string) => {
 vi.mock("lucide-react", () => {
   const icons = [
     "ArrowLeft", "Users", "Clock3", "Check", "LockKeyhole", "Pencil", "Trophy",
-    "CalendarDays", "ArrowDownUp", "Search", "TriangleAlert", "X",
+    "CalendarDays", "ArrowDownUp", "ChevronDown", "Search", "TriangleAlert", "WandSparkles", "X",
     "Download", "Share", "SquarePlus", "CircleHelp", "ShieldCheck",
     "House", "Shirt", "UserRound"
   ];
@@ -101,3 +101,8 @@ vi.mock("@/lib/game-kickoff", () => ({
 process.env.NEXT_PUBLIC_SUPABASE_URL = "http://localhost:54321";
 process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY = "test-anon-key";
 process.env.SUPABASE_SERVICE_ROLE_KEY = "test-service-role-key";
+// `next/font` só funciona no compilador do Next; nos testes, cada fonte vira um nome de classe.
+vi.mock("next/font/google", () => {
+  const font = () => ({ className: "", variable: "" });
+  return { Sofia_Sans: font, Sofia_Sans_Extra_Condensed: font };
+});
