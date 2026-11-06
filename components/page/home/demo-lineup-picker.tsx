@@ -4,9 +4,8 @@ import { useState } from "react";
 import type { ActiveRound, Rodada, SavedTeam, StatusRodada as StatusRodadaType } from "@/lib/types";
 import { LineupBuilder } from "@/components/ui/lineup-builder";
 import type { LineupPlayer } from "@/components/ui/lineup-formation";
-import { Logo } from "@/components/ui/logo";
 import { RoundLineup, SavedLineup } from "@/components/ui/saved-lineup";
-import TitleSection from "@/components/ui/title-section";
+import { LineupTitle } from "@/app/escalar/lineup-title";
 
 // ─── Dados fixos do mock ────────────────────────────────────────────────────
 
@@ -95,7 +94,7 @@ export default function DemoLineupPicker() {
   const round = ROUNDS[DEMO_MODE];
 
   return (
-      <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-2  px-5 text-foreground">
+      <div className="flex flex-col gap-4">
         
         {/* Seletor de demo */}
         <div className="flex flex-col gap-1.5 pb-5">
@@ -131,7 +130,7 @@ export default function DemoLineupPicker() {
           </div>
         </div>
 
-        <TitleSection title={round && demoEditModeLineup ? "Montar time" : "Meu time"} />
+        <LineupTitle passes={null} title={round && demoEditModeLineup ? "Montar time" : "Meu time"} />
 
 
         {/* Inicio de Rodada sem escalaçao */}
@@ -164,5 +163,5 @@ export default function DemoLineupPicker() {
           />
         )}
        
-      </main>)
+      </div>)
 }

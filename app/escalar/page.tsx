@@ -16,7 +16,8 @@ import { Clock3 } from "lucide-react";
 import { Suspense } from "react";
 
 import type { SavedPlayer, SavedTeam, ActiveRound, RoundGame, PlayerStat } from "@/lib/types";
-import Image from "next/image";
+import Link from "next/link";
+import { pitchPanel, quietPanel, scoreboard } from "@/components/ui/scoreboard";
 import DemoLineupPicker from "@/components/page/home/demo-lineup-picker";
 
 /** Apelidos que têm acesso ao modo de demonstração. */
@@ -24,11 +25,11 @@ const DEMO_USERS = new Set(["Miguel"]);
 
 function LineupSkeleton() {
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-4 pt-5 px-5 text-foreground">
-      <div className="animate-pulse space-y-4">
-        <div className="h-8 w-48 bg-muted rounded" />
-        <div className="h-[65vh] bg-muted rounded-[14px]" />
-        <div className="h-12 bg-muted rounded-xl" />
+    <main className={shell}>
+      <div className="animate-pulse space-y-4" aria-label="Carregando escalação" aria-busy="true">
+        <div className="h-9 w-40 rounded bg-muted" />
+        <div className="h-[65vh] rounded-[20px] bg-gramado-escuro" />
+        <div className="h-32 rounded-[20px] bg-muted/60" />
       </div>
     </main>
   );
@@ -38,8 +39,25 @@ function matchTime(value: string) {
   return new Intl.DateTimeFormat("pt-BR", { hour: "2-digit", minute: "2-digit", timeZone: "America/Sao_Paulo" }).format(new Date(value));
 }
 
+const shell = "mx-auto flex min-h-screen w-full max-w-lg flex-col gap-4 px-4 pt-4 font-(family-name:--font-body) text-giz antialiased";
+
 function Message({ children }: { children: React.ReactNode }) {
-  return <p className="rounded-xl bg-card p-4 text-sm text-muted-foreground">{children}</p>;
+  return <p className={`${quietPanel} p-4 text-[15px] text-giz/75`}>{children}</p>;
+}
+
+function Header() {
+  return <header className="pr-12">
+    <Logo size="sm" href="/inicio" priority alt="Escalou, início" />
+  </header>;
+}
+
+/** Painel de gramado para quando não há time para mostrar. */
+function EmptyLineup({ title, description }: { title: string; description: string }) {
+  return <section className={`${pitchPanel} p-5`}>
+    <h2 className={`${scoreboard} text-[28px] uppercase leading-[0.9]`}>{title}</h2>
+    <p className="mt-2 text-[15px] leading-snug text-giz/75">{description}</p>
+    <Link href="/inicio" className="mt-4 inline-flex min-h-11 items-center font-bold text-primary underline underline-offset-4 outline-none focus-visible:ring-2 focus-visible:ring-giz">Voltar para o início</Link>
+  </section>;
 }
 
 type LineupBodyProps = {
@@ -77,8 +95,8 @@ function LineupBody({
     return (
       <>
         {lateLineup && (
-          <p className="flex items-start gap-2 rounded-xl border border-primary/40 bg-primary/10 p-3 text-xs leading-[18px] text-foreground">
-            <Clock3 className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
+          <p className="flex items-start gap-3 rounded-[14px] border border-warning/40 bg-warning/10 p-3.5 text-[15px] leading-snug">
+            <Clock3 className="mt-0.5 size-5 shrink-0 text-warning" aria-hidden="true" />
             A rodada já travou, mas ainda dá tempo: escale só com jogadores de times que não entraram em campo. Depois de salvar, o time não pode ser alterado.
           </p>
         )}
@@ -184,10 +202,8 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
    // ─── Modo demonstração (só para apelidos em DEMO_USERS) ───────────────────
     if (DEMO_USERS.has(String(profile?.apelido))) {
       return (
-        <main className="flex max-w-lg px-5 flex-col justify-start gap-4 pt-5 pb-44 text-white">
-          <div className="w-full flex items-center justify-center">
-            <Logo size="md" />
-          </div>
+        <main className={`${shell} pb-44`}>
+          <Header />
           <DemoLineupPicker />
         </main>
       );
@@ -195,15 +211,10 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
 
   if (!round) {
     return (
-      <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-4 pt-5 px-5 text-foreground">
-        <div className="w-full flex items-center justify-center">
-          <Logo size="md" />
-        </div>
+      <main className={shell}>
+        <Header />
         <LineupTitle passes={availablePasses} title="Meu time" />
-        <div className="flex flex-col items-center justify-center border border-primary/50 rounded-xl py-8 gap-2 mt-20">
-          <Image src="/icon-erro.png" alt="Time indisponível" width={100} height={100} />
-          <p className="text-sm text-primary">Não há rodada disponível no momento.</p>
-        </div>
+        <EmptyLineup title="Sem rodada no momento" description="Quando a próxima rodada for publicada, você monta seu time aqui." />
       </main>
     );
   }
@@ -218,24 +229,17 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
 
   if (!canEdit && !savedTeam) {
     return (
-      <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-4 pt-5 px-5 text-foreground">
-        <div className="w-full flex items-center justify-center">
-          <Logo size="md" />
-        </div>
+      <main className={shell}>
+        <Header />
         <LineupTitle passes={availablePasses} title="Meu time" />
-        <div className="flex flex-col items-center justify-center border border-primary/50 rounded-xl py-8 gap-2 mt-20">
-          <Image src="/icon-erro.png" alt="Time indisponível" width={100} height={100} />
-          <p className="text-sm text-primary">Não é possível editar o time nesta rodada.</p>
-        </div>
+        <EmptyLineup title="Você não escalou nesta rodada" description="A escalação desta rodada já travou. Fique de olho na próxima para montar seu time." />
       </main>
     );
   }
 
   return (
-    <main className="mx-auto flex min-h-screen w-full max-w-lg flex-col gap-2 pt-5 px-5 text-foreground">
-      <div className="w-full flex items-center justify-center">
-        <Logo size="md" />
-      </div>
+    <main className={shell}>
+      <Header />
       <LineupTitle passExempt={passRequired === false} passes={availablePasses} title={round && canEdit ? "Montar time" : "Meu time"} />
       <LineupBody
         round={round}

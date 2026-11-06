@@ -35,7 +35,7 @@ export function PassCount({ available, exempt = false }: PassCountProps) {
   }, [isOpen]);
 
   return <>
-    <button type="button" ref={trigger} onClick={() => setIsOpen(true)} aria-haspopup="dialog" className="flex min-h-9 shrink-0 items-center gap-1.5 rounded-full bg-primary/15 px-3 text-xs font-extrabold text-primary outline-none focus-visible:ring-2 focus-visible:ring-ring">
+    <button type="button" ref={trigger} onClick={() => setIsOpen(true)} aria-haspopup="dialog" className="flex min-h-11 shrink-0 items-center gap-1.5 rounded-full border border-primary/40 bg-primary/10 px-3.5 text-[13px] font-extrabold text-primary outline-none focus-visible:ring-2 focus-visible:ring-ring">
       <Ticket className="size-4" aria-hidden="true" />
       Passes: {available}
     </button>
