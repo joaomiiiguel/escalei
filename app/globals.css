@@ -30,6 +30,10 @@
     --color-destructive: #561d20;
     --color-destructive-foreground: #ffdddd;
     --color-whatsapp: #25d366;
+    /* Marca: traço de giz e gramado cortado (landing e Início). */
+    --color-giz: #f3f7e8;
+    --color-gramado: #0d4a32;
+    --color-gramado-escuro: #06261a;
     --radius-card: 0.75rem;
 }
 

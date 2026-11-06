@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import type { Rodada, Jogo, Clube, TimeDaRodada, EstatisticaDaRodada, StatusRodada as StatusRodadaType } from "@/lib/types";
-import StatusRodadaSection from "@/components/page/home/status-round";
-import RoundViewCTA from "@/components/page/home/round-view-cta";
 import MatchesRounds from "@/components/page/home/matches-rounds";
-import LiveMatches from "@/components/page/home/live-matches";
+import { RoundHero } from "@/components/page/home/round-hero";
+import { roundFigure, roundMessage, roundProgress } from "@/lib/round-home";
 
 // ─── Dados fixos do mock ────────────────────────────────────────────────────
 
@@ -117,12 +116,6 @@ export default function DemoStatusPicker() {
     demoStatus === "EM_ANDAMENTO" ? MOCK_TEAM_STATS_EM_ANDAMENTO :
     demoStatus === "FECHADA"      ? MOCK_TEAM_STATS_FECHADA       : [];
 
-  const completedGames = games.filter((g) => g.status === "ENCERRADO");
-  const liveGames = games.filter((g) => g.status === "EM_ANDAMENTO");
-  const lastCompletedGame = completedGames.at(-1) ?? null;
-  const matchLabel = (game: Jogo) =>
-    `${clubsById.get(game.clube_casa_id)?.sigla ?? "—"} × ${clubsById.get(game.clube_fora_id)?.sigla ?? "—"}`;
-
   return (
     <div className="flex flex-col gap-4">
       {/* Seletor de demo */}
@@ -148,25 +141,15 @@ export default function DemoStatusPicker() {
       </div>
 
       {/* Componentes reais renderizados com dados mockados */}
-      {demoStatus !== "ABERTA" && (
-        <LiveMatches
-          completedGames={completedGames.length}
-          games={games}
-          liveGames={liveGames}
-          lastCompletedGame={lastCompletedGame}
-          matchLabel={matchLabel}
-        />
-      )}
-
-      <StatusRodadaSection unavailable={false} round={round} now={MOCK_NOW} nextRound={null} />
-
-      <RoundViewCTA
-        team={MOCK_TEAM}
+      <RoundHero
         round={round}
-        now={MOCK_NOW}
+        figure={roundFigure({ round, hasTeam: true, now: MOCK_NOW })}
+        message={roundMessage({ round, hasTeam: true, lateLineup: false, now: MOCK_NOW })}
+        progress={roundProgress({ games, stats: teamStats, selectedPlayers: MOCK_TEAM.times_jogadores?.length ?? 0 })}
         games={games}
         clubsById={clubsById}
-        teamStats={teamStats}
+        hasTeam
+        now={MOCK_NOW}
       />
 
       <MatchesRounds games={games} clubsById={clubsById} />

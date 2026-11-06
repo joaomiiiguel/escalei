@@ -5,14 +5,12 @@ import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
 import { displayedKickoff } from "@/lib/game-kickoff";
 import { Logo } from "@/components/ui/logo";
-import TitleSection from "@/components/ui/title-section";
-import StatusRodada from "@/components/page/home/status-round";
 import DemoStatusPicker from "@/components/page/home/demo-status-picker";
-
-import RoundViewCTA from "@/components/page/home/round-view-cta";
 import MatchesRounds from "@/components/page/home/matches-rounds";
-import LiveMatches from "@/components/page/home/live-matches";
+import { RoundHero, RoundHeroEmpty } from "@/components/page/home/round-hero";
 import RoundRecapSection from "@/components/page/home/round-recap";
+import { isLateLineupOpen } from "@/lib/lineup-rules";
+import { roundFigure, roundMessage, roundProgress } from "@/lib/round-home";
 import { TrackEvent } from "@/components/analytics/track-event";
 import { hoursSince } from "@/lib/analytics/events";
 
@@ -77,25 +75,20 @@ export default async function Home() {
   }
 
   const completedGames = games.filter((game) => game.status === "ENCERRADO");
-  const liveGames = games.filter((game) => game.status === "EM_ANDAMENTO");
-  const lastCompletedGame = completedGames.at(-1) ?? null;
-  const matchLabel = (game: Jogo) => `${clubsById.get(game.clube_casa_id)?.sigla ?? "—"} × ${clubsById.get(game.clube_fora_id)?.sigla ?? "—"}`;
+  const shell = `flex max-w-lg flex-col gap-4 px-4 pt-4 pb-44 font-(family-name:--font-body) text-giz antialiased`;
 
-  // ─── Header compartilhado entre modo demo e modo normal ───────────────────
+  // ─── Topo compartilhado entre modo demo e modo normal ─────────────────────
   const header = (
-    <header className="flex flex-col items-start justify-between">
-      <div className="w-full flex items-center justify-center">
-        <Logo size="md" />
-      </div>
-      <p className="text-sm text-muted-foreground">Olá, {profile.apelido} 👋</p>
-      <TitleSection title={round ? `Rodada ${round.numero} - Brasileirão ${round.temporada ?? ""}`.trim() : "Brasileirão"} />
+    <header className="flex items-center justify-between gap-3 pr-12">
+      <Logo size="sm" href="/inicio" priority alt="Escalou, início" />
+      <p className="truncate text-[15px] text-giz/75">Olá, <b className="text-giz">{profile.apelido}</b></p>
     </header>
   );
 
   // ─── Modo demonstração (só para apelidos em DEMO_USERS) ───────────────────
   if (DEMO_USERS.has(String(profile.apelido))) {
     return (
-      <main className="flex max-w-lg px-5 flex-col justify-start gap-4 pt-5 pb-44 text-white">
+      <main className={shell}>
         {header}
         <DemoStatusPicker />
       </main>
@@ -103,27 +96,33 @@ export default async function Home() {
   }
 
   // ─── Render normal ────────────────────────────────────────────────────────
+  const hasTeam = Boolean(team);
+  const lateLineup = !team && isLateLineupOpen(round, games, now);
+
   return (
-    <main className="flex max-w-lg px-5 flex-col justify-start gap-4 pt-5 pb-44 text-white">
+    <main className={shell}>
       {header}
       <TrackEvent event="inicio_visto" properties={{ status_rodada: round?.status ?? null }} />
       {team && (round?.status === "EM_ANDAMENTO" || round?.status === "FECHADA") && <TrackEvent event="pontos_vistos" properties={{ status_rodada: round.status, horas_desde_ultimo_jogo: hoursSince(completedGames.map((game) => game.pontuado_em)) }} />}
-      {round?.status !== "ABERTA" && <LiveMatches
-        completedGames={completedGames.length}
-        games={games}
-        liveGames={liveGames}
-        lastCompletedGame={lastCompletedGame}
-        matchLabel={matchLabel}
-      />}
 
-      <StatusRodada unavailable={unavailable} round={round} now={now} nextRound={null} />
+      {unavailable
+        ? <RoundHeroEmpty title="Rodada indisponível" description="Não foi possível carregar a rodada. Confira sua conexão e tente de novo." action={{ label: "Tentar de novo", href: "/inicio" }} />
+        : !round
+          ? <RoundHeroEmpty title="Sem rodada no momento" description="Quando a próxima rodada for publicada, os jogos e o prazo para escalar aparecem aqui." />
+          : <RoundHero
+            round={round}
+            figure={roundFigure({ round, hasTeam, now })}
+            message={roundMessage({ round, hasTeam, lateLineup, now })}
+            progress={roundProgress({ games, stats: teamStats, selectedPlayers: team?.times_jogadores?.length ?? 0 })}
+            games={games}
+            clubsById={clubsById}
+            hasTeam={hasTeam}
+            now={now}
+          />}
 
       {round?.status === "FECHADA" && team && <RoundRecapSection userId={user.id} roundId={round.id} roundNumber={round.numero} stats={teamStats} />}
 
-      <RoundViewCTA team={team} round={round} now={now} games={games} clubsById={clubsById} teamStats={teamStats} />
-
-      <MatchesRounds games={games} clubsById={clubsById} />
-
+      {round && <MatchesRounds games={games} clubsById={clubsById} />}
     </main>
-  )
+  );
 }

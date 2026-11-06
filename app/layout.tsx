@@ -4,6 +4,7 @@ import { getCurrentRound } from "@/lib/current-round";
 import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
 import { PushInvite } from "@/components/pwa/push-invite";
 import { PwaSetup } from "@/components/pwa/pwa-setup";
+import { body, display } from "./fonts";
 import "./globals.css";
 import type { Metadata, Viewport } from "next";
 
@@ -46,7 +47,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 
     return (
         <html lang="pt-BR" className="dark overflow-x-hidden">
-            <body className="min-h-screen overflow-x-clip">
+            <body className={`${display.variable} ${body.variable} min-h-screen overflow-x-clip`}>
                 <AnalyticsProvider userId={user?.id ?? null} />
                 <PwaSetup />
                 {user && <PushInvite vapidPublicKey={process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY} />}
