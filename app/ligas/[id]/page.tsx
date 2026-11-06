@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ArrowLeft, Users } from "lucide-react";
 import { notFound, redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getCurrentUser } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
 import { buildChampionshipRanking, positionChange, rankByPoints, type ChampionshipRowInput } from "@/lib/league-ranking";
@@ -11,7 +11,7 @@ import { RoundSelector } from "./round-selector";
 import { RankingViewTabs, type RankingView } from "./ranking-view-tabs";
 import { TrackEvent } from "@/components/analytics/track-event";
 import { PositionChangeIndicator } from "./position-change";
-import { Logo } from "@/components/ui";
+import { Logo } from "@/components/ui/logo";
 
 type League = { id: string; nome: string; icone: string | null; tipo: "ABERTA" | "CONVITE"; temporada: number; token_convite: string; arquivada_em: string | null };
 type Membership = { entrou_em: string; ligas: League | League[] | null };
@@ -38,21 +38,22 @@ export default async function LeagueDetailPage({ params, searchParams }: { param
   const { rodada: requestedRoundId, visao } = await searchParams;
   const view: RankingView = visao === "campeonato" ? "campeonato" : "rodada";
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
   if (!user) redirect("/entrar");
-  const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
+  const admin = createAdminClient();
+  const [leagueMembershipStatus, { data: profile }, { data: membershipData }] = await Promise.all([
+    getLeagueMembershipStatus(user.id),
+    supabase.from("perfis").select("id").eq("id", user.id).maybeSingle(),
+    admin
+      .from("ligas_membros")
+      .select("entrou_em, ligas(id, nome, icone, tipo, temporada, token_convite, arquivada_em)")
+      .eq("liga_id", id)
+      .eq("usuario_id", user.id)
+      .maybeSingle(),
+  ]);
   if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
-
-  const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
   if (!profile) redirect("/onboarding");
 
-  const admin = createAdminClient();
-  const { data: membershipData } = await admin
-    .from("ligas_membros")
-    .select("entrou_em, ligas(id, nome, icone, tipo, temporada, token_convite, arquivada_em)")
-    .eq("liga_id", id)
-    .eq("usuario_id", user.id)
-    .maybeSingle();
   const membership = membershipData as unknown as Membership | null;
   const league = membership ? first(membership.ligas) : null;
   if (!membership || !league) notFound();
@@ -63,28 +64,37 @@ export default async function LeagueDetailPage({ params, searchParams }: { param
     getCurrentRound<Round>(admin, "id, numero, temporada, simulada, status, trava_em"),
   ]);
   const leagueMembers = (membersData ?? []) as unknown as LeagueMember[];
-  const administratorIds = await getAdministratorIds(admin, leagueMembers.map((member) => member.usuario_id));
+  const currentRound = currentRoundData as Round | null;
+  const [administratorIds, { data: availableRoundsData }] = await Promise.all([
+    getAdministratorIds(admin, leagueMembers.map((member) => member.usuario_id)),
+    currentRound
+      ? admin
+        .from("rodadas")
+        .select("id, numero, temporada, simulada, status, trava_em")
+        .eq("temporada", currentRound.temporada)
+        .eq("simulada", Boolean(currentRound.simulada))
+        .in("status", ["ABERTA", "EM_ANDAMENTO", "FECHADA"])
+        .order("numero", { ascending: false })
+      : Promise.resolve({ data: [] }),
+  ]);
   const members = withoutAdministrators(leagueMembers, administratorIds).flatMap((member) => {
     const memberProfile = first(member.perfis);
     return memberProfile ? [{ ...member, profile: memberProfile }] : [];
   });
-  const currentRound = currentRoundData as Round | null;
-  const { data: availableRoundsData } = currentRound
-    ? await admin
-      .from("rodadas")
-      .select("id, numero, temporada, simulada, status, trava_em")
-      .eq("temporada", currentRound.temporada)
-      .eq("simulada", Boolean(currentRound.simulada))
-      .in("status", ["ABERTA", "EM_ANDAMENTO", "FECHADA"])
-      .order("numero", { ascending: false })
-    : { data: [] };
   const availableRounds = (availableRoundsData ?? []) as Round[];
   const requestedRound = Number(requestedRoundId);
   const round = availableRounds.find((candidate) => candidate.id === requestedRound) ?? currentRound;
   const memberIds = members.map((member) => member.usuario_id);
-  const { data: teamsData } = view === "rodada" && round && memberIds.length
-    ? await admin.from("times").select("usuario_id, times_jogadores(jogador_id)").eq("rodada_id", round.id).in("usuario_id", memberIds)
-    : { data: [] };
+  // Rodada anterior à exibida: base para indicar quem subiu ou desceu no grupo.
+  const previousRound = round ? availableRounds.find((candidate) => candidate.numero < round.numero) ?? null : null;
+  const [{ data: teamsData }, { data: previousTeamsData }] = await Promise.all([
+    view === "rodada" && round && memberIds.length
+      ? admin.from("times").select("usuario_id, times_jogadores(jogador_id)").eq("rodada_id", round.id).in("usuario_id", memberIds)
+      : Promise.resolve({ data: [] }),
+    view === "rodada" && previousRound && memberIds.length
+      ? admin.from("times").select("usuario_id, pontos").eq("rodada_id", previousRound.id).in("usuario_id", memberIds)
+      : Promise.resolve({ data: null }),
+  ]);
   const teams = (teamsData ?? []) as unknown as Team[];
   const playerIds = [...new Set(teams.flatMap((team) => team.times_jogadores?.map((player) => player.jogador_id) ?? []))];
   const { data: statsData } = view === "rodada" && round && playerIds.length
@@ -94,11 +104,6 @@ export default async function LeagueDetailPage({ params, searchParams }: { param
   const pointsByMember = new Map(teams.map((team) => [team.usuario_id, (team.times_jogadores ?? []).reduce((total, player) => total + (pointsByPlayer.get(player.jogador_id) ?? 0), 0)]));
   const ranking = rankByPoints(members.map((member) => ({ ...member, points: pointsByMember.get(member.usuario_id) ?? 0, isCurrentUser: member.usuario_id === user.id })));
 
-  // Rodada anterior à exibida: base para indicar quem subiu ou desceu no grupo.
-  const previousRound = round ? availableRounds.find((candidate) => candidate.numero < round.numero) ?? null : null;
-  const { data: previousTeamsData } = view === "rodada" && previousRound && memberIds.length
-    ? await admin.from("times").select("usuario_id, pontos").eq("rodada_id", previousRound.id).in("usuario_id", memberIds)
-    : { data: null };
   const previousPointsByMember = new Map(((previousTeamsData ?? []) as { usuario_id: string; pontos: number | string }[]).map((team) => [team.usuario_id, Number(team.pontos)]));
   const previousRoundPositions = previousTeamsData
     ? new Map(rankByPoints(members.map((member) => ({ usuario_id: member.usuario_id, points: previousPointsByMember.get(member.usuario_id) ?? 0 }))).map((member) => [member.usuario_id, member.position]))

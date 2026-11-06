@@ -1,5 +1,5 @@
 import { Navbar } from "@/components/ui/navbar";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getCurrentUser } from "@/lib/supabase/server";
 import { getCurrentRound } from "@/lib/current-round";
 import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
 import { PushInvite } from "@/components/pwa/push-invite";
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { width: "device-width", initialScale: 1, minimumScale: 1, themeColor: "#050505", colorScheme: "dark" };
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     const supabase = await createClient();
-    const { data: { user } } = await supabase.auth.getUser();
+    const user = await getCurrentUser();
     let hasCurrentTeam = false;
     let isRoundInProgress = false;
 

@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { UsersRound } from "lucide-react";
 import { Button } from "@/components/shadcn/button";
 import { SubmitButton } from "@/components/ui/submit-button";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getCurrentUser } from "@/lib/supabase/server";
 import { canUserJoinInvite, getActiveInvite, isInviteToken } from "@/lib/invites";
 import { acceptInvite } from "./actions";
 
@@ -14,7 +14,7 @@ export default async function InvitePage({ params, searchParams }: { params: Pro
   if (!invite) return <main className="mx-auto grid min-h-dvh max-w-[490px] place-items-center bg-background p-6 text-center text-foreground"><section><p className="text-sm font-extrabold tracking-widest text-[#ffcc66]">CONVITE INDISPONÍVEL</p><h1 className="text-3xl font-extrabold">Este link não é válido.</h1><p className="text-muted-foreground">Peça um novo convite a quem administra o grupo.</p></section></main>;
 
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
   const { data: profile } = user ? await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle() : { data: null };
   const authorized = user ? await canUserJoinInvite(token, user.id) : false;
 

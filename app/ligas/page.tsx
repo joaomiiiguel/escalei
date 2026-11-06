@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ChevronRight, KeyRound, Trophy } from "lucide-react";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getCurrentUser } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 
 type League = { id: string; nome: string; icone: string | null; tipo: "ABERTA" | "CONVITE"; temporada: number; arquivada_em: string | null };
@@ -11,12 +11,13 @@ type LeagueMembership = { liga_id: string; ligas: League | League[] | null };
 export default async function LeaguesPage({ searchParams }: { searchParams: Promise<{ lista?: string; erro?: string }> }) {
   const { lista, erro } = await searchParams;
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
   if (!user) redirect("/entrar");
-  const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
+  const [leagueMembershipStatus, { data: profile }] = await Promise.all([
+    getLeagueMembershipStatus(user.id),
+    supabase.from("perfis").select("id").eq("id", user.id).maybeSingle(),
+  ]);
   if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
-
-  const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
   if (!profile) redirect("/onboarding");
 
   const admin = createAdminClient();

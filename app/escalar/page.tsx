@@ -1,7 +1,10 @@
 import { redirect } from "next/navigation";
-import { LineupBuilder, Logo, RoundLineup, SavedLineup, type LineupPlayer } from "@/components/ui";
+import { LineupBuilder } from "@/components/ui/lineup-builder";
+import type { LineupPlayer } from "@/components/ui/lineup-formation";
+import { Logo } from "@/components/ui/logo";
+import { RoundLineup, SavedLineup } from "@/components/ui/saved-lineup";
 import { LineupTitle } from "./lineup-title";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getCurrentUser } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { isRoundEditable, playerRoundStatus } from "@/lib/lineup-rules";
 import { parseAvailability } from "@/lib/player-availability";
@@ -121,26 +124,20 @@ function LineupBody({
 async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?: string }> }) {
   const { editar } = await searchParams;
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
   if (!user) redirect("/entrar");
-  const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
+  // Pertencimento, perfil, carteira, passes e rodada atual não dependem entre si.
+  const [leagueMembershipStatus, { data: profile }, { data: wallet }, { data: availablePasses }, { data: round }] = await Promise.all([
+    getLeagueMembershipStatus(user.id),
+    supabase.from("perfis").select("id, apelido").eq("id", user.id).maybeSingle(),
+    supabase.from("carteiras").select("saldo").eq("usuario_id", user.id).maybeSingle(),
+    supabase.rpc("fn_passes_disponiveis"),
+    getCurrentRound<ActiveRound>(supabase, "id, numero, status, trava_em, fechada_em, simulada"),
+  ]);
   if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
-
-  const { data: profile } = await supabase.from("perfis").select("id, apelido").eq("id", user.id).maybeSingle();
   if (!profile) redirect("/onboarding");
 
-  const { data: wallet } = await supabase
-    .from("carteiras")
-    .select("saldo")
-    .eq("usuario_id", user.id)
-    .maybeSingle();
   const balance = Number(wallet?.saldo ?? 60);
-  const { data: availablePasses } = await supabase.rpc("fn_passes_disponiveis");
-
-  const { data: round } = await getCurrentRound<ActiveRound>(
-    supabase,
-    "id, numero, status, trava_em, fechada_em, simulada",
-  );
   const { data: savedTeamData } = round
     ? await supabase.from("times").select("formacao, times_jogadores(jogadores(id, clube_id, nome, nome_exibicao, posicao, preco, status, status_motivo, clubes(nome, sigla, logo_url)))").eq("usuario_id", user.id).eq("rodada_id", round.id).maybeSingle()
     : { data: null };

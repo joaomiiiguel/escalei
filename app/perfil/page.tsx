@@ -16,13 +16,12 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { PushToggle } from "@/components/pwa/push-toggle";
 import { TeamLogo } from "@/components/ui/team-logo";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getCurrentUser } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { deleteAccount, signOut, updatePreferences, updateProfile } from "./actions";
 import { ProfileEditModal } from "./profile-edit-modal";
 import { SignOutButton } from "./sign-out-button";
 import { NativeSubmitButton } from "@/components/ui/submit-button";
-import { useState } from "react";
 
 type ProfilePageProps = {
   searchParams: Promise<{ atualizado?: string; email_pendente?: string; erro?: string }>;
@@ -72,12 +71,10 @@ function ToggleRow({ icon: Icon, label, defaultChecked, disabled = false }: { ic
 
 export default async function Profile({ searchParams }: ProfilePageProps) {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
   if (!user) redirect("/entrar");
-  const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
-  if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
-
-  const [{ data: profile }, { data: teams }, { count: leaguesCount }] = await Promise.all([
+  const [leagueMembershipStatus, { data: profile }, { data: teams }, { count: leaguesCount }, { data: clubs }] = await Promise.all([
+    getLeagueMembershipStatus(user.id),
     supabase
       .from("perfis")
       .select("apelido, email, telefone, tema, termos_aceitos_em, termos_versao, clube_coracao_id")
@@ -85,11 +82,12 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
       .maybeSingle(),
     supabase.from("times").select("pontos").eq("usuario_id", user.id),
     supabase.from("ligas_membros").select("liga_id", { count: "exact", head: true }).eq("usuario_id", user.id),
+    supabase.from("clubes").select("id, nome, sigla, logo_url").eq("ativo", true).order("nome"),
   ]);
 
+  if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
   if (!profile) redirect("/onboarding");
 
-  const { data: clubs } = await supabase.from("clubes").select("id, nome, sigla, logo_url").eq("ativo", true).order("nome");
   const favoriteClub = clubs?.find((club) => club.id === profile.clube_coracao_id) ?? null;
   const params = await searchParams;
   const errorMessage = params.erro === "apelido"
