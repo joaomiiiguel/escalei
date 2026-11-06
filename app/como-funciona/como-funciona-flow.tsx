@@ -48,7 +48,7 @@ export function ComoFuncionaFlow() {
   function continueFlow() {
     if (!canContinue) return;
     if (currentSlide === slides.length - 1) {
-      router.replace("/");
+      router.replace("/inicio");
       return;
     }
     setCurrentSlide((slideIndex) => slideIndex + 1);

@@ -6,17 +6,17 @@ import { usePathname } from "next/navigation";
 import { HowItWorksModal } from "./how-it-works-modal";
 import { InstallInvite } from "@/components/pwa/install-invite";
 
-const publicPaths = ["/entrar", "/onboarding", "/convite", "/admin", "/beta", "/termos", "/privacidade", "/regulamento"];
+const publicPaths = ["/entrar", "/onboarding", "/convite", "/admin", "/termos", "/privacidade", "/regulamento"];
 
 const items = [
-  { href: "/", label: "Início", icon: House },
+  { href: "/inicio", label: "Início", icon: House },
   { href: "/escalar", label: "Meu time", icon: Shirt },
   { href: "/ligas", label: "Ligas", icon: Trophy },
   { href: "/perfil", label: "Perfil", icon: UserRound },
 ] as const;
 
 function isActive(pathname: string, href: string) {
-  return href === "/" ? pathname === href : pathname === href || pathname.startsWith(`${href}/`);
+  return pathname === href || pathname.startsWith(`${href}/`);
 }
 
 export function Navbar({
@@ -28,11 +28,12 @@ export function Navbar({
 }) {
   const pathname = usePathname();
 
-  if (publicPaths.some((path) => pathname === path || pathname.startsWith(`${path}/`))) return null;
+  // A raiz é a landing pública: sem navegação do app.
+  if (pathname === "/" || publicPaths.some((path) => pathname === path || pathname.startsWith(`${path}/`))) return null;
 
   if (pathname === '/como-funciona') return null;
 
-  const showCta = pathname !== "/escalar" && pathname === "/" && (isRoundInProgress || !hasCurrentTeam);
+  const showCta = pathname === "/inicio" && (isRoundInProgress || !hasCurrentTeam);
 
   return (
     <>

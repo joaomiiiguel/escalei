@@ -35,7 +35,7 @@ export async function saveLineup(input: { formation: string; playerIds: number[]
   const seconds = Number.isFinite(input.durationSeconds) && Number(input.durationSeconds) >= 0 ? Math.round(Number(input.durationSeconds)) : null;
   trackServerEvent(user.id, "time_escalado", { formacao: input.formation, segundos: seconds, edicao: input.isEdit === true });
 
-  revalidatePath("/");
+  revalidatePath("/inicio");
   revalidatePath("/escalar");
   redirect("/?time_salvo=1");
 }

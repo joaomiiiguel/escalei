@@ -21,6 +21,6 @@ export async function requireAdmin() {
     .eq("usuario_id", user.id)
     .maybeSingle();
 
-  if (error || !admin) redirect("/");
+  if (error || !admin) redirect("/inicio");
   return { supabase, user };
 }

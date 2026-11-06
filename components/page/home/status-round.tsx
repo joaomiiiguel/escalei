@@ -23,7 +23,7 @@ const StatusRodada = ({ unavailable, round, nextRound, now }: {
             <CloudOff className="mx-auto size-8 text-[#9aec87]" aria-hidden="true" />
             <h2 className="mt-3 text-lg font-bold">Não foi possível carregar a rodada</h2>
             <p className="mt-1 text-sm leading-6 text-muted-foreground">Confira sua conexão e tente novamente.</p>
-            <Link className="mt-3 inline-flex text-sm font-bold text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4" href="/">Tentar novamente</Link>
+            <Link className="mt-3 inline-flex text-sm font-bold text-primary underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4" href="/inicio">Tentar novamente</Link>
         </section>
     )
 

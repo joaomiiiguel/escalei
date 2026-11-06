@@ -15,7 +15,7 @@ export async function GET(request: Request) {
 
     const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
     if (leagueMembershipStatus === "ATIVA") {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/inicio", request.url));
     }
     if (leagueMembershipStatus === "INATIVA") {
       await supabase.auth.signOut();

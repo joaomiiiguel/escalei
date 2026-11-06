@@ -9,7 +9,7 @@ export default async function SignIn({ searchParams }: { searchParams: Promise<{
     const candidateToken = params.convite;
     const inviteToken = candidateToken && isInviteToken(candidateToken) && await getActiveInvite(candidateToken) ? candidateToken : null;
     const user = await getCurrentUser();
-    if (user) redirect("/");
+    if (user) redirect("/inicio");
 
     return <GoogleSignIn error={params.erro} inviteToken={inviteToken ?? ""} signInWithGoogle={signInWithGoogle} />;
 }

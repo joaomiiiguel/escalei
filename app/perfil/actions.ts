@@ -103,7 +103,7 @@ export async function updateProfile(formData: FormData) {
   if (error?.code === "23505") redirect("/perfil?erro=indisponivel");
   if (error) redirect("/perfil?erro=perfil");
 
-  revalidatePath("/");
+  revalidatePath("/inicio");
   redirect(`/perfil?atualizado=1${emailPending ? "&email_pendente=1" : ""}`);
 }
 

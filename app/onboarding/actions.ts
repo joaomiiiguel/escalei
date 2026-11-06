@@ -72,5 +72,5 @@ export async function finishOnboarding(formData: FormData) {
     }
 
     trackServerEvent(user.id, "cadastro", { via_convite: Boolean(inviteToken && isInviteToken(inviteToken)) });
-    redirect("/");
+    redirect("/inicio");
 }

@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     short_name: "Escalou",
     description: "Monte seu time a cada rodada do Brasileirão e dispute com seus amigos.",
     lang: "pt-BR",
-    start_url: "/",
+    start_url: "/inicio",
     scope: "/",
     display: "standalone",
     orientation: "portrait",

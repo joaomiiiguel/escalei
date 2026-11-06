@@ -47,7 +47,7 @@ describe("push da notify-whatsapp", () => {
   it("manda o usuário para escalar enquanto o mercado está aberto e para a home depois", () => {
     const urlFor = (tipo: string) => JSON.parse(pushPayload({ ...notice, tipo })).url;
     expect(JSON.parse(pushPayload(notice))).toEqual({ title: "⏰ Falta 1 hora!", body: "O mercado fecha às 19h00.\nAinda dá tempo.", tag: "aviso-rodada-7", url: "/escalar" });
-    expect(["MERCADO_ABERTO", "FALTA_1H", "MERCADO_FECHADO", "RODADA_ENCERRADA"].map(urlFor)).toEqual(["/escalar", "/escalar", "/", "/"]);
+    expect(["MERCADO_ABERTO", "FALTA_1H", "MERCADO_FECHADO", "RODADA_ENCERRADA"].map(urlFor)).toEqual(["/escalar", "/escalar", "/inicio", "/inicio"]);
   });
 
   it("usa o nome do app como título quando o aviso não tem primeira frase", () => {

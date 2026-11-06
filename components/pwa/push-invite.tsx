@@ -8,7 +8,7 @@ import { Button } from "@/components/shadcn/button";
 import { parseDismissedAt, PUSH_INVITE_COOLDOWN_DAYS, PUSH_INVITE_DISMISSED_KEY } from "@/lib/pwa";
 
 /** Rotas de quem ainda não terminou de entrar: sem perfil, a inscrição não pode ser salva. */
-const hiddenPaths = ["/entrar", "/onboarding", "/convite", "/beta"];
+const hiddenPaths = ["/entrar", "/onboarding", "/convite"];
 
 function wasDismissedRecently() {
   try {

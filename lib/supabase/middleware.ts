@@ -1,12 +1,10 @@
 import { createServerClient, type CookieOptions } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-const protectedRoutes = ["/", "/admin", "/como-funciona", "/escalar", "/ligas", "/perfil"];
+const protectedRoutes = ["/inicio", "/admin", "/como-funciona", "/escalar", "/ligas", "/perfil"];
 
 function isProtectedRoute(pathname: string) {
-  return protectedRoutes.some((route) => route === "/"
-    ? pathname === route
-    : pathname === route || pathname.startsWith(`${route}/`));
+  return protectedRoutes.some((route) => pathname === route || pathname.startsWith(`${route}/`));
 }
 
 export async function updateSession(request: NextRequest) {
