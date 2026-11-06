@@ -45,6 +45,45 @@ obsidion/                 Especificação, decisões, regras e planejamento
 - Priorize semântica HTML, `aria-label` em controles somente icônicos, foco visível e contraste suficiente.
 - Não introduza dados fictícios como se fossem dados reais da API. Estados de exemplo devem ser claramente identificáveis ou isolados em mocks.
 
+## Arquitetura e qualidade de código
+
+Toda implementação deve seguir arquitetura em camadas, princípios SOLID, Clean Architecture, design patterns e boas práticas de organização, priorizando escalabilidade e manutenibilidade. Neste repositório, isso significa:
+
+### Camadas
+
+- **Apresentação** (`app/**/page.tsx`, `components/`): renderiza e coleta entrada. Não coloque regra de negócio, cálculo de pontos ou saldo, nem consultas complexas dentro de componentes.
+- **Aplicação** (`app/*/actions.ts`, route handlers em `app/api/`): orquestra o caso de uso. Autentica, valida a entrada, chama domínio e dados, trata erros e revalida o cache.
+- **Domínio** (`lib/`): regras do fantasy (formação, saldo, pontuação, trava, validações) em funções puras, sem React, Next ou Supabase, testáveis de forma isolada.
+- **Dados e infraestrutura** (`lib/supabase/`, `supabase/functions/_shared/`, `supabase/migrations/`): acesso ao banco e a APIs externas. Regras que precisam de garantia transacional também ficam no banco (ex.: `fn_salvar_escalacao`).
+- As dependências apontam para dentro: apresentação → aplicação → domínio. O domínio nunca importa de camadas externas.
+
+### SOLID
+
+- **Responsabilidade única:** cada módulo faz uma coisa. Se um componente ou função mistura busca de dados, regra e interface, separe.
+- **Aberto/fechado:** estenda por composição, props, variantes (`cva`) ou mapas de configuração, em vez de encadear `if` para cada caso novo.
+- **Substituição de Liskov:** implementações que compartilham um contrato devem ser intercambiáveis sem quebrar quem as usa.
+- **Segregação de interfaces:** props e tipos enxutos. Não passe um objeto inteiro quando o componente usa dois campos.
+- **Inversão de dependência:** a regra de negócio recebe dados e clientes por parâmetro, em vez de importar um cliente concreto. Isso facilita o teste.
+
+### Design patterns
+
+- Use padrões quando resolvem um problema real deste código:
+  - **Adapter/Gateway** para serviços externos (API-Football via `_shared/api-football.ts`, Supabase);
+  - **Strategy ou mapa de configuração** para variações (formações, pontuação por posição, status da rodada);
+  - **Composição** de componentes na interface (slots, compound components).
+- Não crie abstração para um caso só. Mantenha simples até surgir a segunda necessidade real (YAGNI).
+
+### Organização, escalabilidade e manutenibilidade
+
+- Use nomes que revelam a intenção, com o vocabulário do produto (rodada, escalação, saldo, passe), e siga o padrão de idioma e estilo do arquivo vizinho.
+- Prefira arquivos pequenos e coesos. Código compartilhado entre telas vai para `lib/` ou `components/ui/`; código de uma tela só fica ao lado da rota (`app/<rota>/` ou uma pasta privada `app/_<nome>/`).
+- Cada regra tem uma única fonte de verdade (constantes, tipos e funções em `lib/`). Não duplique regra entre cliente, servidor e banco sem necessidade.
+- Tipe explicitamente as fronteiras: props, retornos de Server Actions e respostas de APIs. Evite `any`.
+- Trate erros de forma explícita em cada camada. Nunca engula um erro em silêncio.
+- Pense no volume: evite consultas N+1, busque em paralelo dados independentes e pagine listas que crescem.
+- Refatore aos poucos, junto com a mudança. Não reescreva áreas sem relação com a tarefa.
+- Ao relatar a entrega, explique em poucas linhas as decisões de arquitetura tomadas.
+
 ## Design e Tailwind
 
 - Use shadcn/ui como design system padrão. Antes de criar um componente, verifique os primitivos já gerados em `components/shadcn/` e `components/ui/`.
