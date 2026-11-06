@@ -6,6 +6,8 @@ import {
   rankByPoints,
   formatInitials,
   formatPoints,
+  leaderGapText,
+  standingZone,
   type LeagueMemberInput,
   type RankingRowInput,
 } from "@/lib/league-ranking";
@@ -215,5 +217,38 @@ describe("variação de posição no ranking", () => {
   it("não indica nada sem posição anterior", () => {
     expect(positionChange(1, null)).toBeNull();
     expect(positionChange(1, undefined)).toBeNull();
+  });
+});
+
+describe("posição do usuário na liga", () => {
+  it("mostra a distância para o líder", () => {
+    expect(leaderGapText({ position: 3, differenceToLeader: 12.36, leaders: 1 })).toBe("A 12,4 pts do líder");
+  });
+
+  it("reconhece a liderança, inclusive dividida", () => {
+    expect(leaderGapText({ position: 1, differenceToLeader: 0, leaders: 1 })).toBe("Você lidera a liga");
+    expect(leaderGapText({ position: 1, differenceToLeader: 0, leaders: 3 })).toBe("Liderança dividida com mais 2");
+  });
+
+  it("explica quando ainda não há pontos", () => {
+    expect(leaderGapText({ position: null, differenceToLeader: null, leaders: 1 })).toBe("Você ainda não tem pontos aqui");
+  });
+});
+
+describe("zonas da tabela", () => {
+  it("marca o líder e o lanterna", () => {
+    const positions = [1, 2, 3, 4];
+    expect(standingZone(1, positions)).toBe("lider");
+    expect(standingZone(4, positions)).toBe("lanterna");
+    expect(standingZone(2, positions)).toBeNull();
+  });
+
+  it("não marca lanterna com menos de três posições diferentes", () => {
+    expect(standingZone(2, [1, 2])).toBeNull();
+    expect(standingZone(2, [1, 1, 2, 2])).toBeNull();
+  });
+
+  it("empatados na última posição são todos lanterna", () => {
+    expect(standingZone(3, [1, 2, 3, 3])).toBe("lanterna");
   });
 });

@@ -176,3 +176,23 @@ export function positionChange(current: number, previous: number | null | undefi
   if (current > previous) return { direction: "down", places: current - previous };
   return { direction: "same", places: 0 };
 }
+
+/** Frase de apoio à posição do usuário: distância para o líder ou liderança. */
+export function leaderGapText({ position, differenceToLeader, leaders }: { position: number | null; differenceToLeader: number | null; leaders: number }): string {
+  if (position === null || differenceToLeader === null) return "Você ainda não tem pontos aqui";
+  if (position === 1 && leaders > 1) return `Liderança dividida com mais ${leaders - 1}`;
+  if (position === 1) return "Você lidera a liga";
+  return `A ${formatPoints(differenceToLeader)} pts do líder`;
+}
+
+export type StandingZone = "lider" | "lanterna" | null;
+
+/**
+ * Zona da tabela, como no Brasileirão: quem está em 1º lidera e quem está na última
+ * colocação é o lanterna. Só há lanterna com pelo menos três posições diferentes.
+ */
+export function standingZone(position: number, positions: number[]): StandingZone {
+  if (position === 1) return "lider";
+  const distinct = new Set(positions);
+  return distinct.size >= 3 && position === Math.max(...positions) ? "lanterna" : null;
+}
