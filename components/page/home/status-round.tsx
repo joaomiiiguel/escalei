@@ -1,4 +1,4 @@
-import { Badge } from "@/components/ui";
+import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
 import { CalendarClock, CloudOff, Dot, Info, ShieldCheck } from "lucide-react";
 import type { Rodada, Jogo, TimeDaRodada, Clube, StatusRodada } from "@/lib/types";

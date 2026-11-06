@@ -13,7 +13,6 @@ vi.mock("lucide-react", () => {
   const icon = (props: React.SVGProps<SVGSVGElement>) => React.createElement("svg", props);
   return { Loader2: icon, WandSparkles: icon, ShieldX: icon };
 });
-vi.mock("@mui/icons-material/Google", () => ({ default: () => null }));
 vi.mock("@/app/escalar/actions", () => ({ saveLineup: vi.fn() }));
 vi.mock("@/components/ui/lineup-formation", () => ({ LineupFormation: () => null }));
 

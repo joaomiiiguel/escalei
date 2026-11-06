@@ -1,5 +1,5 @@
 import { Jogo, Clube } from "@/lib/types";
-import { ScoreCard } from "@/components/ui";
+import { ScoreCard } from "@/components/ui/score-card";
 import { displayedKickoff } from "@/lib/game-kickoff";
 
 const MatchesRounds = ({ games, clubsById }: { games: Jogo[]; clubsById: Map<number, Clube> }) => {

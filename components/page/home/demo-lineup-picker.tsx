@@ -2,7 +2,10 @@
 
 import { useState } from "react";
 import type { ActiveRound, Rodada, SavedTeam, StatusRodada as StatusRodadaType } from "@/lib/types";
-import { LineupBuilder, LineupPlayer, Logo, RoundLineup, SavedLineup } from "@/components/ui";
+import { LineupBuilder } from "@/components/ui/lineup-builder";
+import type { LineupPlayer } from "@/components/ui/lineup-formation";
+import { Logo } from "@/components/ui/logo";
+import { RoundLineup, SavedLineup } from "@/components/ui/saved-lineup";
 import TitleSection from "@/components/ui/title-section";
 
 // ─── Dados fixos do mock ────────────────────────────────────────────────────

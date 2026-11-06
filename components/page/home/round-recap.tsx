@@ -1,4 +1,4 @@
-import { RoundRecapCard } from "@/components/ui";
+import { RoundRecapCard } from "@/components/ui/round-recap-card";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { bestPlayer, formatRecapPoints, groupPosition, recapPoints, recapShareText, type RecapRankingRow, type RecapStat, type RoundRecap } from "@/lib/round-recap";
