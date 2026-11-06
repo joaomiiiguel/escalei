@@ -33,6 +33,7 @@ describe("time salvo", () => {
   it("mostra custo e sobra e leva aos jogos da rodada no Início", () => {
     render(<SavedLineup budget={60} formation="4-3-3" players={team()} travaEm="2026-11-08T19:00:00Z" />);
     expect(screen.getByText("Sua escalação está salva")).toBeInTheDocument();
+    expect(screen.getByText(/uma hora antes do primeiro jogo da rodada/)).toBeInTheDocument();
     expect(screen.getByText("Custou").parentElement).toHaveTextContent("C$ 55,00");
     expect(screen.getByText("Sobram").parentElement).toHaveTextContent("C$ 5,00");
     expect(screen.getByRole("link", { name: "Jogos da rodada" })).toHaveAttribute("href", "/inicio#jogos-da-rodada");
