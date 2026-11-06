@@ -63,6 +63,7 @@ vi.mock("@/lib/supabase/server", () => ({
     })),
     rpc: vi.fn().mockResolvedValue({ data: null, error: null }),
   })),
+  getCurrentUser: vi.fn().mockResolvedValue({ id: "test-user-id" }),
 }));
 
 vi.mock("@/lib/supabase/admin", () => ({

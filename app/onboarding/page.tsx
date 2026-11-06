@@ -1,4 +1,4 @@
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getCurrentUser } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { finishOnboarding } from "./actions";
 import { OnboardingForm } from "./onboarding-form";
@@ -11,7 +11,7 @@ export const dynamic = "force-dynamic";
 export default async function Onboarding({ searchParams }: { searchParams: Promise<{ erro?: string; convite?: string }> }) {
   const params = await searchParams;
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
 
   const cookieStore = await cookies();
   const candidateToken = params.convite ?? cookieStore.get("escalou_invite")?.value ?? cookieStore.get("escalei_invite")?.value;

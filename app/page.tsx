@@ -1,10 +1,10 @@
 import { redirect } from "next/navigation";
-import { createClient } from "@/lib/supabase/server";
+import { createClient, getCurrentUser } from "@/lib/supabase/server";
 import type { Rodada, Jogo, Clube, TimeDaRodada, EstatisticaDaRodada } from "@/lib/types";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
 import { displayedKickoff } from "@/lib/game-kickoff";
-import { Logo } from "@/components/ui";
+import { Logo } from "@/components/ui/logo";
 import TitleSection from "@/components/ui/title-section";
 import StatusRodada from "@/components/page/home/status-round";
 import DemoStatusPicker from "@/components/page/home/demo-status-picker";
@@ -19,31 +19,30 @@ import { hoursSince } from "@/lib/analytics/events";
 /** Apelidos que têm acesso ao modo de demonstração. */
 const DEMO_USERS = new Set(["Miguel"]);
 
-type ProximaRodada = Pick<Rodada, "numero" | "temporada" | "abre_em">;
-
 
 export default async function Home() {
   const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const user = await getCurrentUser();
 
   // Se não estiver logado redireciona para login
   if (!user) redirect("/entrar");
 
-  // Verificação de pertencimento ao grupo, se não estiver ativo redireciona para entrar
-  const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
-  if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
+  // Pertencimento ao grupo, perfil e rodada atual são independentes: busca em paralelo.
+  const [leagueMembershipStatus, { data: profile }, { data: currentRound, error: currentRoundError }] = await Promise.all([
+    getLeagueMembershipStatus(user.id),
+    supabase.from("perfis").select("apelido").eq("id", user.id).maybeSingle(),
+    getCurrentRound<Rodada>(
+      supabase,
+      "id, temporada, numero, status, abre_em, trava_em, fechamento_simulado_em, fechada_em, rotulo_api, simulada",
+    ),
+  ]);
 
-  // Puxa o perfil do usuário
-  const { data: profile } = await supabase.from("perfis").select("apelido").eq("id", user.id).maybeSingle();
+  // Se o grupo não estiver ativo redireciona para entrar
+  if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
 
   // Se não tiver perfil redireciona para onboarding
   if (!profile) redirect("/onboarding");
 
-  // Puxa a rodada atual
-  const { data: currentRound, error: currentRoundError } = await getCurrentRound<Rodada>(
-    supabase,
-    "id, temporada, numero, status, abre_em, trava_em, fechamento_simulado_em, fechada_em, rotulo_api, simulada",
-  );
   const round = currentRound;
   const unavailable = Boolean(currentRoundError);
   const now = new Date();
@@ -51,57 +50,30 @@ export default async function Home() {
   let games: Jogo[] = [];
   let clubsById = new Map<number, Clube>();
   let teamStats: EstatisticaDaRodada[] = [];
-  let roundDataUnavailable = false;
-  let nextRound: ProximaRodada | null = null;
 
   if (round) {
     // Puxa o time do usuário e os jogos da rodada
-    const [{ data: teamData, error: teamError }, { data: gamesData, error: gamesError }] = await Promise.all([
+    const [{ data: teamData }, { data: gamesData }] = await Promise.all([
       supabase.from("times").select("id, formacao, times_jogadores(jogador_id)").eq("usuario_id", user.id).eq("rodada_id", round.id).maybeSingle(),
       supabase.from("jogos").select("id, clube_casa_id, clube_fora_id, inicio_em, inicio_simulado_em, status, gols_casa, gols_fora, pontuado_em").eq("rodada_id", round.id),
     ]);
     team = teamData as TimeDaRodada | null;
     games = ((gamesData as Jogo[] | null) ?? []).sort((first, second) => new Date(displayedKickoff(first)).getTime() - new Date(displayedKickoff(second)).getTime());
-    roundDataUnavailable = Boolean(teamError || gamesError);
     const clubIds = [...new Set(games.flatMap((game) => [game.clube_casa_id, game.clube_fora_id]))];
-
-    // Puxa os clubes da rodada
-    if (clubIds.length) {
-      const { data: clubs, error: clubsError } = await supabase.from("clubes").select("id, nome, sigla, logo_url").in("id", clubIds);
-      roundDataUnavailable ||= Boolean(clubsError);
-      clubsById = new Map(((clubs as Clube[] | null) ?? []).map((club) => [club.id, club]));
-    }
-
     const playerIds = team?.times_jogadores?.map((player) => player.jogador_id) ?? [];
+    const hasStats = (round.status === "EM_ANDAMENTO" || round.status === "FECHADA") && playerIds.length > 0;
 
-    // Puxa as estatísticas do time
-    if ((round.status === "EM_ANDAMENTO" || round.status === "FECHADA") && playerIds.length > 0) {
-      const { data: statsData, error: statsError } = await supabase
-        .from("estatisticas_jogador")
-        .select("jogador_id, jogo_id, pontos")
-        .eq("rodada_id", round.id)
-        .in("jogador_id", playerIds);
-      teamStats = (statsData as EstatisticaDaRodada[] | null) ?? [];
-      roundDataUnavailable ||= Boolean(statsError);
-    }
-
-    // Puxa a próxima rodada
-    if (round.status === "FECHADA") {
-      const { data: roundsData, error: nextRoundError } = await supabase
-        .from("rodadas")
-        .select("numero, temporada, abre_em")
-        .eq("simulada", Boolean(round.simulada))
-        .not("abre_em", "is", null)
-        .order("temporada", { ascending: true })
-        .order("numero", { ascending: true });
-      const rounds = (roundsData as ProximaRodada[] | null) ?? [];
-      nextRound = rounds.find((candidate) =>
-        candidate.temporada !== undefined && round.temporada !== undefined
-          ? candidate.temporada > round.temporada || (candidate.temporada === round.temporada && candidate.numero > round.numero)
-          : candidate.numero > round.numero,
-      ) ?? null;
-      roundDataUnavailable ||= Boolean(nextRoundError);
-    }
+    // Puxa os clubes da rodada e as estatísticas do time em paralelo
+    const [{ data: clubs }, { data: statsData }] = await Promise.all([
+      clubIds.length
+        ? supabase.from("clubes").select("id, nome, sigla, logo_url").in("id", clubIds)
+        : Promise.resolve({ data: null }),
+      hasStats
+        ? supabase.from("estatisticas_jogador").select("jogador_id, jogo_id, pontos").eq("rodada_id", round.id).in("jogador_id", playerIds)
+        : Promise.resolve({ data: null }),
+    ]);
+    clubsById = new Map(((clubs as Clube[] | null) ?? []).map((club) => [club.id, club]));
+    teamStats = (statsData as EstatisticaDaRodada[] | null) ?? [];
   }
 
   const completedGames = games.filter((game) => game.status === "ENCERRADO");
