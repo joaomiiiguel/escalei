@@ -24,7 +24,7 @@ export function validateWaitlist(values: WaitlistValues): WaitlistErrors {
   if (name.length < 2 || name.length > 60) errors.name = "Informe seu nome ou apelido.";
   if (digits.length < 10 || digits.length > 11) errors.whatsapp = "Informe um WhatsApp com DDD.";
   if (values.email.trim().length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) errors.email = "Informe um e-mail válido.";
-  if (!values.consent) errors.consent = "Você precisa aceitar o contato sobre o beta.";
+  if (!values.consent) errors.consent = "Você precisa aceitar o contato do Escalou.";
 
   return errors;
 }

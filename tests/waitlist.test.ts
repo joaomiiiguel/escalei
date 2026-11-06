@@ -18,7 +18,7 @@ describe("validação da lista de espera", () => {
       name: "Informe seu nome ou apelido.",
       whatsapp: "Informe um WhatsApp com DDD.",
       email: "Informe um e-mail válido.",
-      consent: "Você precisa aceitar o contato sobre o beta.",
+      consent: "Você precisa aceitar o contato do Escalou.",
     });
   });
 
@@ -41,20 +41,20 @@ describe("joinWaitlist", () => {
 
   it("grava o cadastro normalizado", async () => {
     insert.mockResolvedValue({ error: null });
-    const { joinWaitlist } = await import("@/app/beta/actions");
+    const { joinWaitlist } = await import("@/app/actions");
     await expect(joinWaitlist(valid)).resolves.toEqual({ ok: true });
     expect(insert).toHaveBeenCalledWith({ nome: "Ana Souza", whatsapp: "11987654321", email: "ana@exemplo.com", origem: "beta" });
   });
 
   it("grava a origem recebida já normalizada", async () => {
     insert.mockResolvedValue({ error: null });
-    const { joinWaitlist } = await import("@/app/beta/actions");
+    const { joinWaitlist } = await import("@/app/actions");
     await joinWaitlist({ ...valid, source: "Instagram" });
     expect(insert).toHaveBeenCalledWith(expect.objectContaining({ origem: "instagram" }));
   });
 
   it("valida no servidor e não grava dados inválidos", async () => {
-    const { joinWaitlist } = await import("@/app/beta/actions");
+    const { joinWaitlist } = await import("@/app/actions");
     const result = await joinWaitlist({ ...valid, consent: false });
     expect(result).toMatchObject({ ok: false, errors: { consent: expect.any(String) } });
     expect(insert).not.toHaveBeenCalled();
@@ -62,13 +62,13 @@ describe("joinWaitlist", () => {
 
   it("trata e-mail repetido como sucesso", async () => {
     insert.mockResolvedValue({ error: { code: "23505" } });
-    const { joinWaitlist } = await import("@/app/beta/actions");
+    const { joinWaitlist } = await import("@/app/actions");
     await expect(joinWaitlist(valid)).resolves.toEqual({ ok: true });
   });
 
   it("devolve mensagem amigável em falha do banco", async () => {
     insert.mockResolvedValue({ error: { code: "XX000" } });
-    const { joinWaitlist } = await import("@/app/beta/actions");
+    const { joinWaitlist } = await import("@/app/actions");
     await expect(joinWaitlist(valid)).resolves.toEqual({ ok: false, message: "Não foi possível entrar na lista agora. Tente novamente em instantes." });
   });
 });

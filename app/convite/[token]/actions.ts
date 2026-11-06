@@ -17,5 +17,5 @@ export async function acceptInvite(formData: FormData) {
 
   const joined = await addUserToInvitedLeague(token, user.id);
   if (joined) trackServerEvent(user.id, "convite_aceito", {});
-  redirect(joined ? "/" : `/convite/${token}?erro=indisponivel`);
+  redirect(joined ? "/inicio" : `/convite/${token}?erro=indisponivel`);
 }

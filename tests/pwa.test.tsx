@@ -32,8 +32,8 @@ const base = { standalone: false, platform: "android" as const, iosBrowser: null
 describe("manifest", () => {
   const data = manifest();
 
-  it("abre em tela cheia a partir da raiz, com as cores do app", () => {
-    expect(data).toMatchObject({ short_name: "Escalou", lang: "pt-BR", start_url: "/", scope: "/", display: "standalone", theme_color: "#050505", background_color: "#050505" });
+  it("abre em tela cheia na Início do app, com as cores do app", () => {
+    expect(data).toMatchObject({ short_name: "Escalou", lang: "pt-BR", start_url: "/inicio", scope: "/", display: "standalone", theme_color: "#050505", background_color: "#050505" });
   });
 
   it("declara ícones 192, 512 e maskable que existem em public/", () => {

@@ -22,7 +22,7 @@ export default async function Onboarding({ searchParams }: { searchParams: Promi
 
   const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
   const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
-  if (leagueMembershipStatus === "ATIVA") redirect("/");
+  if (leagueMembershipStatus === "ATIVA") redirect("/inicio");
   if (!inviteToken) redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
   if (profile) redirect(`/convite/${inviteToken}`);
 

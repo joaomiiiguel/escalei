@@ -3,7 +3,7 @@
 import { useId, useState } from "react";
 import { Check } from "lucide-react";
 import { LoadingContent } from "@/components/ui/loading-content";
-import { joinWaitlist, type WaitlistResult } from "./actions";
+import { joinWaitlist, type WaitlistResult } from "@/app/actions";
 import { validateWaitlist as validate, type WaitlistErrors as FormErrors } from "@/lib/waitlist";
 
 export function WaitlistForm() {
@@ -39,26 +39,26 @@ export function WaitlistForm() {
 
   if (status === "success") {
     return (
-      <section role="status" aria-labelledby={`${id}-success-title`} className="border-l-4 border-(--lima) py-2 pl-6 motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:duration-500">
-        <Check className="size-10 text-(--lima) motion-safe:animate-in motion-safe:zoom-in-50 motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.34,1.56,0.64,1)]" strokeWidth={3} aria-hidden="true" />
-        <h3 id={`${id}-success-title`} className="mt-4 font-(family-name:--font-display) text-6xl font-black uppercase leading-[0.9]">
+      <section role="status" aria-labelledby={`${id}-success-title`} className="motion-safe:animate-in motion-safe:fade-in motion-safe:slide-in-from-bottom-4 motion-safe:duration-500">
+        <Check className="size-10 text-primary motion-safe:animate-in motion-safe:zoom-in-50 motion-safe:duration-500 motion-safe:ease-[cubic-bezier(0.34,1.56,0.64,1)]" strokeWidth={3} aria-hidden="true" />
+        <h3 id={`${id}-success-title`} className="mt-4 font-(family-name:--font-display) text-5xl font-black uppercase leading-[0.9] md:text-6xl">
           Você está na lista!
         </h3>
-        <p className="mt-4 max-w-md text-lg leading-relaxed text-(--giz-suave)">
-          Quando novas vagas forem liberadas, vamos enviar seu convite para o grupo oficial de WhatsApp do beta.
+        <p className="mt-4 max-w-md text-lg leading-relaxed text-muted-foreground">
+          Quando abrir vaga, a gente manda seu convite pro grupo oficial do Escalou no WhatsApp.
         </p>
         <a
-          href="#inicio"
-          className="mt-5 inline-flex min-h-11 items-center font-semibold text-(--lima) underline underline-offset-4 outline-none focus-visible:ring-2 focus-visible:ring-(--lima)"
+          href="#como-funciona"
+          className="mt-5 inline-flex min-h-11 items-center font-bold text-primary underline underline-offset-4 outline-none focus-visible:ring-[3px] focus-visible:ring-(--giz)"
         >
-          Voltar ao início
+          Ver como funciona
         </a>
       </section>
     );
   }
 
   return (
-    <form onSubmit={submit} noValidate aria-label="Entrar na lista de espera" className="grid gap-6">
+    <form onSubmit={submit} noValidate aria-label="Entrar na lista de espera" className="grid gap-5">
       <Field
         id={`${id}-name`}
         label="Nome ou apelido"
@@ -90,26 +90,26 @@ export function WaitlistForm() {
       />
 
       <div>
-        <label className="flex cursor-pointer items-start gap-3 text-base leading-snug text-(--giz-suave)">
+        <label className="flex cursor-pointer items-start gap-3 text-[15px] leading-snug text-muted-foreground md:text-base">
           <input
             type="checkbox"
             checked={values.consent}
             onChange={(event) => update("consent", event.target.checked)}
             aria-invalid={Boolean(errors.consent)}
             aria-describedby={errors.consent ? `${id}-consent-error` : undefined}
-            className="mt-0.5 size-6 shrink-0 cursor-pointer accent-[#c5f920] outline-none focus-visible:ring-2 focus-visible:ring-(--lima)"
+            className="mt-0.5 size-6 shrink-0 cursor-pointer accent-[#c5f920] outline-none focus-visible:ring-[3px] focus-visible:ring-(--giz)"
           />
-          <span>Aceito receber informações sobre o beta do Escalou por WhatsApp e e-mail.</span>
+          <span>Aceito receber novidades do Escalou por WhatsApp e e-mail.</span>
         </label>
         {errors.consent ? (
-          <p id={`${id}-consent-error`} className="mt-2 text-sm font-semibold text-(--lima)">
+          <p id={`${id}-consent-error`} className="mt-2 text-sm font-bold text-primary">
             {errors.consent}
           </p>
         ) : null}
       </div>
 
       {submitError ? (
-        <p role="alert" className="text-base font-semibold text-(--lima)">
+        <p role="alert" className="text-base font-bold text-primary">
           {submitError}
         </p>
       ) : null}
@@ -118,7 +118,7 @@ export function WaitlistForm() {
         type="submit"
         disabled={status === "loading"}
         aria-busy={status === "loading" || undefined}
-        className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-b from-[#e4ff66] to-[#a6e40c] relative overflow-hidden px-6 text-lg font-bold text-primary-foreground shadow-[0_10px_34px_rgb(197_249_32/0.35)] outline-none transition before:absolute before:inset-y-0 before:-left-1/2 before:w-1/3 before:-skew-x-20 before:bg-white/60 before:blur-sm before:transition-transform before:duration-700 hover:-translate-y-0.5 hover:brightness-110 hover:before:translate-x-[480%] active:translate-y-0 motion-reduce:before:hidden focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-(--gramado) disabled:cursor-wait disabled:opacity-75"
+        className="inline-flex min-h-14 w-full items-center justify-center gap-2 rounded-[14px] bg-primary px-6 text-lg font-extrabold text-primary-foreground outline-none transition hover:bg-[#d6ff4d] hover:shadow-[0_0_0_4px_rgb(197_249_32/0.18),0_10px_30px_rgb(197_249_32/0.28)] focus-visible:ring-[3px] focus-visible:ring-(--giz) focus-visible:ring-offset-[3px] focus-visible:ring-offset-card disabled:cursor-wait disabled:opacity-75"
       >
         <span>
           <LoadingContent loading={status === "loading"} loadingText="Entrando…">Entrar na lista de espera</LoadingContent>
@@ -149,7 +149,7 @@ function Field({
 }) {
   return (
     <div>
-      <label htmlFor={id} className="text-sm font-semibold text-(--giz-suave)">
+      <label htmlFor={id} className="text-sm font-bold text-(--giz)">
         {label}
       </label>
       <input
@@ -161,10 +161,10 @@ function Field({
         autoComplete={autoComplete}
         aria-invalid={Boolean(error)}
         aria-describedby={error ? `${id}-error` : undefined}
-        className="mt-1 min-h-12 w-full rounded-none border-0 border-b-2 border-(--giz-linha) bg-transparent text-xl text-(--giz) outline-none transition-colors placeholder:text-(--giz-suave)/60 focus:border-(--lima) aria-invalid:border-(--lima)"
+        className="mt-1.5 min-h-12 w-full rounded-xl border border-border bg-background px-3.5 text-[17px] text-(--giz) outline-none transition-colors placeholder:text-muted-foreground/70 focus:border-primary focus-visible:ring-[3px] focus-visible:ring-primary/30 aria-invalid:border-primary"
       />
       {error ? (
-        <p id={`${id}-error`} className="mt-2 text-sm font-semibold text-(--lima)">
+        <p id={`${id}-error`} className="mt-2 text-sm font-bold text-primary">
           {error}
         </p>
       ) : null}

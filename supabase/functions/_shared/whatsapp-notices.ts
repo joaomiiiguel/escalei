@@ -24,7 +24,7 @@ export function pushPayload(notice: PendingNotice): string {
     title: titleEnd ? notice.mensagem.slice(0, titleEnd) : "Escalou",
     body: notice.mensagem.slice(titleEnd).trim(),
     tag: `aviso-rodada-${notice.id}`,
-    url: MARKET_OPEN.has(notice.tipo) ? "/escalar" : "/",
+    url: MARKET_OPEN.has(notice.tipo) ? "/escalar" : "/inicio",
   });
 }
 

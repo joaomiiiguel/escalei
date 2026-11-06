@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { createClient, getCurrentUser } from "@/lib/supabase/server";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { getCurrentRound } from "@/lib/current-round";
-import Home from "@/app/page";
+import Home from "@/app/inicio/page";
 
 /** Como o `redirect` real do Next, interrompe a execução. */
 class RedirectError extends Error {}

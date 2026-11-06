@@ -27,14 +27,14 @@ describe("requireAdmin", () => {
 
   it("manda para a Início quem está logado mas não é administrador", async () => {
     const { client, query } = mockSupabase({ user: { id: "jogador" }, admin: false });
-    await expect(requireAdmin()).rejects.toThrow(new RedirectError("/"));
+    await expect(requireAdmin()).rejects.toThrow(new RedirectError("/inicio"));
     expect(client.from).toHaveBeenCalledWith("administradores");
     expect(query.eq).toHaveBeenCalledWith("usuario_id", "jogador");
   });
 
   it("nega o acesso se a consulta de administradores falhar", async () => {
     mockSupabase({ user: { id: "admin" }, admin: true, error: { message: "falhou" } });
-    await expect(requireAdmin()).rejects.toThrow(new RedirectError("/"));
+    await expect(requireAdmin()).rejects.toThrow(new RedirectError("/inicio"));
   });
 
   it("libera o administrador e devolve o usuário verificado no servidor", async () => {
