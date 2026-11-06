@@ -67,6 +67,9 @@ Caso exista uma fase futura com premiação juridicamente viável, os itens mín
 | Nome + estatística | Uso factual no jogo, risco baixo. **Nunca** em peça publicitária (CC art. 18) |
 | Cores + sigla | Uso adotado (padrão de FanDuel e DraftKings) |
 
+> [!warning] Divergência em aberto (06/11/2026)
+> O app **mostra os escudos dos clubes** (vindos da API-Football, com cópias em `public/escudos/`) no mercado, no campo e nos jogos, o que contraria a linha "Escudo: não usar". Não há nota registrando essa mudança. Decidir: voltar para cores e sigla ou registrar a decisão com a avaliação de risco.
+
 ## 6. Dados e fonte
 
 - **LGPD:** na validação, só e-mail, apelido e clube do coração. Exclusão de conta funcional. Ver [[Banco de Dados — Modelo e Campos]].

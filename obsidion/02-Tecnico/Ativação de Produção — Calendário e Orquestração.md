@@ -14,9 +14,12 @@ tags:
 
 # Ativação de Produção — Calendário e Orquestração
 
-← [[Index]] · Simulação atual: [[Orquestrador da Rodada Simulada]] · Fonte: [[API-Football]]
+← [[Index]] · Simulação (pausada): [[Orquestrador da Rodada Simulada]] · Fonte: [[API-Football]]
 
-> [!important] Esta nota é para a ativação do plano pago da API-Football
+> [!success] Ativo desde 27/10/2026
+> A virada para o Brasileirão 2026 real aconteceu em 27/10 (ver [[2026-10-27 — Virada para o Brasileirão 2026]]). Os crons em produção são `avancar-rodada`, `sincronizar-calendario`, `sincronizar-catalogo` e `notificar-avisos-whatsapp` (ver [[Arquitetura]]).
+
+> [!note] Contexto original: esta nota foi escrita para a ativação do plano pago da API-Football
 > A função `advance-simulated-round` usa a temporada histórica de 2024,
 > `inicio_simulado_em` e a configuração `rodada_simulada_atual`. Ela é útil no
 > teste, mas **não deve ser promovida para produção sem adaptação**.

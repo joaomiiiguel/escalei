@@ -3,6 +3,7 @@ titulo: Regras do Jogo
 tipo: produto
 projeto: Fantasy Futebol
 criado-em: 2026-09-28
+atualizado-em: 2026-11-06
 tags:
   - projeto/fantasy-futebol
   - area/produto
@@ -64,7 +65,7 @@ Sem técnico, sem capitão e sem banco de reservas no MVP.
 - A próxima rodada abre à **00h do dia seguinte ao último jogo** da rodada anterior, no horário de Fortaleza.
 - **Rodada:** Aberta → Em andamento (x de 10 jogos encerrados) → Fechada.
 - **Jogo:** A jogar → Em andamento → Encerrado (pontuado).
-- **Pontos:** lançados quando o jogo termina. **Fechamento oficial no dia seguinte ao último jogo**, com uma segunda leitura da API para pegar as correções de scout.
+- **Pontos:** lançados quando o jogo termina. **Fechamento oficial 1 hora depois do último jogo pontuado**, com uma segunda leitura da API para pegar as correções de scout; em seguida o orquestrador atualiza os preços, credita os saldos e fecha a rodada (`advance-round`, conferido em 06/11/2026).
 - **Jogo adiado ou cancelado:** os jogadores daquele jogo pontuam 0 na rodada.
 
 ## Status do jogador

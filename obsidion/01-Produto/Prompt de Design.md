@@ -13,6 +13,9 @@ tags:
 
 ← [[Index]] · Telas: [[Fluxo de Telas]] · Regras: [[Regras do Jogo]]
 
+> [!warning] Histórico (atualizado em 06/11/2026)
+> Este prompt gerou a primeira proposta de design e não descreve o app de hoje. A identidade adotada está em [[Identidade Visual]] (Sofia Sans condensada, lima, giz, só tema escuro, com escudos dos clubes) e as telas existentes em [[Fluxo de Telas]]. Regras que mudaram depois: saldo de C$ 60 que cresce, passe de rodada, trava 1 h antes do primeiro jogo e fechamento 1 h após o último jogo pontuado.
+
 > [!note] Versão 1 (28/09/2026)
 > Somente mobile, sem apostas, sem prêmio, pontos lançados a cada jogo encerrado. Em relação ao prompt entregue no chat, as posições passaram a ser **GOL · DEF · MEI · ATA**, porque a API-Football não separa zagueiro de lateral (ver [[Regras do Jogo]]).
 
