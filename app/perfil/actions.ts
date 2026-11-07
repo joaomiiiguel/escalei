@@ -12,24 +12,6 @@ export async function signOut() {
   redirect("/entrar?saida=1");
 }
 
-export async function updatePreferences(formData: FormData) {
-  const tema = formData.get("tema") === "claro" ? "claro" : "escuro";
-  const notificacoesEmail = formData.get("notificacoes_email") === "on";
-  const supabase = await createClient();
-  const { data: { user } } = await supabase.auth.getUser();
-
-  if (!user) redirect("/entrar");
-
-  const { error } = await supabase
-    .from("perfis")
-    .update({ tema, notificacoes_email: notificacoesEmail })
-    .eq("id", user.id);
-
-  if (error) redirect("/perfil?erro=preferencias");
-  revalidatePath("/perfil");
-  redirect("/perfil?atualizado=1");
-}
-
 export async function savePushSubscription(value: unknown) {
   const subscription = parsePushSubscription(value);
   if (!subscription) {

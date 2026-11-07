@@ -74,7 +74,8 @@ tags:
 - [x] Fim de Rodada compartilhável (seção do Início)
 - [ ] Seja PRO (fake door)
 - [ ] Pesquisa
-- [x] Como Funciona e Perfil com exclusão de conta
+- [x] Como Funciona e Perfil (carteirinha, notificações, conta e documentos)
+- [ ] Exclusão de conta pelo app: a action existe, mas a tela está desligada; a privacidade orienta pedir ao administrador do grupo
 - [x] PWA (manifest, ícones, instalar)
 - [x] ~~E-mails~~ → avisos por push ([[2026-11-02 — Avisos da rodada por push]])
 - [x] Eventos do PostHog (8 eventos; ver [[Plano de Validação]])

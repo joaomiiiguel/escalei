@@ -27,10 +27,10 @@ export function PushToggle({ description, vapidPublicKey }: { description: strin
 
   const unavailable = state === "indisponivel" || state === "bloqueado";
 
-  return <div className="border-b border-border px-3.5 py-3 last:border-b-0">
+  return <div className="py-3.5">
     <div className="flex min-h-8 items-center gap-3">
-      <Bell className="size-[19px] shrink-0 text-muted-foreground" aria-hidden="true" />
-      <span className="min-w-0 flex-1 text-[14.5px] font-semibold text-foreground">{label}</span>
+      <Bell className="size-5 shrink-0 text-giz/60" aria-hidden="true" />
+      <span className="min-w-0 flex-1 text-[15px] font-semibold text-giz">{label}</span>
       <Switch
         aria-label={label}
         checked={!unavailable && state !== "desativado"}
@@ -38,9 +38,9 @@ export function PushToggle({ description, vapidPublicKey }: { description: strin
         onCheckedChange={toggle}
       />
     </div>
-    {state === "indisponivel" && <p className="m-0 mt-2 text-xs leading-5 text-muted-foreground">Este navegador não recebe notificações. No iPhone, instale o Escalou na tela de início e abra esta página pelo app.</p>}
-    {state === "bloqueado" && <p className="m-0 mt-2 text-xs leading-5 text-muted-foreground">As notificações estão bloqueadas. Libere o Escalou nos ajustes do navegador ou do aparelho.</p>}
-    {(state === "pendente" || state === "desativado" || state === "ativado") && <p className="m-0 mt-2 text-xs leading-5 text-muted-foreground">{description}</p>}
-    {failure && <p role="alert" className="m-0 mt-2 text-sm font-semibold text-destructive-foreground">{failure}</p>}
+    {state === "indisponivel" && <p className="m-0 mt-2 pl-8 text-sm leading-snug text-giz/70">Este navegador não recebe notificações. No iPhone, instale o Escalou na tela de início e abra esta página pelo app.</p>}
+    {state === "bloqueado" && <p className="m-0 mt-2 pl-8 text-sm leading-snug text-giz/70">As notificações estão bloqueadas. Libere o Escalou nos ajustes do navegador ou do aparelho.</p>}
+    {(state === "pendente" || state === "desativado" || state === "ativado") && <p className="m-0 mt-2 pl-8 text-sm leading-snug text-giz/70">{description}</p>}
+    {failure && <p role="alert" className="m-0 mt-2 pl-8 text-sm font-semibold text-destructive-foreground">{failure}</p>}
   </div>;
 }

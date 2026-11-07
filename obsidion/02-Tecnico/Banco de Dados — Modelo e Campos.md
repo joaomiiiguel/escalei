@@ -499,7 +499,7 @@ A **chave da API-Football nunca vai para o front**: só os jobs no servidor a us
 
 ## LGPD: dados pessoais guardados
 
-**E-mail da conta Google** (em `auth.users` e espelhado em `perfis`), **apelido**, **clube do coração** e **origem**. Na lista de espera: **nome, WhatsApp e e-mail**, com data do consentimento. Inscrições de push guardam o endpoint do aparelho. **Sem CPF ou endereço na validação.** A exclusão de conta:
+**E-mail da conta Google** (em `auth.users` e espelhado em `perfis`), **apelido**, **clube do coração** e **origem**. Na lista de espera: **nome, WhatsApp e e-mail**, com data do consentimento. Inscrições de push guardam o endpoint do aparelho. **Sem CPF ou endereço na validação.** A exclusão de conta é pedida ao administrador do grupo (a exclusão pelo app está desligada) e, quando feita pela action `deleteAccount`:
 - apaga `auth.users` e `perfis` (carteira, passes e inscrições de push saem em cascata);
 - mantém as linhas de ranking das rodadas passadas **anonimizadas** ("Jogador removido"), para a classificação dos outros não mudar.
 

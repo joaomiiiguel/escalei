@@ -28,7 +28,7 @@ Navbar fixa: Início · Meu time · Ligas · Perfil   (+ botão "Como funciona" 
 /inicio ──► /escalar ──► mercado (bottom sheet)
         └─► jogos da rodada e resumo de fim de rodada (na própria tela)
 /ligas ──► /ligas/[id] (ranking da rodada · ranking do campeonato)
-/perfil ──► editar apelido e time do coração, notificação da rodada, termos, excluir conta
+/perfil ──► carteirinha, editar apelido, time do coração e WhatsApp, notificação da rodada, sair, documentos
 /admin ──► grupos, convites (lista de espera), participantes
 ```
 
@@ -44,7 +44,7 @@ Navbar fixa: Início · Meu time · Ligas · Perfil   (+ botão "Como funciona" 
 | `/escalar` | Montar time, time salvo e time na rodada | `jogadores`, `carteiras`, `times`, `estatisticas_jogador`, passes | `time_escalado` |
 | mercado | Bottom sheet com busca e filtros | `/api/jogadores` | — |
 | `/ligas`, `/ligas/[id]` | Minhas ligas e tabela de classificação | `ligas`, `ligas_membros`, `times`, `fn_ranking_campeonato` | `ranking_visto` |
-| `/perfil` | Preferências, termos e exclusão de conta | `perfis`, `push_inscricoes` | — |
+| `/perfil` | Carteirinha (rodadas jogadas, média, ligas), notificações, conta e documentos | `perfis`, `times`, `ligas_membros`, `clubes` | — |
 | `/como-funciona` | Regras e tabela de pontuação | `tabela_pontuacao` | — |
 | `/termos`, `/privacidade`, `/regulamento` | Documentos legais | — | — |
 | `/admin/*` | Grupos, convites, participantes | tudo pelo servidor | — |

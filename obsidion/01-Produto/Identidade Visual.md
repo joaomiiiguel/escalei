@@ -41,6 +41,7 @@ tags:
 | Painel neutro | listas e resumos | `quietPanel` |
 | Campo a giz | escalação, com marcações irregulares | `components/ui/pitch-lines.tsx` |
 | Tabela de classificação | ranking da liga, com faixa do líder (lima) e do lanterna (vermelha) | `app/ligas/[id]/standings-table.tsx` |
+| Carteirinha de sócio | topo do Perfil: apelido, time do coração, desde quando joga e três números | `app/perfil/member-card.tsx` |
 
 ## Clubes e jogadores
 
@@ -55,4 +56,4 @@ O app mostra os **escudos dos clubes** (da API-Football, com cópias locais em `
 
 ---
 
-*Criado em 06/11/2026, depois do redesign de Início, Escalar e Ligas.*
+*Criado em 06/11/2026, depois do redesign de Início, Escalar e Ligas. Perfil incluído em 07/11/2026.*
