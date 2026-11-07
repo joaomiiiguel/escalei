@@ -35,7 +35,7 @@ export function SavedLineup({ budget, formation, passStatus, players, travaEm }:
       <Check className="mt-0.5 size-5 shrink-0 text-primary" strokeWidth={3} aria-hidden="true" />
       <span className="text-[15px] leading-snug">
         <b className="block">Sua escalação está salva</b>
-        <span className="text-giz/75">Dá para trocar jogadores até <time dateTime={travaEm} className="font-bold text-giz">{lockDate}</time>, no apito inicial do primeiro jogo.</span>
+        <span className="text-giz/75">Dá para trocar jogadores até <time dateTime={travaEm} className="font-bold text-giz">{lockDate}</time>, uma hora antes do primeiro jogo da rodada.</span>
       </span>
     </p>
     <ScoreLine items={[{ label: "Formação", value: formation }, { label: "Custou", value: currency(spent) }, { label: "Sobram", value: currency(budget - spent) }]} />

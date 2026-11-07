@@ -34,17 +34,20 @@ cometida (-0,3), impedimento (-0,1), amarelo (-1), vermelho (-3), pênalti perdi
 
 Quem não entra em campo recebe zero. Jogo cancelado ou adiado não aciona a função.
 
-## Operação de homologação
+## Operação
 
-No teste, o catálogo usa a Série A 2024 e a rodada ativa vem de
-`configuracoes.rodada_simulada_atual`; ela não é fixa no código. Após sincronizar
-a rodada e ela estar encerrada no banco, chame a função `score-match` com:
+Desde 27/10/2026 a pontuação roda sobre o **Brasileirão 2026 real**: o orquestrador `advance-round` chama `score-match` para cada jogo encerrado e de novo na conferência, 1 hora depois do último jogo pontuado. Falhas seguem a pausa crescente de JOA-145 (ver [[Banco de Dados — Modelo e Campos]]).
+
+Para pontuar um jogo à mão, chame a função `score-match` com:
 
 ```json
 { "jogoId": 1234567890 }
 ```
 
-No dia seguinte, repita com `{ "jogoId": 1234567890, "conferencia": true }`.
-Antes de publicar a Edge Function, configure no Supabase remoto
-`API_FOOTBALL_KEY`, `API_FOOTBALL_LEAGUE_ID=71` e `API_FOOTBALL_SEASON=2024`.
-O cliente nunca recebe a chave.
+Para a segunda leitura, repita com `{ "jogoId": 1234567890, "conferencia": true }`.
+
+A Edge Function usa `API_FOOTBALL_KEY`, `API_FOOTBALL_LEAGUE_ID=71` e `API_FOOTBALL_SEASON` (2026) nos secrets do Supabase. O cliente nunca recebe a chave.
+
+---
+
+*Atualizado em 06/11/2026: a operação de homologação com a Série A 2024 saiu do ar na virada para 2026.*

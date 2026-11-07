@@ -1,5 +1,10 @@
 # Orquestrador da Rodada Simulada
 
+← [[Index]] · Produção: [[Ativação de Produção — Calendário e Orquestração]] · Virada: [[2026-10-27 — Virada para o Brasileirão 2026]]
+
+> [!warning] Pausado desde 27/10/2026
+> A simulação da temporada 2024 saiu do ar na virada para o Brasileirão 2026. O cron `avancar-rodada-simulada` foi removido e os dados simulados apagados. O orquestrador em produção é `advance-round`, que segue o mesmo desenho com o calendário real. Esta nota fica como referência do teste.
+
 ## Objetivo
 
 `advance-simulated-round` transforma uma rodada histórica em uma experiência

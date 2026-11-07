@@ -3,6 +3,7 @@ titulo: Banco de Dados — Modelo e Campos
 tipo: relatorio-tecnico
 projeto: Fantasy Futebol
 criado-em: 2026-09-28
+atualizado-em: 2026-11-06
 tags:
   - projeto/fantasy-futebol
   - area/tecnico
@@ -15,7 +16,10 @@ tags:
 ← [[Index]] · Contexto: [[Arquitetura]] · Origem dos dados: [[API-Football]] · Regras: [[Regras do Jogo]]
 
 > [!abstract] Em uma frase
-> **PostgreSQL (Supabase)** com **17 tabelas em 4 grupos**: catálogo esportivo espelhado da API-Football, jogo do usuário, social/validação e operação. O volume da validação é minúsculo (dezenas de milhares de linhas), e o plano grátis do Supabase (500 MB) sobra.
+> **PostgreSQL (Supabase)** com **28 tabelas em 4 grupos**: catálogo esportivo espelhado da API-Football, jogo do usuário (time, saldo em C$ e passes), social e acesso (grupos, convites, lista de espera) e operação (jobs, configurações, avisos). O volume da validação é minúsculo (dezenas de milhares de linhas), e o plano grátis do Supabase (500 MB) sobra.
+
+> [!info] Conferido contra `supabase/migrations/` em 06/11/2026
+> 48 migrations. `interesse_pro` e `pesquisas_respostas` continuam **só no plano**: não foram criadas porque o fake door do PRO e a pesquisa não existem no app.
 
 > [!note] Convenções
 > - Nomes de tabela e coluna em **PT-BR, snake_case**, no plural para tabelas.
@@ -213,12 +217,13 @@ A tabela da tela "Como Funciona" é lida daqui. Cada rodada aponta para a versã
 
 ### `perfis`
 
-O identificador de login e a validação do OTP ficam em `auth.users` (Supabase Auth). O telefone abaixo é um espelho do número verificado, necessário para consulta do perfil sem conceder acesso à tabela de autenticação.
+O login fica em `auth.users` (Supabase Auth). Hoje o acesso é **só com Google**; o e-mail da conta é espelhado em `perfis.email` e conferido contra a lista de e-mails autorizados do convite. O `telefone` vem do plano original de login por SMS e não é mais preenchido.
 
 | Campo | Tipo | Regra |
 |---|---|---|
 | `id` | `uuid` PK = `auth.users.id` | |
-| `telefone` | `text` unique, nullable | E.164 brasileiro, espelhado somente após OTP SMS validado |
+| `email` | `citext` | e-mail da conta Google, usado para autorizar o convite |
+| `telefone` | `text` unique, nullable | legado do login por SMS; não é mais preenchido |
 | `apelido` | `citext` unique not null | 3–20 caracteres, `^[A-Za-z0-9_.]+$`, filtro de palavrão |
 | `clube_coracao_id` | `int` FK → `clubes` | alimenta o ranking "Por clube do coração" |
 | `convidado_por` | `uuid` FK → `perfis` | primeiro convite que trouxe o usuário (métrica de viralidade) |
@@ -237,7 +242,7 @@ O identificador de login e a validação do OTP ficam em `auth.users` (Supabase 
 | `usuario_id` | `uuid` FK → `perfis` not null | |
 | `rodada_id` | `int` FK → `rodadas` not null | |
 | `formacao` | `formacao` not null | |
-| `custo` | `numeric(6,2)` not null | `≤ 100,00` na hora de salvar |
+| `custo` | `numeric(6,2)` not null | `≥ 0`; precisa caber no saldo da `carteira` (validado em `fn_salvar_escalacao`) |
 | `pontos` | `numeric(7,2)` default 0 | soma de `times_jogadores.pontos` |
 | `gols_escalados` | `smallint` default 0 | 2º critério de desempate |
 | `salvo_em` | `timestamptz` not null | último salvamento antes da trava · 4º critério de desempate |
@@ -254,6 +259,15 @@ O identificador de login e a validação do OTP ficam em `auth.users` (Supabase 
 | `preco_pago` | `numeric(5,2)` not null | **foto do preço** no momento do salvamento |
 | `pontos` | `numeric(6,2)` default 0 | copiado de `estatisticas_jogador` quando o jogo do jogador acaba |
 | `pontuado` | `bool` default `false` | alimenta "aguardando" × pontos no chip |
+
+### Saldo em C$ (`carteiras` e `movimentacoes_saldo`)
+
+Moeda do jogo, sem valor real. Regras em [[Regras do Jogo]].
+
+| Tabela | Campos principais | Regra |
+|---|---|---|
+| `carteiras` | `usuario_id` (PK), `saldo` | criada por trigger ao criar o perfil; `saldo ≥ 0`, padrão C$ 60,00 |
+| `movimentacoes_saldo` | `usuario_id`, `rodada_id`, `time_id`, `tipo`, `valor`, `saldo_antes`, `saldo_depois` | auditável; `RENDIMENTO` creditado no fechamento por `fn_creditar_saldos_rodada`, uma vez por usuário e rodada; `AJUSTE_SALDO_INICIAL` registrou a mudança de C$ 50 para C$ 60 |
 
 ### Passes de rodada (JOA-151)
 
@@ -318,7 +332,35 @@ Controle de acesso para o backoffice. Uma conta só ganha esse acesso por inclus
 | `convidado_por` | `uuid` FK → `perfis` | quem mandou o link (métrica de convite aceito) |
 | `entrou_em` | `timestamptz` not null | |
 
-O ranking da liga é uma **view**: `ranking_rodada` ⋈ `ligas_membros`, com a posição recalculada dentro da liga. Limite sugerido: 200 membros por liga.
+O ranking da liga é calculado no servidor: a tela soma os pontos dos membros na rodada e reordena dentro do grupo; o do campeonato vem de `fn_ranking_campeonato`. Administradores ficam fora dos rankings. Grupos são criados e geridos **só pelo painel admin** (RLS libera `ligas` e `ligas_membros` apenas para administradores; o app lê pelo cliente de serviço depois de conferir que o usuário é membro).
+
+### `ligas_convites_email` (e-mails autorizados)
+
+| Campo | Tipo | Regra |
+|---|---|---|
+| `liga_id` | `uuid` FK → `ligas` · **PK composta** | |
+| `email` | `text` · **PK composta** | minúsculo e sem espaços |
+| `convidado_por` | `uuid` FK → `perfis` not null | gestor que autorizou |
+| `usuario_id` | `uuid` FK → `perfis` | preenchido quando a pessoa entra |
+| `aceito_em` | `timestamptz` | |
+
+Só entra no grupo quem abre o link do convite logado com um e-mail desta lista.
+
+### `lista_espera` (landing pública)
+
+| Campo | Tipo | Regra |
+|---|---|---|
+| `nome` | `text` not null | 2–60 caracteres |
+| `whatsapp` | `text` not null | 10 ou 11 dígitos |
+| `email` | `citext` unique not null | |
+| `consentimento_em` | `timestamptz` not null | aceite de contato |
+| `origem` | `text` default `beta` | |
+| `liga_id` · `aceito_em` · `aceito_por` | | decisão do admin ao aceitar a inscrição num grupo (JOA-169) |
+
+Escrita e leitura só pelo servidor (service role). Ver [[Landing e Lista de Espera]].
+
+> [!note] Planejadas, não criadas
+> As duas tabelas abaixo são o desenho original do fake door do PRO e da pesquisa. Não existem no banco em 06/11/2026.
 
 ### `interesse_pro` (fake door)
 
@@ -378,7 +420,20 @@ Depois de `api_football_max_tentativas_pontuacao` (10) falhas o jogo para de ser
 
 ### `configuracoes`
 
-Chave-valor para ajustes sem deploy: `temporada_atual`, `liga_api_id` (71), `orcamento` (não usado: o orçamento é o saldo da carteira, que começa em C$ 60), `api_football_limite_diario` (7500), `api_football_reserva_diaria` (500), `api_football_max_tentativas_pontuacao` (10), `pesquisa_ativa`.
+Chave-valor para ajustes sem deploy: `temporada_atual` (2026), `temporada_fonte`, `liga_api_id` (71), `rodada_estreia` (33), `passes_obrigatorios` (desligada), `modo_simulacao` e `rodada_simulada_atual` (simulação de 2024, pausada), `orcamento` (não usado: o orçamento é o saldo da carteira, que começa em C$ 60), `api_football_limite_diario` (7500), `api_football_reserva_diaria` (500), `api_football_max_tentativas_pontuacao` (10), `pesquisa_ativa`.
+
+### `versoes_pontuacao`
+
+Versões publicadas da tabela de pontuação (`versao`, `publicada_em`). `rodadas.versao_regras` aponta para a versão usada na rodada. Leitura pública.
+
+### Avisos da rodada (`avisos_whatsapp` e `push_inscricoes`)
+
+| Tabela | Campos principais | Regra |
+|---|---|---|
+| `avisos_whatsapp` | `rodada_id`, `tipo` (`MERCADO_ABERTO`, `FALTA_1H`, `MERCADO_FECHADO`, `ESCALACAO_TARDIA`, `RODADA_ENCERRADA`), `mensagem`, `publico` (`TODOS`, `COM_TIME`, `SEM_TIME`), `push_enviado_em`, `enviado_em` | um aviso por rodada e tipo; enfileirado por trigger quando a rodada muda de status |
+| `push_inscricoes` | `endpoint` (PK), `usuario_id`, `p256dh`, `auth` | uma inscrição por aparelho |
+
+O nome `avisos_whatsapp` é histórico: o envio é só por push. Ver [[2026-11-02 — Avisos da rodada por push]].
 
 ---
 
@@ -386,12 +441,15 @@ Chave-valor para ajustes sem deploy: `temporada_atual`, `liga_api_id` (71), `orc
 
 | Nome | Tipo | O que garante |
 |---|---|---|
-| `fn_validar_time` | trigger em `times`/`times_jogadores` | 11 jogadores; quantidade por posição = formação; `custo ≤ orcamento`; jogador `ativo` |
-| `fn_bloquear_pos_trava` | trigger | nenhum insert/update/delete em `times` e `times_jogadores` depois de `rodadas.trava_em` |
+| `fn_salvar_escalacao` | RPC | salva o time numa transação: formação, 11 jogadores, saldo da carteira, trava (`fn_rodada_editavel`), escalação tardia (`fn_escalacao_tardia_aberta`), lesionados e suspensos e passe |
+| `fn_escalacao_tardia_aberta` · `fn_limite_escalacao_tardia` · `fn_jogo_iniciado` | funções | janela tardia: menos de 50% dos jogos começou; horário previsto para fechar |
+| `fn_aplicar_status_jogadores` | função | aplica Provável, Dúvida, Lesionado e Suspenso vindos da API |
 | `fn_pontuar_jogo(jogo_id)` | função | calcula `estatisticas_jogador.pontos`, copia para `times_jogadores`, soma em `times`, regrava `ranking_rodada` |
-| `fn_fechar_rodada(rodada_id)` | função | 2ª leitura conferida, ranking final, `status = FECHADA`, abre a próxima |
+| `fn_inicializar_ranking_rodada` · `fn_ranking_rodada` · `fn_ranking_campeonato` | funções e RPC | ranking da rodada e acumulado da temporada, sem administradores |
 | `fn_atualizar_precos(rodada_id)` | função | recalcula médias e preço e grava `historico_precos` para a rodada seguinte |
-| `fn_entrar_liga(codigo)` | RPC | entra na liga pelo código de convite e registra `convidado_por` |
+| `fn_creditar_saldos_rodada(rodada_id)` | função | credita `max(pontos − preço pago, 0)` por jogador na carteira, uma vez por rodada |
+| `fn_enfileirar_aviso_status_rodada` · `fn_enfileirar_aviso_fechamento` | trigger e função | põem os avisos da rodada na fila de push |
+| `fn_requisicoes_api_football` · `fn_temporada_atual` | funções | consumo diário da API e temporada vigente |
 | `fn_passes_disponiveis()` | RPC | total de passes do usuário autenticado ainda válidos na `temporada_atual` |
 | `fn_passe_libera_rodada(rodada_id)` | RPC | se o usuário pode salvar na rodada: chave desligada, administrador, rodada simulada ou passe válido na temporada da rodada |
 | `fn_passe_exigido(rodada_id)` | RPC | se a rodada exige passe do usuário: chave ligada, não administrador e rodada não simulada; usada pela tela de escalação |
@@ -410,9 +468,10 @@ Chave-valor para ajustes sem deploy: `temporada_atual`, `liga_api_id` (71), `orc
 | `perfis` | `apelido` e `clube_coracao_id` públicos (ranking); o resto só o próprio | o próprio |
 | `times`, `times_jogadores` | o próprio sempre; **os outros só depois da trava** (ninguém copia o time alheio antes do jogo) | o próprio, antes da trava |
 | `ranking_rodada` | pública | service role |
-| `ligas` | membros | dono edita; criar é aberto |
-| `ligas_membros` | membros da mesma liga | via `fn_entrar_liga`; sair é o próprio |
-| `interesse_pro`, `pesquisas_respostas` | o próprio | o próprio (insert) |
+| `ligas`, `ligas_membros` | administradores (o app lê pelo servidor após conferir o vínculo) | administradores |
+| `ligas_convites_email`, `lista_espera` | service role | service role |
+| `carteiras`, `movimentacoes_saldo` | o próprio | service role e funções `security definer` |
+| `versoes_pontuacao` | pública | service role |
 | `produtos_passe` | pública | service role |
 | `pedidos`, `passes_lotes` | o próprio | service role e funções `security definer` |
 | `passes_movimentacoes` | o próprio | somente inserção por service role e funções `security definer` |
@@ -440,8 +499,8 @@ A **chave da API-Football nunca vai para o front**: só os jobs no servidor a us
 
 ## LGPD: dados pessoais guardados
 
-Só **telefone verificado** (em `auth.users` e espelhado em `perfis`), **apelido**, **clube do coração**, **origem** e as respostas de pesquisa. **Sem CPF ou endereço na validação.** A exclusão de conta:
-- apaga `auth.users`, `perfis`, `interesse_pro` e `pesquisas_respostas`;
+**E-mail da conta Google** (em `auth.users` e espelhado em `perfis`), **apelido**, **clube do coração** e **origem**. Na lista de espera: **nome, WhatsApp e e-mail**, com data do consentimento. Inscrições de push guardam o endpoint do aparelho. **Sem CPF ou endereço na validação.** A exclusão de conta:
+- apaga `auth.users` e `perfis` (carteira, passes e inscrições de push saem em cascata);
 - mantém as linhas de ranking das rodadas passadas **anonimizadas** ("Jogador removido"), para a classificação dos outros não mudar.
 
 Os `pedidos` **são mantidos** depois da exclusão, sem vínculo com o usuário, por serem registro fiscal. Lotes e movimentações de passes são apagados.
@@ -450,4 +509,4 @@ Quando entrar prêmio, a tabela `perfis` ganha CPF (criptografado) e chave PIX v
 
 ---
 
-*Criado em 28/09/2026. Campos da API conforme a documentação pública da API-Football v3: **conferir contra a resposta real** no primeiro teste com a chave grátis.*
+*Criado em 28/09/2026. Atualizado em 06/11/2026, conferido contra as migrations. Campos da API conforme a documentação pública da API-Football v3: **conferir contra a resposta real** no primeiro teste com a chave grátis.*

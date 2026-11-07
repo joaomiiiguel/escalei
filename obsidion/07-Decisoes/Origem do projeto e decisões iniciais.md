@@ -34,6 +34,13 @@ tags:
 | Ligas privadas no MVP                          | Principal alavanca de retenção e crescimento; testa a H2                                                                                        |
 | Fake door do PRO                               | Mede disposição de pagar sem construir pagamento                                                                                                |
 
+> [!info] O que mudou depois (06/11/2026)
+> - **Pagamento:** escalar passa a exigir passe de rodada por PIX ([[2026-10-27 — Passes de rodada pagos]]). A exigência está desligada até a compra entrar no ar.
+> - **Push:** antecipado ([[2026-11-02 — Avisos da rodada por push]]).
+> - **Temporada real:** desde 27/10 o app roda o Brasileirão 2026, com estreia na rodada 33 ([[2026-10-27 — Virada para o Brasileirão 2026]]).
+> - **Escudos:** o app passou a mostrar escudos dos clubes, ao contrário da decisão "camisa genérica + sigla". Sem nota de decisão; ver o aviso em [[Jurídico e Riscos]].
+> - **Login:** com Google, não por telefone ([[Onboarding por Convite]]).
+
 ## Descartado (por ora)
 
 - Parcial ao vivo, push, prêmio, CPF, PIX, capitão, técnico, Modo Rápido, desktop

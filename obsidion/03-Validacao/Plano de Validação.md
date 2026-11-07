@@ -31,6 +31,10 @@ tags:
 | H3 | "Pagaria R$ 9,90/mês?" = sim | ≥ 10% | `pesquisas_respostas` |
 | H3 | Marcas locais com intenção por escrito de patrocinar | ≥ 2 | conversa direta |
 
+> [!warning] Fontes que ainda não existem (06/11/2026)
+> - **H2:** `ligas_membros.convidado_por` é preenchido com o **gestor** que autorizou no admin, não com o amigo que trouxe a pessoa. Do jeito atual, não mede convite entre amigos.
+> - **H3:** `interesse_pro` e `pesquisas_respostas` não foram criadas; o "Seja PRO" e as pesquisas não existem no app. A H3 hoje só pode ser medida pela compra de passes, quando o PIX entrar no ar.
+
 ## Decisão ao final
 
 | Resultado | Decisão |
@@ -73,8 +77,9 @@ O PostHog liga quando `NEXT_PUBLIC_POSTHOG_KEY` está configurada (host opcional
 | `pontos_vistos` | tela inicial com time em rodada em andamento ou fechada | `status_rodada`, `horas_desde_ultimo_jogo` |
 | `ranking_visto` | tela do grupo | `aba` (`rodada` ou `campeonato`) |
 | `fim_rodada_compartilhado` | botão "Compartilhar resumo" | `metodo` (`nativo` ou `copiado`) |
+| `pwa_instalado` | navegador, uma vez por aparelho | `origem`, `plataforma` |
 
-Ainda sem evento, porque a funcionalidade não existe: `liga_criada`, `convite_enviado`, `clique_pro`, `pesquisa_respondida`, `pwa_instalado`, `conta_excluida`.
+Ainda sem evento, porque a funcionalidade não existe: `liga_criada`, `convite_enviado`, `clique_pro`, `pesquisa_respondida`. A exclusão de conta existe em `/perfil`, mas ainda não envia `conta_excluida`. (Conferido no código em 06/11/2026.)
 
 **Painéis a criar no PostHog** (precisam de acesso ao projeto): funil `cadastro` → `time_escalado`; retenção por semana com `time_escalado` como evento de retorno; mediana de `time_escalado.segundos`; `pontos_vistos` com `horas_desde_ultimo_jogo` ≤ 24; contagem de `convite_aceito` por usuário (K-fator).
 

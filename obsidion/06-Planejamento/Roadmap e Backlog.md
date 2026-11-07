@@ -12,7 +12,10 @@ tags:
 
 ← [[Index]]
 
-> [!warning] Calendário
+> [!info] Situação em 06/11/2026
+> O MVP está no ar com o Brasileirão 2026 real desde a rodada 33. O cronograma abaixo era a estimativa de 28/09.
+
+> [!warning] Calendário (28/09/2026)
 > Em 28/09/2026 o Brasileirão 2026 está por volta da rodada 28 de 38. Construindo em ~2 semanas, sobram **~8 rodadas**: dá para o beta mais 4–6 rodadas de validação. **Confirmar as datas na tabela da CBF.** Se atrasar, a validação passa para o início da Série A 2027.
 
 > [!tip] Execução do mês
@@ -30,53 +33,64 @@ tags:
 
 ## Backlog
 
+> [!info] Conferido contra o código em 06/11/2026
+> Marcado como feito o que existe no repositório. Itens fora do código (contrato, painéis do PostHog) ficaram desmarcados. Itens trocados por outra solução estão riscados, com o que entrou no lugar.
+
 ### Fase 0 · Verificação
-- [ ] Ler o contrato de trabalho (ver [[Jurídico e Riscos]])
-- [ ] Criar a conta e a chave grátis da API-Football
-- [ ] Rodar as 3 chamadas de verificação e marcar o checklist em [[API-Football]]
-- [ ] Salvar as respostas reais (liga, jogo, jogadores) para usar nos testes
-- [ ] Escolher o nome do app e registrar o domínio
-- [ ] Gerar o design com o [[Prompt de Design]]
+- [ ] Ler o contrato de trabalho (ver [[Jurídico e Riscos]]); não verificável pelo código
+- [x] Criar a chave da API-Football (plano de 7.500 requisições/dia; ver [[API-Football]])
+- [x] Salvar respostas reais para os testes (`tests/fixtures/api-football/`)
+- [x] Escolher o nome do app: **Escalou** (domínio jogueescalou.com.br)
+- [x] Design: identidade própria, ver [[Identidade Visual]] (o [[Prompt de Design]] ficou como histórico)
 
 ### Fase 1 · Construção
 **Base**
-- [ ] Projeto Next.js + Supabase + PostHog, deploy na Vercel
-- [ ] Migrations: enums, 17 tabelas, índices ([[Banco de Dados — Modelo e Campos]])
-- [ ] RLS de todas as tabelas
-- [ ] Seed: 20 clubes com sigla e cores, `tabela_pontuacao` v1, `configuracoes`
+- [x] Projeto Next.js + Supabase + PostHog
+- [x] Migrations (28 tabelas em 06/11/2026; ver [[Banco de Dados — Modelo e Campos]])
+- [x] RLS das tabelas
+- [x] Clubes, `tabela_pontuacao` v1 e `configuracoes` (carregados por migration e `sync-catalog`)
 
 **Dados**
-- [x] Cliente da API-Football com controle de cota (`sync_execucoes`, JOA-63)
-- [ ] Jobs `sync-elencos`, `sync-lesoes`, `sync-rodada`
-- [ ] `pontuacao.ts` + `fn_pontuar_jogo`, com teste contra resposta real gravada
-- [ ] Job `pontuar-jogo` (disparado no `ENCERRADO`)
-- [ ] `preco.ts` + preço inicial a partir do histórico da temporada
-- [ ] Jobs `conferir-rodada`, `abrir-rodada` e `fn_atualizar_precos`
+- [x] Cliente da API-Football com controle de cota (`sync_execucoes`, JOA-63, JOA-145)
+- [x] ~~Jobs `sync-elencos`, `sync-lesoes`, `sync-rodada`~~ → `sync-catalog`, `sync-calendar` e lesões dentro de `advance-round`
+- [x] Pontuação no banco (`fn_pontuar_jogo`) com testes contra respostas reais (`tests/scouts.test.ts`)
+- [x] ~~Job `pontuar-jogo`~~ → `score-match`, chamada pelo orquestrador
+- [x] Preço inicial e variação por rodada (`sync-catalog`, `fn_atualizar_precos`)
+- [x] ~~Jobs `conferir-rodada`, `abrir-rodada`~~ → orquestrador `advance-round` (JOA-147)
 
 **App**
-- [ ] Cadastro (telefone + OTP por SMS), apelido, clube do coração, aceite dos termos
-- [ ] ONB-01: onboarding exclusivo por convite de liga (ver [[Onboarding por Convite]])
-- [ ] Início
-- [ ] Montar Time + Mercado + Detalhe do Jogador + escalação automática
+- [x] ~~Cadastro por telefone e OTP~~ → login com Google; apelido, clube do coração e termos no onboarding
+- [x] Onboarding exclusivo por convite, com e-mails autorizados (ver [[Onboarding por Convite]])
+- [x] Início
+- [x] Montar Time + Mercado + escalação automática
+- [ ] Detalhe do Jogador
 - [x] Trava e validação de formação/saldo no banco (`fn_salvar_escalacao` + RLS, JOA-138)
-- [ ] Meu Time na Rodada
-- [ ] Ranking (geral, ligas, clube) com `ranking_rodada`
-- [ ] Ligas: criar, convidar (link + WhatsApp), entrar por código
-- [ ] Fim de Rodada compartilhável
-- [ ] Seja PRO (fake door), Pesquisa, Como Funciona, Perfil com exclusão de conta
-- [ ] PWA (manifest, ícones, instalar)
-- [ ] E-mails: rodada aberta, lembrete de trava
-- [ ] Eventos do PostHog e painéis (eventos implementados em JOA-49; faltam os painéis no PostHog)
+- [x] Escalação tardia (`fn_escalacao_tardia_aberta`)
+- [x] Meu Time na Rodada
+- [x] Ranking da liga: rodada e campeonato, com ▲/▼ (JOA-141, JOA-144)
+- [ ] Ranking geral e por clube do coração
+- [ ] Criar liga e convidar de dentro do app (hoje só pelo admin)
+- [x] Entrar por link ou código de convite
+- [x] Fim de Rodada compartilhável (seção do Início)
+- [ ] Seja PRO (fake door)
+- [ ] Pesquisa
+- [x] Como Funciona e Perfil com exclusão de conta
+- [x] PWA (manifest, ícones, instalar)
+- [x] ~~E-mails~~ → avisos por push ([[2026-11-02 — Avisos da rodada por push]])
+- [x] Eventos do PostHog (8 eventos; ver [[Plano de Validação]])
+- [ ] Painéis no PostHog; não verificável pelo código
+- [x] Landing pública com lista de espera ([[Landing e Lista de Espera]])
+- [x] Painel admin: grupos, convites e participantes
 
 **Publicação**
-- [ ] Termos de uso, privacidade e regulamento (versão simples)
-- [ ] Teste de ponta a ponta numa rodada passada, com as respostas gravadas
+- [x] Termos de uso, privacidade e regulamento
+- [x] Virada para o Brasileirão 2026 real ([[2026-10-27 — Virada para o Brasileirão 2026]])
 
 ### Passes de rodada (decidido em 27/10/2026)
-- [ ] JOA-151 · Schema de passes: produtos, pedidos e lotes com RLS
-- [ ] JOA-152 · Exigir passe para escalar e consumir na trava da rodada
+- [x] JOA-151 · Schema de passes: produtos, pedidos e lotes com RLS
+- [x] JOA-152 · Exigir passe para escalar e consumir na trava (atrás de `passes_obrigatorios`, desligada)
 - [ ] JOA-153 · Pagamento via PIX com webhook idempotente
-- [ ] JOA-154 · UI de passes: compra, saldo e aviso de cortesia
+- [ ] JOA-154 · UI de passes: a contagem e a explicação existem; a compra aparece como "Disponível em breve"
 - [ ] JOA-155 · Admin de pedidos: nota manual, cortesias e estornos
 
 ### Depois da validação (só se passar)
@@ -88,4 +102,4 @@ tags:
 
 ---
 
-*Criado em 28/09/2026. Datas estimadas; atualizar a cada fase.*
+*Criado em 28/09/2026. Backlog conferido contra o código em 06/11/2026.*

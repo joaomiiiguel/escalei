@@ -16,6 +16,9 @@ tags:
 > [!abstract] Em uma frase
 > **4 semanas, ~80 horas (≈ 20 h/semana em noites e fins de semana), R$ 40.** Beta fechado na rodada de **17–19/10** e **lançamento do teste na rodada de 24–26/10**. Depois disso a validação corre sozinha por 4–6 rodadas.
 
+> [!info] Situação em 06/11/2026
+> Plano de setembro, mantido como histórico. O que aconteceu e está registrado: simulação com a Série A 2024 até 27/10 e virada para o Brasileirão 2026 real com estreia na rodada 33 ([[2026-10-27 — Virada para o Brasileirão 2026]]). Não há registro no vault de como foram o beta e o lançamento, nem de quantas pessoas entraram. O backlog atualizado está em [[Roadmap e Backlog]].
+
 > [!warning] Premissas a confirmar no dia 1
 > - **Calendário:** as datas das rodadas do Brasileirão 2026 precisam ser conferidas na tabela da CBF. O plano ancora o beta e o lançamento nos **fins de semana de 17–19/10 e 24–26/10**. Se houver rodada no meio da semana, o beta pode ser antecipado.
 > - **Capacidade:** ~20 h/semana. Com menos, cortar a lista "Pode ficar para depois" antes de atrasar a data.

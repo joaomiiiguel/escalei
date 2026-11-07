@@ -6,7 +6,7 @@ criado-em: 2026-09-28
 tags:
   - projeto/fantasy-futebol
   - area/tecnico
-  - integracao/football-data
+  - integracao/api-football
 ---
 
 # API-Football
@@ -16,18 +16,23 @@ tags:
 > [!abstract] Em uma frase
 > Fonte de clubes, elencos, jogos e scouts. A integração usa a API-Football v3, com a Série A no identificador `71` e autenticação pelo cabeçalho `x-apisports-key`.
 
+> [!info] Temporada em uso (06/11/2026)
+> Desde 27/10/2026 o app usa a **Série A 2026** real, com plano informado de 7.500 requisições por dia ([[2026-10-27 — Virada para o Brasileirão 2026]]). A Série A 2024 foi usada só na simulação, que saiu do ar.
+
 > [!warning] Cobertura e permissões
-> O plano gratuito oferece endpoints, mas restringe temporadas recentes. No teste, usar explicitamente a Série A de **2024**. Não apontar o ambiente gratuito para a temporada corrente sem uma verificação de acesso da chave contratada.
+> O plano gratuito restringe temporadas recentes. Antes de trocar a temporada sincronizada, verifique o plano com `npm run check:api -- <temporada>`.
 
-## Endpoints usados
+## Endpoints usados (conferido em 06/11/2026)
 
-| Endpoint | Para quê | Frequência |
+| Endpoint | Para quê | Quem chama e quando |
 |---|---|---|
-| `/v3/football/teams?league=71&season={ano}` | Carga de `clubes` | 1× por temporada |
-| `/v3/football/players?team={id}&season={ano}` | Carga de `jogadores` e posição | 1× por semana × 20 times |
-| `/v3/football/fixtures?league=71&season={ano}&round={rodada}` | Jogos e status da rodada | job futuro |
-| `/v3/football/fixtures/players?fixture={id}` | Scouts individuais por jogo | fim e conferência do jogo |
-| `/v3/football/fixtures/events?fixture={id}` | Gol contra e eventos | fim e conferência do jogo |
+| `/teams?league=71&season={ano}` | `clubes` | `sync-catalog`, segunda 9h UTC |
+| `/players?league=71&season={ano}` (paginado) | `jogadores`, posição e preço inicial | `sync-catalog`, segunda 9h UTC |
+| `/fixtures?league=71&season={ano}` | calendário: rodadas, jogos, `abre_em` e `trava_em` | `sync-calendar`, a cada 6 h |
+| `/fixtures?ids=` (até 20) | status e placar dos jogos em andamento | `advance-round`, só durante os jogos |
+| `/injuries` | lesionados e suspensos | `advance-round`, a cada 6 h com a rodada aberta e uma vez nas 2 h antes da trava |
+| `/fixtures/players?fixture={id}` | scouts individuais por jogo | `score-match`, no fim e na conferência |
+| `/fixtures/events?fixture={id}` | gol contra e substituições | `score-match`, no fim e na conferência |
 
 ## Verificação antes de programar
 
