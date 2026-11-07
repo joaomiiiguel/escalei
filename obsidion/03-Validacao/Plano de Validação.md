@@ -79,7 +79,7 @@ O PostHog liga quando `NEXT_PUBLIC_POSTHOG_KEY` está configurada (host opcional
 | `fim_rodada_compartilhado` | botão "Compartilhar resumo" | `metodo` (`nativo` ou `copiado`) |
 | `pwa_instalado` | navegador, uma vez por aparelho | `origem`, `plataforma` |
 
-Ainda sem evento, porque a funcionalidade não existe: `liga_criada`, `convite_enviado`, `clique_pro`, `pesquisa_respondida`. A exclusão de conta existe em `/perfil`, mas ainda não envia `conta_excluida`. (Conferido no código em 06/11/2026.)
+Ainda sem evento, porque a funcionalidade não existe: `liga_criada`, `convite_enviado`, `clique_pro`, `pesquisa_respondida`. A exclusão de conta pelo app está desligada (é pedida ao administrador do grupo), então `conta_excluida` também não existe. (Conferido no código em 06/11/2026.)
 
 **Painéis a criar no PostHog** (precisam de acesso ao projeto): funil `cadastro` → `time_escalado`; retenção por semana com `time_escalado` como evento de retorno; mediana de `time_escalado.segundos`; `pontos_vistos` com `horas_desde_ultimo_jogo` ≤ 24; contagem de `convite_aceito` por usuário (K-fator).
 

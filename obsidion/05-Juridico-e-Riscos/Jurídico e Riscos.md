@@ -72,7 +72,7 @@ Caso exista uma fase futura com premiação juridicamente viável, os itens mín
 
 ## 6. Dados e fonte
 
-- **LGPD:** na validação, só e-mail, apelido e clube do coração. Exclusão de conta funcional. Ver [[Banco de Dados — Modelo e Campos]].
+- **LGPD:** na validação, só e-mail, apelido e clube do coração. Exclusão de conta: pedida ao administrador do grupo, como diz a política de privacidade; a exclusão pelo app está desligada (conferido em 07/11/2026). Ver [[Banco de Dados — Modelo e Campos]].
 - **API-Football:** confirmar que os termos permitem **uso comercial**. Os direitos oficiais de dados para apostas do Brasileirão estão com a Infront, mas isso não afeta um fantasy sem apostas e sem prêmio.
 
 ---
