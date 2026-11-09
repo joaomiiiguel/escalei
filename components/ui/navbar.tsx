@@ -3,6 +3,7 @@
 import { House, Shirt, Trophy, UserRound } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { AdminDashboardLink } from "./admin-dashboard-link";
 import { HowItWorksModal } from "./how-it-works-modal";
 import { InstallInvite } from "@/components/pwa/install-invite";
 
@@ -22,9 +23,11 @@ function isActive(pathname: string, href: string) {
 export function Navbar({
   hasCurrentTeam = false,
   isRoundInProgress = false,
+  isAdmin = false,
 }: {
   hasCurrentTeam?: boolean;
   isRoundInProgress?: boolean;
+  isAdmin?: boolean;
 }) {
   const pathname = usePathname();
 
@@ -37,7 +40,7 @@ export function Navbar({
 
   return (
     <>
-      <HowItWorksModal />
+      {isAdmin ? <AdminDashboardLink /> : <HowItWorksModal />}
       <div className="fixed inset-x-0 bottom-0 z-50 mx-auto w-full max-w-lg mb-5 px-4" data-app-navbar>
         <InstallInvite />
         {showCta && (

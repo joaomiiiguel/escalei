@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/ui/navbar";
 import { createClient, getCurrentUser } from "@/lib/supabase/server";
 import { getCurrentRound } from "@/lib/current-round";
+import { isAdministrator } from "@/lib/admin-access";
 import { AnalyticsProvider } from "@/components/analytics/analytics-provider";
 import { PushInvite } from "@/components/pwa/push-invite";
 import { PwaSetup } from "@/components/pwa/pwa-setup";
@@ -24,14 +25,19 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     const user = await getCurrentUser();
     let hasCurrentTeam = false;
     let isRoundInProgress = false;
+    let isAdmin = false;
 
     if (user) {
-        const { data: round } = await getCurrentRound<{
-            id: number;
-            numero: number;
-            status: "AGENDADA" | "ABERTA" | "EM_ANDAMENTO" | "FECHADA";
-            trava_em: string;
-        }>(supabase, "id, numero, status, trava_em");
+        const [{ data: round }, userIsAdmin] = await Promise.all([
+            getCurrentRound<{
+                id: number;
+                numero: number;
+                status: "AGENDADA" | "ABERTA" | "EM_ANDAMENTO" | "FECHADA";
+                trava_em: string;
+            }>(supabase, "id, numero, status, trava_em"),
+            isAdministrator(supabase, user.id),
+        ]);
+        isAdmin = userIsAdmin;
 
         if (round) {
             isRoundInProgress = round.status === "EM_ANDAMENTO";
@@ -52,7 +58,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
                 <PwaSetup />
                 {user && <PushInvite vapidPublicKey={process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY} />}
                 {children}
-                <Navbar hasCurrentTeam={hasCurrentTeam} isRoundInProgress={isRoundInProgress} />
+                <Navbar hasCurrentTeam={hasCurrentTeam} isRoundInProgress={isRoundInProgress} isAdmin={isAdmin} />
             </body>
         </html>
     );
