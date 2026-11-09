@@ -3,7 +3,7 @@ import path from "node:path";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { requireAdmin } from "@/lib/admin-access";
+import { isAdministrator, requireAdmin } from "@/lib/admin-access";
 
 /** Como o `redirect` real do Next, interrompe a execução. */
 class RedirectError extends Error {}
@@ -14,6 +14,28 @@ function mockSupabase({ user, admin, error = null }: { user: { id: string } | nu
   vi.mocked(createClient).mockResolvedValue(client as never);
   return { client, query };
 }
+
+describe("isAdministrator", () => {
+  it("é verdadeiro só com linha em administradores do próprio usuário", async () => {
+    const { client, query } = mockSupabase({ user: { id: "admin" }, admin: true });
+    await expect(isAdministrator(client as never, "admin")).resolves.toBe(true);
+    expect(client.from).toHaveBeenCalledWith("administradores");
+    expect(query.eq).toHaveBeenCalledWith("usuario_id", "admin");
+  });
+
+  it("é falso para o jogador", async () => {
+    const { client } = mockSupabase({ user: { id: "jogador" }, admin: false });
+    await expect(isAdministrator(client as never, "jogador")).resolves.toBe(false);
+  });
+
+  it("nega e registra o erro quando a consulta falha", async () => {
+    const log = vi.spyOn(console, "error").mockImplementation(() => {});
+    const { client } = mockSupabase({ user: { id: "admin" }, admin: true, error: { message: "falhou" } });
+    await expect(isAdministrator(client as never, "admin")).resolves.toBe(false);
+    expect(log).toHaveBeenCalled();
+    log.mockRestore();
+  });
+});
 
 describe("requireAdmin", () => {
   beforeEach(() => {
@@ -33,6 +55,7 @@ describe("requireAdmin", () => {
   });
 
   it("nega o acesso se a consulta de administradores falhar", async () => {
+    vi.spyOn(console, "error").mockImplementationOnce(() => {});
     mockSupabase({ user: { id: "admin" }, admin: true, error: { message: "falhou" } });
     await expect(requireAdmin()).rejects.toThrow(new RedirectError("/inicio"));
   });
