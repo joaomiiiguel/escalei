@@ -1,43 +1,5 @@
-export type WaitlistValues = { name: string; whatsapp: string; email: string; consent: boolean; source?: string };
-export type WaitlistErrors = Partial<Record<keyof WaitlistValues, string>>;
-export type WaitlistEntry = { nome: string; whatsapp: string; email: string; origem: string };
-
 /** Valor padrão de `lista_espera.origem`: cadastro sem `utm_source` no link. */
 const DIRECT_SOURCE = "beta";
-
-/** A origem vem da URL pública: fora do formato esperado, conta como acesso direto. */
-export function normalizeWaitlistSource(source?: string) {
-  const value = source?.trim().toLowerCase() ?? "";
-  return /^[a-z0-9_-]{1,40}$/.test(value) ? value : DIRECT_SOURCE;
-}
-
-export function onlyDigits(value: string) {
-  return value.replace(/\D/g, "");
-}
-
-/** Validação compartilhada entre o formulário e a Server Action da lista de espera. */
-export function validateWaitlist(values: WaitlistValues): WaitlistErrors {
-  const errors: WaitlistErrors = {};
-  const digits = onlyDigits(values.whatsapp);
-  const name = values.name.trim();
-
-  if (name.length < 2 || name.length > 60) errors.name = "Informe seu nome ou apelido.";
-  if (digits.length < 10 || digits.length > 11) errors.whatsapp = "Informe um WhatsApp com DDD.";
-  if (values.email.trim().length > 254 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) errors.email = "Informe um e-mail válido.";
-  if (!values.consent) errors.consent = "Você precisa aceitar o contato do Escalou.";
-
-  return errors;
-}
-
-/** Normaliza os valores já validados para gravação. */
-export function toWaitlistEntry(values: WaitlistValues): WaitlistEntry {
-  return {
-    nome: values.name.trim().replace(/\s+/g, " "),
-    whatsapp: onlyDigits(values.whatsapp),
-    email: values.email.trim().toLowerCase(),
-    origem: normalizeWaitlistSource(values.source),
-  };
-}
 
 /** Nome da origem no admin. */
 export function formatWaitlistSource(source: string) {

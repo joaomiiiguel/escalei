@@ -7,7 +7,6 @@ import { Shirt } from "./shirt";
 import {
   anchorSection, body, card, container, display, displayType, eyebrow, ghostCta, lead, primaryCta, section, strongStripes, tag, textLink,
 } from "./styles";
-import { WaitlistForm } from "./waitlist-form";
 
 // Conversa ilustrativa: nomes e mensagens inventados.
 const chat = [
@@ -57,7 +56,7 @@ export const commonFaqs: Faq[] = [
   ["E se o jogo for adiado?", "Os jogadores daquele jogo ficam com 0 pontos na rodada. Vale igual pra todo mundo do grupo."],
   ["Posso jogar com amigos que torcem pra outros times?", "Claro. O grupo é da turma, não do clube. Cada um torce pra quem quiser e escolhe os jogadores que quiser."],
   ["Isso é aposta?", "Não. Ninguém aposta e não tem prêmio em dinheiro. O que vale é ficar no topo do grupo e a resenha."],
-  ["Quanto custa?", "Durante a fase de testes, é grátis. Depois, você paga por rodada no PIX: R$ 4,99 uma rodada ou R$ 19,99 um pacote com 5. E ganha 2 passes de presente pra começar."],
+  ["Quanto custa?", "Por enquanto, é grátis. Quando a cobrança começar, você paga por rodada no PIX: R$ 4,99 uma rodada ou R$ 19,99 um pacote com 5. E ganha 2 passes de presente pra começar."],
 ];
 
 const whatsappInvite = `https://wa.me/?text=${encodeURIComponent("Bora montar um time no Escalou e disputar comigo a rodada do Brasileirão? https://jogueescalou.com.br")}`;
@@ -83,8 +82,9 @@ export function LandingShell({ id, children }: { id?: string; children: React.Re
   );
 }
 
-/** `ctaHref` é o destino de "Quero testar grátis": a página da lista de espera ou o formulário da própria página. */
-export function LandingHeader({ ctaHref }: { ctaHref: string }) {
+export const SIGN_UP_HREF = "/entrar";
+
+export function LandingHeader() {
   return (
     <header className="sticky top-0 z-20 border-b border-border bg-background/88 backdrop-blur-md">
       <div className={`${container} flex h-16 items-center gap-2 md:h-[76px] md:gap-3`}>
@@ -98,9 +98,9 @@ export function LandingHeader({ ctaHref }: { ctaHref: string }) {
           <a className={`${textLink} text-base text-muted-foreground`} href="#perguntas">Perguntas</a>
         </nav>
         <Link href="/entrar" className={`${ghostCta} h-11 px-3.5 text-[15px] md:h-12 md:px-5 md:text-base`}>Entrar</Link>
-        <Link href={ctaHref} aria-label="Quero testar grátis" className={`${primaryCta} h-11 rounded-xl px-3.5 text-[15px] md:h-12 md:px-[22px] md:text-base`}>
-          <span aria-hidden="true" className="sm:hidden">Testar grátis</span>
-          <span aria-hidden="true" className="hidden sm:inline">Quero testar grátis</span>
+        <Link href={SIGN_UP_HREF} aria-label="Criar meu time" className={`${primaryCta} h-11 rounded-xl px-3.5 text-[15px] md:h-12 md:px-[22px] md:text-base`}>
+          <span aria-hidden="true" className="sm:hidden">Criar time</span>
+          <span aria-hidden="true" className="hidden sm:inline">Criar meu time</span>
         </Link>
       </div>
     </header>
@@ -111,7 +111,7 @@ export function FreeBadge() {
   return (
     <p className="inline-flex h-8 items-center gap-2 rounded-full border border-border bg-card/80 px-3 text-[13px] font-bold md:h-9 md:px-3.5 md:text-sm">
       <span aria-hidden="true" className="size-2 rounded-full bg-primary shadow-[0_0_10px_var(--color-primary)]" />
-      Grátis na fase de testes · Sem apostas
+      Grátis · Sem apostas
     </p>
   );
 }
@@ -185,7 +185,7 @@ export function DemoSection() {
     <section aria-labelledby="demo-titulo" className={section}>
       <div className={container}>
         <p className="flex items-center gap-2">
-          <span className={eyebrow}>Teste agora</span>
+          <span className={eyebrow}>Experimente</span>
           <span className={tag}>Demonstração</span>
         </p>
         <Heading id="demo-titulo" first="Sua primeira janela" second="de contratações." />
@@ -321,9 +321,9 @@ export function PricingSection() {
               <h3 className={`${displayType} text-[26px] md:text-[40px]`}>Passe de rodada</h3>
               <span className="flex h-7 items-center rounded-full bg-(--giz) px-2.5 text-[13px] font-extrabold text-background md:h-8 md:px-3 md:text-sm">R$ · dinheiro real</span>
             </header>
-            <p className="mt-2.5 text-xl font-extrabold text-primary md:mt-3.5 md:text-[26px]">Grátis durante os testes.</p>
+            <p className="mt-2.5 text-xl font-extrabold text-primary md:mt-3.5 md:text-[26px]">Grátis por enquanto.</p>
             <p className="mt-1 text-[15px] text-muted-foreground md:mt-1.5 md:text-lg">
-              Depois dos testes, pra montar o time em cada rodada você usa um passe. Ele vale pra todos os seus grupos e é pago por PIX.
+              Quando a cobrança começar, pra montar o time em cada rodada você usa um passe. Ele vale pra todos os seus grupos e é pago por PIX.
             </p>
             <dl className="mt-3 grid grid-cols-2 gap-2 md:mt-[18px] md:gap-3">
               <div className="flex flex-col-reverse rounded-xl border border-border px-3 py-2.5 md:rounded-[14px] md:p-4">
@@ -387,7 +387,18 @@ export function FaqSection({ faqs }: { faqs: Faq[] }) {
   );
 }
 
-/** Fecha a página com um segundo formulário da lista de espera, para quem leu tudo não precisar voltar ao topo. */
+/** Chamada para criar a conta: no topo da página e no fim, para quem leu tudo não precisar voltar. */
+export function SignUpCard({ as: Title = "h2", description }: { as?: "h2" | "h3"; description: string }) {
+  return (
+    <div className="rounded-[20px] border-2 border-primary bg-card p-5 shadow-[0_0_40px_rgb(197_249_32/0.14)] md:p-8">
+      <Title className={`${displayType} text-[34px] leading-[0.9] md:text-[44px]`}>Bora escalar?</Title>
+      <p className="mt-2 text-[15px] text-muted-foreground md:text-base">{description}</p>
+      <Link href={SIGN_UP_HREF} className={`${primaryCta} mt-5 h-[52px] w-full text-lg md:mt-6`}>Criar meu time</Link>
+    </div>
+  );
+}
+
+/** Fecha a página com uma segunda chamada para criar a conta. */
 export function FinalCta() {
   return (
     <section aria-labelledby="final-titulo" className={`relative overflow-hidden border-t border-border py-16 md:py-32 ${strongStripes}`}>
@@ -398,14 +409,10 @@ export function FinalCta() {
           <h2 id="final-titulo" className={`${displayType} text-[64px] leading-[0.88] md:text-[clamp(96px,9.5vw,140px)] md:leading-[0.86]`}>
             <span className="text-(--giz)">Sua turma já tem opinião.</span> <span className="block text-primary">Agora tem ranking.</span>
           </h2>
-          <p className="mt-3.5 text-sm text-muted-foreground md:mt-[18px] md:text-base">Grátis na fase de testes · Sem apostas · Sem prêmio em dinheiro</p>
+          <p className="mt-3.5 text-sm text-muted-foreground md:mt-[18px] md:text-base">Grátis · Sem apostas · Sem prêmio em dinheiro</p>
         </div>
-        <div className="mx-auto mt-8 max-w-[460px] rounded-[20px] border-2 border-primary bg-card p-5 shadow-[0_0_40px_rgb(197_249_32/0.14)] md:mt-12 md:p-8">
-          <h3 className={`${displayType} text-[34px] leading-[0.9] md:text-[44px]`}>Entre na lista de espera</h3>
-          <p className="mt-2 text-[15px] text-muted-foreground md:text-base">Quando abrir vaga, a gente te chama pro grupo oficial no WhatsApp.</p>
-          <div className="mt-5 md:mt-6">
-            <WaitlistForm />
-          </div>
+        <div className="mx-auto mt-8 max-w-[460px] md:mt-12">
+          <SignUpCard as="h3" description="Entre com o Google, escolha um apelido e monte seu time pra próxima rodada." />
         </div>
       </div>
     </section>
