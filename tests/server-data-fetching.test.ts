@@ -38,18 +38,20 @@ describe("Início", () => {
     vi.mocked(redirect).mockReset().mockImplementation((url: string) => { throw new RedirectError(url); });
   });
 
-  it("busca grupo, perfil e rodada atual em paralelo, sem esperar uma pela outra", async () => {
+  it("busca grupo, perfil, rodada atual e modo demonstração em paralelo, sem esperar uma pela outra", async () => {
     const membership = deferred<"ATIVA" | "INATIVA" | "NENHUMA">();
     const maybeSingle = vi.fn().mockResolvedValue({ data: null, error: null });
     const query = { select: vi.fn().mockReturnThis(), eq: vi.fn().mockReturnThis(), maybeSingle };
     vi.mocked(getCurrentUser).mockResolvedValue({ id: "jogador" } as never);
-    vi.mocked(createClient).mockResolvedValue({ from: vi.fn(() => query) } as never);
+    const from = vi.fn((_table: string) => query);
+    vi.mocked(createClient).mockResolvedValue({ from } as never);
     vi.mocked(getLeagueMembershipStatus).mockReturnValue(membership.promise);
     vi.mocked(getCurrentRound).mockClear();
 
     const page = Home();
     await vi.waitFor(() => expect(getCurrentRound).toHaveBeenCalledTimes(1));
-    expect(maybeSingle).toHaveBeenCalledTimes(1);
+    expect(maybeSingle).toHaveBeenCalledTimes(2);
+    expect(from.mock.calls.map(([table]) => table)).toEqual(["perfis", "administradores"]);
 
     membership.resolve("NENHUMA");
     await expect(page).rejects.toThrow("/entrar?erro=sem_liga");

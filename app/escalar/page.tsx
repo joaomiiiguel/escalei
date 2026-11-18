@@ -19,9 +19,8 @@ import type { SavedPlayer, SavedTeam, ActiveRound, RoundGame, PlayerStat } from 
 import Link from "next/link";
 import { pitchPanel, quietPanel, scoreboard } from "@/components/ui/scoreboard";
 import DemoLineupPicker from "@/components/page/home/demo-lineup-picker";
+import { isDemoModeEnabled } from "@/lib/admin-access";
 
-/** Apelidos que têm acesso ao modo de demonstração. */
-const DEMO_USERS = new Set(["Miguel"]);
 
 function LineupSkeleton() {
   return (
@@ -145,12 +144,13 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
   const user = await getCurrentUser();
   if (!user) redirect("/entrar");
   // Pertencimento, perfil, carteira, passes e rodada atual não dependem entre si.
-  const [leagueMembershipStatus, { data: profile }, { data: wallet }, { data: availablePasses }, { data: round }] = await Promise.all([
+  const [leagueMembershipStatus, { data: profile }, { data: wallet }, { data: availablePasses }, { data: round }, demoMode] = await Promise.all([
     getLeagueMembershipStatus(user.id),
     supabase.from("perfis").select("id, apelido").eq("id", user.id).maybeSingle(),
     supabase.from("carteiras").select("saldo").eq("usuario_id", user.id).maybeSingle(),
     supabase.rpc("fn_passes_disponiveis"),
     getCurrentRound<ActiveRound>(supabase, "id, numero, status, trava_em, fechada_em, simulada"),
+    isDemoModeEnabled(supabase, user.id),
   ]);
   if (leagueMembershipStatus !== "ATIVA") redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
   if (!profile) redirect("/onboarding");
@@ -199,15 +199,15 @@ async function LineupContent({ searchParams }: { searchParams: Promise<{ editar?
     };
   });
 
-   // ─── Modo demonstração (só para apelidos em DEMO_USERS) ───────────────────
-    if (DEMO_USERS.has(String(profile?.apelido))) {
-      return (
-        <main className={`${shell} pb-44`}>
-          <Header />
-          <DemoLineupPicker />
-        </main>
-      );
-    }
+  // ─── Modo demonstração (admin com a opção ligada no painel) ────────────────
+  if (demoMode) {
+    return (
+      <main className={`${shell} pb-44`}>
+        <Header />
+        <DemoLineupPicker />
+      </main>
+    );
+  }
 
   if (!round) {
     return (

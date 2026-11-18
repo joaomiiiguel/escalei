@@ -24,6 +24,24 @@ export async function isAdministrator(supabase: SupabaseClient, userId: string):
 }
 
 /**
+ * Modo demonstração do admin: só vale para quem tem linha em `administradores`
+ * com `modo_demonstracao` ligado. Falha fechada, como `isAdministrator`.
+ */
+export async function isDemoModeEnabled(supabase: SupabaseClient, userId: string): Promise<boolean> {
+  const { data, error } = await supabase
+    .from("administradores")
+    .select("modo_demonstracao")
+    .eq("usuario_id", userId)
+    .maybeSingle();
+
+  if (error) {
+    console.error("Falha ao verificar modo demonstração", error);
+    return false;
+  }
+  return data?.modo_demonstracao === true;
+}
+
+/**
  * Garante que quem acessa a área `/admin` é administrador (JOA-160).
  * Sem sessão vai para `/entrar`; sem registro em `administradores`, para `/inicio`.
  *

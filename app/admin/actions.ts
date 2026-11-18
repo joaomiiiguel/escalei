@@ -1,6 +1,7 @@
 "use server";
 
 import { randomBytes } from "node:crypto";
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
@@ -178,4 +179,27 @@ export async function signOut() {
   const supabase = await createClient();
   await supabase.auth.signOut({ scope: "local" });
   redirect("/entrar?saida=1");
+}
+
+export type DemoModeResult = { ok: true; enabled: boolean } | { ok: false; error: string };
+
+/** Liga ou desliga o modo demonstração do próprio admin (vale para /inicio e /escalar). */
+export async function setDemoMode(enabled: unknown): Promise<DemoModeResult> {
+  if (typeof enabled !== "boolean") return { ok: false, error: "Valor inválido para o modo demonstração." };
+
+  const { user } = await requireAdmin();
+  const { error } = await createAdminClient()
+    .from("administradores")
+    .update({ modo_demonstracao: enabled })
+    .eq("usuario_id", user.id);
+
+  if (error) {
+    console.error("Falha ao salvar modo demonstração", error);
+    return { ok: false, error: "Não foi possível salvar. Tente de novo." };
+  }
+
+  revalidatePath("/inicio");
+  revalidatePath("/escalar");
+  revalidatePath("/admin");
+  return { ok: true, enabled };
 }
