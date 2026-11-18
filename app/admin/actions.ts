@@ -20,6 +20,8 @@ export async function createGroup(formData: FormData) {
   if (name.length < 3 || name.length > 40) {
     redirect("/admin/grupos/novo?erro=grupo");
   }
+  // Grupo geral: recebe quem se cadastra sem convite. Só pode haver um ativo.
+  const type = formData.get("grupo_geral") === "on" ? "ABERTA" : "CONVITE";
 
   const { supabase, user } = await requireAdmin();
   const admin = createAdminClient();
@@ -40,10 +42,12 @@ export async function createGroup(formData: FormData) {
       dono_id: user.id,
       codigo_convite: createInviteCode(),
       temporada: season,
+      tipo: type,
     })
     .select("id, token_convite")
     .single();
 
+  if (error?.code === "23505" && type === "ABERTA") redirect("/admin/grupos/novo?erro=grupo_geral");
   if (error || !group) redirect("/admin/grupos/novo?erro=grupo");
   const { error: ownerMembershipError } = await admin.from("ligas_membros").upsert({
     liga_id: group.id,
