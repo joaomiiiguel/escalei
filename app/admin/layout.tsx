@@ -19,7 +19,7 @@ export default async function AdminLayout({ children }: Readonly<{ children: Rea
             <aside className="hidden min-h-dvh border-r border-neutral-800 bg-neutral-900 p-6 lg:flex lg:flex-col">
                 <div className="flex items-center gap-3">
                     <div>
-                        <Logo size="lg" className="m-0 text-lg font-extrabold" />
+                        <Logo size="lg" href="/inicio" alt="Escalou, início" className="m-0 text-lg font-extrabold" />
                         <p className="m-0 text-xs font-semibold text-muted-foreground">Administração</p>
                     </div>
                 </div>

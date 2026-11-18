@@ -17,7 +17,7 @@ export function GoogleSignIn({ error, inviteToken, signInWithGoogle }: { error?:
 
   return <main className="flex flex-col items-center justify-center min-h-dvh px-5 py-10 text-foreground">
     <section className="flex flex-col items-center gap-5 pb-24">
-      <Logo size="xl" />
+      <Logo size="xl" href="/" alt="Escalou, página inicial" />
     </section>
     <div className="grid gap-3 w-2/3 max-w-[400px] text-center">
       <h1 className="text-2xl font-bold uppercase text-primary tracking-wider">Login</h1>

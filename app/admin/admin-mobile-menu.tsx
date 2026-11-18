@@ -30,7 +30,7 @@ export function AdminMobileMenu({ apelido }: { apelido: string | null }) {
         <header className="sticky top-0 z-40 border-b border-neutral-800 bg-neutral-900/95 backdrop-blur lg:hidden">
             <div className="flex h-14 items-center justify-between px-5">
                 <div className="flex items-baseline gap-2">
-                    <Logo size="sm" className="m-0" />
+                    <Logo size="sm" href="/inicio" alt="Escalou, início" className="m-0" />
                     <span className="text-xs font-semibold text-muted-foreground">Administração</span>
                 </div>
                 <button
