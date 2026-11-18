@@ -1,6 +1,6 @@
 export { body, display } from "@/app/fonts";
 
-// Classes compartilhadas pelas páginas públicas (Home e Beta).
+// Classes compartilhadas pelas páginas públicas.
 export const displayType = "font-(family-name:--font-display) font-black uppercase";
 export const container = "mx-auto w-full max-w-[75rem] px-5 md:px-10";
 export const section = "border-t border-border py-14 md:py-28";

@@ -21,6 +21,10 @@ describe("documentos legais", () => {
     for (const document of LEGAL_DOCUMENTS) expect(allText(document)).not.toMatch(/gratuit/i);
   });
 
+  it("não fala mais em fase de teste depois do lançamento", () => {
+    for (const document of LEGAL_DOCUMENTS) expect(allText(document)).not.toMatch(/\bteste\b|fim do teste/i);
+  });
+
   it("regulamento usa as formações e o saldo inicial vigentes", () => {
     const text = allText(REGULAMENTO);
     for (const formation of Object.keys(FORMATIONS)) expect(text).toContain(formation);
@@ -34,7 +38,7 @@ describe("documentos legais", () => {
   });
 
   it("versão dos termos muda junto com o conteúdo", () => {
-    expect(TERMOS_VERSAO).toBe("v2");
+    expect(TERMOS_VERSAO).toBe("v3");
   });
 });
 
@@ -51,6 +55,6 @@ describe("LegalDocumentPage", () => {
   });
 
   it("gera metadados em português", () => {
-    expect(legalMetadata(REGULAMENTO)).toEqual({ title: "Regulamento do teste | Escalou", description: REGULAMENTO.descricao });
+    expect(legalMetadata(REGULAMENTO)).toEqual({ title: "Regulamento | Escalou", description: REGULAMENTO.descricao });
   });
 });

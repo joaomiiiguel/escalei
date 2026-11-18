@@ -5,6 +5,7 @@ import { OnboardingForm } from "./onboarding-form";
 import { cookies } from "next/headers";
 import { getLeagueMembershipStatus } from "@/lib/league-access";
 import { canUserJoinInvite, getActiveInvite, isInviteToken } from "@/lib/invites";
+import { getOpenLeague } from "@/lib/open-league";
 
 export const dynamic = "force-dynamic";
 
@@ -23,8 +24,9 @@ export default async function Onboarding({ searchParams }: { searchParams: Promi
   const { data: profile } = await supabase.from("perfis").select("id").eq("id", user.id).maybeSingle();
   const leagueMembershipStatus = await getLeagueMembershipStatus(user.id);
   if (leagueMembershipStatus === "ATIVA") redirect("/inicio");
-  if (!inviteToken) redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
-  if (profile) redirect(`/convite/${inviteToken}`);
+  // Sem convite, o cadastro novo vai para o grupo geral; sem ele, continua exigindo convite.
+  if (!inviteToken && (profile || !await getOpenLeague())) redirect(`/entrar?erro=${leagueMembershipStatus === "INATIVA" ? "grupo_inativado" : "sem_liga"}`);
+  if (inviteToken && profile) redirect(`/convite/${inviteToken}`);
 
   const { data: clubs } = await supabase
     .from("clubes")
@@ -32,5 +34,5 @@ export default async function Onboarding({ searchParams }: { searchParams: Promi
     .eq("ativo", true)
     .order("nome");
 
-  return <OnboardingForm clubs={clubs ?? []} erro={params.erro} inviteToken={inviteToken} finishOnboarding={finishOnboarding} />;
+  return <OnboardingForm clubs={clubs ?? []} erro={params.erro} inviteToken={inviteToken ?? undefined} finishOnboarding={finishOnboarding} />;
 }

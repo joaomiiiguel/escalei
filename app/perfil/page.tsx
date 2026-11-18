@@ -112,10 +112,10 @@ export default async function Profile({ searchParams }: ProfilePageProps) {
         <LinkRow href="/como-funciona" icon={BookOpen} label="Como funciona" />
         <LinkRow href="/termos" icon={FileText} label="Termos de uso" detail={termsDetail} />
         <LinkRow href="/privacidade" icon={Shield} label="Privacidade" detail="Para excluir a conta, fale com o administrador do seu grupo." />
-        <LinkRow href="/regulamento" icon={ScrollText} label="Regulamento do teste" />
+        <LinkRow href="/regulamento" icon={ScrollText} label="Regulamento" />
       </Panel>
 
-      <p className="px-4 text-center text-[13px] leading-snug text-giz/55">Escalou em fase de testes. Produto independente, sem vínculo com clubes ou ligas.</p>
+      <p className="px-4 text-center text-[13px] leading-snug text-giz/55">Produto independente, sem vínculo com clubes ou ligas.</p>
     </main>
   );
 }

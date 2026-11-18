@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { cookies } from "next/headers";
 import { addUserToInvitedLeague, canUserJoinInvite, getActiveInvite, isInviteToken } from "@/lib/invites";
 import { hasActiveLeagueMembership } from "@/lib/league-access";
+import { getOpenLeague, joinOpenLeague } from "@/lib/open-league";
 import { trackServerEvent } from "@/lib/analytics/server";
 import { TERMOS_VERSAO } from "@/lib/legal";
 
@@ -32,7 +33,7 @@ export async function finishOnboarding(formData: FormData) {
       : cookieStore.get("escalou_invite")?.value ?? cookieStore.get("escalei_invite")?.value;
     const hasMembership = await hasActiveLeagueMembership(user.id);
     const activeInvite = inviteToken && isInviteToken(inviteToken) ? await getActiveInvite(inviteToken) : false;
-    if (!hasMembership && !activeInvite) redirect("/entrar?erro=sem_liga");
+    if (!hasMembership && !activeInvite && !await getOpenLeague()) redirect("/entrar?erro=sem_liga");
     if (activeInvite && (!inviteToken || !await canUserJoinInvite(inviteToken, user.id))) redirect("/entrar?erro=convite_email");
 
     if (clube) {
@@ -64,13 +65,15 @@ export async function finishOnboarding(formData: FormData) {
 
     cookieStore.delete("escalou_verified_phone");
     cookieStore.delete("escalei_verified_phone");
-    if (inviteToken && isInviteToken(inviteToken)) {
+    if (activeInvite && inviteToken) {
       const joined = await addUserToInvitedLeague(inviteToken, user.id);
       if (!joined) redirect("/entrar?erro=sem_liga");
       cookieStore.delete("escalou_invite");
       cookieStore.delete("escalei_invite");
+    } else if (!hasMembership && !await joinOpenLeague(user.id)) {
+      redirect("/entrar?erro=sem_liga");
     }
 
-    trackServerEvent(user.id, "cadastro", { via_convite: Boolean(inviteToken && isInviteToken(inviteToken)) });
+    trackServerEvent(user.id, "cadastro", { via_convite: Boolean(activeInvite) });
     redirect("/inicio");
 }

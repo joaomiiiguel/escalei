@@ -64,7 +64,7 @@ export function OnboardingForm({ clubs, erro, inviteToken, finishOnboarding }: {
 
         <label className="flex items-start gap-2 pt-1 text-xs leading-4 text-muted-foreground">
           <Checkbox name="aceite_termos" value="on" required className="mt-0.5 border-[#6d7d76] data-checked:border-primary data-checked:bg-primary data-checked:text-primary-foreground" checked={termos} onCheckedChange={(c) => setTermos(c === true)} />
-          <span>Li e aceito os <Link href="/termos" target="_blank" className="font-semibold text-primary underline underline-offset-2">Termos de uso</Link>, a <Link href="/privacidade" target="_blank" className="font-semibold text-primary underline underline-offset-2">Política de privacidade</Link> e o <Link href="/regulamento" target="_blank" className="font-semibold text-primary underline underline-offset-2">Regulamento do teste</Link>.</span>
+          <span>Li e aceito os <Link href="/termos" target="_blank" className="font-semibold text-primary underline underline-offset-2">Termos de uso</Link>, a <Link href="/privacidade" target="_blank" className="font-semibold text-primary underline underline-offset-2">Política de privacidade</Link> e o <Link href="/regulamento" target="_blank" className="font-semibold text-primary underline underline-offset-2">Regulamento</Link>.</span>
         </label>
       </form>
 

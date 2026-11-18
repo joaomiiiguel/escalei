@@ -12,7 +12,6 @@ vi.mock("lucide-react", () => {
   const icons = ["ArrowRight", "Check", "House", "Info", "Loader2", "Lock", "MessageCircle", "Plus", "Shirt", "Trophy", "UserRound", "Whistle", "X", "CircleHelp"];
   return Object.fromEntries(icons.map((icon) => [icon, () => null]));
 });
-vi.mock("@/app/actions", () => ({ joinWaitlist: vi.fn() }));
 vi.mock("@/components/ui/how-it-works-modal", () => ({ HowItWorksModal: () => null }));
 vi.mock("@/components/pwa/install-invite", () => ({ InstallInvite: () => null }));
 
@@ -35,29 +34,34 @@ describe("landing pública", () => {
     await expect(LandingPage()).rejects.toThrow(new RedirectError("/inicio"));
   });
 
-  it("abre com o formulário da lista de espera no hero", async () => {
+  it("abre com a chamada para criar o time no hero, levando ao login", async () => {
     const { container } = await renderVisitorPage();
-    const hero = container.querySelector("section#lista-de-espera")!;
+    const hero = container.querySelector("section#comecar")!;
 
     expect(container.querySelector("main > section")).toBe(hero);
     expect(hero.querySelector("h1")).toHaveTextContent("Mostre que você entende de futebol.");
-    expect(within(hero as HTMLElement).getByRole("form", { name: "Entrar na lista de espera" })).toBeInTheDocument();
+    expect(within(hero as HTMLElement).getByRole("link", { name: "Criar meu time" })).toHaveAttribute("href", "/entrar");
+    expect(container.querySelector("form")).toBeNull();
   });
 
-  it("repete o formulário na seção final, com campos próprios", async () => {
-    const { container } = await renderVisitorPage();
+  it("repete a chamada na seção final", async () => {
+    await renderVisitorPage();
     const final = screen.getByRole("heading", { name: /Sua turma já tem opinião/ }).closest("section")!;
 
-    expect(within(final).getByRole("form", { name: "Entrar na lista de espera" })).toBeInTheDocument();
-    const ids = [...container.querySelectorAll("form input[id]")].map((input) => input.id);
-    expect(ids).toHaveLength(6);
-    expect(new Set(ids).size).toBe(6);
+    expect(within(final).getByRole("link", { name: "Criar meu time" })).toHaveAttribute("href", "/entrar");
   });
 
-  it("leva o CTA do topo ao formulário e o Entrar ao login", async () => {
-    await renderVisitorPage();
+  it("não fala mais em fase de testes nem em lista de espera", async () => {
+    const { container } = await renderVisitorPage();
+    const text = `${container.textContent} ${metadata.description}`;
 
-    expect(screen.getByRole("link", { name: "Quero testar grátis" })).toHaveAttribute("href", "#lista-de-espera");
+    expect(text).not.toMatch(/fase de testes|durante os testes|em testes|lista de espera|quando abrir vaga/i);
+  });
+
+  it("leva o CTA do topo e o Entrar ao login", async () => {
+    const { container } = await renderVisitorPage();
+
+    expect(within(container.querySelector("header")!).getByRole("link", { name: "Criar meu time" })).toHaveAttribute("href", "/entrar");
     expect(screen.getByRole("link", { name: "Entrar" })).toHaveAttribute("href", "/entrar");
     expect(screen.getAllByRole("link", { name: "Como funciona" })[0]).toHaveAttribute("href", "#como-funciona");
     expect(document.getElementById("como-funciona")).not.toBeNull();

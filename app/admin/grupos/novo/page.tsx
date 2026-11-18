@@ -17,6 +17,7 @@ export default async function NewAdminGroup({ searchParams }: { searchParams: Pr
         <SubmitButton loadingText="Salvando…" className="h-10">Salvar grupo</SubmitButton>
       </header>
 
+      {erro === "grupo_geral" && <p role="alert" className="mt-5 rounded-lg border border-destructive bg-destructive/20 p-3 text-sm font-semibold text-destructive-foreground">Já existe um grupo geral ativo. Arquive-o antes de criar outro.</p>}
       {erro === "grupo" && <p role="alert" className="mt-5 rounded-lg border border-destructive bg-destructive/20 p-3 text-sm font-semibold text-destructive-foreground">Não foi possível criar o grupo. Revise o nome e tente novamente.</p>}
 
       <section className="mt-6 max-w-xl rounded-lg border border-neutral-800 bg-neutral-900 p-5 shadow-sm">
@@ -24,6 +25,10 @@ export default async function NewAdminGroup({ searchParams }: { searchParams: Pr
         <div className="mt-4">
           <label className="grid gap-1.5 text-sm font-bold">Nome do grupo
             <Input name="nome" required minLength={3} maxLength={40} autoFocus placeholder="Ex.: Resenha da Firma" className="h-10 border-neutral-700 bg-neutral-950" />
+          </label>
+          <label className="mt-4 flex items-start gap-3 text-sm">
+            <input type="checkbox" name="grupo_geral" className="mt-0.5 size-4 accent-primary" />
+            <span><b>Grupo geral</b><span className="block text-muted-foreground">Quem se cadastrar sem convite entra neste grupo. Só pode haver um ativo.</span></span>
           </label>
         </div>
       </section>
