@@ -13,9 +13,8 @@ import { isLateLineupOpen } from "@/lib/lineup-rules";
 import { roundFigure, roundMessage, roundProgress } from "@/lib/round-home";
 import { TrackEvent } from "@/components/analytics/track-event";
 import { hoursSince } from "@/lib/analytics/events";
+import { isDemoModeEnabled } from "@/lib/admin-access";
 
-/** Apelidos que têm acesso ao modo de demonstração. */
-const DEMO_USERS = new Set(["Miguel"]);
 
 
 export default async function Home() {
@@ -26,13 +25,14 @@ export default async function Home() {
   if (!user) redirect("/entrar");
 
   // Pertencimento ao grupo, perfil e rodada atual são independentes: busca em paralelo.
-  const [leagueMembershipStatus, { data: profile }, { data: currentRound, error: currentRoundError }] = await Promise.all([
+  const [leagueMembershipStatus, { data: profile }, { data: currentRound, error: currentRoundError }, demoMode] = await Promise.all([
     getLeagueMembershipStatus(user.id),
     supabase.from("perfis").select("apelido").eq("id", user.id).maybeSingle(),
     getCurrentRound<Rodada>(
       supabase,
       "id, temporada, numero, status, abre_em, trava_em, fechamento_simulado_em, fechada_em, rotulo_api, simulada",
     ),
+    isDemoModeEnabled(supabase, user.id),
   ]);
 
   // Se o grupo não estiver ativo redireciona para entrar
@@ -85,8 +85,8 @@ export default async function Home() {
     </header>
   );
 
-  // ─── Modo demonstração (só para apelidos em DEMO_USERS) ───────────────────
-  if (DEMO_USERS.has(String(profile.apelido))) {
+  // ─── Modo demonstração (admin com a opção ligada no painel) ────────────────
+  if (demoMode) {
     return (
       <main className={shell}>
         {header}
