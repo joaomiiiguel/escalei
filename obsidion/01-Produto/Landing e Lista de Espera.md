@@ -13,6 +13,9 @@ tags:
 
 ← [[Index]] · Entrada no grupo: [[Onboarding por Convite]] · Divulgação: [[Primeiros 9 posts]]
 
+> [!warning] Atualizado em 18/11/2026
+> Com o lançamento, a landing não tem mais lista de espera: os CTAs levam a `/entrar` e o cadastro é aberto. Ver [[2026-11-18 — Lançamento com cadastro aberto]]. A seção "Lista de espera" abaixo descreve só as inscrições antigas.
+
 > [!info] Fonte
 > Descrição do que está no código em 06/11/2026 (`app/(landing)/`, `app/_landing/`, `app/actions.ts`, `app/admin/convites/`). A decisão de abrir a landing não tem nota própria; o motivo não foi registrado.
 
@@ -22,10 +25,10 @@ A raiz do domínio (`/`) é uma landing pública para quem ainda não tem conta.
 
 ## Conteúdo
 
-- Título "Mostre que você entende de futebol." e o selo "Grátis na fase de testes · Sem apostas".
-- Formulário da lista de espera logo no topo.
+- Título "Mostre que você entende de futebol." e o selo "Grátis · Sem apostas".
+- Chamada "Criar meu time" logo no topo e no fim da página, levando a `/entrar`.
 - Seções: como funciona, demonstração interativa do mercado (dados fictícios, só ilustrativos), grupos, saldo em C$, preço, perguntas frequentes e chamada final.
-- Preço explicado: grátis durante os testes; depois R$ 4,99 por rodada ou R$ 19,99 o pacote com 5, com 2 passes de presente. Ver [[2026-10-27 — Passes de rodada pagos]].
+- Preço explicado: grátis por enquanto; quando a cobrança começar, R$ 4,99 por rodada ou R$ 19,99 o pacote com 5, com 2 passes de presente. Ver [[2026-10-27 — Passes de rodada pagos]].
 
 ## Lista de espera
 

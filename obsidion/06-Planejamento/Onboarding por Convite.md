@@ -17,6 +17,9 @@ tags:
 > [!info] Conferido contra o código em 06/11/2026
 > O plano de 29/09 previa login por telefone e OTP por SMS e um link `/convite/[codigo]`. O que foi construído usa **login com Google** e uma **lista de e-mails autorizados por grupo**. O plano original está resumido no fim da nota.
 
+> [!warning] Atualizado em 18/11/2026
+> Com o lançamento, o cadastro é aberto: quem entra sem convite vai para o grupo geral. O fluxo de convite abaixo continua valendo para grupos privados. Ver [[2026-11-18 — Lançamento com cadastro aberto]].
+
 ## Decisão
 
 O beta continua fechado: só entra quem tem um convite válido **e** foi autorizado pelo gestor do grupo. Não há cadastro aberto nem criação de grupo pelo usuário; grupos são criados e geridos no painel admin. A pessoa entra sabendo para qual grupo vai jogar.
