@@ -1,12 +1,12 @@
 import { FORMATIONS } from "@/lib/lineup-rules";
 
 /**
- * Textos de termos, privacidade e regulamento do teste.
+ * Textos de termos, privacidade e regulamento.
  * Ao mudar o conteúdo dos termos de forma relevante, troque `TERMOS_VERSAO`:
  * o onboarding grava a versão aceita em `perfis.termos_versao`.
  */
-export const TERMOS_VERSAO = "v2";
-export const LEGAL_ATUALIZADO_EM = "03/11/2026";
+export const TERMOS_VERSAO = "v3";
+export const LEGAL_ATUALIZADO_EM = "18/11/2026";
 
 export type LegalSection = { titulo: string; paragrafos: string[] };
 
@@ -41,10 +41,10 @@ export const TERMOS: LegalDocument = {
       ],
     },
     {
-      titulo: "Fase de teste",
+      titulo: "Acesso e mudanças no jogo",
       paragrafos: [
-        "O Escalou está em teste fechado. O acesso é liberado por convite, e entrar na lista de espera não garante acesso imediato.",
-        "Durante o teste, regras, preços dos jogadores e funcionalidades podem mudar para corrigir erros ou equilibrar o jogo. Mudanças relevantes são avisadas no app antes de valer.",
+        "Qualquer pessoa pode criar uma conta. Quem entra sem convite participa do grupo geral; os demais grupos são acessados por convite.",
+        "Regras, preços dos jogadores e funcionalidades podem mudar para corrigir erros ou equilibrar o jogo. Mudanças relevantes são avisadas no app antes de valer.",
       ],
     },
     {
@@ -118,7 +118,7 @@ export const PRIVACIDADE: LegalDocument = {
     {
       titulo: "Por quanto tempo guardamos",
       paragrafos: [
-        "Mantemos os dados enquanto sua conta existir. Os dados da lista de espera são mantidos até o fim do teste ou até você pedir a remoção.",
+        "Mantemos os dados enquanto sua conta existir. A lista de espera foi encerrada no lançamento; os dados dela são mantidos só enquanto forem necessários para convidar quem se inscreveu, ou até você pedir a remoção.",
       ],
     },
     {
@@ -133,21 +133,21 @@ export const PRIVACIDADE: LegalDocument = {
 
 export const REGULAMENTO: LegalDocument = {
   href: "/regulamento",
-  titulo: "Regulamento do teste",
-  descricao: "Regulamento simplificado da fase de teste do Escalou.",
-  resumo: "As regras da disputa durante o teste fechado. A participação não tem prêmio em dinheiro: vale o ranking entre amigos.",
+  titulo: "Regulamento",
+  descricao: "Regulamento simplificado do Escalou.",
+  resumo: "As regras da disputa. A participação não tem prêmio em dinheiro: vale o ranking entre amigos.",
   secoes: [
     {
       titulo: "Quem participa",
       paragrafos: [
-        "Pessoas convidadas para um grupo que concluíram o cadastro e aceitaram os termos de uso.",
+        "Pessoas que concluíram o cadastro e aceitaram os termos de uso. Quem entra sem convite participa do grupo geral; os demais grupos são por convite.",
         "Administradores dos grupos não disputam os rankings.",
       ],
     },
     {
       titulo: "Duração",
       paragrafos: [
-        "O teste acompanha rodadas reais do Brasileirão Série A e deve durar entre 4 e 6 rodadas. O encerramento será avisado no app.",
+        "A disputa acompanha as rodadas reais do Brasileirão Série A da temporada em andamento.",
       ],
     },
     {
