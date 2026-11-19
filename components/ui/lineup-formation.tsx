@@ -31,6 +31,8 @@ export type LineupPlayer = {
   statusReason?: string | null;
   /** Titular ou reserva no último jogo do clube; `null` sem dados (JOA-170). */
   lastGameRole?: PlayerRole | null;
+  /** Confronto do clube na rodada atual (ex.: `CORxPAL`); `null` sem jogo. */
+  nextMatch?: string | null;
 };
 
 type LineupFormationProps = {
