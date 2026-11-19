@@ -21,3 +21,10 @@ A opção **Notificação da rodada**, em `/perfil`, vem ligada por padrão em c
 - O aviso de mercado fechado passa a ir só para quem escalou, para ninguém receber "já era" e "ainda dá tempo" ao mesmo tempo.
 - Se todos já escalaram, o aviso é marcado como enviado sem push.
 - No iPhone, o push só funciona com o Escalou instalado na tela de início.
+
+## Fim de jogo (19/11/2026)
+
+- Quando um jogo encerrado de rodada real é pontuado pela primeira vez, quem **escalou na rodada** recebe "⚽ Fim de jogo! COR 2 x 1 PAL".
+- O corpo é personalizado: os escalados do usuário nesse jogo com a pontuação de cada um (e o total, se forem dois ou mais). Quem não tinha jogador no jogo recebe só o placar. O toque abre `/escalar`.
+- A fila fica em `avisos_jogo` (um aviso por jogo), enfileirada por gatilho em `jogos.pontuado_em`. A conferência posterior não gera novo aviso, e jogos adiados ou cancelados não avisam.
+- A pontuação mostrada é a da primeira leitura; a conferência pode ajustá-la depois.
