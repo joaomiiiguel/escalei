@@ -79,7 +79,7 @@ describe("GET /api/jogadores", () => {
     };
   }
 
-  const load = async () => (await (await GET(new Request("http://localhost/api/jogadores?posicao=ATA"))).json()) as { players: { id: number; lastGameRole: string | null }[] };
+  const load = async () => (await (await GET(new Request("http://localhost/api/jogadores?posicao=ATA"))).json()) as { players: { id: number; lastGameRole: string | null; nextMatch: string | null }[] };
 
   beforeEach(() => createClient.mockReset());
 
@@ -90,6 +90,16 @@ describe("GET /api/jogadores", () => {
       estatisticas_jogador: { data: [stat(20, 1, 10), stat(20, 1, 11, true)] },
     }));
     expect((await load()).players.map((player) => [player.id, player.lastGameRole])).toEqual([[10, "TITULAR"], [11, "RESERVA"], [12, null]]);
+  });
+
+  it("mostra o confronto da rodada atual do clube", async () => {
+    createClient.mockResolvedValue(client({
+      jogadores: { data: players },
+      rodadas: { data: [{ id: 30, numero: 34, status: "ABERTA", trava_em: "2099-01-01T00:00:00Z" }] },
+      jogos: { data: [{ id: 21, clube_casa_id: 1, clube_fora_id: 2, inicio_em: "2099-01-02T00:00:00Z", inicio_simulado_em: null, status: "A_JOGAR", casa: { sigla: "CLU" }, fora: { sigla: "RIV" } }] },
+    }));
+    const { players: result } = await load();
+    expect(result.map((player) => [player.id, player.nextMatch])).toEqual([[10, "CLUxRIV"], [11, "CLUxRIV"], [12, null]]);
   });
 
   it("mantém o mercado quando a leitura dos jogos falha", async () => {
