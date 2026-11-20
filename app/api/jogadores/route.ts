@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { getCurrentRound } from "@/lib/current-round";
 import { getLateLineupState } from "@/lib/late-lineup";
 import { parseAvailability } from "@/lib/player-availability";
-import { nextMatchByClub, type MatchWithClubs } from "@/lib/next-match";
+import { nextOpponentByClub, type MatchWithClubs } from "@/lib/next-opponent";
 import { LAST_GAMES_WINDOW, lastGameByClub, lastGameRoles } from "@/lib/player-role";
 import { createClient } from "@/lib/supabase/server";
 import type { StatusRodada } from "@/lib/types";
@@ -27,17 +27,17 @@ async function loadLastGameRoles(supabase: Awaited<ReturnType<typeof createClien
   return lastGameRoles(lastGames, stats ?? []);
 }
 
-type ClubRef = { sigla: string } | { sigla: string }[] | null;
+type ClubRef = { nome: string } | { nome: string }[] | null;
 type CurrentRound = { id: number; numero: number; status: StatusRodada; trava_em: string };
 
-const siglaOf = (club: ClubRef) => (Array.isArray(club) ? club[0] : club)?.sigla ?? null;
+const nameOf = (club: ClubRef) => (Array.isArray(club) ? club[0] : club)?.nome ?? null;
 
-/** Confronto da rodada atual por clube; sem leitura dos jogos, o mercado segue sem o confronto. */
-async function loadNextMatches(supabase: Awaited<ReturnType<typeof createClient>>, round: CurrentRound | null) {
+/** Adversário de cada clube na rodada atual; sem leitura dos jogos, o mercado segue sem o adversário. */
+async function loadNextOpponents(supabase: Awaited<ReturnType<typeof createClient>>, round: CurrentRound | null) {
   if (!round) return new Map<number, string>();
   const { data: games, error } = await supabase
     .from("jogos")
-    .select("clube_casa_id, clube_fora_id, inicio_em, inicio_simulado_em, status, casa:clubes!jogos_clube_casa_id_fkey(sigla), fora:clubes!jogos_clube_fora_id_fkey(sigla)")
+    .select("clube_casa_id, clube_fora_id, inicio_em, inicio_simulado_em, status, casa:clubes!jogos_clube_casa_id_fkey(nome), fora:clubes!jogos_clube_fora_id_fkey(nome)")
     .eq("rodada_id", round.id);
   if (error) {
     console.error("Falha ao carregar os confrontos da rodada", error);
@@ -45,10 +45,10 @@ async function loadNextMatches(supabase: Awaited<ReturnType<typeof createClient>
   }
   const matches: MatchWithClubs[] = (games ?? []).map(({ casa, fora, ...game }) => ({
     ...game,
-    sigla_casa: siglaOf(casa as unknown as ClubRef),
-    sigla_fora: siglaOf(fora as unknown as ClubRef),
+    nome_casa: nameOf(casa as unknown as ClubRef),
+    nome_fora: nameOf(fora as unknown as ClubRef),
   }));
-  return nextMatchByClub(matches);
+  return nextOpponentByClub(matches);
 }
 
 export async function GET(request: Request) {
@@ -59,7 +59,7 @@ export async function GET(request: Request) {
 
   const supabase = await createClient();
   const roundPromise = getCurrentRound<CurrentRound>(supabase, "id, numero, status, trava_em").then(({ data: round }) => round);
-  const [{ data, error }, roles, lateLineup, nextMatches] = await Promise.all([
+  const [{ data, error }, roles, lateLineup, nextOpponents] = await Promise.all([
     supabase
       .from("jogadores")
       .select("id, clube_id, nome, nome_exibicao, posicao, preco, status, status_motivo, clubes(nome, sigla, logo_url)")
@@ -69,7 +69,7 @@ export async function GET(request: Request) {
       .limit(300),
     loadLastGameRoles(supabase),
     roundPromise.then((round) => getLateLineupState(supabase, round)),
-    roundPromise.then((round) => loadNextMatches(supabase, round)),
+    roundPromise.then((round) => loadNextOpponents(supabase, round)),
   ]);
 
   if (error) {
@@ -92,7 +92,7 @@ export async function GET(request: Request) {
       status: parseAvailability(player.status),
       statusReason: player.status_motivo ?? null,
       lastGameRole: roles.get(player.clube_id)?.get(player.id) ?? null,
-      nextMatch: nextMatches.get(player.clube_id) ?? null,
+      nextOpponent: nextOpponents.get(player.clube_id) ?? null,
     };
   });
 
