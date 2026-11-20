@@ -163,7 +163,7 @@ export function PlayerPickerSheet({ catalogPosition, slotLabel, maxAvailablePric
                           <p className="truncate text-[15px] font-bold">{player.name}</p>
                           <p className="mt-0.5 text-[13px] text-giz/65">{isSelected ? "Já escalado" : isOut ? statusText : isOverBudget ? "Fora do orçamento" : player.clubName}</p>
                           <div className="mt-1 flex flex-wrap gap-1 empty:hidden">
-                            {player.nextMatch && <span className="inline-block rounded-full bg-muted px-2 py-0.5 text-[11px] font-bold tabular-nums text-giz/85"><span className="sr-only">Próximo jogo: </span>{player.nextMatch}</span>}
+                            {player.nextOpponent && <span className="inline-block rounded-full bg-muted px-2 py-0.5 text-[11px] font-bold text-giz/85">Adversário: {player.nextOpponent}</span>}
                             {!isOut && <PlayerRoleTag role={player.lastGameRole} />}
                             {statusText && !isSelected && <span className={`inline-block rounded-full px-2 py-0.5 text-[11px] font-bold ${isOut ? "bg-destructive text-destructive-foreground" : "bg-warning/20 text-warning"}`}>{isOut ? "Não pode ser escalado" : statusText}</span>}
                           </div>
