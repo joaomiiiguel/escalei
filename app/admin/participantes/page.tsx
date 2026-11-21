@@ -1,6 +1,7 @@
 import { Layers3, UsersRound } from "lucide-react";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireAdmin } from "@/lib/admin-access";
+import { availablePassesByUser } from "@/lib/admin-participants";
 
 type Participant = {
     usuario_id: string;
@@ -8,7 +9,6 @@ type Participant = {
     email: string;
     telefone: string | null;
     grupos: string[];
-    gestores: string[];
 };
 
 function first<T>(value: T | T[] | null) {
@@ -22,6 +22,8 @@ export default async function AdminParticipants() {
     const [
         { data: groups },
         { data: membersData },
+        { data: seasonConfig, error: seasonError },
+        { data: passBatches, error: passesError },
     ] = await Promise.all([
         admin.from("ligas").select("id").is("arquivada_em", null),
         admin
@@ -30,14 +32,20 @@ export default async function AdminParticipants() {
                 usuario_id,
                 entrou_em,
                 perfis!ligas_membros_usuario_id_fkey ( apelido, email, telefone ),
-                ligas!inner (
-                    nome,
-                    perfis!ligas_dono_id_fkey ( apelido )
-                )
+                ligas!inner ( nome )
             `)
             .is("ligas.arquivada_em", null)
             .order("entrou_em", { ascending: false }),
+        admin.from("configuracoes").select("valor").eq("chave", "temporada_atual").maybeSingle(),
+        admin.from("passes_lotes").select("usuario_id, restantes, valido_ate_temporada").gt("restantes", 0),
     ]);
+
+    if (seasonError) console.error("Falha ao ler a temporada atual", seasonError);
+    if (passesError) console.error("Falha ao ler os passes dos participantes", passesError);
+    const currentSeason = Number(seasonConfig?.valor);
+    const passesByUser = Number.isFinite(currentSeason) && !passesError
+        ? availablePassesByUser(passBatches ?? [], currentSeason)
+        : null;
 
     const activeGroupsCount = groups?.length ?? 0;
     
@@ -47,13 +55,10 @@ export default async function AdminParticipants() {
         const participant = participantsByUser.get(membership.usuario_id);
         const group = first(membership.ligas);
         const profile = first(membership.perfis);
-        const manager = first(group?.perfis);
         const groupName = group?.nome ?? "Sem grupo";
-        const managerName = manager?.apelido ?? "Desconhecido";
 
         if (participant) {
             if (!participant.grupos.includes(groupName)) participant.grupos.push(groupName);
-            if (!participant.gestores.includes(managerName)) participant.gestores.push(managerName);
             continue;
         }
 
@@ -63,7 +68,6 @@ export default async function AdminParticipants() {
             email: profile?.email ?? "Sem e-mail",
             telefone: profile?.telefone ?? null,
             grupos: [groupName],
-            gestores: [managerName],
         });
     }
 
@@ -95,7 +99,7 @@ export default async function AdminParticipants() {
                         <th className="px-5 py-3 font-semibold">E-mail</th>
                         <th className="px-5 py-3 font-semibold">Telefone</th>
                         <th className="px-5 py-3 font-semibold">Grupos</th>
-                        <th className="px-5 py-3 font-semibold">Gestores</th>
+                        <th className="px-5 py-3 text-right font-semibold">Passes</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -105,7 +109,7 @@ export default async function AdminParticipants() {
                             <td className="px-5 py-4 text-muted-foreground">{p.email}</td>
                             <td className="px-5 py-4 text-muted-foreground">{p.telefone ?? "Sem telefone"}</td>
                             <td className="px-5 py-4">{p.grupos.join(", ")}</td>
-                            <td className="px-5 py-4">{p.gestores.join(", ")}</td>
+                            <td className="px-5 py-4 text-right font-bold tabular-nums">{passesByUser ? passesByUser.get(p.usuario_id) ?? 0 : "—"}</td>
                         </tr>
                     )) : (
                         <tr>
