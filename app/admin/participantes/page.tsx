@@ -2,6 +2,7 @@ import { Layers3, UsersRound } from "lucide-react";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { requireAdmin } from "@/lib/admin-access";
 import { availablePassesByUser } from "@/lib/admin-participants";
+import { GrantPassButton } from "./grant-pass-button";
 
 type Participant = {
     usuario_id: string;
@@ -109,7 +110,13 @@ export default async function AdminParticipants() {
                             <td className="px-5 py-4 text-muted-foreground">{p.email}</td>
                             <td className="px-5 py-4 text-muted-foreground">{p.telefone ?? "Sem telefone"}</td>
                             <td className="px-5 py-4">{p.grupos.join(", ")}</td>
-                            <td className="px-5 py-4 text-right font-bold tabular-nums">{passesByUser ? passesByUser.get(p.usuario_id) ?? 0 : "—"}</td>
+                            <td className="px-5 py-4 text-right">
+                                <GrantPassButton
+                                    userId={p.usuario_id}
+                                    nickname={p.apelido}
+                                    initialAvailable={passesByUser ? passesByUser.get(p.usuario_id) ?? 0 : null}
+                                />
+                            </td>
                         </tr>
                     )) : (
                         <tr>
