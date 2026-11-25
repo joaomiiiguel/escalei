@@ -179,6 +179,37 @@ export async function deleteWaitlistSignup(formData: FormData) {
   redirect(`/admin/convites${error ? "?erro=excluir" : "?excluido=1"}`);
 }
 
+export type GrantPassesResult = { ok: true; available: number } | { ok: false; error: string };
+
+const GRANT_PASSES_ERRORS: Record<string, string> = {
+  ES403: "Só administradores concedem passes.",
+  ES404: "Participante não encontrado.",
+  ES422: "Informe de 1 a 10 passes.",
+};
+
+/** Concede passes de cortesia a um participante; o banco grava lote e crédito juntos. */
+export async function grantPasses(userId: unknown, quantity: unknown = 1): Promise<GrantPassesResult> {
+  if (typeof userId !== "string" || !UUID_PATTERN.test(userId)) return { ok: false, error: "Participante inválido." };
+  if (typeof quantity !== "number" || !Number.isInteger(quantity) || quantity < 1 || quantity > 10) {
+    return { ok: false, error: GRANT_PASSES_ERRORS.ES422 };
+  }
+
+  const { user } = await requireAdmin();
+  const { data, error } = await createAdminClient().rpc("fn_admin_conceder_passes", {
+    p_admin_id: user.id,
+    p_usuario_id: userId,
+    p_quantidade: quantity,
+  });
+
+  if (error || typeof data !== "number") {
+    console.error("Falha ao conceder passes", error);
+    return { ok: false, error: (error?.code && GRANT_PASSES_ERRORS[error.code]) ?? "Não foi possível conceder o passe. Tente de novo." };
+  }
+
+  revalidatePath("/admin/participantes");
+  return { ok: true, available: data };
+}
+
 export async function signOut() {
   const supabase = await createClient();
   await supabase.auth.signOut({ scope: "local" });
